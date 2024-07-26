@@ -20,7 +20,12 @@ export class pelicula extends connect {
         connect.instanceConnect = undefined;
     }
 
-    // Listar Películas
+    
+//--------------------------------------------------------------------------------------------------------
+
+
+    //  Listar Películas
+
     async listarPeliculas() {
         try {
             await this.conexion.connect();
@@ -45,4 +50,40 @@ export class pelicula extends connect {
     }
 
 
+//--------------------------------------------------------------------------------------------------------
+
+
+    // Obtener Detalles de Película
+    async obtenerDetallesPelicula(idOTitulo) {
+        try {
+            await this.conexion.connect();
+            const consulta = {
+                $or: [
+                    { id: parseInt(idOTitulo) },
+                    { titulo: { $regex: new RegExp(idOTitulo, 'i') } }
+                ]
+            };
+            const pelicula = await this.collection.findOne(consulta, {
+                projection: {
+                    _id: 0,
+                    id: 1,
+                    titulo: 1,
+                    sinopsis: 1,
+                    fecha_estreno: 1,
+                    genero: 1,
+                    duracion: 1,
+                    estado: 1,
+                    pais_origen: 1
+                }
+            });
+            await this.conexion.close();
+            if (!pelicula) {
+                return { error: `No se encontró una película con el ID o título ${idOTitulo}` };
+            }
+            return pelicula;
+        } catch (error) {
+            await this.conexion.close();
+            return { error: `Error al obtener los detalles de la película: ${error.message}` };
+        }
+    }
 }
