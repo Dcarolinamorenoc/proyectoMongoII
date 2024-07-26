@@ -30,8 +30,10 @@ export class pelicula extends connect {
         try {
             await this.conexion.connect();
             
-           
-            const peliculas = await this.collection.find({}, {
+
+            const peliculas = await this.collection.find({
+                estado: { $in: ["En cartelera", "Próximo estreno"] }
+            }, {
                 projection: {
                     _id: 0,
                     id: 1,
@@ -45,7 +47,7 @@ export class pelicula extends connect {
                 }
             }).toArray();
     
-            
+
             const peliculasConHorarios = [];
             for (const pelicula of peliculas) {
                 const horarios = await this.db.collection('horario_proyeccion').find(

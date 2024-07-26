@@ -21,3 +21,7 @@ console.log(await objPelicula.listarPeliculas());
 // console.log(await objPelicula.obtenerDetallesPelicula(2));
 
 objPelicula.destructor();
+
+
+
+//--------------------------------------------------------------------------------------------------------
