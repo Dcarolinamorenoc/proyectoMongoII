@@ -145,4 +145,63 @@ export class boleto extends connect {
 
 
 
+    // Consultar disponibilidad de asientos en una sala específica
+
+    async consultarDisponibilidadAsientos(idHorarioProyeccion) {
+
+        try {
+        await this.conexion.connect();
+    
+        
+        const horarioProyeccion = await this.db.collection('horario_proyeccion').findOne({ id: idHorarioProyeccion });
+        if (!horarioProyeccion) {
+            throw new Error('Horario de proyección no encontrado.');
+        }
+    
+        
+        const sala = await this.db.collection('sala').findOne({ id: horarioProyeccion.id_sala });
+        if (!sala) {
+            throw new Error('Sala no encontrada.');
+        }
+    
+        
+        const boletosVendidos = await this.collection.find({ id_horario_proyeccion: idHorarioProyeccion }).toArray();
+        const asientosOcupados = boletosVendidos.flatMap(boleto => boleto.asientos_comprados);
+    
+        
+        const asientosDisponibles = await this.db.collection('asiento').find(
+            { 
+            id: { $in: sala.asientos, $nin: asientosOcupados },
+            estado: 'disponible'
+            }
+        ).toArray();
+    
+        
+        const asientosDisponibilidad = asientosDisponibles.map(asiento => ({
+            id: asiento.id,
+            nombre: asiento.nombre_general,
+            fila: asiento.fila,
+            numero: asiento.numero,
+            tipo: asiento.tipo,
+            estado: asiento.estado
+        }));
+    
+        await this.conexion.close();
+
+        return {
+            idHorarioProyeccion: horarioProyeccion.id,
+            fechaProyeccion: horarioProyeccion.fecha_proyeccion,
+            horarioProyeccion: horarioProyeccion.horario_proyeccion,
+            idSala: sala.id,
+            nombreSala: sala.nombre,
+            capacidadTotal: sala.capacidad,
+            asientosDisponibles: asientosDisponibilidad.length,
+            asientos: asientosDisponibilidad
+        };
+
+        } catch (error) {
+        await this.conexion.close();
+        return { error: `Error al consultar disponibilidad de asientos: ${error.message}` };
+        }
+    }
 }
