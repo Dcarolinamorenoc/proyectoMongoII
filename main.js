@@ -64,7 +64,7 @@ let objBoleto = new boleto();
 
 // Consultar disponibilidad de asientos en una sala específica
 
-console.log(await objBoleto.consultarDisponibilidadAsientos(1));
+// console.log(await objBoleto.consultarDisponibilidadAsientos(1));
 
 
 // ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
