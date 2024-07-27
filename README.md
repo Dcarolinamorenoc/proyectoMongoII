@@ -4,6 +4,12 @@
 -Diana Carolina Moreno Cárdenas
 ```
 
+
+
+─────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀─────
+
+
+
 ### Proyecto: CineCampus
 
 #### Problemtica
@@ -13,6 +19,10 @@ CineCampus es una empresa de entretenimiento que se especializa en ofrecer una e
 #### Objetivo
 
 Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando MongoDB como base de datos. Las APIs deberán gestionar la selección de películas, la compra de boletos, la asignación de asientos, y la implementación de descuentos para tarjetas VIP, con soporte para diferentes roles de usuario.
+
+
+
+─────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀─────
 
 
 
@@ -29,6 +39,10 @@ npm install mongodb
 ```
 npm run dev
 ```
+
+
+
+─────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀─────
 
 
 
@@ -49,7 +63,12 @@ npm run dev
      
      ```
    
-     
+   
+   
+   
+   ☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆
+   
+   
    
 2. **Compra de Boletos:**
    - **API para Comprar Boletos:** Permitir la compra de boletos para una película específica, incluyendo la selección de la fecha y la hora de la proyección.
@@ -66,7 +85,12 @@ npm run dev
      
      ```
    
-     
+   
+   
+   
+   ☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆
+   
+   
    
 3. **Asignación de Asientos:**
    - **API para Reservar Asientos:** Permitir la selección y reserva de asientos para una proyección específica.
@@ -83,7 +107,12 @@ npm run dev
      
      ```
    
-     
+   
+   
+   
+   ☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆
+   
+   
    
 4. **Descuentos y Tarjetas VIP:**
    - **API para Aplicar Descuentos:** Permitir la aplicación de descuentos en la compra de boletos para usuarios con tarjeta VIP.
@@ -100,7 +129,12 @@ npm run dev
      
      ```
    
-     
+   
+   
+   
+   ☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆
+   
+   
    
 5. - Roles Definidos:
      - **Administrador:** Tiene permisos completos para gestionar el sistema, incluyendo la venta de boletos en el lugar físico. Los administradores no están involucrados en las compras en línea realizadas por los usuarios.
@@ -141,7 +175,12 @@ npm run dev
      
      ```
    
-     
+   
+   
+   
+   ☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆*ﾟ ゜ﾟ*☆
+   
+   
    
 6. **Compras en Línea:**
    - **API para Procesar Pagos:** Permitir el procesamiento de pagos en línea para la compra de boletos.
@@ -158,7 +197,12 @@ npm run dev
      
      ```
    
-     
+
+
+
+─────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀─────
+
+
 
 #### Requisitos Técnicos
 
@@ -180,3 +224,21 @@ npm run dev
 - **Eficiencia:** Desempeño y tiempo de respuesta de las APIs.
 - **Seguridad:** Implementación adecuada de medidas de seguridad, autenticación y autorización de roles.
 - **Documentación:** Claridad y exhaustividad de la documentación proporcionada.
+
+
+
+─────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀─────
+
+
+
+### Esquemas utilizados para cada coleccion
+
+
+
+
+
+─────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀─────
+
+
+
+### Data utilizada para cada coleccion
