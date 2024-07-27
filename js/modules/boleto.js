@@ -143,6 +143,30 @@ export class boleto extends connect {
 
 //--------------------------------------------------------------------------------------------------------
 
+    /**
+     * Consulta la disponibilidad de asientos en una sala específica para un horario de proyección.
+     *
+     * @async
+     * @param {number} idHorarioProyeccion - ID del horario de proyección.
+     * @returns {Promise<Object>} Objeto con la información de disponibilidad de asientos.
+     * @property {number} idHorarioProyeccion - ID del horario de proyección.
+     * @property {string} fechaProyeccion - Fecha de la proyección.
+     * @property {string} horarioProyeccion - Horario de la proyección.
+     * @property {number} idSala - ID de la sala.
+     * @property {string} nombreSala - Nombre de la sala.
+     * @property {number} capacidadTotal - Capacidad total de la sala.
+     * @property {number} asientosDisponibles - Número de asientos disponibles.
+     * @property {Array<Object>} asientos - Lista de asientos disponibles.
+     * @property {number} asientos[].id - ID del asiento.
+     * @property {string} asientos[].nombre - Nombre del asiento.
+     * @property {string} asientos[].fila - Fila del asiento.
+     * @property {number} asientos[].numero - Número del asiento.
+     * @property {string} asientos[].tipo - Tipo del asiento.
+     * @property {string} asientos[].estado - Estado del asiento.
+     * @property {Object} [error] - Objeto de error en caso de fallo.
+     * @property {string} error.message - Mensaje de error.
+     * @throws {Error} Si ocurre algún error durante el proceso de consulta.
+     */
 
 
     // Consultar disponibilidad de asientos en una sala específica
