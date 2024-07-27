@@ -49,19 +49,271 @@ npm run dev
 #### Requisitos Funcionales
 
 1. **Selección de Películas:**
-   - **API para Listar Películas:** Permitir la consulta de todas las películas disponibles en el catálogo, con detalles como título, género, duración y horarios de proyección.
    
-     ```
-     
-     ```
+   ★ **API para Listar Películas:** Permitir la consulta de todas las películas disponibles en el catálogo, con detalles como título, género, duración y horarios de proyección.
    
-     
    
-   - **API para Obtener Detalles de Película:** Permitir la consulta de información detallada sobre una película específica, incluyendo sinopsis.
    
-     ```
-     
-     ```
+   **listarPeliculas():** Lista todas las películas disponibles. 
+   
+   ***Parámetros:*** Traer todas las peliculas disponibles, es decir las que estan con estado en Cartelera y con proximo estreno 
+   
+   Cuando se ejecuta esto :
+   
+   ```
+   let objPelicula = new pelicula();
+   
+   console.log(await objPelicula.listarPeliculas());
+   
+   objPelicula.destructor();
+   ```
+   
+   En consola obtendremos una respuesta como esta:
+   
+   ```
+   [
+     {
+       id: 1,
+       titulo: 'Intensamente 2',
+       sinopsis: 'Riley, ahora adolescente, enfrenta nuevos desafíos emocionales mientras sus emociones se adaptan a cambios en su mente.',
+       fecha_estreno: '14/06/2024',
+       genero: 'Animación',
+       duracion: '107 minutos',
+       estado: 'En cartelera',
+       pais_origen: 'Estados Unidos',
+       horarios_proyeccion: [ [Object], [Object], [Object] ]
+     },
+     {
+       id: 2,
+       titulo: 'Mi villano favorito 4',
+       sinopsis: 'Gru y su familia se embarcan en una nueva aventura llena de travesuras y desafíos inesperados.',
+       fecha_estreno: '03/07/2024',
+       genero: 'Animación',
+       duracion: '90 minutos',
+       estado: 'En cartelera',
+       pais_origen: 'Estados Unidos',
+       horarios_proyeccion: [ [Object], [Object], [Object] ]
+     },
+     {
+       id: 3,
+       titulo: 'Deadpool & Wolverine',
+       sinopsis: 'Deadpool se une a Wolverine en una aventura irreverente que atraviesa el multiverso Marvel.',
+       fecha_estreno: '26/07/2024',
+       genero: 'Acción',
+       duracion: '124 minutos',
+       estado: 'En cartelera',
+       pais_origen: 'Estados Unidos',
+       horarios_proyeccion: [ [Object], [Object], [Object] ]
+     },
+     {
+       id: 4,
+       titulo: 'Inmaculada',
+       sinopsis: 'Una joven novicia enfrenta fuerzas sobrenaturales en un convento aislado en Italia.',
+       fecha_estreno: '22/03/2024',
+       genero: 'Terror',
+       duracion: '89 minutos',
+       estado: 'En cartelera',
+       pais_origen: 'Estados Unidos',
+       horarios_proyeccion: [ [Object], [Object], [Object] ]
+     },
+     {
+       id: 5,
+       titulo: 'Tornados',
+       sinopsis: 'Un grupo de cazadores de tormentas se enfrenta al tornado más devastador de la historia.',
+       fecha_estreno: '19/04/2024',
+       genero: 'Acción',
+       duracion: '110 minutos',
+       estado: 'En cartelera',
+       pais_origen: 'Estados Unidos',
+       horarios_proyeccion: [ [Object], [Object], [Object] ]
+     },
+     {
+       id: 6,
+       titulo: 'Bad Boys: Ride or Die',
+       sinopsis: 'Mike Lowrey y Marcus Burnett regresan para una última misión llena de acción y comedia.',
+       fecha_estreno: '07/06/2024',
+       genero: 'Acción',
+       duracion: '118 minutos',
+       estado: 'En cartelera',
+       pais_origen: 'Estados Unidos',
+       horarios_proyeccion: [ [Object], [Object], [Object] ]
+     },
+     {
+       id: 7,
+       titulo: 'Escucha como todo comenzó',
+       sinopsis: 'La historia del origen de la música hip-hop y sus pioneros en el Bronx de los años 70.',
+       fecha_estreno: '09/02/2024',
+       genero: 'Drama musical',
+       duracion: '135 minutos',
+       estado: 'En cartelera',
+       pais_origen: 'Estados Unidos',
+       horarios_proyeccion: [ [Object], [Object], [Object] ]
+     },
+     {
+       id: 8,
+       titulo: 'Coraline',
+       sinopsis: 'Remake live-action del clásico de animación sobre una niña que descubre una realidad alternativa siniestra.',
+       fecha_estreno: '25/10/2024',
+       genero: 'Fantasía',
+       duracion: '100 minutos',
+       estado: 'Próximo estreno',
+       pais_origen: 'Estados Unidos',
+       horarios_proyeccion: [ [Object], [Object], [Object] ]
+     },
+     {
+       id: 9,
+       titulo: 'Masacre en el tren',
+       sinopsis: 'Un viaje en tren se convierte en una pesadilla cuando un asesino comienza a atacar a los pasajeros.',
+       fecha_estreno: '13/09/2024',
+       genero: 'Terror',
+       duracion: '95 minutos',
+       estado: 'Próximo estreno',
+       pais_origen: 'Reino Unido',
+       horarios_proyeccion: [ [Object], [Object], [Object] ]
+     },
+     {
+       id: 10,
+       titulo: 'Herencia Siniestra',
+       sinopsis: 'Una familia hereda una mansión antigua, solo para descubrir que viene con un terrible secreto sobrenatural.',
+       fecha_estreno: '01/11/2024',
+       genero: 'Terror',
+       duracion: '112 minutos',
+       estado: 'Próximo estreno',
+       pais_origen: 'Estados Unidos',
+       horarios_proyeccion: [ [Object], [Object], [Object] ]
+     }
+   ]
+   ```
+   
+   
+   
+   ★ **API para Listar Películas:** Permitir la consulta de todas las películas disponibles en el catálogo, con detalles como título, género, duración y horarios de proyección.
+   
+   
+   
+   **obtenerDetallesPelicula(titulo):** Obtiene los detalles de una película específica por su título. ***Parámetro:*** El título de la película a consultar 
+   
+   Cuando se ejecuta esto con el título de la película que queremos consultar
+   
+   ```
+   let objPelicula = new pelicula();
+   
+   console.log(await objPelicula.obtenerDetallesPelicula("Intensamente 2"));
+   
+   objPelicula.destructor();
+   ```
+   
+   En consola obtendremos una respuesta como esta:
+   
+   ```
+   {
+     id: 1,
+     titulo: 'Intensamente 2',
+     sinopsis: 'Riley, ahora adolescente, enfrenta nuevos desafíos emocionales mientras sus emociones se adaptan a cambios en su mente.',
+     fecha_estreno: '14/06/2024',
+     genero: 'Animación',
+     duracion: '107 minutos',
+     estado: 'En cartelera',
+     pais_origen: 'Estados Unidos',
+     horarios_proyeccion: [
+       {
+         fecha_proyeccion: '14/06/2024',
+         horario_proyeccion: '14:00',
+         hora_finalizacion: '15:47',
+         id_sala: 1,
+         precio_pelicula: 15000
+       },
+       {
+         fecha_proyeccion: '14/06/2024',
+         horario_proyeccion: '18:30',
+         hora_finalizacion: '20:17',
+         id_sala: 2,
+         precio_pelicula: 15000
+       },
+       {
+         fecha_proyeccion: '15/06/2024',
+         horario_proyeccion: '16:00',
+         hora_finalizacion: '17:47',
+         id_sala: 3,
+         precio_pelicula: 15000
+       }
+     ]
+   }
+   ```
+   
+   en caso de no ser encontrada la pelicula por su nombre devolvera lo siguiente en consola:
+   
+   ```
+   let objPelicula = new pelicula();
+   
+   console.log(await objPelicula.obtenerDetallesPelicula("Tom y Jerry"));
+   
+   objPelicula.destructor();
+   ```
+   
+   
+   
+   **obtenerDetallesPelicula(id):** Obtiene los detalles de una película específica por su ID.
+   
+    ***Parámetro:*** El ID de la película a consultar 
+   
+   Cuando se ejecuta esto con el ID de la película que queremos consultar:
+   
+   ```
+   let objPelicula = new pelicula();
+   
+   console.log(await objPelicula.obtenerDetallesPelicula(2));
+   
+   objPelicula.destructor();
+   ```
+   
+   En consola obtendremos una respuesta como esta:
+   
+   ```
+   {
+     id: 2,
+     titulo: 'Mi villano favorito 4',
+     sinopsis: 'Gru y su familia se embarcan en una nueva aventura llena de travesuras y desafíos inesperados.',
+     fecha_estreno: '03/07/2024',
+     genero: 'Animación',
+     duracion: '90 minutos',
+     estado: 'En cartelera',
+     pais_origen: 'Estados Unidos',
+     horarios_proyeccion: [
+       {
+         fecha_proyeccion: '03/07/2024',
+         horario_proyeccion: '15:00',
+         hora_finalizacion: '16:30',
+         id_sala: 1,
+         precio_pelicula: 15000
+       },
+       {
+         fecha_proyeccion: '03/07/2024',
+         horario_proyeccion: '19:00',
+         hora_finalizacion: '20:30',
+         id_sala: 2,
+         precio_pelicula: 15000
+       },
+       {
+         fecha_proyeccion: '04/07/2024',
+         horario_proyeccion: '17:30',
+         hora_finalizacion: '19:00',
+         id_sala: 3,
+         precio_pelicula: 15000
+       }
+     ]
+   }
+   ```
+   
+   en caso de no ser encontrada la pelicula por su nombre devolvera lo siguiente en consola:
+   
+   ```
+   let objPelicula = new pelicula();
+   
+   console.log(await objPelicula.obtenerDetallesPelicula("56"));
+   
+   objPelicula.destructor();
+   ```
    
    
    
@@ -71,19 +323,20 @@ npm run dev
    
    
 2. **Compra de Boletos:**
-   - **API para Comprar Boletos:** Permitir la compra de boletos para una película específica, incluyendo la selección de la fecha y la hora de la proyección.
    
-     ```
-     
-     ```
+   ★ **API para Comprar Boletos:** Permitir la compra de boletos para una película específica, incluyendo la selección de la fecha y la hora de la proyección.
    
-     
+   ```
    
-   - **API para Verificar Disponibilidad de Asientos:** Permitir la consulta de la disponibilidad de asientos en una sala para una proyección específica.
+   ```
    
-     ```
-     
-     ```
+   
+   
+   ★ **API para Verificar Disponibilidad de Asientos:** Permitir la consulta de la disponibilidad de asientos en una sala para una proyección específica.
+   
+   ```
+   
+   ```
    
    
    
@@ -93,19 +346,20 @@ npm run dev
    
    
 3. **Asignación de Asientos:**
-   - **API para Reservar Asientos:** Permitir la selección y reserva de asientos para una proyección específica.
    
-     ```
-     
-     ```
+   ★ **API para Reservar Asientos:** Permitir la selección y reserva de asientos para una proyección específica.
    
-     
+   ```
    
-   - **API para Cancelar Reserva de Asientos:** Permitir la cancelación de una reserva de asiento ya realizada.
+   ```
    
-     ```
-     
-     ```
+   
+   
+   ★ **API para Cancelar Reserva de Asientos:** Permitir la cancelación de una reserva de asiento ya realizada.
+   
+   ```
+   
+   ```
    
    
    
@@ -115,19 +369,20 @@ npm run dev
    
    
 4. **Descuentos y Tarjetas VIP:**
-   - **API para Aplicar Descuentos:** Permitir la aplicación de descuentos en la compra de boletos para usuarios con tarjeta VIP.
    
-     ```
-     
-     ```
+   ★ **API para Aplicar Descuentos:** Permitir la aplicación de descuentos en la compra de boletos para usuarios con tarjeta VIP.
    
-     
+   ```
    
-   - **API para Verificar Tarjeta VIP:** Permitir la verificación de la validez de una tarjeta VIP durante el proceso de compra.
+   ```
    
-     ```
-     
-     ```
+   
+   
+   ★ **API para Verificar Tarjeta VIP:** Permitir la verificación de la validez de una tarjeta VIP durante el proceso de compra.
+   
+   ```
+   
+   ```
    
    
    
@@ -145,32 +400,32 @@ npm run dev
      
        
      
-   - **API para Crear Usuario:** Permitir la creación de nuevos usuarios en el sistema, asignando roles y privilegios específicos (usuario estándar, usuario VIP o administrador).
-   
+     ★ **API para Crear Usuario:** Permitir la creación de nuevos usuarios en el sistema, asignando roles y privilegios específicos (usuario estándar, usuario VIP o administrador).
+     
      ```
      
      ```
-   
      
-   
-   - **API para Obtener Detalles de Usuario:** Permitir la consulta de información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
-   
-     ```
      
-     ```
-   
      
-   
-   - **API para Actualizar Rol de Usuario:** Permitir la actualización del rol de un usuario (por ejemplo, cambiar de usuario estándar a VIP, o viceversa).
-   
+     ★ **API para Obtener Detalles de Usuario:** Permitir la consulta de información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
+     
      ```
      
      ```
-   
      
-   
-   - **API para Listar Usuarios:** Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol (VIP, estándar o administrador).
-   
+     
+     
+     ★ **API para Actualizar Rol de Usuario:** Permitir la actualización del rol de un usuario (por ejemplo, cambiar de usuario estándar a VIP, o viceversa).
+     
+     ```
+     
+     ```
+     
+     
+     
+     ★ **API para Listar Usuarios:** Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol (VIP, estándar o administrador).
+     
      ```
      
      ```
@@ -183,20 +438,20 @@ npm run dev
    
    
 6. **Compras en Línea:**
-   - **API para Procesar Pagos:** Permitir el procesamiento de pagos en línea para la compra de boletos.
    
-     ```
-     
-     ```
+   ★ **API para Procesar Pagos:** Permitir el procesamiento de pagos en línea para la compra de boletos.
    
-     
+   ```
    
-   - **API para Confirmación de Compra:** Enviar confirmación de la compra y los detalles del boleto al usuario.
+   ```
    
-     ```
-     
-     ```
    
+   
+   ★ **API para Confirmación de Compra:** Enviar confirmación de la compra y los detalles del boleto al usuario.
+   
+   ```
+   
+   ```
 
 
 
