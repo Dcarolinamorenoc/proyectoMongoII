@@ -23,6 +23,27 @@ export class pelicula extends connect {
     
 //--------------------------------------------------------------------------------------------------------
 
+    /**
+     * Lista todas las películas en cartelera o de próximo estreno con sus horarios de proyección.
+     *
+     * @async
+     * @returns {Promise<Array<Object>|Object>} - Un array de objetos con la información de las películas y sus horarios, o un objeto con un mensaje de error.
+     * @property {number} id - ID único de la película.
+     * @property {string} titulo - Título de la película.
+     * @property {string} sinopsis - Resumen breve de la trama de la película.
+     * @property {Date} fecha_estreno - Fecha de estreno de la película.
+     * @property {string} genero - Género de la película.
+     * @property {number} duracion - Duración de la película en minutos.
+     * @property {string} estado - Estado actual de la película ("En cartelera" o "Próximo estreno").
+     * @property {string} pais_origen - País de origen de la película.
+     * @property {Array<Object>} horarios_proyeccion - Lista de horarios de proyección para la película.
+     * @property {Date} horarios_proyeccion.fecha_proyeccion - Fecha de la proyección.
+     * @property {string} horarios_proyeccion.horario_proyeccion - Hora de inicio de la proyección.
+     * @property {string} horarios_proyeccion.hora_finalizacion - Hora de finalización de la proyección.
+     * @property {number} horarios_proyeccion.id_sala - ID de la sala de proyección.
+     * @property {number} horarios_proyeccion.precio_pelicula - Precio de la entrada para esta proyección.
+     */
+
 
     //  Listar Películas
 
@@ -80,6 +101,28 @@ export class pelicula extends connect {
 
 //--------------------------------------------------------------------------------------------------------
 
+    /**
+     * Obtiene los detalles de una película específica por su ID o título, incluyendo sus horarios de proyección.
+     *
+     * @async
+     * @param {number|string} idOTitulo - El ID numérico o el título de la película a buscar.
+     * @returns {Promise<Object>} - Un objeto con los detalles de la película y sus horarios de proyección, o un objeto con un mensaje de error.
+     * @property {number} id - ID único de la película.
+     * @property {string} titulo - Título de la película.
+     * @property {string} sinopsis - Resumen breve de la trama de la película.
+     * @property {Date} fecha_estreno - Fecha de estreno de la película.
+     * @property {string} genero - Género de la película.
+     * @property {number} duracion - Duración de la película en minutos.
+     * @property {string} estado - Estado actual de la película.
+     * @property {string} pais_origen - País de origen de la película.
+     * @property {Array<Object>} horarios_proyeccion - Lista de horarios de proyección para la película.
+     * @property {Date} horarios_proyeccion.fecha_proyeccion - Fecha de la proyección.
+     * @property {string} horarios_proyeccion.horario_proyeccion - Hora de inicio de la proyección.
+     * @property {string} horarios_proyeccion.hora_finalizacion - Hora de finalización de la proyección.
+     * @property {number} horarios_proyeccion.id_sala - ID de la sala de proyección.
+     * @property {number} horarios_proyeccion.precio_pelicula - Precio de la entrada para esta proyección.
+     */
+    
 
     // Obtener Detalles de Película
 

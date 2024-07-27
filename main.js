@@ -10,7 +10,7 @@ let objPelicula = new pelicula();
 
 // Listar todas las películas
 
-console.log(await objPelicula.listarPeliculas());
+// console.log(await objPelicula.listarPeliculas());
 
 // Obtener detalles de una película específica por título
 
