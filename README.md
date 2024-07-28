@@ -914,17 +914,179 @@ npm run dev
    
    ★ **API para Aplicar Descuentos:** Permitir la aplicación de descuentos en la compra de boletos para usuarios con tarjeta VIP.
    
+   
+   
+   **comprarBoletosVIP(datosBoletoVip):** Realiza la compra de boletos VIP para una película, aplicando descuentos para usuarios VIP.
+   
+   **Parámetros:** Un objeto con los siguientes datos:
+   
+   - id: Identificador único del boleto
+   - id_pelicula: Identificador de la película
+   - id_horario_proyeccion: Identificador del horario de proyección
+   - id_usuario: Identificador del usuario que realiza la compra
+   - asientos_comprados: Array con los números de asientos a comprar
+   - modo_compra: Modo de compra (por ejemplo, "virtual" o "presencial")
+   - metodo_pago: Método de pago utilizado
+   - id_reserva: Identificador de la reserva (si aplica), puede ser null
+   
+   Cuando se ejecuta esto:
+   
+   ```js
+   let objTarjetaVip = new TarjetaVip();
+   
+   const datosBoletoVip = {
+       id: 20,
+       id_pelicula: 4,
+       id_horario_proyeccion: 11,
+       id_usuario: 4,
+       asientos_comprados: [107,108], 
+       modo_compra: "virtual",
+       metodo_pago: "efectivo",
+       id_reserva: null
+   };
+   
+   console.log(await objTarjetaVip.comprarBoletosVIP(datosBoletoVip));
+   
+   objTarjetaVip.destructor();
    ```
    
+   en consola obtendremos un resultado:
+   
+   ```js
+   {
+     mensaje: 'Compra realizada con éxito. Eres un cliente VIP y por eso te hemos otorgado un descuento de: 15%',
+     detallesBoleto: {
+       id: 20,
+       id_pelicula: 4,
+       id_horario_proyeccion: 11,
+       id_usuario: 4,
+       asientos_comprados: [ 107, 108 ],
+       modo_compra: 'virtual',
+       metodo_pago: 'efectivo',
+       id_reserva: null,
+       total: 27200,
+       descuento_aplicado: 15,
+       fecha_compra: '28/7/2024',
+       estado_compra: 'completada',
+       _id: new ObjectId('66a69721bb12080912e2ce58')
+     }
+   }
    ```
+   
+   Como podemos observar la notifica al usuario, que al ser un cliente vip se le ha aplicado el correspondiente descuento.
    
    
    
    ★ **API para Verificar Tarjeta VIP:** Permitir la verificación de la validez de una tarjeta VIP durante el proceso de compra.
    
+   
+   
+   **ComprarBoletosVIPConVerificacionTarjeta(datosBoletoVip):** Realiza la compra de boletos VIP para una película, verificando la validez de la tarjeta VIP durante el proceso.
+   
+   **Parámetros:** Un objeto con los siguientes datos:
+   
+   - id: Identificador único del boleto
+   - id_pelicula: Identificador de la película
+   - id_horario_proyeccion: Identificador del horario de proyección
+   - id_usuario: Identificador del usuario que realiza la compra
+   - asientos_comprados: Array con los números de asientos a comprar
+   - modo_compra: Modo de compra (por ejemplo, "virtual" o "presencial")
+   - metodo_pago: Método de pago utilizado
+   - id_reserva: Identificador de la reserva (si aplica), puede ser null
+   
+   Cuando se ejecuta esto:
+   
+   ```js
+   let objTarjetaVip = new TarjetaVip();
+   
+   const datosBoletoVip = {
+       id: 21,
+       id_pelicula: 6,
+       id_horario_proyeccion: 18,
+       id_usuario: 4,
+       asientos_comprados: [76,77], 
+       modo_compra: "virtual",
+       metodo_pago: "efectivo",
+       id_reserva: null
+   };
+   
+   console.log(await objTarjetaVip.comprarBoletosVIPConVerificacionTarjeta(datosBoletoVip));
+   
+   objTarjetaVip.destructor();
    ```
    
+   obtendremos desde consola una respuesta asi, en caso de que la tarjeta este en un estado activo:
+   
+   ```js
+   {
+     mensaje: 'Compra realizada con éxito. Querido usuario VIP tu tarjeta esta (activa) y por eso te hemos otorgado un descuento de: 15%',
+     detallesBoleto: {
+       id: 21,
+       id_pelicula: 6,
+       id_horario_proyeccion: 18,
+       id_usuario: 4,
+       asientos_comprados: [ 76, 77 ],
+       modo_compra: 'virtual',
+       metodo_pago: 'efectivo',
+       id_reserva: null,
+       total: 30600,
+       descuento_aplicado: 15,
+       fecha_compra: '28/7/2024',
+       estado_compra: 'completada',
+       _id: new ObjectId('66a69a07afc20d91f1dd284e')
+     }
+   }
    ```
+   
+   Como vemos le notifica que se le realizo la compra y se le aplico un descuento al estar su tarjeta en estado activo
+   
+   
+   
+   Cuando se ejecuta esto para un usuario que tiene su tarjeta expirada:
+   
+   ```js
+   let objTarjetaVip = new TarjetaVip();
+   
+   const datosBoletoVip = {
+       id: 20,
+       id_pelicula: 6,
+       id_horario_proyeccion: 18,
+       id_usuario: 3,
+       asientos_comprados: [86,87], 
+       modo_compra: "virtual",
+       metodo_pago: "efectivo",
+       id_reserva: null
+   };
+   
+   console.log(await objTarjetaVip.comprarBoletosVIPConVerificacionTarjeta(datosBoletoVip));
+   
+   objTarjetaVip.destructor();
+   ```
+   
+   En consola obtendremos una respuesta asi:
+   
+   ```js
+   {
+     mensaje: 'Compra realizada con éxito. Pero Lo sentimos mucho querido usuario VIP pero tu tarjeta esta (expirada) por eso no hemos podido realizarte un descuento, te invitamos a que vuelvas a activar tu tarjeta',
+     detallesBoleto: {
+       id: 20,
+       id_pelicula: 6,
+       id_horario_proyeccion: 18,
+       id_usuario: 3,
+       asientos_comprados: [ 86, 87 ],
+       modo_compra: 'virtual',
+       metodo_pago: 'efectivo',
+       id_reserva: null,
+       total: 36000,
+       descuento_aplicado: 0,
+       fecha_compra: '28/7/2024',
+       estado_compra: 'completada',
+       _id: new ObjectId('66a698258f442e2c611c8711')
+     }
+   }
+   ```
+   
+   Como vemos se realizo la compra, pero le notifico al usuario VIP que su tarjeta ya expiro y que si quiere que le sigan aplicando descuentos debe renovarla.
    
    
    
