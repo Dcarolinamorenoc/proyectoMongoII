@@ -98,15 +98,15 @@ let objReserva = new reserva();
 
 // Cancelar parcialmente una reserva 
 
-const datosCancelacionParcial = {
-    id: 7,
-    id_pelicula: 1,
-    id_horario_proyeccion: 2,
-    id_usuario: 2,
-    asientos_reservados: [60],
-};
+// const datosCancelacionParcial = {
+//     id: 7,
+//     id_pelicula: 1,
+//     id_horario_proyeccion: 2,
+//     id_usuario: 2,
+//     asientos_reservados: [60],
+// };
 
-console.log(await objReserva.cancelarReserva(datosCancelacionParcial));
+// console.log(await objReserva.cancelarReserva(datosCancelacionParcial));
 
 
 objReserva.destructor();

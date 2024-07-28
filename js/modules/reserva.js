@@ -154,6 +154,25 @@ export class reserva extends connect {
 
 //--------------------------------------------------------------------------------------------------------
 
+  /**
+   * Cancela o actualiza una reserva existente.
+   * 
+   * @async
+   * @param {Object} datosReserva - Datos de la reserva a cancelar o actualizar.
+   * @param {string} datosReserva.id - ID de la reserva.
+   * @param {string} datosReserva.id_usuario - ID del usuario que solicita la cancelación/actualización.
+   * @param {Array<string>} datosReserva.asientos_reservados - Nueva lista de IDs de asientos reservados (vacía para cancelación total).
+   * @returns {Promise<Object>} Objeto con el resultado de la operación.
+   * @property {string} mensaje - Mensaje indicando el resultado de la operación.
+   * @property {Object} detallesReserva - Detalles actualizados de la reserva.
+   * @property {string} detallesReserva.estado - Nuevo estado de la reserva ('cancelada' o 'activa').
+   * @property {Array<string>} detallesReserva.asientos_reservados - Lista actualizada de asientos reservados.
+   * @property {Object} [error] - Objeto de error en caso de fallo.
+   * @property {string} error.error - Mensaje de error detallado.
+   * @throws {Error} Si la reserva no existe, el usuario no tiene permiso, o no se puede actualizar la reserva.
+   */
+
+  // Cancelar parcialmente una reserva 
   async cancelarReserva(datosReserva) {
 
     try {
