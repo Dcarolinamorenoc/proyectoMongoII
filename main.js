@@ -77,7 +77,7 @@ import { reserva } from './js/modules/reserva.js';
 //--------------------------------------------------------------------------------------------------------
 
 
-let objReserva = new reserva();
+// let objReserva = new reserva();
 
 //Caso de uso 3: Asignación de Asientos(Diana Carolina Moreno Cárdenas)
 
@@ -109,4 +109,4 @@ let objReserva = new reserva();
 // console.log(await objReserva.cancelarReserva(datosCancelacionParcial));
 
 
-objReserva.destructor();
+// objReserva.destructor();
