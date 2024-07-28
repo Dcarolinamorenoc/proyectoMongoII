@@ -2,6 +2,10 @@ import { pelicula } from './js/modules/pelicula.js';
 import { boleto } from './js/modules/boleto.js';
 import { reserva } from './js/modules/reserva.js';
 import { TarjetaVip } from './js/modules/tarjetaVip.js';
+import { Usuario } from './js/modules/usuario.js';
+
+
+
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -155,3 +159,40 @@ import { TarjetaVip } from './js/modules/tarjetaVip.js';
 
 
 // objTarjetaVip.destructor();
+
+
+
+//--------------------------------------------------------------------------------------------------------
+
+let objUsuario = new Usuario();
+
+// Caso de uso 5: Roles Definidos (Diana Carolina Moreno Cárdenas)
+
+// Crear un nuevo usuario
+
+// const datosUsuarioEstandar = {
+//     id: 20,
+//     nombre_completo: "Miguel Angel Castro",
+//     identificacion: "109785312",
+//     nickname: "MigueCastro",
+//     celular: "3131464905",
+//     email: "miguel.angel@email.com",
+//     telefono: "6019876543",
+//     rol: "VIP"
+// };
+
+// console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
+
+
+
+// Si el Usuario nuevo es registrado con un rol VIP es necesario crear su tarjeta Vip
+
+// const datosTarjetaVip = {
+//     identificacion: "109785312"
+// };
+
+// console.log(await objUsuario.crearTarjetaVIP(datosTarjetaVip));
+
+
+
+objUsuario.destructor();
