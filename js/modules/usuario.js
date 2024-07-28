@@ -25,6 +25,29 @@ export class Usuario extends connect {
 
 //--------------------------------------------------------------------------------------------------------
 
+    /**
+     * Crea un nuevo usuario en la base de datos.
+     *
+     * @async
+     * @param {Object} datosUsuario - Datos del usuario a crear.
+     * @param {number} datosUsuario.id - ID único del usuario.
+     * @param {string} datosUsuario.nombre_completo - Nombre completo del usuario.
+     * @param {string} datosUsuario.nickname - Apodo único del usuario.
+     * @param {string} datosUsuario.email - Correo electrónico único del usuario.
+     * @param {string} datosUsuario.celular - Número de celular único del usuario.
+     * @param {string} datosUsuario.identificacion - Número de identificación único del usuario.
+     * @param {string} [datosUsuario.telefono] - Número de teléfono del usuario (opcional).
+     * @param {string} [datosUsuario.rol] - Rol del usuario (por defecto: 'estándar').
+     * @returns {Promise<Object>} Objeto con el resultado de la operación.
+     * @property {string} [mensaje] - Mensaje de éxito si el usuario se crea correctamente.
+     * @property {Object} [usuario] - Detalles del usuario creado si la operación es exitosa.
+     * @property {string} [error] - Mensaje de error si la creación falla.
+     * @throws {Error} Si ocurre algún error durante el proceso de creación.
+     */
+
+
+    // Crear un nuevo usuario
+
     async crearUsuario(datosUsuario) {
         try {
             await this.conexion.connect();
@@ -65,7 +88,27 @@ export class Usuario extends connect {
 
 //--------------------------------------------------------------------------------------------------------
 
+    /**
+     * Crea una nueva tarjeta VIP para un usuario.
+     *
+     * @async
+     * @param {Object} datosTarjetaVip - Datos para crear la tarjeta VIP.
+     * @param {number} [datosTarjetaVip.id_usuario] - ID del usuario (opcional).
+     * @param {string} [datosTarjetaVip.nickname] - Nickname del usuario (opcional).
+     * @param {string} [datosTarjetaVip.identificacion] - Identificación del usuario (opcional).
+     * @returns {Promise<Object>} Objeto con el resultado de la operación.
+     * @property {number} [id] - ID de la tarjeta VIP creada.
+     * @property {number} [id_usuario] - ID del usuario al que se asignó la tarjeta.
+     * @property {string} [numero] - Número único de la tarjeta VIP.
+     * @property {number} [porcentaje_descuento] - Porcentaje de descuento de la tarjeta.
+     * @property {string} [fecha_expiracion] - Fecha de expiración de la tarjeta.
+     * @property {string} [estado] - Estado de la tarjeta (por defecto: 'activa').
+     * @property {string} [error] - Mensaje de error si la creación falla.
+     * @throws {Error} Si ocurre algún error durante el proceso de creación.
+     */
 
+
+    // Si el Usuario nuevo es registrado con un rol VIP es necesario crear su tarjeta Vip
     async crearTarjetaVIP(datosTarjetaVip) {
         try {
             await this.conexion.connect();
@@ -132,6 +175,38 @@ export class Usuario extends connect {
 
 
 
+//--------------------------------------------------------------------------------------------------------
+
+    /**
+     * Consulta información detallada de un usuario, incluyendo su rol y estado de tarjeta VIP.
+     *
+     * @async
+     * @param {Object} datosConsulta - Datos para realizar la consulta.
+     * @param {number} [datosConsulta.id] - ID del usuario (opcional).
+     * @param {string} [datosConsulta.identificacion] - Identificación del usuario (opcional).
+     * @param {string} [datosConsulta.nickname] - Nickname del usuario (opcional).
+     * @param {string} [datosConsulta.nombre_completo] - Nombre completo del usuario (opcional).
+     * @returns {Promise<Object>} Objeto con la información detallada del usuario.
+     * @property {number} id - ID del usuario.
+     * @property {string} nombre_completo - Nombre completo del usuario.
+     * @property {string} identificacion - Identificación del usuario.
+     * @property {string} nickname - Nickname del usuario.
+     * @property {string} celular - Número de celular del usuario.
+     * @property {string} email - Correo electrónico del usuario.
+     * @property {string} [telefono] - Número de teléfono del usuario (si está disponible).
+     * @property {string} rol - Rol del usuario.
+     * @property {Object} [tarjetaVIP] - Detalles de la tarjeta VIP (si el usuario tiene una).
+     * @property {string} [tarjetaVIP.numero] - Número de la tarjeta VIP.
+     * @property {number} [tarjetaVIP.porcentaje_descuento] - Porcentaje de descuento de la tarjeta VIP.
+     * @property {string} [tarjetaVIP.fecha_expiracion] - Fecha de expiración de la tarjeta VIP.
+     * @property {string} [tarjetaVIP.estado] - Estado actual de la tarjeta VIP.
+     * @property {string} mensajeTarjetaVIP - Mensaje sobre el estado de la tarjeta VIP o el rol del usuario.
+     * @property {string} [error] - Mensaje de error si la consulta falla.
+     * @throws {Error} Si ocurre algún error durante el proceso de consulta.
+     */
+
+
+    // Consultar información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
 
     async consultarUsuarioDetallado(datosConsulta) {
         try {
@@ -187,7 +262,7 @@ export class Usuario extends connect {
               break;
             default: 
               mensajeTarjetaVIP = 'Eres usuario estándar. No tienes una tarjeta VIP. Si deseas una, puedes adquirirla.';
-              
+
           }
       
           const usuarioDetallado = {
@@ -214,6 +289,6 @@ export class Usuario extends connect {
           await this.conexion.close();
           return { error: error.message };
         }
-      }
+    }
 }
 

@@ -198,8 +198,10 @@ let objUsuario = new Usuario();
 
 // Consultar información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
 
+
 console.log(await objUsuario.consultarUsuarioDetallado({ id: 2 }));
 
 
+// ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
 
 objUsuario.destructor();
