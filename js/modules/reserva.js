@@ -25,17 +25,50 @@ export class reserva extends connect {
 
 // Reservar asientos para una película
 
+  /**
+   * Obtiene la fecha actual en formato DD/MM/YYYY.
+   * 
+   * @returns {string} Fecha actual formateada.
+   */
+
     getFechaActual() {
       const fecha = new Date();
       return `${fecha.getDate().toString().padStart(2, '0')}/${(fecha.getMonth() + 1).toString().padStart(2, '0')}/${fecha.getFullYear()}`;
     }
-  
+
+  /**
+   * Calcula la fecha de expiración (3 días a partir de la fecha actual) en formato DD/MM/YYYY.
+   * 
+   * @returns {string} Fecha de expiración.
+   */
+
     getFechaExpiracion() {
       const fecha = new Date();
       fecha.setDate(fecha.getDate() + 3);
       return `${fecha.getDate().toString().padStart(2, '0')}/${(fecha.getMonth() + 1).toString().padStart(2, '0')}/${fecha.getFullYear()}`;
     }
   
+  /**
+   * Realiza una reserva de asientos para una película en un horario específico.
+   * 
+   * @async
+   * @param {Object} datosReserva - Datos de la reserva a realizar.
+   * @param {string} datosReserva.id - ID único de la reserva.
+   * @param {string} datosReserva.id_pelicula - ID de la película.
+   * @param {string} datosReserva.id_horario_proyeccion - ID del horario de proyección.
+   * @param {string} datosReserva.id_usuario - ID del usuario que realiza la reserva.
+   * @param {Array<string>} datosReserva.asientos_reservados - Lista de IDs de asientos a reservar.
+   * @param {string} [datosReserva.fecha_reserva] - Fecha de la reserva (opcional).
+   * @param {string} [datosReserva.estado] - Estado de la reserva (opcional).
+   * @param {string} [datosReserva.fecha_expiracion] - Fecha de expiración de la reserva (opcional).
+   * @returns {Promise<Object>} Objeto con el resultado de la operación.
+   * @property {string} mensaje - Mensaje de éxito si la reserva se realiza correctamente.
+   * @property {Object} detallesReserva - Detalles de la reserva creada.
+   * @property {Object} [error] - Objeto de error en caso de fallo.
+   * @property {string} error.error - Mensaje de error detallado.
+   * @throws {Error} Si ocurre algún error durante el proceso de reserva.
+   */
+
     async reservarAsientos(datosReserva) {
 
       try {
