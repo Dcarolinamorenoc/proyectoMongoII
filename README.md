@@ -60,7 +60,7 @@ npm run dev
    
    Cuando se ejecuta esto :
    
-   ```
+   ```js
    let objPelicula = new pelicula();
    
    console.log(await objPelicula.listarPeliculas());
@@ -70,7 +70,7 @@ npm run dev
    
    En consola obtendremos una respuesta como esta:
    
-   ```
+   ```js
    [
      {
        id: 1,
@@ -195,7 +195,7 @@ npm run dev
    
    Cuando se ejecuta esto con el título de la película que queremos consultar
    
-   ```
+   ```js
    let objPelicula = new pelicula();
    
    console.log(await objPelicula.obtenerDetallesPelicula("Intensamente 2"));
@@ -205,7 +205,7 @@ npm run dev
    
    En consola obtendremos una respuesta como esta:
    
-   ```
+   ```js
    {
      id: 1,
      titulo: 'Intensamente 2',
@@ -243,7 +243,7 @@ npm run dev
    
    en caso de no ser encontrada la pelicula por su nombre devolvera lo siguiente en consola:
    
-   ```
+   ```js
    let objPelicula = new pelicula();
    
    console.log(await objPelicula.obtenerDetallesPelicula("Tom y Jerry"));
@@ -259,7 +259,7 @@ npm run dev
    
    Cuando se ejecuta esto con el ID de la película que queremos consultar:
    
-   ```
+   ```js
    let objPelicula = new pelicula();
    
    console.log(await objPelicula.obtenerDetallesPelicula(2));
@@ -269,7 +269,7 @@ npm run dev
    
    En consola obtendremos una respuesta como esta:
    
-   ```
+   ```js
    {
      id: 2,
      titulo: 'Mi villano favorito 4',
@@ -307,7 +307,7 @@ npm run dev
    
    en caso de no ser encontrada la pelicula por su nombre devolvera lo siguiente en consola:
    
-   ```
+   ```js
    let objPelicula = new pelicula();
    
    console.log(await objPelicula.obtenerDetallesPelicula("56"));
@@ -326,16 +326,361 @@ npm run dev
    
    ★ **API para Comprar Boletos:** Permitir la compra de boletos para una película específica, incluyendo la selección de la fecha y la hora de la proyección.
    
+   **comprarBoletos(datosBoleto):** Realiza la compra de boletos para una película.
+   
+   ***Parámetros:*** Un objeto con los siguientes datos:
+   
+   - id: Identificador único del boleto
+   - id_pelicula: Identificador de la película
+   - id_horario_proyeccion: Identificador del horario de proyección
+   - id_usuario: Identificador del usuario que realiza la compra
+   - asientos_comprados: Array con los números de asientos seleccionados
+   - modo_compra: Modo de compra ("virtual" o "presencial")
+   - metodo_pago: Método de pago utilizado
+   - id_reserva: Identificador de la reserva (si aplica o si no un null)
+   
+   
+   
+   Cuando se ejecuta esto para un usuario VIP:
+   
+   ```js
+   let objBoleto = new boleto();
+   
+   const datosBoleto = {
+       id: 15,
+       id_pelicula: 1,
+       id_horario_proyeccion: 1,
+       id_usuario: 1,
+       asientos_comprados: [48,49], 
+       modo_compra: "virtual",
+       metodo_pago: "tarjeta de crédito",
+       id_reserva: null
+   };
+   
+   console.log(await objBoleto.comprarBoletos(datosBoleto));
+   
+   objBoleto.destructor();
    ```
    
+   en consola obtendremos (si es un usuario VIP)
+   
+   ```js
+   {
+     mensaje: 'Compra realizada con éxito',
+     detallesBoleto: {
+       id: 15,
+       id_pelicula: 1,
+       id_horario_proyeccion: 1,
+       id_usuario: 1,
+       asientos_comprados: [ 48, 49 ],
+       modo_compra: 'virtual',
+       metodo_pago: 'tarjeta de crédito',
+       id_reserva: 1,
+       total: 25500,
+       descuento_aplicado: 15,
+       fecha_compra: '27/7/2024',
+       estado_compra: 'completada',
+       _id: new ObjectId('66a5a3b52d66d18e8ad19c33')
+     }
+   }
+   ```
+   
+   en caso de que sea un usuario estandar 
+   
+   ```js
+   let objBoleto = new boleto();
+   
+   const datosBoleto = {
+       id: 19,
+       id_pelicula: 6,
+       id_horario_proyeccion: 1,
+       id_usuario: 1,
+       asientos_comprados: [46,45], 
+       modo_compra: "virtual",
+       metodo_pago: "tarjeta de crédito",
+       id_reserva: null
+   };
+   
+   console.log(await objBoleto.comprarBoletos(datosBoleto));
+   
+   objBoleto.destructor();
+   ```
+   
+   obtendremos en consola:
+   
+   ```js
+   {
+     mensaje: 'Compra realizada con éxito',
+     detallesBoleto: {
+       id: 18,
+       id_pelicula: 1,
+       id_horario_proyeccion: 1,
+       id_usuario: 7,
+       asientos_comprados: [ 46, 45 ],
+       modo_compra: 'virtual',
+       metodo_pago: 'tarjeta de crédito',
+       id_reserva: 1,
+       total: 30000,
+       descuento_aplicado: 0,
+       fecha_compra: '27/7/2024',
+       estado_compra: 'completada',
+       _id: new ObjectId('66a5a41e6f0a78eee96779b4')
+     }
+   }
+   ```
+   
+   En caso de que un asiento o ambos esten ocupados 
+   
+   ```js
+   let objBoleto = new boleto();
+   
+   const datosBoleto = {
+       id: 16,
+       id_pelicula: 1,
+       id_horario_proyeccion: 1,
+       id_usuario: 1,
+       asientos_comprados: [1,49], 
+       modo_compra: "virtual",
+       metodo_pago: "tarjeta de crédito",
+       id_reserva: 1
+   };
+   
+   console.log(await objBoleto.comprarBoletos(datosBoleto));
+   
+   objBoleto.destructor();
+   ```
+   
+   devolvera un mensaje como este 
+   
+   ```js
+   {
+     error: 'Error al realizar la compra: Uno o más asientos seleccionados no están disponibles.'
+   }
+   ```
+   
+   y si la pelicula ya salio de cartelera
+   
+   ```js
+   let objBoleto = new boleto();
+   
+   const datosBoleto = {
+       id: 16,
+       id_pelicula: 11,
+       id_horario_proyeccion: 1,
+       id_usuario: 1,
+       asientos_comprados: [1,49], 
+       modo_compra: "virtual",
+       metodo_pago: "tarjeta de crédito",
+       id_reserva: 1
+   };
+   
+   console.log(await objBoleto.comprarBoletos(datosBoleto));
+   
+   objBoleto.destructor();
    ```
    
    
    
    ★ **API para Verificar Disponibilidad de Asientos:** Permitir la consulta de la disponibilidad de asientos en una sala para una proyección específica.
    
+   **consultarDisponibilidadAsientos(id_sala):** Consulta la disponibilidad de asientos en una sala específica.
+   
+   ***Parámetros:*** El identificador de la sala a consultar.
+   
+   Cuando se ejecuta esto:
+   
+   ```js
+   let objBoleto = new boleto();
+   
+   console.log(await objBoleto.consultarDisponibilidadAsientos(1));
+   
+   objBoleto.destructor();
    ```
    
+   obtendremos en consola un resultado como este:
+   
+   ```js
+   {
+     idHorarioProyeccion: 1,
+     fechaProyeccion: '14/06/2024',
+     horarioProyeccion: '14:00',
+     idSala: 1,
+     nombreSala: 'Sala 1',
+     capacidadTotal: 25,
+     asientosDisponibles: 19,
+     asientos: [
+       {
+         id: 31,
+         nombre: 'F5',
+         fila: 'F',
+         numero: 5,
+         tipo: 'estándar',
+         estado: 'disponible'
+       },
+       {
+         id: 32,
+         nombre: 'F6',
+         fila: 'F',
+         numero: 6,
+         tipo: 'estándar',
+         estado: 'disponible'
+       },
+       {
+         id: 33,
+         nombre: 'G1',
+         fila: 'G',
+         numero: 1,
+         tipo: 'estándar',
+         estado: 'disponible'
+       },
+       {
+         id: 34,
+         nombre: 'G2',
+         fila: 'G',
+         numero: 2,
+         tipo: 'estándar',
+         estado: 'disponible'
+       },
+       {
+         id: 35,
+         nombre: 'G3',
+         fila: 'G',
+         numero: 3,
+         tipo: 'estándar',
+         estado: 'disponible'
+       },
+       {
+         id: 36,
+         nombre: 'G4',
+         fila: 'G',
+         numero: 4,
+         tipo: 'estándar',
+         estado: 'disponible'
+       },
+       {
+         id: 37,
+         nombre: 'G5',
+         fila: 'G',
+         numero: 5,
+         tipo: 'estándar',
+         estado: 'disponible'
+       },
+       {
+         id: 38,
+         nombre: 'G6',
+         fila: 'G',
+         numero: 6,
+         tipo: 'estándar',
+         estado: 'disponible'
+       },
+       {
+         id: 39,
+         nombre: 'H1',
+         fila: 'H',
+         numero: 1,
+         tipo: 'reclinable',
+         estado: 'disponible'
+       },
+       {
+         id: 40,
+         nombre: 'H2',
+         fila: 'H',
+         numero: 2,
+         tipo: 'reclinable',
+         estado: 'disponible'
+       },
+       {
+         id: 41,
+         nombre: 'H3',
+         fila: 'H',
+         numero: 3,
+         tipo: 'reclinable',
+         estado: 'disponible'
+       },
+       {
+         id: 42,
+         nombre: 'H4',
+         fila: 'H',
+         numero: 4,
+         tipo: 'reclinable',
+         estado: 'disponible'
+       },
+       {
+         id: 43,
+         nombre: 'H5',
+         fila: 'H',
+         numero: 5,
+         tipo: 'reclinable',
+         estado: 'disponible'
+       },
+       {
+         id: 44,
+         nombre: 'H6',
+         fila: 'H',
+         numero: 6,
+         tipo: 'reclinable',
+         estado: 'disponible'
+       },
+       {
+         id: 45,
+         nombre: 'I1',
+         fila: 'I',
+         numero: 1,
+         tipo: 'VIP',
+         estado: 'disponible'
+       },
+       {
+         id: 46,
+         nombre: 'I2',
+         fila: 'I',
+         numero: 2,
+         tipo: 'VIP',
+         estado: 'disponible'
+       },
+       {
+         id: 47,
+         nombre: 'I3',
+         fila: 'I',
+         numero: 3,
+         tipo: 'VIP',
+         estado: 'disponible'
+       },
+       {
+         id: 48,
+         nombre: 'I4',
+         fila: 'I',
+         numero: 4,
+         tipo: 'VIP',
+         estado: 'disponible'
+       },
+       {
+         id: 49,
+         nombre: 'I5',
+         fila: 'I',
+         numero: 5,
+         tipo: 'VIP',
+         estado: 'disponible'
+       }
+     ]
+   }
+   ```
+   
+   En caso de que el horario de proyeccion no exista
+   
+   ```js
+   let objBoleto = new boleto();
+   
+   console.log(await objBoleto.consultarDisponibilidadAsientos(50));
+   
+   objBoleto.destructor();
+   ```
+   
+   obtendremos en consola lo siguiente:
+   
+   ```js
+   {
+     error: 'Error al consultar disponibilidad de asientos: Horario de proyección no encontrado.'
+   }
    ```
    
    
