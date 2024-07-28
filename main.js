@@ -1,6 +1,7 @@
 import { pelicula } from './js/modules/pelicula.js';
 import { boleto } from './js/modules/boleto.js';
 import { reserva } from './js/modules/reserva.js';
+import { TarjetaVip } from './js/modules/tarjetaVip.js';
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -110,3 +111,32 @@ import { reserva } from './js/modules/reserva.js';
 
 
 // objReserva.destructor();
+
+
+
+//--------------------------------------------------------------------------------------------------------
+
+let objTarjetaVip = new TarjetaVip();
+
+//Caso de uso 4: Descuentos y Tarjetas VIP (Diana Carolina Moreno Cárdenas)
+
+// Descuento en boletos para Usuarios VIP
+
+const datosBoletoVip = {
+    id: 20,
+    id_pelicula: 4,
+    id_horario_proyeccion: 11,
+    id_usuario: 4,
+    asientos_comprados: [107,108], 
+    modo_compra: "virtual",
+    metodo_pago: "efectivo",
+    id_reserva: null
+};
+
+console.log(await objTarjetaVip.comprarBoletosVIP(datosBoletoVip));
+
+
+// ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
+
+
+objTarjetaVip.destructor();
