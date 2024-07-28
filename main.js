@@ -84,16 +84,29 @@ let objReserva = new reserva();
 
 // Reservar asientos para una película
 
-const datosReserva = {
+// const datosReserva = {
+//     id: 7,
+//     id_pelicula: 1,
+//     id_horario_proyeccion: 2,
+//     id_usuario: 2,
+//     asientos_reservados: [60, 61],
+// };
+
+// console.log(await objReserva.reservarAsientos(datosReserva));
+
+// ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
+
+// Cancelar parcialmente una reserva 
+
+const datosCancelacionParcial = {
     id: 7,
     id_pelicula: 1,
     id_horario_proyeccion: 2,
     id_usuario: 2,
-    asientos_reservados: [60, 61],
+    asientos_reservados: [60],
 };
 
-console.log(await objReserva.reservarAsientos(datosReserva));
+console.log(await objReserva.cancelarReserva(datosCancelacionParcial));
 
-// ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
 
 objReserva.destructor();
