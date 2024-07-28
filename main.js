@@ -1,5 +1,6 @@
 import { pelicula } from './js/modules/pelicula.js';
 import { boleto } from './js/modules/boleto.js';
+import { reserva } from './js/modules/reserva.js';
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -39,7 +40,7 @@ import { boleto } from './js/modules/boleto.js';
 //--------------------------------------------------------------------------------------------------------
 
 
-let objBoleto = new boleto();
+// let objBoleto = new boleto();
 
 //Caso de uso 2: Compra de Boletos (Diana Carolina Moreno Cárdenas)
 
@@ -69,4 +70,43 @@ let objBoleto = new boleto();
 
 // ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
 
-objBoleto.destructor();
+// objBoleto.destructor();
+
+
+
+//--------------------------------------------------------------------------------------------------------
+
+
+// let objReserva = new reserva();
+
+//Caso de uso 3: Asignación de Asientos(Diana Carolina Moreno Cárdenas)
+
+
+// Reservar asientos para una película
+
+// const datosReserva = {
+//     id: 7,
+//     id_pelicula: 1,
+//     id_horario_proyeccion: 2,
+//     id_usuario: 2,
+//     asientos_reservados: [60, 61],
+// };
+
+// console.log(await objReserva.reservarAsientos(datosReserva));
+
+// ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
+
+// Cancelar parcialmente una reserva 
+
+// const datosCancelacionParcial = {
+//     id: 7,
+//     id_pelicula: 1,
+//     id_horario_proyeccion: 2,
+//     id_usuario: 2,
+//     asientos_reservados: [60],
+// };
+
+// console.log(await objReserva.cancelarReserva(datosCancelacionParcial));
+
+
+// objReserva.destructor();
