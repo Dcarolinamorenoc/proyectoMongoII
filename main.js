@@ -122,21 +122,36 @@ let objTarjetaVip = new TarjetaVip();
 
 // Descuento en boletos para Usuarios VIP
 
+// const datosBoletoVip = {
+//     id: 20,
+//     id_pelicula: 4,
+//     id_horario_proyeccion: 11,
+//     id_usuario: 4,
+//     asientos_comprados: [107,108], 
+//     modo_compra: "virtual",
+//     metodo_pago: "efectivo",
+//     id_reserva: null
+// };
+
+// console.log(await objTarjetaVip.comprarBoletosVIP(datosBoletoVip));
+
+
+// ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
+
+// Verificación de la validez de una tarjeta VIP durante el proceso de compra
+
 const datosBoletoVip = {
     id: 20,
-    id_pelicula: 4,
-    id_horario_proyeccion: 11,
-    id_usuario: 4,
-    asientos_comprados: [107,108], 
+    id_pelicula: 6,
+    id_horario_proyeccion: 18,
+    id_usuario: 5,
+    asientos_comprados: [86,87], 
     modo_compra: "virtual",
     metodo_pago: "efectivo",
     id_reserva: null
 };
 
-console.log(await objTarjetaVip.comprarBoletosVIP(datosBoletoVip));
-
-
-// ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
+console.log(await objTarjetaVip.comprarBoletosVIPConVerificacionTarjeta(datosBoletoVip));
 
 
 objTarjetaVip.destructor();
