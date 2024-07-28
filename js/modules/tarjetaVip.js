@@ -180,7 +180,40 @@ export class TarjetaVip extends connect {
 
 //--------------------------------------------------------------------------------------------------------
 
-// Verificación de la validez de una tarjeta VIP durante el proceso de compra
+    /**
+     * Realiza la compra de boletos VIP para una película, verificando la tarjeta VIP del usuario.
+     *
+     * @async
+     * @param {Object} datosBoletoVip - Datos del boleto VIP a comprar.
+     * @param {number} datosBoletoVip.id - ID único del boleto.
+     * @param {number} datosBoletoVip.id_pelicula - ID de la película.
+     * @param {number} datosBoletoVip.id_horario_proyeccion - ID del horario de proyección.
+     * @param {number} datosBoletoVip.id_usuario - ID del usuario que realiza la compra.
+     * @param {Array<number>} datosBoletoVip.asientos_comprados - Array de IDs de los asientos comprados.
+     * @param {string} datosBoletoVip.modo_compra - Modo de compra (ej. "virtual", "presencial").
+     * @param {string} datosBoletoVip.metodo_pago - Método de pago utilizado.
+     * @param {number|null} datosBoletoVip.id_reserva - ID de la reserva (si aplica), puede ser null.
+     * @returns {Promise<Object>} Objeto con el resultado de la operación.
+     * @property {string} [mensaje] - Mensaje de éxito si la compra se realiza correctamente.
+     * @property {Object} [detallesBoleto] - Detalles del boleto VIP comprado si la operación es exitosa.
+     * @property {number} detallesBoleto.id - ID del boleto.
+     * @property {number} detallesBoleto.id_pelicula - ID de la película.
+     * @property {number} detallesBoleto.id_horario_proyeccion - ID del horario de proyección.
+     * @property {number} detallesBoleto.id_usuario - ID del usuario.
+     * @property {Array<number>} detallesBoleto.asientos_comprados - IDs de los asientos comprados.
+     * @property {string} detallesBoleto.modo_compra - Modo de compra.
+     * @property {string} detallesBoleto.metodo_pago - Método de pago.
+     * @property {number} detallesBoleto.total - Monto total de la compra.
+     * @property {number} detallesBoleto.descuento_aplicado - Porcentaje de descuento aplicado.
+     * @property {string} detallesBoleto.fecha_compra - Fecha de la compra.
+     * @property {string} detallesBoleto.estado_compra - Estado de la compra.
+     * @property {number} [detallesBoleto.id_reserva] - ID de la reserva (si aplica).
+     * @property {string} [error] - Mensaje de error si la compra falla.
+     * @throws {Error} Si ocurre algún error durante el proceso de compra.
+     */
+
+
+    // Verificación de la validez de una tarjeta VIP durante el proceso de compra
 
     async comprarBoletosVIPConVerificacionTarjeta(datosBoletoVip) {
         try {
@@ -257,7 +290,7 @@ export class TarjetaVip extends connect {
                         descuento = tarjetaVIP.porcentaje_descuento;
                         mensajeVIP = `Querido usuario VIP tu tarjeta esta (${tarjetaVIP.estado}) y por eso te hemos otorgado un descuento de: ${descuento}%`;
                     } else {
-                        mensajeVIP = `Lo sentimos mucho querido usuario VIP pero tu tarjeta esta  (${tarjetaVIP.estado}) por eso no hemos podido realizarte un descuento, te invitamos a que vuelvas a activar tu tarjeta`;
+                        mensajeVIP = `Pero Lo sentimos mucho querido usuario VIP pero tu tarjeta esta (${tarjetaVIP.estado}) por eso no hemos podido realizarte un descuento, te invitamos a que vuelvas a activar tu tarjeta`;
                     }
                 } else {
                     mensajeVIP = 'Eres un cliente VIP, pero no tienes una tarjeta registrada. No se aplicó descuento.';
@@ -302,7 +335,4 @@ export class TarjetaVip extends connect {
             return { error: `Error al realizar la compra: ${error.message}` };
         }
     }
-
-
-
 }

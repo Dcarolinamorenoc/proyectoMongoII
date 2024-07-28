@@ -144,7 +144,7 @@ const datosBoletoVip = {
     id: 20,
     id_pelicula: 6,
     id_horario_proyeccion: 18,
-    id_usuario: 5,
+    id_usuario: 3,
     asientos_comprados: [86,87], 
     modo_compra: "virtual",
     metodo_pago: "efectivo",
