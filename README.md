@@ -48,7 +48,7 @@ npm run dev
 
 #### Requisitos Funcionales
 
-1. **Selección de Películas:**
+1. ### **Selección de Películas:**
    
    ★ **API para Listar Películas:** Permitir la consulta de todas las películas disponibles en el catálogo, con detalles como título, género, duración y horarios de proyección.
    
@@ -322,7 +322,7 @@ npm run dev
    
    
    
-2. **Compra de Boletos:**
+2. ### **Compra de Boletos:**
    
    ★ **API para Comprar Boletos:** Permitir la compra de boletos para una película específica, incluyendo la selección de la fecha y la hora de la proyección.
    
@@ -690,20 +690,217 @@ npm run dev
    
    
    
-3. **Asignación de Asientos:**
+3. ### **Asignación de Asientos:**
    
    ★ **API para Reservar Asientos:** Permitir la selección y reserva de asientos para una proyección específica.
    
+   **reservarAsientos(datosReserva):** Realiza la reserva de asientos para una película. 
+   
+   **Parámetros:**Un objeto con los siguientes datos: 
+   
+   - id: Identificador único de la reserva 
+   - id_pelicula: Identificador de la película 
+   - id_horario_proyeccion: Identificador del horario de proyección 
+   - id_usuario: Identificador del usuario que realiza la reserva 
+   - asientos_reservados: Array con los números de asientos a reservar 
+   
+   Cuando se ejecuta esto:
+   
+   ```js
+   let objReserva = new reserva();
+   
+   const datosReserva = {
+       id: 7,
+       id_pelicula: 1,
+       id_horario_proyeccion: 2,
+       id_usuario: 2,
+       asientos_reservados: [60, 61],
+   };
+   
+   console.log(await objReserva.reservarAsientos(datosReserva));
+   
+   objReserva.destructor();
    ```
    
+   en consola sale
+   
+   ```js
+   {
+     mensaje: 'Reserva realizada con éxito',
+     detallesReserva: {
+       id: 7,
+       id_pelicula: 1,
+       id_horario_proyeccion: 2,
+       id_usuario: 2,
+       asientos_reservados: [ 60, 61 ],
+       fecha_reserva: '27/07/2024',
+       estado: 'activa',
+       fecha_expiracion: '30/07/2024',
+       _id: new ObjectId('66a5cd8273195fe75a8f4ce8')
+     }
+   }
+   ```
+   
+   Cuando ya hay un asiento ocupado o ambos 
+   
+   ```js
+   let objReserva = new reserva();
+   
+   const datosReserva = {
+       id: 8,
+       id_pelicula: 1,
+       id_horario_proyeccion: 2,
+       id_usuario: 2,
+       asientos_reservados: [6, 61],
+   };
+   
+   console.log(await objReserva.reservarAsientos(datosReserva));
+   
+   objReserva.destructor();
+   ```
+   
+   en la consola sale
+   
+   ```js
+   {
+     error: 'Error al realizar la reserva: Uno o más asientos seleccionados no pertenecen a la sala de esta proyección.'
+   }
+   ```
+   
+   y finalmente si el horario de proyeccion no coincide con la pelicula 
+   
+   ```js
+   let objReserva = new reserva();
+   
+   const datosReserva = {
+       id: 8,
+       id_pelicula: 1,
+       id_horario_proyeccion: 12,
+       id_usuario: 2,
+       asientos_reservados: [6, 61],
+   };
+   
+   console.log(await objReserva.reservarAsientos(datosReserva));
+   
+   objReserva.destructor();
+   ```
+   
+   devuelve en consola lo siguiente
+   
+   ```js
+   {
+     error: 'Error al realizar la reserva: El horario de proyección no es válido para esta película.'
+   }
    ```
    
    
    
    ★ **API para Cancelar Reserva de Asientos:** Permitir la cancelación de una reserva de asiento ya realizada.
    
+   **cancelarReserva(datosCancelacion):**  Cancela parcial o totalmente una reserva de asientos.
+   
+   ***Parámetros:*** Un objeto con los siguientes datos:
+   
+   - id: Identificador único de la reserva
+   - id_pelicula: Identificador de la película
+   - id_horario_proyeccion: Identificador del horario de proyección
+   - id_usuario: Identificador del usuario que realiza la cancelación
+   - asientos_reservados: Array con los números de asientos a cancelar
+   
+   Cuando se ejecuta esto para una cancelación parcial:
+   
+   ```js
+   let objReserva = new reserva();
+   
+   const datosCancelacionParcial = {
+       id: 7,
+       id_pelicula: 1,
+       id_horario_proyeccion: 2,
+       id_usuario: 2,
+       asientos_reservados: [60],
+   };
+   
+   console.log(await objReserva.cancelarReserva(datosCancelacionParcial));
+   
+   objReserva.destructor();
    ```
    
+   en consola obtenemos un resultado como este
+   
+   ```js
+   {
+     mensaje: 'Reserva actualizada con éxito',
+     detallesReserva: {
+       _id: new ObjectId('66a5d4e48ea73424d56c022b'),
+       id: 7,
+       id_pelicula: 1,
+       id_horario_proyeccion: 2,
+       id_usuario: 2,
+       asientos_reservados: [ 60 ],
+       fecha_reserva: '28/07/2024',
+       estado: 'activa',
+       fecha_expiracion: '31/07/2024'
+     }
+   }
+   ```
+   
+   En caso de cancelación total de todos los asientos ejecutamos lo siguiente:
+   
+   ```js
+   let objReserva = new reserva();
+   
+   const datosCancelacionParcial = {
+       id: 7,
+       id_pelicula: 1,
+       id_horario_proyeccion: 2,
+       id_usuario: 2,
+       asientos_reservados: [],
+   };
+   
+   console.log(await objReserva.cancelarReserva(datosCancelacionParcial));
+   
+   objReserva.destructor();
+   ```
+   
+   en consola sale lo siguiente
+   
+   ```js
+   {
+     mensaje: 'Reserva cancelada con éxito',
+     detallesReserva: {
+       _id: new ObjectId('66a5d4e48ea73424d56c022b'),
+       id: 7,
+       id_pelicula: 1,
+       id_horario_proyeccion: 2,
+       id_usuario: 2,
+       asientos_reservados: [],
+       fecha_reserva: '28/07/2024',
+       estado: 'cancelada',
+       fecha_expiracion: '31/07/2024'
+     }
+   }
+   ```
+   
+   y en caso de que otro usuario quiera modificar la reserva:
+   
+   ```js
+   const datosCancelacionParcial = {
+       id: 7,
+       id_pelicula: 1,
+       id_horario_proyeccion: 2,
+       id_usuario: 6,
+       asientos_reservados: [60],
+   };
+   
+   console.log(await objReserva.cancelarReserva(datosCancelacionParcial));
+   ```
+   
+   en consola le saldra lo siguiente:
+   
+   ```js
+   {
+     error: 'Error al cancelar/actualizar la reserva: No tienes permiso para modificar esta reserva.'
+   }
    ```
    
    
