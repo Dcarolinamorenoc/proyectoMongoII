@@ -129,5 +129,91 @@ export class Usuario extends connect {
         fecha.setFullYear(fecha.getFullYear() + 1);
         return fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '/');
     }
+
+
+
+
+    async consultarUsuarioDetallado(datosConsulta) {
+        try {
+          await this.conexion.connect();
+      
+          let filtro = {};
+          if (datosConsulta.id) {
+            filtro.id = datosConsulta.id
+
+          } else if (datosConsulta.identificacion) {
+            filtro.identificacion = datosConsulta.identificacion;
+
+          } else if (datosConsulta.nickname) {
+            filtro.nickname = datosConsulta.nickname;
+
+          } else if (datosConsulta.nombre_completo) {
+            filtro.nombre_completo = datosConsulta.nombre_completo;
+
+          } else {
+            throw new Error('Se requiere id, identificacion, nickname o nombre_completo para consultar el usuario.');
+          }
+      
+          const usuario = await this.collectionUsuario.findOne(filtro);
+          if (!usuario) {
+            throw new Error('Usuario no encontrado en la base de datos.');
+          }
+      
+          let tarjetaVIP = null;
+          let mensajeTarjetaVIP = '';
+      
+          switch(usuario.rol) {
+            case 'VIP':
+              tarjetaVIP = await this.collectionTarjetaVip.findOne({ id_usuario: usuario.id });
+              if (tarjetaVIP) {
+                if (tarjetaVIP.estado === 'activa') {
+                  mensajeTarjetaVIP = 'Felicidades, eres un usuario VIP con tarjeta activa. Sigue disfrutando de nuestros descuentos.';
+
+                } else if (tarjetaVIP.estado === 'expirada') {
+                  mensajeTarjetaVIP = 'Querido usuario, lamentamos que tengas tu tarjeta expirada. ¿Qué esperas para volver a activarla?';
+
+                } else {
+                  mensajeTarjetaVIP = `Tu tarjeta VIP está en estado: ${tarjetaVIP.estado}. Por favor, contacta con soporte para más información.`;
+
+                }
+              } else {
+                mensajeTarjetaVIP = 'Eres usuario VIP pero no tienes una tarjeta VIP asignada. Por favor, contacta con soporte.';
+
+              }
+              break;
+            case 'administrador':
+              mensajeTarjetaVIP = 'Eres un administrador sin acceso a una tarjeta VIP.';
+
+              break;
+            default: 
+              mensajeTarjetaVIP = 'Eres usuario estándar. No tienes una tarjeta VIP. Si deseas una, puedes adquirirla.';
+              
+          }
+      
+          const usuarioDetallado = {
+            id: usuario.id,
+            nombre_completo: usuario.nombre_completo,
+            identificacion: usuario.identificacion,
+            nickname: usuario.nickname,
+            celular: usuario.celular,
+            email: usuario.email,
+            telefono: usuario.telefono,
+            rol: usuario.rol,
+            tarjetaVIP: tarjetaVIP ? {
+              numero: tarjetaVIP.numero,
+              porcentaje_descuento: tarjetaVIP.porcentaje_descuento,
+              fecha_expiracion: tarjetaVIP.fecha_expiracion,
+              estado: tarjetaVIP.estado
+            } : null,
+            mensajeTarjetaVIP: mensajeTarjetaVIP
+          };
+      
+          await this.conexion.close();
+          return usuarioDetallado;
+        } catch (error) {
+          await this.conexion.close();
+          return { error: error.message };
+        }
+      }
 }
 
