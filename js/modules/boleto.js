@@ -265,4 +265,133 @@ export class boleto extends connect {
         return { error: `Error al consultar disponibilidad de asientos: ${error.message}` };
         }
     }
+
+
+//--------------------------------------------------------------------------------------------------------
+
+
+    async pagosEnLinea(datosPagoLinea) {
+        try {
+            await this.conexion.connect();
+
+            
+            const boletoExistente = await this.collection.findOne({ id: datosPagoLinea.id });
+            if (boletoExistente) {
+                throw new Error('El ID del boleto ya existe.');
+            }
+
+            
+            const pelicula = await this.db.collection('pelicula').findOne({ 
+                id: datosPagoLinea.id_pelicula, 
+                estado: { $in: ["En cartelera", "Próximo estreno"] } 
+            });
+            if (!pelicula) {
+                throw new Error('La película no existe o no está disponible para compra de boletos.');
+            }
+
+            
+            const horarioProyeccion = await this.db.collection('horario_proyeccion').findOne({ 
+                id: datosPagoLinea.id_horario_proyeccion, 
+                id_pelicula: datosPagoLinea.id_pelicula 
+            });
+            if (!horarioProyeccion) {
+                throw new Error('El horario de proyección no es válido para esta película.');
+            }
+
+            
+            const usuario = await this.db.collection('usuario').findOne({ id: datosPagoLinea.id_usuario });
+            if (!usuario) {
+                throw new Error('El usuario especificado no existe.');
+            }
+
+            
+            const sala = await this.db.collection('sala').findOne({ id: horarioProyeccion.id_sala });
+            if (!sala) {
+                throw new Error('No se encontró la sala asociada a este horario de proyección.');
+            }
+
+            
+            const asientosValidos = datosPagoLinea.asientos_comprados.every(asientoId => sala.asientos.includes(asientoId));
+            if (!asientosValidos) {
+                throw new Error('Uno o más asientos seleccionados no pertenecen a la sala de esta proyección.');
+            }
+
+            
+            const asientosDisponibles = await this.db.collection('asiento').countDocuments({ 
+                id: { $in: datosPagoLinea.asientos_comprados }, 
+                estado: 'disponible' 
+            });
+            if (asientosDisponibles !== datosPagoLinea.asientos_comprados.length) {
+                throw new Error('Uno o más asientos seleccionados no están disponibles.');
+            }
+
+            
+            if (datosPagoLinea.id_reserva !== null) {
+                const reserva = await this.db.collection('reserva').findOne({ id: datosPagoLinea.id_reserva });
+                if (!reserva) {
+                    throw new Error('La reserva especificada no existe.');
+                }
+            }
+
+            
+            let descuento = 0;
+            let mensajeDescuento = '';
+            if (usuario.rol === 'VIP') {
+                const tarjetaVIP = await this.db.collection('tarjeta_vip').findOne({ 
+                    id_usuario: usuario.id
+                });
+                if (tarjetaVIP) {
+                    if (tarjetaVIP.estado === 'activa') {
+                        descuento = tarjetaVIP.porcentaje_descuento;
+                        mensajeDescuento = `Querido usuario VIP tu tarjeta esta (${tarjetaVIP.estado}) y por eso te hemos otorgado un descuento de: ${descuento}%`;
+                    } else {
+                        mensajeDescuento = `Lo sentimos mucho querido usuario VIP pero tu tarjeta esta (${tarjetaVIP.estado}) por eso no hemos podido realizarte un descuento, te invitamos a que vuelvas a activar tu tarjeta`;
+                    }
+                } else {
+                    mensajeDescuento = 'Eres un cliente VIP, pero no tienes una tarjeta registrada. No se aplicó descuento.';
+                }
+            } else if (usuario.rol === 'Estandar') {
+                mensajeDescuento = 'No se aplicó descuento por no ser usuario VIP. Puedes adquirir una tarjeta VIP para obtener descuentos en futuras compras.';
+            }
+
+            
+            const precioBase = horarioProyeccion.precio_pelicula * datosPagoLinea.asientos_comprados.length;
+            const total = precioBase - (precioBase * (descuento / 100));
+
+            
+            const nuevoBoleto = {
+                ...datosPagoLinea,
+                total: total,
+                descuento_aplicado: descuento,
+                fecha_compra: new Date().toLocaleDateString('es-ES'),
+                estado_compra: 'completada'
+            };
+
+            
+            await this.collection.insertOne(nuevoBoleto);
+
+            
+            await this.db.collection('asiento').updateMany(
+                { id: { $in: datosPagoLinea.asientos_comprados } },
+                { $set: { estado: 'ocupado' } }
+            );
+
+            await this.conexion.close();
+            
+            let mensajeRespuesta = 'Compra realizada con éxito.';
+            let mensajeModoCompra = datosPagoLinea.modo_compra === 'virtual' 
+                ? 'Su compra virtual se ha realizado satisfactoriamente.'
+                : 'Su compra presencial se ha realizado satisfactoriamente.';
+            
+            return { 
+                mensaje: mensajeRespuesta,
+                mensajeDescuento: mensajeDescuento,
+                mensajeModoCompra: mensajeModoCompra,
+                detallesBoleto: nuevoBoleto 
+            };
+        } catch (error) {
+            await this.conexion.close();
+            return { error: `Error al realizar la compra: ${error.message}` };
+        }
+    }
 }
