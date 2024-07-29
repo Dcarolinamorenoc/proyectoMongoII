@@ -198,20 +198,23 @@ let objUsuario = new Usuario();
 
 // Consultar información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
 
+const datosConsulta = {
+    identificacion: "1087654321"
 
-// console.log(await objUsuario.consultarUsuarioDetallado({ id: 2 }));
+};
 
+console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
 
 // ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
 
 
 // Actualización del rol de un usuario 
 
-const datosActualizacion1 = {
-    id: 20,
-    nuevoRol: 'Estandar'
-};
-console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
+// const datosActualizacion1 = {
+//     id: 20,
+//     nuevoRol: 'Estandar'
+// };
+// console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
 
 
 objUsuario.destructor();
