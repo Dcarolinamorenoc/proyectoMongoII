@@ -1643,17 +1643,146 @@ npm run dev
    
    ★ **API para Procesar Pagos:** Permitir el procesamiento de pagos en línea para la compra de boletos.
    
+   
+   
+   ##### **pagosEnLinea(datosPagoLinea):**
+   
+   Realiza el pago en línea de boletos para una película.
+   
+   ##### **Parámetros:**
+   
+   Un objeto con los siguientes datos:
+   
+   - **id:** Identificador único del boleto
+   - **id_pelicula:** Identificador de la película
+   - **id_horario_proyeccion:** Identificador del horario de proyección
+   - **id_usuario:** Identificador del usuario que realiza la compra
+   - **asientos_comprados:** Array con los números de asientos a comprar
+   - **modo_compra:** Modo de compra (por ejemplo, "virtual")
+   - **metodo_pago:** Método de pago utilizado
+   - **id_reserva:** Identificador de la reserva (si aplica), puede ser `null`
+   
+   Cuando ejecutamos este codigo:
+   
+   ```js
+   let objBoleto = new boleto();
+   
+   const datosPagoLinea = {
+       id: 28,
+       id_pelicula: 7,
+       id_horario_proyeccion: 20,
+       id_usuario: 5,
+       asientos_comprados: [107, 108], 
+       modo_compra: "virtual",
+       metodo_pago: "tarjeta_credito",
+       id_reserva: null
+   };
+   
+   console.log(await objBoleto.pagosEnLinea(datosPagoLinea));
+   
+   objBoleto.destructor();
    ```
    
+   Obtenemos en consola la siguiente informacion:
+   
+   ```js
+   {
+     mensaje: 'Compra realizada con éxito.',
+     mensajeDescuento: 'Querido usuario VIP tu tarjeta esta (activa) y por eso te hemos otorgado un descuento de: 15%',
+     mensajeModoCompra: 'Su compra virtual se ha realizado satisfactoriamente.',
+     detallesBoleto: {
+       id: 28,
+       id_pelicula: 7,
+       id_horario_proyeccion: 20,
+       id_usuario: 5,
+       asientos_comprados: [ 107, 108 ],
+       modo_compra: 'virtual',
+       metodo_pago: 'tarjeta_credito',
+       id_reserva: null,
+       total: 28900,
+       descuento_aplicado: 15,
+       fecha_compra: '29/7/2024',
+       estado_compra: 'completada',
+       _id: new ObjectId('66a724f76280e16f7f9f1cda')
+     }
+   }
    ```
+   
+   Como vemos hay un mensaje que le avisa al usuario que : Su compra virtual se ha realizado satisfactoriamente
    
    
    
    ★ **API para Confirmación de Compra:** Enviar confirmación de la compra y los detalles del boleto al usuario.
    
-   ```
    
+   
+   ##### **confirmacionCompra(detallesBoletoUser):**
+   
+   Confirma la compra y proporciona los detalles del boleto al usuario.
+   
+   ##### **Parámetros:**
+   
+   Un objeto con los siguientes datos:
+   
+   - **id:** Identificador único del boleto
+   - **id_pelicula:** Identificador de la película
+   - **id_horario_proyeccion:** Identificador del horario de proyección
+   - **id_usuario:** Identificador del usuario que realiza la compra
+   - **asientos_comprados:** Array con los números de asientos a comprar
+   - **modo_compra:** Modo de compra (por ejemplo, "virtual")
+   - **metodo_pago:** Método de pago utilizado
+   - **id_reserva:** Identificador de la reserva (si aplica), puede ser `null`
+   
+   
+   
+   Cuando ejecutamos este codigo:
+   
+   ```js
+   let objBoleto = new boleto();
+   
+   const detallesBoletoUser = {
+       id: 30,
+       id_pelicula: 1,
+       id_horario_proyeccion: 1,
+       id_usuario: 5,
+       asientos_comprados: [31], 
+       modo_compra: "virtual",
+       metodo_pago: "tarjeta_credito",
+       id_reserva: null
+   };
+   
+   console.log(await objBoleto.confirmacionCompra(detallesBoletoUser));
+   
+   objBoleto.destructor();
    ```
+
+​	Obtenemos en consola la siguiente informacion:
+
+```js
+{
+  mensaje: 'Compra realizada con éxito.',
+  mensajeConfirmacion: 'Su compra ha sido confirmada. Gracias por su preferencia.',
+  mensajeDescuento: 'Querido usuario VIP tu tarjeta esta (activa) y por eso te hemos otorgado un descuento de: 15%',
+  mensajeModoCompra: 'Su compra virtual se ha realizado satisfactoriamente.',
+  detallesBoleto: {
+    id: 30,
+    id_pelicula: 1,
+    id_horario_proyeccion: 1,
+    id_usuario: 5,
+    asientos_comprados: [ 31 ],
+    modo_compra: 'virtual',
+    metodo_pago: 'tarjeta_credito',
+    id_reserva: null,
+    total: 12750,
+    descuento_aplicado: 15,
+    fecha_compra: '29/7/2024',
+    estado_compra: 'completada',
+    _id: new ObjectId('66a72b5012cf3b48f1769ec9')
+  }
+}
+```
+
+Como vemos hay mensajes que le avisa al usuario que :  Compra realizada con éxito y Su compra ha sido confirmada. Gracias por su preferencia, y no solo eso si no que tambien brinda la informacion de la compra.
 
 
 
