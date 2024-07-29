@@ -225,3 +225,48 @@ import { Usuario } from './js/modules/usuario.js';
 
 
 // objUsuario.destructor();
+
+
+//--------------------------------------------------------------------------------------------------------
+
+
+// let objBoleto = new boleto();
+
+// Caso de uso 6: Compras en Línea (Diana Carolina Moreno Cárdenas)
+
+// Procesamiento de pagos en línea
+
+// const datosPagoLinea = {
+//     id: 28,
+//     id_pelicula: 7,
+//     id_horario_proyeccion: 20,
+//     id_usuario: 5,
+//     asientos_comprados: [107, 108], 
+//     modo_compra: "virtual",
+//     metodo_pago: "tarjeta_credito",
+//     id_reserva: null
+// };
+
+// console.log(await objBoleto.pagosEnLinea(datosPagoLinea));
+
+
+
+// ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
+
+// Confirmación de la compra y los detalles del boleto al usuario
+
+// const detallesBoletoUser = {
+//     id: 30,
+//     id_pelicula: 1,
+//     id_horario_proyeccion: 1,
+//     id_usuario: 5,
+//     asientos_comprados: [31], 
+//     modo_compra: "virtual",
+//     metodo_pago: "tarjeta_credito",
+//     id_reserva: null
+// };
+
+// console.log(await objBoleto.confirmacionCompra(detallesBoletoUser));
+
+
+// objBoleto.destructor();
