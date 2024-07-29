@@ -230,7 +230,7 @@ import { Usuario } from './js/modules/usuario.js';
 //--------------------------------------------------------------------------------------------------------
 
 
-let objBoleto = new boleto();
+// let objBoleto = new boleto();
 
 // Caso de uso 6: Compras en Línea (Diana Carolina Moreno Cárdenas)
 
@@ -269,6 +269,4 @@ let objBoleto = new boleto();
 // console.log(await objBoleto.confirmacionCompra(detallesBoletoUser));
 
 
-
-
-objBoleto.destructor();
+// objBoleto.destructor();
