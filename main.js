@@ -164,7 +164,7 @@ import { Usuario } from './js/modules/usuario.js';
 
 //--------------------------------------------------------------------------------------------------------
 
-let objUsuario = new Usuario();
+// let objUsuario = new Usuario();
 
 // Caso de uso 5: Roles Definidos (Diana Carolina Moreno Cárdenas)
 
@@ -224,4 +224,4 @@ let objUsuario = new Usuario();
 // console.log(await objUsuario.consultarUsuarios({ rol: 'VIP' }));
 
 
-objUsuario.destructor();
+// objUsuario.destructor();
