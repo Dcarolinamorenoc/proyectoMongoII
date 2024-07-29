@@ -253,6 +253,21 @@ let objBoleto = new boleto();
 
 // ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
 
+// Confirmación de la compra y los detalles del boleto al usuario
+
+// const detallesBoletoUser = {
+//     id: 30,
+//     id_pelicula: 1,
+//     id_horario_proyeccion: 1,
+//     id_usuario: 5,
+//     asientos_comprados: [31], 
+//     modo_compra: "virtual",
+//     metodo_pago: "tarjeta_credito",
+//     id_reserva: null
+// };
+
+// console.log(await objBoleto.confirmacionCompra(detallesBoletoUser));
+
 
 
 
