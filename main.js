@@ -198,12 +198,12 @@ let objUsuario = new Usuario();
 
 // Consultar información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
 
-const datosConsulta = {
-    identificacion: "1087654321"
+// const datosConsulta = {
+//     identificacion: "1087654321"
 
-};
+// };
 
-console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
+// console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
 
 // ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
 
@@ -215,6 +215,13 @@ console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
 //     nuevoRol: 'Estandar'
 // };
 // console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
+
+
+// ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
+
+// Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol
+
+console.log(await objUsuario.consultarUsuarios({ rol: 'VIP' }));
 
 
 objUsuario.destructor();

@@ -364,4 +364,63 @@ export class Usuario extends connect {
 
         return { mensaje: 'Rol actualizado exitosamente.' };
     }
+
+
+//--------------------------------------------------------------------------------------------------------
+
+    /**
+     * Consulta todos los usuarios del sistema con opción de filtrar por rol.
+     *
+     * @async
+     * @param {Object} [opciones] - Opciones para la consulta.
+     * @param {string} [opciones.rol] - Rol para filtrar los usuarios ('VIP', 'Estandar', 'administrador').
+     * @returns {Promise<Object>} Objeto con la lista de usuarios y mensaje de estado.
+     * @property {Array} usuarios - Lista de usuarios que cumplen con los criterios de búsqueda.
+     * @property {string} mensaje - Mensaje indicando el resultado de la operación.
+     * @throws {Error} Si ocurre algún error durante la consulta.
+     */
+
+    // Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol
+    
+    async consultarUsuarios(opciones = {}) {
+        try {
+            await this.conexion.connect();
+    
+            let filtro = {};
+            if (opciones.rol) {
+                filtro.rol = opciones.rol;
+            }
+    
+            const usuarios = await this.collectionUsuario.find(filtro).toArray();
+    
+            let mensaje;
+            if (usuarios.length === 0) {
+                mensaje = opciones.rol 
+                    ? `No se encontraron usuarios con el rol ${opciones.rol}.`
+                    : 'No hay usuarios registrados en el sistema.';
+                return { usuarios: [], mensaje };
+            }
+    
+            mensaje = opciones.rol
+                ? `Se encontraron ${usuarios.length} usuario(s) con rol ${opciones.rol}.`
+                : `Se encontraron ${usuarios.length} usuario(s) en total.`;
+    
+            await this.conexion.close();
+    
+            return {
+                usuarios: usuarios.map(usuario => ({
+                    id: usuario.id,
+                    nombre_completo: usuario.nombre_completo,
+                    identificacion: usuario.identificacion,
+                    nickname: usuario.nickname,
+                    email: usuario.email,
+                    rol: usuario.rol
+                })),
+                mensaje: mensaje
+            };
+        } catch (error) {
+            await this.conexion.close();
+            throw new Error(`Error al consultar usuarios: ${error.message}`);
+        }
+    }
 }
