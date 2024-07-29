@@ -1106,34 +1106,531 @@ npm run dev
      
      ★ **API para Crear Usuario:** Permitir la creación de nuevos usuarios en el sistema, asignando roles y privilegios específicos (usuario estándar, usuario VIP o administrador).
      
+     **crearUsuario(datosUsuarioEstandar):** Crea un nuevo usuario en el sistema.
+     
+     ***\*****Parámetros:*****\*** Un objeto con los siguientes datos: 
+     
+     - id: Identificador único del usuario 
+     - nombre_completo: Nombre completo del usuario 
+     - identificacion: Número de identificación del usuario 
+     - nickname: Apodo o nombre de usuario 
+     - celular: Número de celular 
+     - email: Correo electrónico 
+     - telefono: Número de teléfono fijo 
+     - rol: Rol del usuario (por ejemplo, "VIP", "Estandar" o "Administrador")
+     
+     
+     
+     Cuando ejecutamos esto para crear un nuevo usuario:
+     
+     ```js
+     let objUsuario = new Usuario();
+     
+     const datosUsuarioEstandar = {
+         id: 20,
+         nombre_completo: "Miguel Angel Castro",
+         identificacion: "109785312",
+         nickname: "MigueCastro",
+         celular: "3131464905",
+         email: "miguel.angel@email.com",
+         telefono: "6019876543",
+         rol: "VIP"
+     };
+     
+     console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
+     
+     objUsuario.destructor();
      ```
      
+     obtendremos desde consola el siguiente resultado
+     
+     ```js
+     {
+       mensaje: 'Usuario creado con éxito',
+       usuario: {
+         id: 20,
+         nombre_completo: 'Miguel Angel Castro',
+         identificacion: '109785312',
+         nickname: 'MigueCastro',
+         celular: '3131464905',
+         email: 'miguel.angel@email.com',
+         telefono: '6019876543',
+         rol: 'VIP'
+       }
+     }
+     ```
+     
+     Como vemos este usuario es creado con el VIP, por eso es importante que el administrador le genere su nueva Tarjeta VIP.
+     
+     **crearTarjetaVIP(datosTarjetaVip):** Crea una tarjeta VIP para un usuario.
+     
+     **Parámetros:** Un objeto con los siguientes datos:
+     
+     - identificacion: Número de identificación del usuario
+     
+     Tambien es posible crear la tarjeta VIP por medio del id, identificacion o nickname
+     
+     para realizar esto ejecutamos lo siguiente (identificacion):
+     
+     ```js
+     let objUsuario = new Usuario();
+     
+     const datosTarjetaVip = {
+         identificacion: "109785312"
+     };
+     
+     console.log(await objUsuario.crearTarjetaVIP(datosTarjetaVip));
+     
+     objUsuario.destructor();
+     ```
+     
+     y como respuesta en consola obtendremos una respuesta asi:
+     
+     ```js
+     {
+       id: 6,
+       id_usuario: 20,
+       numero: 'VIP5044',
+       porcentaje_descuento: 15,
+       fecha_expiracion: '28/07/2025',
+       estado: 'activa',
+       _id: new ObjectId('66a70d9b8b1791fd25fc42bd')
+     }
+     ```
+     
+     Esto indica que la tarjeta fue creada correctamente.
+     
+     Este codigo valida que no se pueda crear ningun otro usuario que tenga el mismo id, nombre completo, nickname, correo electronico, identificacion o celular, ya que de lo contrario votara un mensaje de advertencia.
+     
+     ```js
+     let objUsuario = new Usuario();
+     
+     const datosUsuarioEstandar = {
+         id: 25,
+         nombre_completo: "Diana Carolina Moreno",
+         identificacion: "1087654321",
+         nickname: "CarolinaM",
+         celular: "3131464905",
+         email: "caro.moreno@email.com",
+         telefono: "6019876543",
+         rol: "VIP"
+     };
+     
+     console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
+     
+     objUsuario.destructor();
+     ```
+     
+     al ejecutar esto devuelve en consola esto:
+     
+     ```js
+     {
+       error: 'Error al crear el usuario: Ya existe un usuario con el mismo nickname.'
+     }
      ```
      
      
      
      ★ **API para Obtener Detalles de Usuario:** Permitir la consulta de información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
      
+     
+     
+     **consultarUsuarioDetallado(datosConsulta):** Consulta información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
+     
+     **Parámetros:** Un objeto con los siguientes datos:
+     
+     - identificacion: Número de identificación del usuario
+     
+     Tambien es posible buscar por medio del id, identificacion o nickname
+     
+     Al ejecutar esto:
+     
+     ```js
+     let objUsuario = new Usuario();
+     
+     const datosConsulta = {
+         identificacion: "1087654321"
+     
+     };
+     
+     console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
+     
+     objUsuario.destructor();
      ```
      
+     obtendremos desde consola una respuesta asi:
+     
+     ```js
+     {
+       id: 2,
+       nombre_completo: 'Diana Carolina Moreno',
+       identificacion: '1087654321',
+       nickname: 'CarolinaM',
+       celular: '3157654321',
+       email: 'caro.moreno@email.com',
+       telefono: '6028765432',
+       rol: 'VIP',
+       tarjetaVIP: {
+         numero: 'VIP002',
+         porcentaje_descuento: 15,
+         fecha_expiracion: '28/11/2024',
+         estado: 'activa'
+       },
+       mensajeTarjetaVIP: 'Felicidades, eres un usuario VIP con tarjeta activa. Sigue disfrutando de nuestros descuentos.'
+     }
+     ```
+     
+     Para buscar la informacion de un usuario estandar ejecutamos lo siguiente (aca buscamos por id): 
+     
+     ```js
+     let objUsuario = new Usuario();
+     
+     const datosConsulta = {
+         id: 7
+     
+     };
+     
+     console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
+     
+     objUsuario.destructor();
+     ```
+     
+     y obtendremos una respuesta asi:
+     
+     ```js
+     {
+       id: 7,
+       nombre_completo: 'Henry Fabian Boada',
+       identificacion: '1032109876',
+       nickname: 'HenryFab',
+       celular: '3112345678',
+       email: 'henry.boada@email.com',
+       telefono: '6074567890',
+       rol: 'Estandar',
+       tarjetaVIP: null,
+       mensajeTarjetaVIP: 'Eres usuario estándar. No tienes una tarjeta VIP. Si deseas una, puedes adquirirla.'
+     }
      ```
      
      
      
      ★ **API para Actualizar Rol de Usuario:** Permitir la actualización del rol de un usuario (por ejemplo, cambiar de usuario estándar a VIP, o viceversa).
      
+     
+     
+     **actualizarRolUsuario(datosActualizacion):** Actualiza el rol de un usuario existente.
+     
+     **Parámetros:** Un objeto con los siguientes datos:
+     
+     - id: Identificador único del usuario
+     - nuevoRol: Nuevo rol a asignar al usuario
+     
+     Cuando ejecutamos esto cuando queremos pasar un VIP a Estandar:
+     
+     ```js
+     let objUsuario = new Usuario();
+     
+     const datosActualizacion1 = {
+         id: 20,
+         nuevoRol: 'Estandar'
+     };
+     console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
+     
+     objUsuario.destructor();
      ```
      
+     En consola obtenemos una respuesta como esta:
+     
+     ```js
+     {
+       mensaje: 'Tu rol ha sido actualizado a Estándar y tu tarjeta VIP ha sido cancelada.'
+     }
+     ```
+     
+     Cuando queremos pasar un Usuario Estandar a VIP ejecutamos lo siguiente:
+     
+     ```js
+     let objUsuario = new Usuario();
+     
+     const datosActualizacion1 = {
+         id: 9,
+         nuevoRol: 'VIP'
+     };
+     console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
+     
+     
+     objUsuario.destructor();
+     ```
+     
+     y obtendremos una respuesta como esta:
+     
+     ```js
+     {
+       mensaje: 'Ya eres un usuario Vip, Felicidades has obtenido acceso a la tarjeta premium. El siguiente paso es registrar tu tarjeta.'
+     }
+     ```
+     
+     Asi mismo le estamos indicando al usuario que debe realizar el paso que hicimos anteriormente para registrar su tarjeta.
+     
+     Tambien podemos cambiar a un usuario normal como administrador en caso de que empiece a trabajar para CineCampus
+     
+     ```js
+     let objUsuario = new Usuario();
+     
+     const datosActualizacion1 = {
+         id: 9,
+         nuevoRol: 'Administrador'
+     };
+     console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
+     
+     
+     objUsuario.destructor();
+     ```
+     
+     Entonces desde consola obtendremos una respuesta asi:
+     
+     ```js
+     { mensaje: 'Rol actualizado exitosamente.' }
      ```
      
      
      
      ★ **API para Listar Usuarios:** Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol (VIP, estándar o administrador).
      
-     ```
      
+     
+     **consultarUsuarios(filtro):** Permite la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol.
+     
+     **Parámetros:** Un objeto con los siguientes datos (opcional):
+     
+     - rol: Rol por el cual filtrar los usuarios
+     
+     Cuando ejecutamos esto para buscar los VIP:
+     
+     ```js
+     let objUsuario = new Usuario();
+     
+     console.log(await objUsuario.consultarUsuarios({ rol: 'VIP' }));
+     
+     
+     objUsuario.destructor();
      ```
    
+   Obtendremos una respuesta asi:
+   
+   ```js
+   {
+     usuarios: [
+       {
+         id: 1,
+         nombre_completo: 'Jhon Sebastian Gutierrez',
+         identificacion: '1098765432',
+         nickname: 'JhonSebas',
+         email: 'jhon.gutierrez@email.com',
+         rol: 'VIP'
+       },
+       {
+         id: 2,
+         nombre_completo: 'Diana Carolina Moreno',
+         identificacion: '1087654321',
+         nickname: 'CarolinaM',
+         email: 'caro.moreno@email.com',
+         rol: 'VIP'
+       },
+       {
+         id: 3,
+         nombre_completo: 'Mariana Traslavña Sarmiento',
+         identificacion: '1076543210',
+         nickname: 'MarianaTS',
+         email: 'mariana.traslavina@email.com',
+         rol: 'VIP'
+       },
+       {
+         id: 4,
+         nombre_completo: 'Samuel Enrique Suarez',
+         identificacion: '1065432109',
+         nickname: 'SamuelES',
+         email: 'samuel.suarez@email.com',
+         rol: 'VIP'
+       },
+       {
+         id: 5,
+         nombre_completo: 'Camilo Esteban Concha',
+         identificacion: '1054321098',
+         nickname: 'CamiloConcha',
+         email: 'camilo.concha@email.com',
+         rol: 'VIP'
+       }
+     ],
+     mensaje: 'Se encontraron 5 usuario(s) con rol VIP.'
+   }
+   ```
+   
+   Cuando ejecutamos esto para buscar los Estandar:
+   
+   ```js
+   let objUsuario = new Usuario();
+   
+   console.log(await objUsuario.consultarUsuarios({ rol: 'Estandar' }));
+   
+   
+   objUsuario.destructor();
+   ```
+   
+   Obtendremos una respuesta asi:
+   
+   ```js
+   {
+     usuarios: [
+       {
+         id: 6,
+         nombre_completo: 'Danna Nikole Ardila',
+         identificacion: '1043210987',
+         nickname: 'DannaNik',
+         email: 'danna.ardila@email.com',
+         rol: 'Estandar'
+       },
+       {
+         id: 7,
+         nombre_completo: 'Henry Fabian Boada',
+         identificacion: '1032109876',
+         nickname: 'HenryFab',
+         email: 'henry.boada@email.com',
+         rol: 'Estandar'
+       },
+       {
+         id: 8,
+         nombre_completo: 'Karen Yiseth Pinto',
+         identificacion: '1021098765',
+         nickname: 'KarenYP',
+         email: 'karen.pinto@email.com',
+         rol: 'Estandar'
+       },
+       {
+         id: 9,
+         nombre_completo: 'David Steven Romero',
+         identificacion: '1010987654',
+         nickname: 'DavidSR',
+         email: 'david.romero@email.com',
+         rol: 'Estandar'
+       },
+       {
+         id: 10,
+         nombre_completo: 'Camilo Andres Franco',
+         identificacion: '1000876543',
+         nickname: 'CamiloAF',
+         email: 'camilo.franco@email.com',
+         rol: 'Estandar'
+       },
+       {
+         id: 11,
+         nombre_completo: 'Juan Carlos Almario',
+         identificacion: '1097984654',
+         nickname: 'JuanitoAl',
+         email: 'juan.almario@email.com',
+         rol: 'Estandar'
+       },
+       {
+         id: 12,
+         nombre_completo: 'Nikoll Zarai Mantilla',
+         identificacion: '1095828793',
+         nickname: 'NikollMan',
+         email: 'niko.mantilla@email.com',
+         rol: 'Estandar'
+       },
+       {
+         id: 20,
+         nombre_completo: 'Miguel Angel Castro',
+         identificacion: '109785312',
+         nickname: 'MigueCastro',
+         email: 'miguel.angel@email.com',
+         rol: 'Estandar'
+       }
+     ],
+     mensaje: 'Se encontraron 8 usuario(s) con rol Estandar.'
+   }
+   ```
+   
+   Cuando ejecutamos esto para buscar los Administrador:
+   
+   ```js
+   let objUsuario = new Usuario();
+   
+   console.log(await objUsuario.consultarUsuarios({ rol: 'Administrador' }));
+   
+   
+   objUsuario.destructor();
+   ```
+   
+   Obtendremos una respuesta asi:
+   
+   ```js
+   {
+     usuarios: [
+       {
+         id: 31,
+         nombre_completo: 'Karen Lorena Celis',
+         identificacion: '1098765433',
+         nickname: 'KarenLCelis',
+         email: 'karen.celis@email.com',
+         rol: 'Administrador'
+       },
+       {
+         id: 32,
+         nombre_completo: 'Diego Tarazona Pinzon',
+         identificacion: '1098765434',
+         nickname: 'DiegoTP',
+         email: 'diego.tarazona@email.com',
+         rol: 'Administrador'
+       },
+       {
+         id: 33,
+         nombre_completo: 'Angie Gorett Suárez',
+         identificacion: '1098765435',
+         nickname: 'AngieSuarez',
+         email: 'angie.suarez@email.com',
+         rol: 'Administrador'
+       },
+       {
+         id: 34,
+         nombre_completo: 'Johlver Jose Pardo',
+         identificacion: '1098765436',
+         nickname: 'JohlverJP',
+         email: 'johlver.pardo@email.com',
+         rol: 'Administrador'
+       },
+       {
+         id: 35,
+         nombre_completo: 'Janeth Cardenas Bonilla',
+         identificacion: '1098765437',
+         nickname: 'JanethCB',
+         email: 'janeth.cardenas@email.com',
+         rol: 'Administrador'
+       }
+     ],
+     mensaje: 'Se encontraron 5 usuario(s) con rol Administrador.'
+   }
+   ```
+   
+   En caso de ingresar un rol que no es entonces el codigo marcara una advertencia:
+   
+   ```js
+   let objUsuario = new Usuario();
+   
+   console.log(await objUsuario.consultarUsuarios({ rol: 'Cine' }));
+   
+   
+   objUsuario.destructor();
+   ```
+   
+   en consola obtendremos:
+   
+   ```js
+   {
+     usuarios: [],
+     mensaje: 'El rol "Cine" no es válido. Los roles válidos son: VIP, Estandar, Administrador.'
+   }
+   ```
    
    
    
