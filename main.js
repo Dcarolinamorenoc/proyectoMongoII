@@ -221,7 +221,7 @@ let objUsuario = new Usuario();
 
 // Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol
 
-console.log(await objUsuario.consultarUsuarios({ rol: 'VIP' }));
+// console.log(await objUsuario.consultarUsuarios({ rol: 'VIP' }));
 
 
 objUsuario.destructor();
