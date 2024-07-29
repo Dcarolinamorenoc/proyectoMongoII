@@ -290,5 +290,78 @@ export class Usuario extends connect {
           return { error: error.message };
         }
     }
-}
 
+//--------------------------------------------------------------------------------------------------------
+
+
+    /**
+     * Actualiza el rol de un usuario y gestiona su tarjeta VIP si es necesario.
+     *
+     * @async
+     * @param {Object} datosActualizacion - Datos para realizar la actualización.
+     * @param {number} datosActualizacion.id - ID del usuario.
+     * @param {string} datosActualizacion.nuevoRol - Nuevo rol a asignar al usuario ("VIP" o "Estandar").
+     * @returns {Promise<Object>} Objeto con un mensaje indicando el resultado de la operación.
+     * @property {string} mensaje - Mensaje describiendo el resultado de la actualización.
+     * @throws {Error} Si el usuario no se encuentra en la base de datos.
+     */
+
+
+    // Actualización del rol de un usuario 
+
+    async actualizarRolUsuario(datosActualizacion)  {
+        const { id, nuevoRol } = datosActualizacion;
+
+
+        const usuario = await this.collectionUsuario.findOne({ id });
+        if (!usuario) {
+            throw new Error("Usuario no encontrado");
+        }
+
+        if (usuario.rol === nuevoRol) {
+            if (nuevoRol === "VIP") {
+                const tarjetaVIP = await this.collectionTarjetaVip.findOne({ id_usuario: id });
+                if (tarjetaVIP && tarjetaVIP.estado === "activa") {
+                    return { mensaje: 'El usuario ya tiene el rol VIP.' };
+                }
+            }
+            return { mensaje: 'El usuario ya tiene el rol especificado.' };
+        }
+
+        await this.collectionUsuario.updateOne(
+            { id },
+            { $set: { rol: nuevoRol } }
+        );
+
+        if (nuevoRol === "VIP") {
+
+            const tarjetaVIP = await this.collectionTarjetaVip.findOne({ id_usuario: id });
+            
+            if (tarjetaVIP) {
+
+                await this.collectionTarjetaVip.updateOne(
+                    { id_usuario: id },
+                    { $set: { estado: "activa" } }
+                );
+                return { mensaje: 'Eres un usuario Vip, Tu tarjeta VIP ha sido reactivada.' };
+            } else {
+
+                return { mensaje: 'Ya eres un usuario Vip, Felicidades has obtenido acceso a la tarjeta premium. El siguiente paso es registrar tu tarjeta.' };
+            }
+        } else if (nuevoRol === "Estandar") {
+
+            const tarjetaVIP = await this.collectionTarjetaVip.findOne({ id_usuario: id });
+            if (tarjetaVIP) {
+                await this.collectionTarjetaVip.updateOne(
+                    { id_usuario: id },
+                    { $set: { estado: "cancelada" } }
+                );
+                return { mensaje: 'Tu rol ha sido actualizado a Estándar y tu tarjeta VIP ha sido cancelada.' };
+            } else {
+                return { mensaje: 'Tu rol ha sido actualizado a Estándar.' };
+            }
+        }
+
+        return { mensaje: 'Rol actualizado exitosamente.' };
+    }
+}
