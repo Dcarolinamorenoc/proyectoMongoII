@@ -269,6 +269,33 @@ export class boleto extends connect {
 
 //--------------------------------------------------------------------------------------------------------
 
+    /**
+     * Procesa un pago en línea para la compra de boletos de cine.
+     *
+     * @async
+     * @param {Object} datosPagoLinea - Datos del pago en línea.
+     * @param {string} datosPagoLinea.id - ID del boleto.
+     * @param {string} datosPagoLinea.id_pelicula - ID de la película.
+     * @param {string} datosPagoLinea.id_horario_proyeccion - ID del horario de proyección.
+     * @param {string} datosPagoLinea.id_usuario - ID del usuario.
+     * @param {Array<string>} datosPagoLinea.asientos_comprados - Lista de IDs de asientos comprados.
+     * @param {string|null} datosPagoLinea.id_reserva - ID de la reserva (si aplica).
+     * @param {string} datosPagoLinea.modo_compra - Modo de compra ('virtual' o 'presencial').
+     * @returns {Promise<Object>} Objeto con el resultado de la operación de pago.
+     * @property {string} mensaje - Mensaje de confirmación de la compra.
+     * @property {string} mensajeDescuento - Mensaje sobre el descuento aplicado.
+     * @property {string} mensajeModoCompra - Mensaje sobre el modo de compra.
+     * @property {Object} detallesBoleto - Detalles del boleto comprado.
+     * @property {number} detallesBoleto.total - Total pagado.
+     * @property {number} detallesBoleto.descuento_aplicado - Porcentaje de descuento aplicado.
+     * @property {string} detallesBoleto.fecha_compra - Fecha de la compra.
+     * @property {string} detallesBoleto.estado_compra - Estado de la compra.
+     * @property {Object} [error] - Objeto de error en caso de fallo.
+     * @property {string} error.message - Mensaje de error.
+     * @throws {Error} Si ocurre algún error durante el proceso de pago.
+     */
+
+    // Procesamiento de pagos en línea
 
     async pagosEnLinea(datosPagoLinea) {
         try {
