@@ -383,16 +383,25 @@ export class Usuario extends connect {
     // Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol
     
     async consultarUsuarios(opciones = {}) {
+        const rolesValidos = ['VIP', 'Estandar', 'Administrador'];
+
         try {
+            if (opciones.rol && !rolesValidos.includes(opciones.rol)) {
+                return {
+                    usuarios: [],
+                    mensaje: `El rol "${opciones.rol}" no está incluido en la base de datos. Los roles válidos son: ${rolesValidos.join(', ')}.`
+                };
+            }
+
             await this.conexion.connect();
-    
+
             let filtro = {};
             if (opciones.rol) {
                 filtro.rol = opciones.rol;
             }
-    
+
             const usuarios = await this.collectionUsuario.find(filtro).toArray();
-    
+
             let mensaje;
             if (usuarios.length === 0) {
                 mensaje = opciones.rol 
@@ -400,13 +409,13 @@ export class Usuario extends connect {
                     : 'No hay usuarios registrados en el sistema.';
                 return { usuarios: [], mensaje };
             }
-    
+
             mensaje = opciones.rol
                 ? `Se encontraron ${usuarios.length} usuario(s) con rol ${opciones.rol}.`
                 : `Se encontraron ${usuarios.length} usuario(s) en total.`;
-    
+
             await this.conexion.close();
-    
+
             return {
                 usuarios: usuarios.map(usuario => ({
                     id: usuario.id,
@@ -420,7 +429,10 @@ export class Usuario extends connect {
             };
         } catch (error) {
             await this.conexion.close();
-            throw new Error(`Error al consultar usuarios: ${error.message}`);
+            return {
+                usuarios: [],
+                mensaje: `Error al consultar usuarios: ${error.message}`
+            };
         }
     }
 }
