@@ -1095,326 +1095,327 @@ npm run dev
    
    
    
-5. - Roles Definidos:
-     - **Administrador:** Tiene permisos completos para gestionar el sistema, incluyendo la venta de boletos en el lugar físico. Los administradores no están involucrados en las compras en línea realizadas por los usuarios.
+5. #### Roles Definidos:
+   
+   - **Administrador:** Tiene permisos completos para gestionar el sistema, incluyendo la venta de boletos en el lugar físico. Los administradores no están involucrados en las compras en línea realizadas por los usuarios.
+   
+   - **Usuario Estándar:** Puede comprar boletos en línea sin la intervención del administrador.
+   
+   - **Usuario VIP:** Puede comprar boletos en línea con descuentos aplicables para titulares de tarjetas VIP.
+   
      
-     - **Usuario Estándar:** Puede comprar boletos en línea sin la intervención del administrador.
-     
-     - **Usuario VIP:** Puede comprar boletos en línea con descuentos aplicables para titulares de tarjetas VIP.
-     
-       
-     
-     ★ **API para Crear Usuario:** Permitir la creación de nuevos usuarios en el sistema, asignando roles y privilegios específicos (usuario estándar, usuario VIP o administrador).
-     
-     **crearUsuario(datosUsuarioEstandar):** Crea un nuevo usuario en el sistema.
-     
-     ***\*****Parámetros:*****\*** Un objeto con los siguientes datos: 
-     
-     - id: Identificador único del usuario 
-     - nombre_completo: Nombre completo del usuario 
-     - identificacion: Número de identificación del usuario 
-     - nickname: Apodo o nombre de usuario 
-     - celular: Número de celular 
-     - email: Correo electrónico 
-     - telefono: Número de teléfono fijo 
-     - rol: Rol del usuario (por ejemplo, "VIP", "Estandar" o "Administrador")
-     
-     
-     
-     Cuando ejecutamos esto para crear un nuevo usuario:
-     
-     ```js
-     let objUsuario = new Usuario();
-     
-     const datosUsuarioEstandar = {
-         id: 20,
-         nombre_completo: "Miguel Angel Castro",
-         identificacion: "109785312",
-         nickname: "MigueCastro",
-         celular: "3131464905",
-         email: "miguel.angel@email.com",
-         telefono: "6019876543",
-         rol: "VIP"
-     };
-     
-     console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
-     
-     objUsuario.destructor();
-     ```
-     
-     obtendremos desde consola el siguiente resultado
-     
-     ```js
-     {
-       mensaje: 'Usuario creado con éxito',
-       usuario: {
-         id: 20,
-         nombre_completo: 'Miguel Angel Castro',
-         identificacion: '109785312',
-         nickname: 'MigueCastro',
-         celular: '3131464905',
-         email: 'miguel.angel@email.com',
-         telefono: '6019876543',
-         rol: 'VIP'
-       }
+   
+   ★ **API para Crear Usuario:** Permitir la creación de nuevos usuarios en el sistema, asignando roles y privilegios específicos (usuario estándar, usuario VIP o administrador).
+   
+   **crearUsuario(datosUsuarioEstandar):** Crea un nuevo usuario en el sistema.
+   
+   **Parámetros:** Un objeto con los siguientes datos: 
+   
+   - id: Identificador único del usuario 
+   - nombre_completo: Nombre completo del usuario 
+   - identificacion: Número de identificación del usuario 
+   - nickname: Apodo o nombre de usuario 
+   - celular: Número de celular 
+   - email: Correo electrónico 
+   - telefono: Número de teléfono fijo 
+   - rol: Rol del usuario (por ejemplo, "VIP", "Estandar" o "Administrador")
+   
+   
+   
+   Cuando ejecutamos esto para crear un nuevo usuario:
+   
+   ```js
+   let objUsuario = new Usuario();
+   
+   const datosUsuarioEstandar = {
+       id: 20,
+       nombre_completo: "Miguel Angel Castro",
+       identificacion: "109785312",
+       nickname: "MigueCastro",
+       celular: "3131464905",
+       email: "miguel.angel@email.com",
+       telefono: "6019876543",
+       rol: "VIP"
+   };
+   
+   console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
+   
+   objUsuario.destructor();
+   ```
+   
+   obtendremos desde consola el siguiente resultado
+   
+   ```js
+   {
+     mensaje: 'Usuario creado con éxito',
+     usuario: {
+       id: 20,
+       nombre_completo: 'Miguel Angel Castro',
+       identificacion: '109785312',
+       nickname: 'MigueCastro',
+       celular: '3131464905',
+       email: 'miguel.angel@email.com',
+       telefono: '6019876543',
+       rol: 'VIP'
      }
-     ```
-     
-     Como vemos este usuario es creado con el VIP, por eso es importante que el administrador le genere su nueva Tarjeta VIP.
-     
-     **crearTarjetaVIP(datosTarjetaVip):** Crea una tarjeta VIP para un usuario.
-     
-     **Parámetros:** Un objeto con los siguientes datos:
-     
-     - identificacion: Número de identificación del usuario
-     
-     Tambien es posible crear la tarjeta VIP por medio del id, identificacion o nickname
-     
-     para realizar esto ejecutamos lo siguiente (identificacion):
-     
-     ```js
-     let objUsuario = new Usuario();
-     
-     const datosTarjetaVip = {
-         identificacion: "109785312"
-     };
-     
-     console.log(await objUsuario.crearTarjetaVIP(datosTarjetaVip));
-     
-     objUsuario.destructor();
-     ```
-     
-     y como respuesta en consola obtendremos una respuesta asi:
-     
-     ```js
-     {
-       id: 6,
-       id_usuario: 20,
-       numero: 'VIP5044',
+   }
+   ```
+   
+   Como vemos este usuario es creado con el VIP, por eso es importante que el administrador le genere su nueva Tarjeta VIP.
+   
+   **crearTarjetaVIP(datosTarjetaVip):** Crea una tarjeta VIP para un usuario.
+   
+   **Parámetros:** Un objeto con los siguientes datos:
+   
+   - identificacion: Número de identificación del usuario
+   
+   Tambien es posible crear la tarjeta VIP por medio del id, identificacion o nickname
+   
+   para realizar esto ejecutamos lo siguiente (identificacion):
+   
+   ```js
+   let objUsuario = new Usuario();
+   
+   const datosTarjetaVip = {
+       identificacion: "109785312"
+   };
+   
+   console.log(await objUsuario.crearTarjetaVIP(datosTarjetaVip));
+   
+   objUsuario.destructor();
+   ```
+   
+   y como respuesta en consola obtendremos una respuesta asi:
+   
+   ```js
+   {
+     id: 6,
+     id_usuario: 20,
+     numero: 'VIP5044',
+     porcentaje_descuento: 15,
+     fecha_expiracion: '28/07/2025',
+     estado: 'activa',
+     _id: new ObjectId('66a70d9b8b1791fd25fc42bd')
+   }
+   ```
+   
+   Esto indica que la tarjeta fue creada correctamente.
+   
+   Este codigo valida que no se pueda crear ningun otro usuario que tenga el mismo id, nombre completo, nickname, correo electronico, identificacion o celular, ya que de lo contrario votara un mensaje de advertencia.
+   
+   ```js
+   let objUsuario = new Usuario();
+   
+   const datosUsuarioEstandar = {
+       id: 25,
+       nombre_completo: "Diana Carolina Moreno",
+       identificacion: "1087654321",
+       nickname: "CarolinaM",
+       celular: "3131464905",
+       email: "caro.moreno@email.com",
+       telefono: "6019876543",
+       rol: "VIP"
+   };
+   
+   console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
+   
+   objUsuario.destructor();
+   ```
+   
+   al ejecutar esto devuelve en consola esto:
+   
+   ```js
+   {
+     error: 'Error al crear el usuario: Ya existe un usuario con el mismo nickname.'
+   }
+   ```
+   
+   
+   
+   ★ **API para Obtener Detalles de Usuario:** Permitir la consulta de información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
+   
+   
+   
+   **consultarUsuarioDetallado(datosConsulta):** Consulta información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
+   
+   **Parámetros:** Un objeto con los siguientes datos:
+   
+   - identificacion: Número de identificación del usuario
+   
+   Tambien es posible buscar por medio del id, identificacion o nickname
+   
+   Al ejecutar esto:
+   
+   ```js
+   let objUsuario = new Usuario();
+   
+   const datosConsulta = {
+       identificacion: "1087654321"
+   
+   };
+   
+   console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
+   
+   objUsuario.destructor();
+   ```
+   
+   obtendremos desde consola una respuesta asi:
+   
+   ```js
+   {
+     id: 2,
+     nombre_completo: 'Diana Carolina Moreno',
+     identificacion: '1087654321',
+     nickname: 'CarolinaM',
+     celular: '3157654321',
+     email: 'caro.moreno@email.com',
+     telefono: '6028765432',
+     rol: 'VIP',
+     tarjetaVIP: {
+       numero: 'VIP002',
        porcentaje_descuento: 15,
-       fecha_expiracion: '28/07/2025',
-       estado: 'activa',
-       _id: new ObjectId('66a70d9b8b1791fd25fc42bd')
-     }
-     ```
-     
-     Esto indica que la tarjeta fue creada correctamente.
-     
-     Este codigo valida que no se pueda crear ningun otro usuario que tenga el mismo id, nombre completo, nickname, correo electronico, identificacion o celular, ya que de lo contrario votara un mensaje de advertencia.
-     
-     ```js
-     let objUsuario = new Usuario();
-     
-     const datosUsuarioEstandar = {
-         id: 25,
-         nombre_completo: "Diana Carolina Moreno",
-         identificacion: "1087654321",
-         nickname: "CarolinaM",
-         celular: "3131464905",
-         email: "caro.moreno@email.com",
-         telefono: "6019876543",
-         rol: "VIP"
-     };
-     
-     console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
-     
-     objUsuario.destructor();
-     ```
-     
-     al ejecutar esto devuelve en consola esto:
-     
-     ```js
-     {
-       error: 'Error al crear el usuario: Ya existe un usuario con el mismo nickname.'
-     }
-     ```
-     
-     
-     
-     ★ **API para Obtener Detalles de Usuario:** Permitir la consulta de información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
-     
-     
-     
-     **consultarUsuarioDetallado(datosConsulta):** Consulta información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
-     
-     **Parámetros:** Un objeto con los siguientes datos:
-     
-     - identificacion: Número de identificación del usuario
-     
-     Tambien es posible buscar por medio del id, identificacion o nickname
-     
-     Al ejecutar esto:
-     
-     ```js
-     let objUsuario = new Usuario();
-     
-     const datosConsulta = {
-         identificacion: "1087654321"
-     
-     };
-     
-     console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
-     
-     objUsuario.destructor();
-     ```
-     
-     obtendremos desde consola una respuesta asi:
-     
-     ```js
-     {
-       id: 2,
-       nombre_completo: 'Diana Carolina Moreno',
-       identificacion: '1087654321',
-       nickname: 'CarolinaM',
-       celular: '3157654321',
-       email: 'caro.moreno@email.com',
-       telefono: '6028765432',
-       rol: 'VIP',
-       tarjetaVIP: {
-         numero: 'VIP002',
-         porcentaje_descuento: 15,
-         fecha_expiracion: '28/11/2024',
-         estado: 'activa'
-       },
-       mensajeTarjetaVIP: 'Felicidades, eres un usuario VIP con tarjeta activa. Sigue disfrutando de nuestros descuentos.'
-     }
-     ```
-     
-     Para buscar la informacion de un usuario estandar ejecutamos lo siguiente (aca buscamos por id): 
-     
-     ```js
-     let objUsuario = new Usuario();
-     
-     const datosConsulta = {
-         id: 7
-     
-     };
-     
-     console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
-     
-     objUsuario.destructor();
-     ```
-     
-     y obtendremos una respuesta asi:
-     
-     ```js
-     {
-       id: 7,
-       nombre_completo: 'Henry Fabian Boada',
-       identificacion: '1032109876',
-       nickname: 'HenryFab',
-       celular: '3112345678',
-       email: 'henry.boada@email.com',
-       telefono: '6074567890',
-       rol: 'Estandar',
-       tarjetaVIP: null,
-       mensajeTarjetaVIP: 'Eres usuario estándar. No tienes una tarjeta VIP. Si deseas una, puedes adquirirla.'
-     }
-     ```
-     
-     
-     
-     ★ **API para Actualizar Rol de Usuario:** Permitir la actualización del rol de un usuario (por ejemplo, cambiar de usuario estándar a VIP, o viceversa).
-     
-     
-     
-     **actualizarRolUsuario(datosActualizacion):** Actualiza el rol de un usuario existente.
-     
-     **Parámetros:** Un objeto con los siguientes datos:
-     
-     - id: Identificador único del usuario
-     - nuevoRol: Nuevo rol a asignar al usuario
-     
-     Cuando ejecutamos esto cuando queremos pasar un VIP a Estandar:
-     
-     ```js
-     let objUsuario = new Usuario();
-     
-     const datosActualizacion1 = {
-         id: 20,
-         nuevoRol: 'Estandar'
-     };
-     console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
-     
-     objUsuario.destructor();
-     ```
-     
-     En consola obtenemos una respuesta como esta:
-     
-     ```js
-     {
-       mensaje: 'Tu rol ha sido actualizado a Estándar y tu tarjeta VIP ha sido cancelada.'
-     }
-     ```
-     
-     Cuando queremos pasar un Usuario Estandar a VIP ejecutamos lo siguiente:
-     
-     ```js
-     let objUsuario = new Usuario();
-     
-     const datosActualizacion1 = {
-         id: 9,
-         nuevoRol: 'VIP'
-     };
-     console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
-     
-     
-     objUsuario.destructor();
-     ```
-     
-     y obtendremos una respuesta como esta:
-     
-     ```js
-     {
-       mensaje: 'Ya eres un usuario Vip, Felicidades has obtenido acceso a la tarjeta premium. El siguiente paso es registrar tu tarjeta.'
-     }
-     ```
-     
-     Asi mismo le estamos indicando al usuario que debe realizar el paso que hicimos anteriormente para registrar su tarjeta.
-     
-     Tambien podemos cambiar a un usuario normal como administrador en caso de que empiece a trabajar para CineCampus
-     
-     ```js
-     let objUsuario = new Usuario();
-     
-     const datosActualizacion1 = {
-         id: 9,
-         nuevoRol: 'Administrador'
-     };
-     console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
-     
-     
-     objUsuario.destructor();
-     ```
-     
-     Entonces desde consola obtendremos una respuesta asi:
-     
-     ```js
-     { mensaje: 'Rol actualizado exitosamente.' }
-     ```
-     
-     
-     
-     ★ **API para Listar Usuarios:** Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol (VIP, estándar o administrador).
-     
-     
-     
-     **consultarUsuarios(filtro):** Permite la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol.
-     
-     **Parámetros:** Un objeto con los siguientes datos (opcional):
-     
-     - rol: Rol por el cual filtrar los usuarios
-     
-     Cuando ejecutamos esto para buscar los VIP:
-     
-     ```js
-     let objUsuario = new Usuario();
-     
-     console.log(await objUsuario.consultarUsuarios({ rol: 'VIP' }));
-     
-     
-     objUsuario.destructor();
-     ```
+       fecha_expiracion: '28/11/2024',
+       estado: 'activa'
+     },
+     mensajeTarjetaVIP: 'Felicidades, eres un usuario VIP con tarjeta activa. Sigue disfrutando de nuestros descuentos.'
+   }
+   ```
+   
+   Para buscar la informacion de un usuario estandar ejecutamos lo siguiente (aca buscamos por id): 
+   
+   ```js
+   let objUsuario = new Usuario();
+   
+   const datosConsulta = {
+       id: 7
+   
+   };
+   
+   console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
+   
+   objUsuario.destructor();
+   ```
+   
+   y obtendremos una respuesta asi:
+   
+   ```js
+   {
+     id: 7,
+     nombre_completo: 'Henry Fabian Boada',
+     identificacion: '1032109876',
+     nickname: 'HenryFab',
+     celular: '3112345678',
+     email: 'henry.boada@email.com',
+     telefono: '6074567890',
+     rol: 'Estandar',
+     tarjetaVIP: null,
+     mensajeTarjetaVIP: 'Eres usuario estándar. No tienes una tarjeta VIP. Si deseas una, puedes adquirirla.'
+   }
+   ```
+   
+   
+   
+   ★ **API para Actualizar Rol de Usuario:** Permitir la actualización del rol de un usuario (por ejemplo, cambiar de usuario estándar a VIP, o viceversa).
+   
+   
+   
+   **actualizarRolUsuario(datosActualizacion):** Actualiza el rol de un usuario existente.
+   
+   **Parámetros:** Un objeto con los siguientes datos:
+   
+   - id: Identificador único del usuario
+   - nuevoRol: Nuevo rol a asignar al usuario
+   
+   Cuando ejecutamos esto cuando queremos pasar un VIP a Estandar:
+   
+   ```js
+   let objUsuario = new Usuario();
+   
+   const datosActualizacion1 = {
+       id: 20,
+       nuevoRol: 'Estandar'
+   };
+   console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
+   
+   objUsuario.destructor();
+   ```
+   
+   En consola obtenemos una respuesta como esta:
+   
+   ```js
+   {
+     mensaje: 'Tu rol ha sido actualizado a Estándar y tu tarjeta VIP ha sido cancelada.'
+   }
+   ```
+   
+   Cuando queremos pasar un Usuario Estandar a VIP ejecutamos lo siguiente:
+   
+   ```js
+   let objUsuario = new Usuario();
+   
+   const datosActualizacion1 = {
+       id: 9,
+       nuevoRol: 'VIP'
+   };
+   console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
+   
+   
+   objUsuario.destructor();
+   ```
+   
+   y obtendremos una respuesta como esta:
+   
+   ```js
+   {
+     mensaje: 'Ya eres un usuario Vip, Felicidades has obtenido acceso a la tarjeta premium. El siguiente paso es registrar tu tarjeta.'
+   }
+   ```
+   
+   Asi mismo le estamos indicando al usuario que debe realizar el paso que hicimos anteriormente para registrar su tarjeta.
+   
+   Tambien podemos cambiar a un usuario normal como administrador en caso de que empiece a trabajar para CineCampus
+   
+   ```js
+   let objUsuario = new Usuario();
+   
+   const datosActualizacion1 = {
+       id: 9,
+       nuevoRol: 'Administrador'
+   };
+   console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
+   
+   
+   objUsuario.destructor();
+   ```
+   
+   Entonces desde consola obtendremos una respuesta asi:
+   
+   ```js
+   { mensaje: 'Rol actualizado exitosamente.' }
+   ```
+   
+   
+   
+   ★ **API para Listar Usuarios:** Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol (VIP, estándar o administrador).
+   
+   
+   
+   **consultarUsuarios(filtro):** Permite la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol.
+   
+   **Parámetros:** Un objeto con los siguientes datos (opcional):
+   
+   - rol: Rol por el cual filtrar los usuarios
+   
+   Cuando ejecutamos esto para buscar los VIP:
+   
+   ```js
+   let objUsuario = new Usuario();
+   
+   console.log(await objUsuario.consultarUsuarios({ rol: 'VIP' }));
+   
+   
+   objUsuario.destructor();
+   ```
    
    Obtendremos una respuesta asi:
    
@@ -1638,7 +1639,7 @@ npm run dev
    
    
    
-6. **Compras en Línea:**
+6. #### **Compras en Línea:**
    
    ★ **API para Procesar Pagos:** Permitir el procesamiento de pagos en línea para la compra de boletos.
    
