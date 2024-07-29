@@ -386,11 +386,15 @@ export class Usuario extends connect {
         const rolesValidos = ['VIP', 'Estandar', 'Administrador'];
 
         try {
-            if (opciones.rol && !rolesValidos.includes(opciones.rol)) {
-                return {
-                    usuarios: [],
-                    mensaje: `El rol "${opciones.rol}" no está incluido en la base de datos. Los roles válidos son: ${rolesValidos.join(', ')}.`
-                };
+            if (opciones.rol) {
+                const rolNormalizado = opciones.rol.toUpperCase();
+                if (!rolesValidos.includes(rolNormalizado)) {
+                    return {
+                        usuarios: [],
+                        mensaje: `El rol "${opciones.rol}" no está incluido en la base de datos. Los roles válidos son: ${rolesValidos.join(', ')}.`
+                    };
+                }
+                opciones.rol = rolNormalizado;
             }
 
             await this.conexion.connect();
@@ -399,20 +403,32 @@ export class Usuario extends connect {
             if (opciones.rol) {
                 filtro.rol = opciones.rol;
             }
+            if (opciones.nombre) {
+                filtro.nombre_completo = { $regex: new RegExp(opciones.nombre, 'i') };
+            }
 
             const usuarios = await this.collectionUsuario.find(filtro).toArray();
 
             let mensaje;
             if (usuarios.length === 0) {
-                mensaje = opciones.rol 
-                    ? `No se encontraron usuarios con el rol ${opciones.rol}.`
-                    : 'No hay usuarios registrados en el sistema.';
+                mensaje = 'No se encontraron usuarios que coincidan con los criterios de búsqueda.';
+                if (opciones.rol) {
+                    mensaje += ` Rol buscado: ${opciones.rol}.`;
+                }
+                if (opciones.nombre) {
+                    mensaje += ` Nombre buscado: ${opciones.nombre}.`;
+                }
                 return { usuarios: [], mensaje };
             }
 
-            mensaje = opciones.rol
-                ? `Se encontraron ${usuarios.length} usuario(s) con rol ${opciones.rol}.`
-                : `Se encontraron ${usuarios.length} usuario(s) en total.`;
+            mensaje = `Se encontraron ${usuarios.length} usuario(s)`;
+            if (opciones.rol) {
+                mensaje += ` con rol ${opciones.rol}`;
+            }
+            if (opciones.nombre) {
+                mensaje += ` que coinciden con el nombre "${opciones.nombre}"`;
+            }
+            mensaje += '.';
 
             await this.conexion.close();
 
