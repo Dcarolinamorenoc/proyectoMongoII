@@ -54,6 +54,36 @@ npm run dev
    
    
    
+   Este caso de uso puede ser aplicado a los siguientes usuarios: Administrador, Estandar o VIP 
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos
+   
+   EJEMPLO:
+   
+   Usuario VIP 2:
+   
+   user: "CarolinaM"
+   pwd: "1087654321"
+   
+   mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   user: "NikollMan"
+   pwd: "1095828793"
+   
+   mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   
+   
    **listarPeliculas():** Lista todas las películas disponibles. 
    
    ***Parámetros:*** Traer todas las peliculas disponibles, es decir las que estan con estado en Cartelera y con proximo estreno 
@@ -189,6 +219,34 @@ npm run dev
    
    ★ **API para Listar Películas:** Permitir la consulta de todas las películas disponibles en el catálogo, con detalles como título, género, duración y horarios de proyección.
    
+   Este caso de uso puede ser aplicado a los siguientes usuarios: Administrador, Estandar o VIP 
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos
+   
+   EJEMPLO:
+   
+   Usuario VIP 2:
+   
+   user: "CarolinaM"
+   pwd: "1087654321"
+   
+   mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   user: "NikollMan"
+   pwd: "1095828793"
+   
+   mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
    
    
    **obtenerDetallesPelicula(titulo):** Obtiene los detalles de una película específica por su título. ***Parámetro:*** El título de la película a consultar 
@@ -241,7 +299,7 @@ npm run dev
    }
    ```
    
-   en caso de no ser encontrada la pelicula por su nombre devolvera lo siguiente en consola:
+   en caso de no ser encontrada la pelicula por su nombre :
    
    ```js
    let objPelicula = new pelicula();
@@ -249,6 +307,12 @@ npm run dev
    console.log(await objPelicula.obtenerDetallesPelicula("Tom y Jerry"));
    
    objPelicula.destructor();
+   ```
+   
+   devolvera lo siguiente en consola:
+   
+   ```js
+   { error: 'No se encontró una película con el ID o título Tom y Jerry' }
    ```
    
    
@@ -305,7 +369,7 @@ npm run dev
    }
    ```
    
-   en caso de no ser encontrada la pelicula por su nombre devolvera lo siguiente en consola:
+   en caso de no ser encontrada la pelicula por su id :
    
    ```js
    let objPelicula = new pelicula();
@@ -313,6 +377,12 @@ npm run dev
    console.log(await objPelicula.obtenerDetallesPelicula("56"));
    
    objPelicula.destructor();
+   ```
+   
+   devolvera lo siguiente en consola:
+   
+   ```js
+   { error: 'No se encontró una película con el ID o título 56' }
    ```
    
    
@@ -325,6 +395,38 @@ npm run dev
 2. ### **Compra de Boletos:**
    
    ★ **API para Comprar Boletos:** Permitir la compra de boletos para una película específica, incluyendo la selección de la fecha y la hora de la proyección.
+   
+   
+   
+   Este caso de uso puede ser aplicado a los siguientes usuarios: Administrador, Estandar o VIP 
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos
+   
+   EJEMPLO:
+   
+   Usuario VIP 2:
+   
+   user: "CarolinaM"
+   pwd: "1087654321"
+   
+   mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   user: "NikollMan"
+   pwd: "1095828793"
+   
+   mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   
    
    **comprarBoletos(datosBoleto):** Realiza la compra de boletos para una película.
    
@@ -479,9 +581,49 @@ npm run dev
    objBoleto.destructor();
    ```
    
+   devolvera en consola lo siguiente:
+   
+   ```js
+   {
+     error: 'Error al realizar la compra: La película no existe o no está disponible para compra de boletos.'
+   }
+   ```
+   
+   
+   
    
    
    ★ **API para Verificar Disponibilidad de Asientos:** Permitir la consulta de la disponibilidad de asientos en una sala para una proyección específica.
+   
+   Este caso de uso puede ser aplicado a los siguientes usuarios: Administrador, Estandar o VIP 
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos
+   
+   EJEMPLO:
+   
+   Usuario VIP 2:
+   
+   user: "CarolinaM"
+   pwd: "1087654321"
+   
+   mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   user: "NikollMan"
+   pwd: "1095828793"
+   
+   mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   
    
    **consultarDisponibilidadAsientos(id_sala):** Consulta la disponibilidad de asientos en una sala específica.
    
@@ -694,9 +836,41 @@ npm run dev
    
    ★ **API para Reservar Asientos:** Permitir la selección y reserva de asientos para una proyección específica.
    
+   
+   
+   Este caso de uso puede ser aplicado a los siguientes usuarios: Administrador, Estandar o VIP 
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos
+   
+   EJEMPLO:
+   
+   Usuario VIP 2:
+   
+   user: "CarolinaM"
+   pwd: "1087654321"
+   
+   mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   user: "NikollMan"
+   pwd: "1095828793"
+   
+   mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   
+   
    **reservarAsientos(datosReserva):** Realiza la reserva de asientos para una película. 
    
-   **Parámetros:**Un objeto con los siguientes datos: 
+   ##### Parámetros: Un objeto con los siguientes datos: 
    
    - id: Identificador único de la reserva 
    - id_pelicula: Identificador de la película 
@@ -796,6 +970,38 @@ npm run dev
    
    
    ★ **API para Cancelar Reserva de Asientos:** Permitir la cancelación de una reserva de asiento ya realizada.
+   
+   
+   
+   Este caso de uso puede ser aplicado a los siguientes usuarios: Administrador, Estandar o VIP 
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos
+   
+   EJEMPLO:
+   
+   Usuario VIP 2:
+   
+   user: "CarolinaM"
+   pwd: "1087654321"
+   
+   mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   user: "NikollMan"
+   pwd: "1095828793"
+   
+   mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   
    
    **cancelarReserva(datosCancelacion):**  Cancela parcial o totalmente una reserva de asientos.
    
@@ -916,6 +1122,36 @@ npm run dev
    
    
    
+   Este caso de uso puede ser aplicado a los siguientes usuarios: Administrador, Estandar o VIP 
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos
+   
+   EJEMPLO:
+   
+   Usuario VIP 2:
+   
+   user: "CarolinaM"
+   pwd: "1087654321"
+   
+   mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   user: "NikollMan"
+   pwd: "1095828793"
+   
+   mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   
+   
    **comprarBoletosVIP(datosBoletoVip):** Realiza la compra de boletos VIP para una película, aplicando descuentos para usuarios VIP.
    
    **Parámetros:** Un objeto con los siguientes datos:
@@ -978,6 +1214,36 @@ npm run dev
    
    
    ★ **API para Verificar Tarjeta VIP:** Permitir la verificación de la validez de una tarjeta VIP durante el proceso de compra.
+   
+   
+   
+   Este caso de uso puede ser aplicado a los siguientes usuarios: Administrador, Estandar o VIP 
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos
+   
+   EJEMPLO:
+   
+   Usuario VIP 2:
+   
+   user: "CarolinaM"
+   pwd: "1087654321"
+   
+   mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   user: "NikollMan"
+   pwd: "1095828793"
+   
+   mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
    
    
    
@@ -1107,6 +1373,38 @@ npm run dev
    
    ★ **API para Crear Usuario:** Permitir la creación de nuevos usuarios en el sistema, asignando roles y privilegios específicos (usuario estándar, usuario VIP o administrador).
    
+   
+   
+   Este caso de uso puede ser aplicado a los siguientes usuarios: Administrador, Estandar o VIP 
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos
+   
+   EJEMPLO:
+   
+   Usuario VIP 2:
+   
+   user: "CarolinaM"
+   pwd: "1087654321"
+   
+   mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   user: "NikollMan"
+   pwd: "1095828793"
+   
+   mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   
+   
    **crearUsuario(datosUsuarioEstandar):** Crea un nuevo usuario en el sistema.
    
    **Parámetros:** Un objeto con los siguientes datos: 
@@ -1164,6 +1462,26 @@ npm run dev
    Como vemos este usuario es creado con el VIP, por eso es importante que el administrador le genere su nueva Tarjeta VIP.
    
    **crearTarjetaVIP(datosTarjetaVip):** Crea una tarjeta VIP para un usuario.
+   
+   
+   
+   Este caso de uso puede ser aplicado solo al siguiente usuario: Administrador
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos, en este caso de uso solo el Administrador puede ser el encargado de activar la tarjeta del usuario
+   
+   EJEMPLO:
+   
+   
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   
    
    **Parámetros:** Un objeto con los siguientes datos:
    
@@ -1233,6 +1551,22 @@ npm run dev
    
    
    ★ **API para Obtener Detalles de Usuario:** Permitir la consulta de información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
+   
+   
+   
+   Este caso de uso puede ser aplicado solo al siguiente usuario: Administrador
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos, en este solo es para el administrador, ya que es una informacion personal que solo el admin puede ver
+   
+   EJEMPLO:
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    
    
@@ -1319,6 +1653,22 @@ npm run dev
    
    
    
+   Este caso de uso puede ser aplicado solo al siguiente usuario: Administrador
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos, en este solo es para el administrador, ya que es el encargado de validar las tarjetas VIP
+   
+   EJEMPLO:
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   
+   
    **actualizarRolUsuario(datosActualizacion):** Actualiza el rol de un usuario existente.
    
    **Parámetros:** Un objeto con los siguientes datos:
@@ -1397,6 +1747,22 @@ npm run dev
    
    
    ★ **API para Listar Usuarios:** Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol (VIP, estándar o administrador).
+   
+   
+   
+   Este caso de uso puede ser aplicado solo al siguiente usuario: Administrador
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos, en este solo es para el administrador, ya que es una informacion personal que solo el admin puede ver
+   
+   EJEMPLO:
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    
    
@@ -1645,6 +2011,36 @@ npm run dev
    
    
    
+   Este caso de uso puede ser aplicado a los siguientes usuarios: Administrador, Estandar o VIP 
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos
+   
+   EJEMPLO:
+   
+   Usuario VIP 2:
+   
+   user: "CarolinaM"
+   pwd: "1087654321"
+   
+   mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   user: "NikollMan"
+   pwd: "1095828793"
+   
+   mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   
+   
    ##### **pagosEnLinea(datosPagoLinea):**
    
    Realiza el pago en línea de boletos para una película.
@@ -1713,6 +2109,36 @@ npm run dev
    
    
    ★ **API para Confirmación de Compra:** Enviar confirmación de la compra y los detalles del boleto al usuario.
+   
+   
+   
+   Este caso de uso puede ser aplicado a los siguientes usuarios: Administrador, Estandar o VIP 
+   Los siguientes ejemplos toman de referencia a un usuario de diferente Rol, sin embargo si queremos hacerlo con otros diferentes al Final del Readme podremos encontrarlos
+   
+   EJEMPLO:
+   
+   Usuario VIP 2:
+   
+   user: "CarolinaM"
+   pwd: "1087654321"
+   
+   mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   Usuario Administrador 5:
+   
+   user: "JanethCB"
+   pwd: "1098765437"
+   
+   mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   user: "NikollMan"
+   pwd: "1095828793"
+   
+   mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
    
    
    
@@ -1815,9 +2241,142 @@ Como vemos hay mensajes que le avisa al usuario que :  Compra realizada con éxi
 
 ─────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀─────
 
+# Roles Utilizados 
 
 
-### Esquemas utilizados para cada coleccion
+
+# Roles CineCampus
+
+
+
+#### Rol de administrador
+
+```
+db.createRole({
+  role: "Administrador",
+  privileges: [
+    {
+        resource: { db: "cineCampus", collection: "asiento" },
+        actions: ["find", "remove", "update", "insert", "createCollection", "dropCollection"]
+      },
+      {
+        resource: { db: "cineCampus", collection: "boleto" },
+        actions: ["find", "remove", "update", "insert", "createCollection", "dropCollection"]
+      },
+      {
+        resource: { db: "cineCampus", collection: "horario_proyeccion" },
+        actions: ["find", "remove", "update", "insert", "createCollection", "dropCollection"]
+      },
+      {
+        resource: { db: "cineCampus", collection: "pelicula" },
+        actions: ["find", "remove", "update", "insert", "createCollection", "dropCollection"]
+      },
+      {
+        resource: { db: "cineCampus", collection: "reserva" },
+        actions: ["find", "remove", "update", "insert", "createCollection", "dropCollection"]
+      },
+      {
+        resource: { db: "cineCampus", collection: "sala" },
+        actions: ["find", "remove", "update", "insert", "createCollection", "dropCollection"]
+      },
+      {
+        resource: { db: "cineCampus", collection: "tarjeta_vip" },
+        actions: ["find", "remove", "update", "insert", "createCollection", "dropCollection"]
+      },
+      {
+        resource: { db: "cineCampus", collection: "usuario" },
+        actions: ["find", "remove", "update", "insert", "createCollection", "dropCollection"]
+      }
+  ],
+  roles: []
+})
+```
+
+
+
+#### Rol de Usuario Estandar
+
+```
+db.createRole(
+	{
+		role: "userEstandar",
+        privileges: [
+      {
+            resource: {db: "cineCampus", collection: "pelicula"},
+            actions: ["find"]
+            },
+            {
+            resource: {db: "cineCampus", collection: "boleto"},
+            actions: ["find", "insert"]
+            },
+            {
+            resource: {db: "cineCampus", collection: "sala"},
+            actions: ["find"]
+            },
+            {
+            resource: {db: "cineCampus", collection: "reserva"},
+            actions: ["find", "insert", "update"]
+            },
+            {
+            resource: {db: "cineCampus", collection: "asiento"},
+            actions: ["find", "insert", "update"]
+            },
+              {
+            resource: { db: "cineCampus", collection: "", command: { aggregate: "pelicula" } },
+            actions: ["find"]  
+              },
+            {
+            resource: {db: "cineCampus", collection: "usuario"},
+            actions: ["insert", "update"]
+            }
+    	],
+            roles: []
+	}
+)
+```
+
+
+
+#### Rol de Usuario VIP
+
+```
+db.createRole(
+	{
+		role: "userVip",
+        privileges: [
+      {
+            resource: {db: "cineCampus", collection: "pelicula"},
+            actions: ["find"]
+            },
+            {
+            resource: {db: "cineCampus", collection: "boleto"},
+            actions: ["find", "insert"]
+            },
+            {
+            resource: {db: "cineCampus", collection: "sala"},
+            actions: ["find"]
+            },
+            {
+            resource: {db: "cineCampus", collection: "reserva"},
+            actions: ["find", "insert", "update"]
+            },
+            {
+            resource: {db: "cineCampus", collection: "asiento"},
+            actions: ["find", "insert", "update"]
+            },
+              {
+            resource: { db: "cineCampus", collection: "", command: { aggregate: "pelicula" } },
+            actions: ["find"]  
+              },
+            {
+            resource: {db: "cineCampus", collection: "usuario"},
+            actions: ["insert", "update"]
+            }
+    	],
+            roles: []
+	}
+)
+```
 
 
 
@@ -1827,4 +2386,399 @@ Como vemos hay mensajes que le avisa al usuario que :  Compra realizada con éxi
 
 
 
-### Data utilizada para cada coleccion
+# Usuarios Utilizados 
+
+
+
+# Usuarios CineCampus
+
+####  Usuarios administradores
+
+##### Usuario 1 
+
+```
+db.createUser(
+  {
+    user: "KarenLCelis",
+    pwd: "1098765433",
+    roles: [ { role: "Administrador", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 2
+
+```
+db.createUser(
+  {
+    user: "DiegoTP",
+    pwd: "1098765434",
+    roles: [ { role: "Administrador", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 3
+
+```
+db.createUser(
+  {
+    user: "AngieSuarez",
+    pwd: "1098765435",
+    roles: [ { role: "Administrador", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 4
+
+```
+db.createUser(
+  {
+    user: "JohlverJP",
+    pwd: "1098765436",
+    roles: [ { role: "Administrador", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 5
+
+```
+db.createUser(
+  {
+    user: "JanethCB",
+    pwd: "1098765437",
+    roles: [ { role: "Administrador", db: "cineCampus" } ]
+  }
+)
+```
+
+
+
+#### Usuarios Estandar
+
+##### Usuario 1 
+
+```
+db.createUser(
+  {
+    user: "DannaNik",
+    pwd: "1043210987",
+    roles: [ { role: "userEstandar", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 2 
+
+```
+db.createUser(
+  {
+    user: "HenryFab",
+    pwd: "1032109876",
+    roles: [ { role: "userEstandar", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 3 
+
+```
+db.createUser(
+  {
+    user: "KarenYP",
+    pwd: "1021098765",
+    roles: [ { role: "userEstandar", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 4 
+
+```
+db.createUser(
+  {
+    user: "DavidSR",
+    pwd: "1010987654",
+    roles: [ { role: "userEstandar", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 5 
+
+```
+db.createUser(
+  {
+    user: "CamiloAF",
+    pwd: "1000876543",
+    roles: [ { role: "userEstandar", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 6 
+
+```
+db.createUser(
+  {
+    user: "JuanitoAl",
+    pwd: "1097984654",
+    roles: [ { role: "userEstandar", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 7 
+
+```
+db.createUser(
+  {
+    user: "NikollMan",
+    pwd: "1095828793",
+    roles: [ { role: "userEstandar", db: "cineCampus" } ]
+  }
+)
+```
+
+
+
+#### Usuarios VIP
+
+##### Usuario 1 
+
+```
+db.createUser(
+  {
+    user: "JhonSebas",
+    pwd: "1098765432",
+    roles: [ { role: "userVip", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 2 
+
+```
+db.createUser(
+  {
+    user: "CarolinaM",
+    pwd: "1087654321",
+    roles: [ { role: "userVip", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 3 
+
+```
+db.createUser(
+  {
+    user: "MarianaTS",
+    pwd: "1076543210",
+    roles: [ { role: "userVip", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 4 
+
+```
+db.createUser(
+  {
+    user: "SamuelES",
+    pwd: "1065432109",
+    roles: [ { role: "userVip", db: "cineCampus" } ]
+  }
+)
+```
+
+##### Usuario 5 
+
+```
+db.createUser(
+  {
+    user: "CamiloConcha",
+    pwd: "1054321098",
+    roles: [ { role: "userVip", db: "cineCampus" } ]
+  }
+)
+```
+
+# 
+
+
+
+─────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀─────
+
+# Conexion Usuarios
+
+
+
+#### Administrador:
+
+Usuario Administrador 1:
+
+user: "KarenLCelis"
+pwd: "1098765433"
+
+mongodb://KarenLCelis:1098765433@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+--------------------------------------------------
+
+Usuario Administrador 2:
+
+user: "DiegoTP"
+pwd: "1098765434"
+
+mongodb://DiegoTP:1098765434@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+---------------------------------------
+
+ Usuario Administrador 3:
+
+user: "AngieSuarez"
+ pwd: "1098765435"
+
+mongodb://AngieSuarez:1098765435@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+Usuario Administrador 4:
+
+user: "JohlverJP"
+pwd: "1098765436"
+
+mongodb://JohlverJP:1098765436@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Usuario Administrador 5:
+
+user: "JanethCB"
+pwd: "1098765437"
+
+mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+
+
+─────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀─────
+
+
+
+#### VIP:
+
+
+
+Usuario VIP 1:
+
+user: "JhonSebas"
+pwd: "1098765432"
+
+mongodb://JhonSebas:1098765432@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+-----------------------------
+
+Usuario VIP 2:
+
+user: "CarolinaM"
+pwd: "1087654321"
+
+mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+---------------------
+
+Usuario VIP 3:
+
+user: "MarianaTS"
+pwd: "1076543210"
+
+mongodb://MarianaTS:1076543210@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+--------------------------
+
+Usuario VIP 4:
+
+user: "SamuelES"
+pwd: "1065432109"
+
+mongodb://SamuelES:1065432109@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+-------------------------
+
+Usuario VIP 5:
+
+user: "CamiloConcha"
+pwd: "1054321098"
+
+mongodb://CamiloConcha:1054321098@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+
+
+─────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀─────
+
+#### Estandar:
+
+
+
+Usuario Estandar 1:
+
+user: "DannaNik"
+pwd: "1043210987"
+
+mongodb://DannaNik:1043210987@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+----------------------
+
+Usuario Estandar 2:
+
+user: "HenryFab"
+pwd: "1032109876"
+
+mongodb://HenryFab:1032109876@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+----------------------
+
+Usuario Estandar 3:
+
+user: "KarenYP"
+pwd: "1021098765"
+
+mongodb://KarenYP:1021098765@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+----------------------
+
+Usuario Estandar 4:
+
+user: "DavidSR"
+pwd: "1010987654"
+
+mongodb://DavidSR:1010987654@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+----------------------
+
+Usuario Estandar 5:
+
+user: "CamiloAF"
+pwd: "1000876543"
+
+mongodb://CamiloAF:1000876543@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+----------------------
+
+Usuario Estandar 6:
+
+user: "JuanitoAl"
+pwd: "1097984654"
+
+mongodb://JuanitoAl:1097984654@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+----------------------
+
+Usuario Estandar 7:
+
+user: "NikollMan"
+pwd: "1095828793"
+
+mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
