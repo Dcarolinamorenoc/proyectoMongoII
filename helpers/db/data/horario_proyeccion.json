@@ -1,0 +1,360 @@
+[{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c422"
+  },
+  "id": 1,
+  "fecha_proyeccion": "14/08/2024",
+  "horario_proyeccion": "14:00",
+  "hora_finalizacion": "15:47",
+  "id_pelicula": 1,
+  "id_sala": 1,
+  "precio_pelicula": 15000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c423"
+  },
+  "id": 2,
+  "fecha_proyeccion": "14/08/2024",
+  "horario_proyeccion": "18:30",
+  "hora_finalizacion": "20:17",
+  "id_pelicula": 1,
+  "id_sala": 2,
+  "precio_pelicula": 15000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c424"
+  },
+  "id": 3,
+  "fecha_proyeccion": "15/08/2024",
+  "horario_proyeccion": "16:00",
+  "hora_finalizacion": "17:47",
+  "id_pelicula": 1,
+  "id_sala": 3,
+  "precio_pelicula": 15000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c425"
+  },
+  "id": 4,
+  "fecha_proyeccion": "03/08/2024",
+  "horario_proyeccion": "15:00",
+  "hora_finalizacion": "16:30",
+  "id_pelicula": 2,
+  "id_sala": 1,
+  "precio_pelicula": 15000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c426"
+  },
+  "id": 5,
+  "fecha_proyeccion": "03/08/2024",
+  "horario_proyeccion": "19:00",
+  "hora_finalizacion": "20:30",
+  "id_pelicula": 2,
+  "id_sala": 2,
+  "precio_pelicula": 15000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c427"
+  },
+  "id": 6,
+  "fecha_proyeccion": "04/08/2024",
+  "horario_proyeccion": "17:30",
+  "hora_finalizacion": "19:00",
+  "id_pelicula": 2,
+  "id_sala": 3,
+  "precio_pelicula": 15000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c428"
+  },
+  "id": 7,
+  "fecha_proyeccion": "26/08/2024",
+  "horario_proyeccion": "20:00",
+  "hora_finalizacion": "22:04",
+  "id_pelicula": 3,
+  "id_sala": 1,
+  "precio_pelicula": 18000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c429"
+  },
+  "id": 8,
+  "fecha_proyeccion": "26/08/2024",
+  "horario_proyeccion": "22:30",
+  "hora_finalizacion": "00:34",
+  "id_pelicula": 3,
+  "id_sala": 2,
+  "precio_pelicula": 18000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c42a"
+  },
+  "id": 9,
+  "fecha_proyeccion": "27/08/2024",
+  "horario_proyeccion": "18:00",
+  "hora_finalizacion": "20:04",
+  "id_pelicula": 3,
+  "id_sala": 3,
+  "precio_pelicula": 18000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c42b"
+  },
+  "id": 10,
+  "fecha_proyeccion": "22/08/2024",
+  "horario_proyeccion": "21:00",
+  "hora_finalizacion": "22:29",
+  "id_pelicula": 4,
+  "id_sala": 4,
+  "precio_pelicula": 16000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c42c"
+  },
+  "id": 11,
+  "fecha_proyeccion": "23/08/2024",
+  "horario_proyeccion": "19:30",
+  "hora_finalizacion": "20:59",
+  "id_pelicula": 4,
+  "id_sala": 5,
+  "precio_pelicula": 16000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c42d"
+  },
+  "id": 12,
+  "fecha_proyeccion": "23/08/2024",
+  "horario_proyeccion": "22:00",
+  "hora_finalizacion": "23:29",
+  "id_pelicula": 4,
+  "id_sala": 1,
+  "precio_pelicula": 16000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c42e"
+  },
+  "id": 13,
+  "fecha_proyeccion": "19/08/2024",
+  "horario_proyeccion": "16:30",
+  "hora_finalizacion": "18:20",
+  "id_pelicula": 5,
+  "id_sala": 2,
+  "precio_pelicula": 16000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c42f"
+  },
+  "id": 14,
+  "fecha_proyeccion": "19/08/2024",
+  "horario_proyeccion": "20:00",
+  "hora_finalizacion": "21:50",
+  "id_pelicula": 5,
+  "id_sala": 3,
+  "precio_pelicula": 16000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c430"
+  },
+  "id": 15,
+  "fecha_proyeccion": "20/08/2024",
+  "horario_proyeccion": "18:00",
+  "hora_finalizacion": "19:50",
+  "id_pelicula": 5,
+  "id_sala": 4,
+  "precio_pelicula": 16000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c431"
+  },
+  "id": 16,
+  "fecha_proyeccion": "07/08/2024",
+  "horario_proyeccion": "19:00",
+  "hora_finalizacion": "20:58",
+  "id_pelicula": 6,
+  "id_sala": 1,
+  "precio_pelicula": 18000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c432"
+  },
+  "id": 17,
+  "fecha_proyeccion": "07/08/2024",
+  "horario_proyeccion": "21:30",
+  "hora_finalizacion": "23:28",
+  "id_pelicula": 6,
+  "id_sala": 2,
+  "precio_pelicula": 18000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c433"
+  },
+  "id": 18,
+  "fecha_proyeccion": "08/08/2024",
+  "horario_proyeccion": "17:00",
+  "hora_finalizacion": "18:58",
+  "id_pelicula": 6,
+  "id_sala": 3,
+  "precio_pelicula": 18000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c434"
+  },
+  "id": 19,
+  "fecha_proyeccion": "09/08/2024",
+  "horario_proyeccion": "18:30",
+  "hora_finalizacion": "20:45",
+  "id_pelicula": 7,
+  "id_sala": 4,
+  "precio_pelicula": 17000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c435"
+  },
+  "id": 20,
+  "fecha_proyeccion": "09/08/2024",
+  "horario_proyeccion": "21:00",
+  "hora_finalizacion": "23:15",
+  "id_pelicula": 7,
+  "id_sala": 5,
+  "precio_pelicula": 17000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c436"
+  },
+  "id": 21,
+  "fecha_proyeccion": "10/08/2024",
+  "horario_proyeccion": "16:00",
+  "hora_finalizacion": "18:15",
+  "id_pelicula": 7,
+  "id_sala": 1,
+  "precio_pelicula": 17000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c437"
+  },
+  "id": 22,
+  "fecha_proyeccion": "25/10/2024",
+  "horario_proyeccion": "15:00",
+  "hora_finalizacion": "16:40",
+  "id_pelicula": 8,
+  "id_sala": 2,
+  "precio_pelicula": 16000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c438"
+  },
+  "id": 23,
+  "fecha_proyeccion": "25/10/2024",
+  "horario_proyeccion": "18:30",
+  "hora_finalizacion": "20:10",
+  "id_pelicula": 8,
+  "id_sala": 3,
+  "precio_pelicula": 16000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c439"
+  },
+  "id": 24,
+  "fecha_proyeccion": "26/10/2024",
+  "horario_proyeccion": "17:00",
+  "hora_finalizacion": "18:40",
+  "id_pelicula": 8,
+  "id_sala": 4,
+  "precio_pelicula": 16000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c43a"
+  },
+  "id": 25,
+  "fecha_proyeccion": "13/09/2024",
+  "horario_proyeccion": "20:30",
+  "hora_finalizacion": "22:05",
+  "id_pelicula": 9,
+  "id_sala": 1,
+  "precio_pelicula": 17000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c43b"
+  },
+  "id": 26,
+  "fecha_proyeccion": "13/09/2024",
+  "horario_proyeccion": "22:30",
+  "hora_finalizacion": "00:05",
+  "id_pelicula": 9,
+  "id_sala": 2,
+  "precio_pelicula": 17000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c43c"
+  },
+  "id": 27,
+  "fecha_proyeccion": "14/09/2024",
+  "horario_proyeccion": "19:00",
+  "hora_finalizacion": "20:35",
+  "id_pelicula": 9,
+  "id_sala": 3,
+  "precio_pelicula": 17000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c43d"
+  },
+  "id": 28,
+  "fecha_proyeccion": "01/11/2024",
+  "horario_proyeccion": "19:30",
+  "hora_finalizacion": "21:22",
+  "id_pelicula": 10,
+  "id_sala": 4,
+  "precio_pelicula": 17000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c43e"
+  },
+  "id": 29,
+  "fecha_proyeccion": "01/11/2024",
+  "horario_proyeccion": "22:00",
+  "hora_finalizacion": "23:52",
+  "id_pelicula": 10,
+  "id_sala": 5,
+  "precio_pelicula": 17000
+},
+{
+  "_id": {
+    "$oid": "66a321a289805e45bce0c43f"
+  },
+  "id": 30,
+  "fecha_proyeccion": "02/11/2024",
+  "horario_proyeccion": "18:00",
+  "hora_finalizacion": "19:52",
+  "id_pelicula": 10,
+  "id_sala": 1,
+  "precio_pelicula": 17000
+}]
