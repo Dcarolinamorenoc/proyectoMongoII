@@ -1,0 +1,143 @@
+[{
+  "_id": {
+    "$oid": "66a316bd89805e45bce0c3e7"
+  },
+  "id": 1,
+  "titulo": "Intensamente 2",
+  "sinopsis": "Riley, ahora adolescente, enfrenta nuevos desafíos emocionales mientras sus emociones se adaptan a cambios en su mente.",
+  "fecha_estreno": "14/06/2024",
+  "genero": "Animación",
+  "duracion": "107 minutos",
+  "estado": "En cartelera",
+  "pais_origen": "Estados Unidos"
+},
+{
+  "_id": {
+    "$oid": "66a316bd89805e45bce0c3e8"
+  },
+  "id": 2,
+  "titulo": "Mi villano favorito 4",
+  "sinopsis": "Gru y su familia se embarcan en una nueva aventura llena de travesuras y desafíos inesperados.",
+  "fecha_estreno": "03/07/2024",
+  "genero": "Animación",
+  "duracion": "90 minutos",
+  "estado": "En cartelera",
+  "pais_origen": "Estados Unidos"
+},
+{
+  "_id": {
+    "$oid": "66a316bd89805e45bce0c3e9"
+  },
+  "id": 3,
+  "titulo": "Deadpool & Wolverine",
+  "sinopsis": "Deadpool se une a Wolverine en una aventura irreverente que atraviesa el multiverso Marvel.",
+  "fecha_estreno": "26/07/2024",
+  "genero": "Acción",
+  "duracion": "124 minutos",
+  "estado": "En cartelera",
+  "pais_origen": "Estados Unidos"
+},
+{
+  "_id": {
+    "$oid": "66a316bd89805e45bce0c3ea"
+  },
+  "id": 4,
+  "titulo": "Inmaculada",
+  "sinopsis": "Una joven novicia enfrenta fuerzas sobrenaturales en un convento aislado en Italia.",
+  "fecha_estreno": "22/03/2024",
+  "genero": "Terror",
+  "duracion": "89 minutos",
+  "estado": "En cartelera",
+  "pais_origen": "Estados Unidos"
+},
+{
+  "_id": {
+    "$oid": "66a316bd89805e45bce0c3eb"
+  },
+  "id": 5,
+  "titulo": "Tornados",
+  "sinopsis": "Un grupo de cazadores de tormentas se enfrenta al tornado más devastador de la historia.",
+  "fecha_estreno": "19/04/2024",
+  "genero": "Acción",
+  "duracion": "110 minutos",
+  "estado": "En cartelera",
+  "pais_origen": "Estados Unidos"
+},
+{
+  "_id": {
+    "$oid": "66a316bd89805e45bce0c3ec"
+  },
+  "id": 6,
+  "titulo": "Bad Boys: Ride or Die",
+  "sinopsis": "Mike Lowrey y Marcus Burnett regresan para una última misión llena de acción y comedia.",
+  "fecha_estreno": "07/06/2024",
+  "genero": "Acción",
+  "duracion": "118 minutos",
+  "estado": "En cartelera",
+  "pais_origen": "Estados Unidos"
+},
+{
+  "_id": {
+    "$oid": "66a316bd89805e45bce0c3ed"
+  },
+  "id": 7,
+  "titulo": "Escucha como todo comenzó",
+  "sinopsis": "La historia del origen de la música hip-hop y sus pioneros en el Bronx de los años 70.",
+  "fecha_estreno": "09/02/2024",
+  "genero": "Drama musical",
+  "duracion": "135 minutos",
+  "estado": "En cartelera",
+  "pais_origen": "Estados Unidos"
+},
+{
+  "_id": {
+    "$oid": "66a316bd89805e45bce0c3ee"
+  },
+  "id": 8,
+  "titulo": "Coraline",
+  "sinopsis": "Remake live-action del clásico de animación sobre una niña que descubre una realidad alternativa siniestra.",
+  "fecha_estreno": "25/10/2024",
+  "genero": "Fantasía",
+  "duracion": "100 minutos",
+  "estado": "Próximo estreno",
+  "pais_origen": "Estados Unidos"
+},
+{
+  "_id": {
+    "$oid": "66a316bd89805e45bce0c3ef"
+  },
+  "id": 9,
+  "titulo": "Masacre en el tren",
+  "sinopsis": "Un viaje en tren se convierte en una pesadilla cuando un asesino comienza a atacar a los pasajeros.",
+  "fecha_estreno": "13/09/2024",
+  "genero": "Terror",
+  "duracion": "95 minutos",
+  "estado": "Próximo estreno",
+  "pais_origen": "Reino Unido"
+},
+{
+  "_id": {
+    "$oid": "66a316bd89805e45bce0c3f0"
+  },
+  "id": 10,
+  "titulo": "Herencia Siniestra",
+  "sinopsis": "Una familia hereda una mansión antigua, solo para descubrir que viene con un terrible secreto sobrenatural.",
+  "fecha_estreno": "01/11/2024",
+  "genero": "Terror",
+  "duracion": "112 minutos",
+  "estado": "Próximo estreno",
+  "pais_origen": "Estados Unidos"
+},
+{
+  "_id": {
+    "$oid": "66a3d83d80a3f207a671e99f"
+  },
+  "id": 11,
+  "titulo": "Parasite",
+  "sinopsis": "Una familia desempleada se infiltra en una casa adinerada mediante engaños y manipulaciones, hasta que los secretos y las mentiras causan una serie de eventos inesperados.",
+  "fecha_estreno": "07/02/2020",
+  "genero": "Drama",
+  "duracion": "132 minutos",
+  "estado": "No disponible",
+  "pais_origen": "Corea del Sur"
+}]

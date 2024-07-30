@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "66a31fe389805e45bce0c418"
+  },
+  "id": 1,
+  "id_usuario": 1,
+  "fecha_reserva": "10/06/2024",
+  "estado": "activa",
+  "fecha_expiracion": "12/06/2024",
+  "asientos_reservados": [
+    1,
+    2
+  ],
+  "id_pelicula": 1,
+  "id_horario_proyeccion": 1
+},
+{
+  "_id": {
+    "$oid": "66a31fe389805e45bce0c419"
+  },
+  "id": 2,
+  "id_usuario": 2,
+  "fecha_reserva": "22/07/2024",
+  "estado": "activa",
+  "fecha_expiracion": "24/07/2024",
+  "asientos_reservados": [
+    7,
+    8,
+    9
+  ],
+  "id_pelicula": 3,
+  "id_horario_proyeccion": 7
+},
+{
+  "_id": {
+    "$oid": "66a31fe389805e45bce0c41a"
+  },
+  "id": 3,
+  "id_usuario": 3,
+  "fecha_reserva": "29/06/2024",
+  "estado": "activa",
+  "fecha_expiracion": "01/07/2024",
+  "asientos_reservados": [
+    13,
+    14
+  ],
+  "id_pelicula": 2,
+  "id_horario_proyeccion": 4
+},
+{
+  "_id": {
+    "$oid": "66a31fe389805e45bce0c41b"
+  },
+  "id": 4,
+  "id_usuario": 4,
+  "fecha_reserva": "18/03/2024",
+  "estado": "activa",
+  "fecha_expiracion": "20/03/2024",
+  "asientos_reservados": [
+    19,
+    20
+  ],
+  "id_pelicula": 4,
+  "id_horario_proyeccion": 10
+},
+{
+  "_id": {
+    "$oid": "66a31fe389805e45bce0c41c"
+  },
+  "id": 5,
+  "id_usuario": 5,
+  "fecha_reserva": "15/04/2024",
+  "estado": "activa",
+  "fecha_expiracion": "17/04/2024",
+  "asientos_reservados": [
+    25
+  ],
+  "id_pelicula": 5,
+  "id_horario_proyeccion": 13
+}]

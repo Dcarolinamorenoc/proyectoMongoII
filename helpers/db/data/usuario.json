@@ -1,0 +1,221 @@
+[{
+  "_id": {
+    "$oid": "66a3198d89805e45bce0c3fb"
+  },
+  "id": 1,
+  "nombre_completo": "Jhon Sebastian Gutierrez",
+  "identificacion": "1098765432",
+  "nickname": "JhonSebas",
+  "celular": "3101234567",
+  "email": "jhon.gutierrez@email.com",
+  "telefono": "6017654321",
+  "rol": "VIP"
+},
+{
+  "_id": {
+    "$oid": "66a3198d89805e45bce0c3fc"
+  },
+  "id": 2,
+  "nombre_completo": "Diana Carolina Moreno",
+  "identificacion": "1087654321",
+  "nickname": "CarolinaM",
+  "celular": "3157654321",
+  "email": "caro.moreno@email.com",
+  "telefono": "6028765432",
+  "rol": "VIP"
+},
+{
+  "_id": {
+    "$oid": "66a3198d89805e45bce0c3fd"
+  },
+  "id": 3,
+  "nombre_completo": "Mariana Traslavña Sarmiento",
+  "identificacion": "1076543210",
+  "nickname": "MarianaTS",
+  "celular": "3203456789",
+  "email": "mariana.traslavina@email.com",
+  "telefono": "6039876543",
+  "rol": "VIP"
+},
+{
+  "_id": {
+    "$oid": "66a3198d89805e45bce0c3fe"
+  },
+  "id": 4,
+  "nombre_completo": "Samuel Enrique Suarez",
+  "identificacion": "1065432109",
+  "nickname": "SamuelES",
+  "celular": "3134567890",
+  "email": "samuel.suarez@email.com",
+  "telefono": "6041234567",
+  "rol": "VIP"
+},
+{
+  "_id": {
+    "$oid": "66a3198d89805e45bce0c3ff"
+  },
+  "id": 5,
+  "nombre_completo": "Camilo Esteban Concha",
+  "identificacion": "1054321098",
+  "nickname": "CamiloConcha",
+  "celular": "3187654321",
+  "email": "camilo.concha@email.com",
+  "telefono": "6052345678",
+  "rol": "VIP"
+},
+{
+  "_id": {
+    "$oid": "66a3198d89805e45bce0c400"
+  },
+  "id": 6,
+  "nombre_completo": "Danna Nikole Ardila",
+  "identificacion": "1043210987",
+  "nickname": "DannaNik",
+  "celular": "3009876543",
+  "email": "danna.ardila@email.com",
+  "telefono": "6063456789",
+  "rol": "Estandar"
+},
+{
+  "_id": {
+    "$oid": "66a3198d89805e45bce0c401"
+  },
+  "id": 7,
+  "nombre_completo": "Henry Fabian Boada",
+  "identificacion": "1032109876",
+  "nickname": "HenryFab",
+  "celular": "3112345678",
+  "email": "henry.boada@email.com",
+  "telefono": "6074567890",
+  "rol": "Estandar"
+},
+{
+  "_id": {
+    "$oid": "66a3198d89805e45bce0c402"
+  },
+  "id": 8,
+  "nombre_completo": "Karen Yiseth Pinto",
+  "identificacion": "1021098765",
+  "nickname": "KarenYP",
+  "celular": "3145678901",
+  "email": "karen.pinto@email.com",
+  "telefono": "6085678901",
+  "rol": "Estandar"
+},
+{
+  "_id": {
+    "$oid": "66a3198d89805e45bce0c403"
+  },
+  "id": 9,
+  "nombre_completo": "David Steven Romero",
+  "identificacion": "1010987654",
+  "nickname": "DavidSR",
+  "celular": "3178901234",
+  "email": "david.romero@email.com",
+  "telefono": "6096789012",
+  "rol": "Estandar"
+},
+{
+  "_id": {
+    "$oid": "66a3198d89805e45bce0c404"
+  },
+  "id": 10,
+  "nombre_completo": "Camilo Andres Franco",
+  "identificacion": "1000876543",
+  "nickname": "CamiloAF",
+  "celular": "3201234567",
+  "email": "camilo.franco@email.com",
+  "telefono": "6107890123",
+  "rol": "Estandar"
+},
+{
+  "_id": {
+    "$oid": "66a31a9989805e45bce0c405"
+  },
+  "id": 11,
+  "nombre_completo": "Juan Carlos Almario",
+  "identificacion": "1097984654",
+  "nickname": "JuanitoAl",
+  "celular": "3133523173",
+  "email": "juan.almario@email.com",
+  "telefono": "6083488256",
+  "rol": "Estandar"
+},
+{
+  "_id": {
+    "$oid": "66a31a9989805e45bce0c406"
+  },
+  "id": 12,
+  "nombre_completo": "Nikoll Zarai Mantilla",
+  "identificacion": "1095828793",
+  "nickname": "NikollMan",
+  "celular": "3178934568",
+  "email": "niko.mantilla@email.com",
+  "telefono": "6101230123",
+  "rol": "Estandar"
+},
+{
+  "_id": {
+    "$oid": "66a7140e5bf57a676561df2e"
+  },
+  "id": 31,
+  "nombre_completo": "Karen Lorena Celis",
+  "identificacion": "1098765433",
+  "nickname": "KarenLCelis",
+  "celular": "3101234568",
+  "email": "karen.celis@email.com",
+  "telefono": "6017654322",
+  "rol": "Administrador"
+},
+{
+  "_id": {
+    "$oid": "66a7140e5bf57a676561df2f"
+  },
+  "id": 32,
+  "nombre_completo": "Diego Tarazona Pinzon",
+  "identificacion": "1098765434",
+  "nickname": "DiegoTP",
+  "celular": "3101517892",
+  "email": "diego.tarazona@email.com",
+  "telefono": "6017654323",
+  "rol": "Administrador"
+},
+{
+  "_id": {
+    "$oid": "66a7140e5bf57a676561df30"
+  },
+  "id": 33,
+  "nombre_completo": "Angie Gorett Suárez",
+  "identificacion": "1098765435",
+  "nickname": "AngieSuarez",
+  "celular": "3267163570",
+  "email": "angie.suarez@email.com",
+  "telefono": "6017654324",
+  "rol": "Administrador"
+},
+{
+  "_id": {
+    "$oid": "66a7140e5bf57a676561df31"
+  },
+  "id": 34,
+  "nombre_completo": "Johlver Jose Pardo",
+  "identificacion": "1098765436",
+  "nickname": "JohlverJP",
+  "celular": "3101587571",
+  "email": "johlver.pardo@email.com",
+  "telefono": "6017654325",
+  "rol": "Administrador"
+},
+{
+  "_id": {
+    "$oid": "66a7140e5bf57a676561df32"
+  },
+  "id": 35,
+  "nombre_completo": "Janeth Cardenas Bonilla",
+  "identificacion": "1098765437",
+  "nickname": "JanethCB",
+  "celular": "3101384572",
+  "email": "janeth.cardenas@email.com",
+  "telefono": "6017654326",
+  "rol": "Administrador"
+}]

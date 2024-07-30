@@ -1,0 +1,55 @@
+[{
+  "_id": {
+    "$oid": "66a3206089805e45bce0c41d"
+  },
+  "id": 1,
+  "id_usuario": 1,
+  "numero": "VIP001",
+  "porcentaje_descuento": 15,
+  "fecha_expiracion": "31/12/2024",
+  "estado": "activa"
+},
+{
+  "_id": {
+    "$oid": "66a3206089805e45bce0c41e"
+  },
+  "id": 2,
+  "id_usuario": 2,
+  "numero": "VIP002",
+  "porcentaje_descuento": 15,
+  "fecha_expiracion": "28/11/2024",
+  "estado": "activa"
+},
+{
+  "_id": {
+    "$oid": "66a3206089805e45bce0c41f"
+  },
+  "id": 3,
+  "id_usuario": 3,
+  "numero": "VIP003",
+  "porcentaje_descuento": 15,
+  "fecha_expiracion": "26/05/2024",
+  "estado": "expirada"
+},
+{
+  "_id": {
+    "$oid": "66a3206089805e45bce0c420"
+  },
+  "id": 4,
+  "id_usuario": 4,
+  "numero": "VIP004",
+  "porcentaje_descuento": 15,
+  "fecha_expiracion": "25/12/2024",
+  "estado": "activa"
+},
+{
+  "_id": {
+    "$oid": "66a3206089805e45bce0c421"
+  },
+  "id": 5,
+  "id_usuario": 5,
+  "numero": "VIP005",
+  "porcentaje_descuento": 15,
+  "fecha_expiracion": "24/11/2024",
+  "estado": "activa"
+}]

@@ -1,0 +1,1500 @@
+[{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c440"
+  },
+  "id": 1,
+  "nombre_general": "A1",
+  "fila": "A",
+  "numero": 1,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c441"
+  },
+  "id": 2,
+  "nombre_general": "A2",
+  "fila": "A",
+  "numero": 2,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c442"
+  },
+  "id": 3,
+  "nombre_general": "A3",
+  "fila": "A",
+  "numero": 3,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c443"
+  },
+  "id": 4,
+  "nombre_general": "A4",
+  "fila": "A",
+  "numero": 4,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c444"
+  },
+  "id": 5,
+  "nombre_general": "A5",
+  "fila": "A",
+  "numero": 5,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c445"
+  },
+  "id": 6,
+  "nombre_general": "A6",
+  "fila": "A",
+  "numero": 6,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c446"
+  },
+  "id": 7,
+  "nombre_general": "B1",
+  "fila": "B",
+  "numero": 1,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c447"
+  },
+  "id": 8,
+  "nombre_general": "B2",
+  "fila": "B",
+  "numero": 2,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c448"
+  },
+  "id": 9,
+  "nombre_general": "B3",
+  "fila": "B",
+  "numero": 3,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c449"
+  },
+  "id": 10,
+  "nombre_general": "B4",
+  "fila": "B",
+  "numero": 4,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c44a"
+  },
+  "id": 11,
+  "nombre_general": "B5",
+  "fila": "B",
+  "numero": 5,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c44b"
+  },
+  "id": 12,
+  "nombre_general": "B6",
+  "fila": "B",
+  "numero": 6,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c44c"
+  },
+  "id": 13,
+  "nombre_general": "C1",
+  "fila": "C",
+  "numero": 1,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c44d"
+  },
+  "id": 14,
+  "nombre_general": "C2",
+  "fila": "C",
+  "numero": 2,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c44e"
+  },
+  "id": 15,
+  "nombre_general": "C3",
+  "fila": "C",
+  "numero": 3,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c44f"
+  },
+  "id": 16,
+  "nombre_general": "C4",
+  "fila": "C",
+  "numero": 4,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c450"
+  },
+  "id": 17,
+  "nombre_general": "C5",
+  "fila": "C",
+  "numero": 5,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c451"
+  },
+  "id": 18,
+  "nombre_general": "C6",
+  "fila": "C",
+  "numero": 6,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c452"
+  },
+  "id": 19,
+  "nombre_general": "D1",
+  "fila": "D",
+  "numero": 1,
+  "descripcion": "Asiento para discapacitados",
+  "tipo": "discapacitados",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c453"
+  },
+  "id": 20,
+  "nombre_general": "D2",
+  "fila": "D",
+  "numero": 2,
+  "descripcion": "Asiento para discapacitados",
+  "tipo": "discapacitados",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c454"
+  },
+  "id": 21,
+  "nombre_general": "E1",
+  "fila": "E",
+  "numero": 1,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c455"
+  },
+  "id": 22,
+  "nombre_general": "E2",
+  "fila": "E",
+  "numero": 2,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c456"
+  },
+  "id": 23,
+  "nombre_general": "E3",
+  "fila": "E",
+  "numero": 3,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c457"
+  },
+  "id": 24,
+  "nombre_general": "E4",
+  "fila": "E",
+  "numero": 4,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c458"
+  },
+  "id": 25,
+  "nombre_general": "E5",
+  "fila": "E",
+  "numero": 5,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c459"
+  },
+  "id": 26,
+  "nombre_general": "E6",
+  "fila": "E",
+  "numero": 6,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c45a"
+  },
+  "id": 27,
+  "nombre_general": "F1",
+  "fila": "F",
+  "numero": 1,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c45b"
+  },
+  "id": 28,
+  "nombre_general": "F2",
+  "fila": "F",
+  "numero": 2,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c45c"
+  },
+  "id": 29,
+  "nombre_general": "F3",
+  "fila": "F",
+  "numero": 3,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "ocupado"
+},
+{
+  "_id": {
+    "$oid": "66a321c389805e45bce0c45d"
+  },
+  "id": 30,
+  "nombre_general": "F4",
+  "fila": "F",
+  "numero": 4,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577426"
+  },
+  "id": 31,
+  "nombre_general": "F5",
+  "fila": "F",
+  "numero": 5,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577427"
+  },
+  "id": 32,
+  "nombre_general": "F6",
+  "fila": "F",
+  "numero": 6,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577428"
+  },
+  "id": 33,
+  "nombre_general": "G1",
+  "fila": "G",
+  "numero": 1,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577429"
+  },
+  "id": 34,
+  "nombre_general": "G2",
+  "fila": "G",
+  "numero": 2,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757742a"
+  },
+  "id": 35,
+  "nombre_general": "G3",
+  "fila": "G",
+  "numero": 3,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757742b"
+  },
+  "id": 36,
+  "nombre_general": "G4",
+  "fila": "G",
+  "numero": 4,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757742c"
+  },
+  "id": 37,
+  "nombre_general": "G5",
+  "fila": "G",
+  "numero": 5,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757742d"
+  },
+  "id": 38,
+  "nombre_general": "G6",
+  "fila": "G",
+  "numero": 6,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757742e"
+  },
+  "id": 39,
+  "nombre_general": "H1",
+  "fila": "H",
+  "numero": 1,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757742f"
+  },
+  "id": 40,
+  "nombre_general": "H2",
+  "fila": "H",
+  "numero": 2,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577430"
+  },
+  "id": 41,
+  "nombre_general": "H3",
+  "fila": "H",
+  "numero": 3,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577431"
+  },
+  "id": 42,
+  "nombre_general": "H4",
+  "fila": "H",
+  "numero": 4,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577432"
+  },
+  "id": 43,
+  "nombre_general": "H5",
+  "fila": "H",
+  "numero": 5,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577433"
+  },
+  "id": 44,
+  "nombre_general": "H6",
+  "fila": "H",
+  "numero": 6,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577434"
+  },
+  "id": 45,
+  "nombre_general": "I1",
+  "fila": "I",
+  "numero": 1,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577435"
+  },
+  "id": 46,
+  "nombre_general": "I2",
+  "fila": "I",
+  "numero": 2,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577436"
+  },
+  "id": 47,
+  "nombre_general": "I3",
+  "fila": "I",
+  "numero": 3,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577437"
+  },
+  "id": 48,
+  "nombre_general": "I4",
+  "fila": "I",
+  "numero": 4,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577438"
+  },
+  "id": 49,
+  "nombre_general": "I5",
+  "fila": "I",
+  "numero": 5,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577439"
+  },
+  "id": 50,
+  "nombre_general": "I6",
+  "fila": "I",
+  "numero": 6,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757743a"
+  },
+  "id": 51,
+  "nombre_general": "J1",
+  "fila": "J",
+  "numero": 1,
+  "descripcion": "Asiento para discapacitados",
+  "tipo": "discapacitados",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757743b"
+  },
+  "id": 52,
+  "nombre_general": "J2",
+  "fila": "J",
+  "numero": 2,
+  "descripcion": "Asiento para discapacitados",
+  "tipo": "discapacitados",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757743c"
+  },
+  "id": 53,
+  "nombre_general": "K1",
+  "fila": "K",
+  "numero": 1,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757743d"
+  },
+  "id": 54,
+  "nombre_general": "K2",
+  "fila": "K",
+  "numero": 2,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757743e"
+  },
+  "id": 55,
+  "nombre_general": "K3",
+  "fila": "K",
+  "numero": 3,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757743f"
+  },
+  "id": 56,
+  "nombre_general": "K4",
+  "fila": "K",
+  "numero": 4,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577440"
+  },
+  "id": 57,
+  "nombre_general": "K5",
+  "fila": "K",
+  "numero": 5,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577441"
+  },
+  "id": 58,
+  "nombre_general": "K6",
+  "fila": "K",
+  "numero": 6,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577442"
+  },
+  "id": 59,
+  "nombre_general": "L1",
+  "fila": "L",
+  "numero": 1,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577443"
+  },
+  "id": 60,
+  "nombre_general": "L2",
+  "fila": "L",
+  "numero": 2,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577444"
+  },
+  "id": 61,
+  "nombre_general": "L3",
+  "fila": "L",
+  "numero": 3,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577445"
+  },
+  "id": 62,
+  "nombre_general": "L4",
+  "fila": "L",
+  "numero": 4,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577446"
+  },
+  "id": 63,
+  "nombre_general": "L5",
+  "fila": "L",
+  "numero": 5,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577447"
+  },
+  "id": 64,
+  "nombre_general": "L6",
+  "fila": "L",
+  "numero": 6,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577448"
+  },
+  "id": 65,
+  "nombre_general": "M1",
+  "fila": "M",
+  "numero": 1,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577449"
+  },
+  "id": 66,
+  "nombre_general": "M2",
+  "fila": "M",
+  "numero": 2,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757744a"
+  },
+  "id": 67,
+  "nombre_general": "M3",
+  "fila": "M",
+  "numero": 3,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757744b"
+  },
+  "id": 68,
+  "nombre_general": "M4",
+  "fila": "M",
+  "numero": 4,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757744c"
+  },
+  "id": 69,
+  "nombre_general": "M5",
+  "fila": "M",
+  "numero": 5,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757744d"
+  },
+  "id": 70,
+  "nombre_general": "M6",
+  "fila": "M",
+  "numero": 6,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757744e"
+  },
+  "id": 71,
+  "nombre_general": "N1",
+  "fila": "N",
+  "numero": 1,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757744f"
+  },
+  "id": 72,
+  "nombre_general": "N2",
+  "fila": "N",
+  "numero": 2,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577450"
+  },
+  "id": 73,
+  "nombre_general": "N3",
+  "fila": "N",
+  "numero": 3,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577451"
+  },
+  "id": 74,
+  "nombre_general": "N4",
+  "fila": "N",
+  "numero": 4,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577452"
+  },
+  "id": 75,
+  "nombre_general": "N5",
+  "fila": "N",
+  "numero": 5,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577453"
+  },
+  "id": 76,
+  "nombre_general": "N6",
+  "fila": "N",
+  "numero": 6,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577454"
+  },
+  "id": 77,
+  "nombre_general": "O1",
+  "fila": "O",
+  "numero": 1,
+  "descripcion": "Asiento para discapacitados",
+  "tipo": "discapacitados",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577455"
+  },
+  "id": 78,
+  "nombre_general": "O2",
+  "fila": "O",
+  "numero": 2,
+  "descripcion": "Asiento para discapacitados",
+  "tipo": "discapacitados",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577456"
+  },
+  "id": 79,
+  "nombre_general": "P1",
+  "fila": "P",
+  "numero": 1,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577457"
+  },
+  "id": 80,
+  "nombre_general": "P2",
+  "fila": "P",
+  "numero": 2,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577458"
+  },
+  "id": 81,
+  "nombre_general": "P3",
+  "fila": "P",
+  "numero": 3,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577459"
+  },
+  "id": 82,
+  "nombre_general": "P4",
+  "fila": "P",
+  "numero": 4,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757745a"
+  },
+  "id": 83,
+  "nombre_general": "P5",
+  "fila": "P",
+  "numero": 5,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757745b"
+  },
+  "id": 84,
+  "nombre_general": "P6",
+  "fila": "P",
+  "numero": 6,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757745c"
+  },
+  "id": 85,
+  "nombre_general": "Q1",
+  "fila": "Q",
+  "numero": 1,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757745d"
+  },
+  "id": 86,
+  "nombre_general": "Q2",
+  "fila": "Q",
+  "numero": 2,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757745e"
+  },
+  "id": 87,
+  "nombre_general": "Q3",
+  "fila": "Q",
+  "numero": 3,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757745f"
+  },
+  "id": 88,
+  "nombre_general": "Q4",
+  "fila": "Q",
+  "numero": 4,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577460"
+  },
+  "id": 89,
+  "nombre_general": "Q5",
+  "fila": "Q",
+  "numero": 5,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577461"
+  },
+  "id": 90,
+  "nombre_general": "Q6",
+  "fila": "Q",
+  "numero": 6,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577462"
+  },
+  "id": 91,
+  "nombre_general": "R1",
+  "fila": "R",
+  "numero": 1,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577463"
+  },
+  "id": 92,
+  "nombre_general": "R2",
+  "fila": "R",
+  "numero": 2,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577464"
+  },
+  "id": 93,
+  "nombre_general": "R3",
+  "fila": "R",
+  "numero": 3,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577465"
+  },
+  "id": 94,
+  "nombre_general": "R4",
+  "fila": "R",
+  "numero": 4,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577466"
+  },
+  "id": 95,
+  "nombre_general": "R5",
+  "fila": "R",
+  "numero": 5,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577467"
+  },
+  "id": 96,
+  "nombre_general": "R6",
+  "fila": "R",
+  "numero": 6,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577468"
+  },
+  "id": 97,
+  "nombre_general": "S1",
+  "fila": "S",
+  "numero": 1,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577469"
+  },
+  "id": 98,
+  "nombre_general": "S2",
+  "fila": "S",
+  "numero": 2,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757746a"
+  },
+  "id": 99,
+  "nombre_general": "S3",
+  "fila": "S",
+  "numero": 3,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757746b"
+  },
+  "id": 100,
+  "nombre_general": "S4",
+  "fila": "S",
+  "numero": 4,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757746c"
+  },
+  "id": 101,
+  "nombre_general": "S5",
+  "fila": "S",
+  "numero": 5,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757746d"
+  },
+  "id": 102,
+  "nombre_general": "S6",
+  "fila": "S",
+  "numero": 6,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757746e"
+  },
+  "id": 103,
+  "nombre_general": "T1",
+  "fila": "T",
+  "numero": 1,
+  "descripcion": "Asiento para discapacitados",
+  "tipo": "discapacitados",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757746f"
+  },
+  "id": 104,
+  "nombre_general": "T2",
+  "fila": "T",
+  "numero": 2,
+  "descripcion": "Asiento para discapacitados",
+  "tipo": "discapacitados",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577470"
+  },
+  "id": 105,
+  "nombre_general": "U1",
+  "fila": "U",
+  "numero": 1,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577471"
+  },
+  "id": 106,
+  "nombre_general": "U2",
+  "fila": "U",
+  "numero": 2,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577472"
+  },
+  "id": 107,
+  "nombre_general": "U3",
+  "fila": "U",
+  "numero": 3,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577473"
+  },
+  "id": 108,
+  "nombre_general": "U4",
+  "fila": "U",
+  "numero": 4,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577474"
+  },
+  "id": 109,
+  "nombre_general": "U5",
+  "fila": "U",
+  "numero": 5,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577475"
+  },
+  "id": 110,
+  "nombre_general": "U6",
+  "fila": "U",
+  "numero": 6,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577476"
+  },
+  "id": 111,
+  "nombre_general": "V1",
+  "fila": "V",
+  "numero": 1,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577477"
+  },
+  "id": 112,
+  "nombre_general": "V2",
+  "fila": "V",
+  "numero": 2,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577478"
+  },
+  "id": 113,
+  "nombre_general": "V3",
+  "fila": "V",
+  "numero": 3,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577479"
+  },
+  "id": 114,
+  "nombre_general": "V4",
+  "fila": "V",
+  "numero": 4,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757747a"
+  },
+  "id": 115,
+  "nombre_general": "V5",
+  "fila": "V",
+  "numero": 5,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757747b"
+  },
+  "id": 116,
+  "nombre_general": "V6",
+  "fila": "V",
+  "numero": 6,
+  "descripcion": "Asiento estándar",
+  "tipo": "estándar",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757747c"
+  },
+  "id": 117,
+  "nombre_general": "W1",
+  "fila": "W",
+  "numero": 1,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757747d"
+  },
+  "id": 118,
+  "nombre_general": "W2",
+  "fila": "W",
+  "numero": 2,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757747e"
+  },
+  "id": 119,
+  "nombre_general": "W3",
+  "fila": "W",
+  "numero": 3,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a1033757747f"
+  },
+  "id": 120,
+  "nombre_general": "W4",
+  "fila": "W",
+  "numero": 4,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577480"
+  },
+  "id": 121,
+  "nombre_general": "W5",
+  "fila": "W",
+  "numero": 5,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577481"
+  },
+  "id": 122,
+  "nombre_general": "W6",
+  "fila": "W",
+  "numero": 6,
+  "descripcion": "Asiento reclinable",
+  "tipo": "reclinable",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577482"
+  },
+  "id": 123,
+  "nombre_general": "X1",
+  "fila": "X",
+  "numero": 1,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577483"
+  },
+  "id": 124,
+  "nombre_general": "X2",
+  "fila": "X",
+  "numero": 2,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+},
+{
+  "_id": {
+    "$oid": "66a4f351bdf2a10337577484"
+  },
+  "id": 125,
+  "nombre_general": "X3",
+  "fila": "X",
+  "numero": 3,
+  "descripcion": "Asiento VIP",
+  "tipo": "VIP",
+  "estado": "disponible"
+}]
