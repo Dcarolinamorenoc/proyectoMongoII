@@ -63,25 +63,28 @@ npm run dev
    
    user: "CarolinaM"
    pwd: "1087654321"
-   
+
+   ```js
    mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    Usuario Administrador 5:
    
    user: "JanethCB"
    pwd: "1098765437"
-   
+
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    user: "NikollMan"
    pwd: "1095828793"
    
+   ```js
    mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
    
    
    **listarPeliculas():** Lista todas las películas disponibles. 
@@ -229,7 +232,9 @@ npm run dev
    user: "CarolinaM"
    pwd: "1087654321"
    
+   ```js
    mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
@@ -238,14 +243,17 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    user: "NikollMan"
    pwd: "1095828793"
-   
+
+   ```js
    mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    
    
@@ -408,8 +416,10 @@ npm run dev
    user: "CarolinaM"
    pwd: "1087654321"
    
+   ```js
    mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    Usuario Administrador 5:
@@ -417,15 +427,19 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    user: "NikollMan"
    pwd: "1095828793"
    
+   ```js
    mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    
    
    **comprarBoletos(datosBoleto):** Realiza la compra de boletos para una película.
@@ -605,8 +619,10 @@ npm run dev
    user: "CarolinaM"
    pwd: "1087654321"
    
+   ```js
    mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    Usuario Administrador 5:
@@ -614,14 +630,18 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    user: "NikollMan"
    pwd: "1095828793"
    
+   ```js
    mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    
    
@@ -848,8 +868,10 @@ npm run dev
    user: "CarolinaM"
    pwd: "1087654321"
    
+   ```js
    mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    Usuario Administrador 5:
@@ -857,14 +879,18 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    user: "NikollMan"
    pwd: "1095828793"
    
+   ```js
    mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    
    
@@ -983,7 +1009,9 @@ npm run dev
    user: "CarolinaM"
    pwd: "1087654321"
    
+   ```js
    mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
@@ -992,14 +1020,18 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    user: "NikollMan"
    pwd: "1095828793"
    
+   ```js
    mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    
    
@@ -1132,8 +1164,10 @@ npm run dev
    user: "CarolinaM"
    pwd: "1087654321"
    
+   ```js
    mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    Usuario Administrador 5:
@@ -1141,14 +1175,18 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    user: "NikollMan"
    pwd: "1095828793"
    
+   ```js
    mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    
    
@@ -1227,7 +1265,9 @@ npm run dev
    user: "CarolinaM"
    pwd: "1087654321"
    
+   ```js
    mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
@@ -1236,14 +1276,18 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    user: "NikollMan"
    pwd: "1095828793"
    
+   ```js
    mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    
    
@@ -1385,8 +1429,10 @@ npm run dev
    user: "CarolinaM"
    pwd: "1087654321"
    
+   ```js
    mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    Usuario Administrador 5:
@@ -1394,15 +1440,19 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    user: "NikollMan"
    pwd: "1095828793"
    
+   ```js
    mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    
    
    **crearUsuario(datosUsuarioEstandar):** Crea un nuevo usuario en el sistema.
@@ -1477,8 +1527,10 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    
@@ -1564,8 +1616,10 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    
@@ -1663,8 +1717,10 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    
@@ -1760,8 +1816,10 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    
@@ -2021,8 +2079,10 @@ npm run dev
    user: "CarolinaM"
    pwd: "1087654321"
    
+   ```js
    mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    Usuario Administrador 5:
@@ -2030,14 +2090,18 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
-   
+   ```
+
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    user: "NikollMan"
    pwd: "1095828793"
    
+   ```js
    mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    
    
@@ -2122,7 +2186,9 @@ npm run dev
    user: "CarolinaM"
    pwd: "1087654321"
    
+   ```js
    mongodb://CarolinaM:1087654321@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
@@ -2131,14 +2197,18 @@ npm run dev
    user: "JanethCB"
    pwd: "1098765437"
    
+   ```js
    mongodb://JanethCB:1098765437@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    user: "NikollMan"
    pwd: "1095828793"
    
+   ```js
    mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+   ```
    
    
    
