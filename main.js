@@ -171,20 +171,17 @@ let objUsuario = new Usuario();
 // Crear un nuevo usuario
 
 const datosUsuarioEstandar = {
-    id: 28,
-    nombre_completo: "Yesli Vannessa Martinez",
-    identificacion: "109893432",
-    nickname: "vane",
-    celular: "3131422305",
-    email: "yesli.marti@email.com",
-    telefono: "6019834523",
-    rol: "Estandar"
+    id: 29,
+    nombre_completo: "Heidy Babilonia",
+    identificacion: "109634423",
+    nickname: "heidy",
+    celular: "3131444323",
+    email: "heidy.babi@email.com",
+    telefono: "6349454512",
+    rol: "VIP"
 };
 
-const usuario = new Usuario();
-const resultado = await usuario.crearUsuario(datosUsuarioEstandar);
-console.log(resultado);
-
+console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
 
 
 // Si el Usuario nuevo es registrado con un rol VIP es necesario crear su tarjeta Vip
