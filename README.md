@@ -1637,12 +1637,11 @@ npm run dev
    ```js
    let objUsuario = new Usuario();
    
-   const datosConsulta = {
-       identificacion: "1087654321"
-   
-   };
-   
-   console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
+   console.log(await objUsuario.consultarUsuarioDetallado({
+       admin_nickname: 'soni',
+       admin_identificacion: '109634453',
+       id: 2
+   }));
    
    objUsuario.destructor();
    ```
@@ -1674,10 +1673,11 @@ npm run dev
    ```js
    let objUsuario = new Usuario();
    
-   const datosConsulta = {
+   console.log(await objUsuario.consultarUsuarioDetallado({
+       admin_nickname: 'soni',
+       admin_identificacion: '109634453',
        id: 7
-   
-   };
+   }));
    
    console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
    
@@ -1835,8 +1835,11 @@ npm run dev
    ```js
    let objUsuario = new Usuario();
    
-   console.log(await objUsuario.consultarUsuarios({ rol: 'VIP' }));
-   
+   console.log(await objUsuario.consultarUsuarios({ 
+       nickname: 'Cata', 
+       identificacion: '109783432', 
+       rol: 'VIP' 
+   }));
    
    objUsuario.destructor();
    ```
@@ -1896,8 +1899,11 @@ npm run dev
    ```js
    let objUsuario = new Usuario();
    
-   console.log(await objUsuario.consultarUsuarios({ rol: 'Estandar' }));
-   
+   console.log(await objUsuario.consultarUsuarios({ 
+       nickname: 'Cata', 
+       identificacion: '109783432', 
+       rol: 'Estandar' 
+   }));
    
    objUsuario.destructor();
    ```
@@ -1981,8 +1987,11 @@ npm run dev
    ```js
    let objUsuario = new Usuario();
    
-   console.log(await objUsuario.consultarUsuarios({ rol: 'Administrador' }));
-   
+   console.log(await objUsuario.consultarUsuarios({ 
+       nickname: 'Cata', 
+       identificacion: '109783432', 
+       rol: 'Administrador' 
+   }));
    
    objUsuario.destructor();
    ```
@@ -2042,8 +2051,11 @@ npm run dev
    ```js
    let objUsuario = new Usuario();
    
-   console.log(await objUsuario.consultarUsuarios({ rol: 'Cine' }));
-   
+   console.log(await objUsuario.consultarUsuarios({ 
+       nickname: 'Cata', 
+       identificacion: '109783432', 
+       rol: 'Cine' 
+   }));
    
    objUsuario.destructor();
    ```
