@@ -171,24 +171,23 @@ import { Usuario } from './js/modules/usuario.js';
 // Crear un nuevo usuario
 
 // const datosUsuarioEstandar = {
-//     id: 20,
-//     nombre_completo: "Miguel Angel Castro",
-//     identificacion: "109785312",
-//     nickname: "MigueCastro",
-//     celular: "3131464905",
-//     email: "miguel.angel@email.com",
-//     telefono: "6019876543",
+//     id: 39,
+//     nombre_completo: "Lorenza Perez Almeida",
+//     identificacion: "1029234756",
+//     nickname: "lore",
+//     celular: "3334222333",
+//     email: "lorenza.lore@email.com",
+//     telefono: "6986389224",
 //     rol: "VIP"
 // };
 
 // console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
 
 
-
 // Si el Usuario nuevo es registrado con un rol VIP es necesario crear su tarjeta Vip
 
 // const datosTarjetaVip = {
-//     identificacion: "109785312"
+//     identificacion: "1029234756"
 // };
 
 // console.log(await objUsuario.crearTarjetaVIP(datosTarjetaVip));
@@ -198,12 +197,11 @@ import { Usuario } from './js/modules/usuario.js';
 
 // Consultar información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
 
-// const datosConsulta = {
-//     identificacion: "1087654321"
-
-// };
-
-// console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
+// console.log(await objUsuario.consultarUsuarioDetallado({
+//     admin_nickname: 'soni',
+//     admin_identificacion: '109634453',
+//     id: 2
+// }));
 
 // ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
 
@@ -211,7 +209,7 @@ import { Usuario } from './js/modules/usuario.js';
 // Actualización del rol de un usuario 
 
 // const datosActualizacion1 = {
-//     id: 20,
+//     id: 5,
 //     nuevoRol: 'Estandar'
 // };
 // console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
@@ -221,8 +219,11 @@ import { Usuario } from './js/modules/usuario.js';
 
 // Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol
 
-// console.log(await objUsuario.consultarUsuarios({ rol: 'VIP' }));
-
+// console.log(await objUsuario.consultarUsuarios({ 
+//     nickname: 'Cata', 
+//     identificacion: '109783432', 
+//     rol: 'VIP' 
+// }));
 
 // objUsuario.destructor();
 
