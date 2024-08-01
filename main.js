@@ -197,12 +197,11 @@ import { Usuario } from './js/modules/usuario.js';
 
 // Consultar información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
 
-// const datosConsulta = {
-//     identificacion: "1087654321"
-
-// };
-
-// console.log(await objUsuario.consultarUsuarioDetallado(datosConsulta));
+// console.log(await objUsuario.consultarUsuarioDetallado({
+//     admin_nickname: 'soni',
+//     admin_identificacion: '109634453',
+//     id: 2
+// }));
 
 // ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
 
@@ -220,8 +219,11 @@ import { Usuario } from './js/modules/usuario.js';
 
 // Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol
 
-// console.log(await objUsuario.consultarUsuarios({ rol: 'VIP' }));
-
+// console.log(await objUsuario.consultarUsuarios({ 
+//     nickname: 'Cata', 
+//     identificacion: '109783432', 
+//     rol: 'VIP' 
+// }));
 
 // objUsuario.destructor();
 

@@ -135,6 +135,7 @@ export class Usuario extends connect {
 
 
     // Si el Usuario nuevo es registrado con un rol VIP es necesario crear su tarjeta Vip
+
     async crearTarjetaVIP(datosTarjetaVip) {
         try {
             await this.conexion.connect();
@@ -236,86 +237,90 @@ export class Usuario extends connect {
 
     async consultarUsuarioDetallado(datosConsulta) {
         try {
-          await this.conexion.connect();
-      
-          let filtro = {};
-          if (datosConsulta.id) {
-            filtro.id = datosConsulta.id
-
-          } else if (datosConsulta.identificacion) {
-            filtro.identificacion = datosConsulta.identificacion;
-
-          } else if (datosConsulta.nickname) {
-            filtro.nickname = datosConsulta.nickname;
-
-          } else if (datosConsulta.nombre_completo) {
-            filtro.nombre_completo = datosConsulta.nombre_completo;
-
-          } else {
-            throw new Error('Se requiere id, identificacion, nickname o nombre_completo para consultar el usuario.');
-          }
-      
-          const usuario = await this.collectionUsuario.findOne(filtro);
-          if (!usuario) {
-            throw new Error('Usuario no encontrado en la base de datos.');
-          }
-      
-          let tarjetaVIP = null;
-          let mensajeTarjetaVIP = '';
-      
-          switch(usuario.rol) {
-            case 'VIP':
-              tarjetaVIP = await this.collectionTarjetaVip.findOne({ id_usuario: usuario.id });
-              if (tarjetaVIP) {
-                if (tarjetaVIP.estado === 'activa') {
-                  mensajeTarjetaVIP = 'Felicidades, eres un usuario VIP con tarjeta activa. Sigue disfrutando de nuestros descuentos.';
-
-                } else if (tarjetaVIP.estado === 'expirada') {
-                  mensajeTarjetaVIP = 'Querido usuario, lamentamos que tengas tu tarjeta expirada. ¿Qué esperas para volver a activarla?';
-
-                } else {
-                  mensajeTarjetaVIP = `Tu tarjeta VIP está en estado: ${tarjetaVIP.estado}. Por favor, contacta con soporte para más información.`;
-
-                }
-              } else {
-                mensajeTarjetaVIP = 'Eres usuario VIP pero no tienes una tarjeta VIP asignada. Por favor, contacta con soporte.';
-
-              }
-              break;
-            case 'administrador':
-              mensajeTarjetaVIP = 'Eres un administrador sin acceso a una tarjeta VIP.';
-
-              break;
-            default: 
-              mensajeTarjetaVIP = 'Eres usuario estándar. No tienes una tarjeta VIP. Si deseas una, puedes adquirirla.';
-
-          }
-      
-          const usuarioDetallado = {
-            id: usuario.id,
-            nombre_completo: usuario.nombre_completo,
-            identificacion: usuario.identificacion,
-            nickname: usuario.nickname,
-            celular: usuario.celular,
-            email: usuario.email,
-            telefono: usuario.telefono,
-            rol: usuario.rol,
-            tarjetaVIP: tarjetaVIP ? {
-              numero: tarjetaVIP.numero,
-              porcentaje_descuento: tarjetaVIP.porcentaje_descuento,
-              fecha_expiracion: tarjetaVIP.fecha_expiracion,
-              estado: tarjetaVIP.estado
-            } : null,
-            mensajeTarjetaVIP: mensajeTarjetaVIP
-          };
-      
-          await this.conexion.close();
-          return usuarioDetallado;
+            await this.conexion.connect();
+    
+            
+            const usuarioAdmin = await this.collectionUsuario.findOne({
+                nickname: datosConsulta.admin_nickname,
+                identificacion: datosConsulta.admin_identificacion,
+                rol: 'Administrador'
+            });
+    
+            if (!usuarioAdmin) {
+                return {
+                    error: 'Acceso denegado. Solo los administradores pueden realizar esta consulta.'
+                };
+            }
+    
+            let filtro = {};
+            if (datosConsulta.id) {
+                filtro.id = datosConsulta.id;
+            } else if (datosConsulta.identificacion) {
+                filtro.identificacion = datosConsulta.identificacion;
+            } else if (datosConsulta.nickname) {
+                filtro.nickname = datosConsulta.nickname;
+            } else if (datosConsulta.nombre_completo) {
+                filtro.nombre_completo = datosConsulta.nombre_completo;
+            } else {
+                throw new Error('Se requiere id, identificacion, nickname o nombre_completo para consultar el usuario.');
+            }
+    
+            const usuario = await this.collectionUsuario.findOne(filtro);
+            if (!usuario) {
+                throw new Error('Usuario no encontrado en la base de datos.');
+            }
+    
+            let tarjetaVIP = null;
+            let mensajeTarjetaVIP = '';
+    
+            switch(usuario.rol) {
+                case 'VIP':
+                    tarjetaVIP = await this.collectionTarjetaVip.findOne({ id_usuario: usuario.id });
+                    if (tarjetaVIP) {
+                        if (tarjetaVIP.estado === 'activa') {
+                            mensajeTarjetaVIP = 'Felicidades, eres un usuario VIP con tarjeta activa. Sigue disfrutando de nuestros descuentos.';
+                        } else if (tarjetaVIP.estado === 'expirada') {
+                            mensajeTarjetaVIP = 'Querido usuario, lamentamos que tengas tu tarjeta expirada. ¿Qué esperas para volver a activarla?';
+                        } else {
+                            mensajeTarjetaVIP = `Tu tarjeta VIP está en estado: ${tarjetaVIP.estado}. Por favor, contacta con soporte para más información.`;
+                        }
+                    } else {
+                        mensajeTarjetaVIP = 'Eres usuario VIP pero no tienes una tarjeta VIP asignada. Por favor, contacta con soporte.';
+                    }
+                    break;
+                case 'administrador':
+                    mensajeTarjetaVIP = 'Eres un administrador sin acceso a una tarjeta VIP.';
+                    break;
+                default: 
+                    mensajeTarjetaVIP = 'Eres usuario estándar. No tienes una tarjeta VIP. Si deseas una, puedes adquirirla.';
+            }
+    
+            const usuarioDetallado = {
+                id: usuario.id,
+                nombre_completo: usuario.nombre_completo,
+                identificacion: usuario.identificacion,
+                nickname: usuario.nickname,
+                celular: usuario.celular,
+                email: usuario.email,
+                telefono: usuario.telefono,
+                rol: usuario.rol,
+                tarjetaVIP: tarjetaVIP ? {
+                    numero: tarjetaVIP.numero,
+                    porcentaje_descuento: tarjetaVIP.porcentaje_descuento,
+                    fecha_expiracion: tarjetaVIP.fecha_expiracion,
+                    estado: tarjetaVIP.estado
+                } : null,
+                mensajeTarjetaVIP: mensajeTarjetaVIP
+            };
+    
+            await this.conexion.close();
+            return usuarioDetallado;
         } catch (error) {
-          await this.conexion.close();
-          return { error: error.message };
+            await this.conexion.close();
+            return { error: error.message };
         }
     }
+    
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -439,6 +444,20 @@ export class Usuario extends connect {
     
         try {
             await this.conexion.connect();
+    
+            // Primero, verificamos si el usuario que hace la consulta es un Administrador
+            const usuarioAdmin = await this.collectionUsuario.findOne({
+                nickname: opciones.nickname,
+                identificacion: opciones.identificacion,
+                rol: 'Administrador'
+            });
+    
+            if (!usuarioAdmin) {
+                return {
+                    usuarios: [],
+                    mensaje: 'Acceso denegado. Solo los administradores pueden realizar esta consulta.'
+                };
+            }
     
             let filtro = {};
             if (opciones.rol) {
