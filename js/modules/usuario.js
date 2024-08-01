@@ -55,32 +55,32 @@ export class Usuario extends connect {
             const db = client.db('cineCampus'); 
             const usuarios = db.collection('usuario');
     
-            
+            // Verificar campos únicos
             const camposUnicos = ['id', 'nickname', 'email', 'celular', 'identificacion'];
             for (let campo of camposUnicos) {
                 const usuarioExistente = await usuarios.findOne({ [campo]: datosUsuario[campo] });
                 if (usuarioExistente) {
-                    throw new Error(`Ya existe un usuario con el mismo ${campo}.`);
+                    return { error: `Error al crear el usuario: Ya existe un usuario con el mismo ${campo}.` };
                 }
             }
     
-            
+            // Verificar nombre completo único
             const usuarioNombreExistente = await usuarios.findOne({
                 nombre_completo: { $regex: new RegExp('^' + datosUsuario.nombre_completo + '$', 'i') }
             });
             if (usuarioNombreExistente) {
-                throw new Error('Ya existe un usuario con el mismo nombre completo.');
+                return { error: 'Error al crear el usuario: Ya existe un usuario con el mismo nombre completo.' };
             }
     
-            
+            // Verificar rol válido
             if (!['VIP', 'Estandar', 'Administrador'].includes(datosUsuario.rol)) {
-                throw new Error('Rol de usuario no válido');
+                return { error: 'Error al crear el usuario: Rol de usuario no válido' };
             }
     
-            
+            // Insertar usuario en la colección
             await usuarios.insertOne(datosUsuario);
     
-            
+            // Crear usuario en la base de datos con el rol correspondiente
             if (datosUsuario.rol === 'Administrador') {
                 await db.command({
                     createUser: datosUsuario.nickname,
@@ -98,15 +98,12 @@ export class Usuario extends connect {
                 });
             }
     
-           
+            // Preparar respuesta
             const respuesta = { ...datosUsuario };
             delete respuesta._id;
     
-            console.log(`Usuario ${datosUsuario.rol} registrado correctamente:`, respuesta);
-    
             return { mensaje: 'Usuario creado con éxito', usuario: respuesta };
         } catch (error) {
-            console.error('Error al crear el usuario:', error);
             return { error: `Error al crear el usuario: ${error.message}` };
         } finally {
             if (client) {
