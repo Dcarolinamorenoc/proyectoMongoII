@@ -49,41 +49,74 @@ export class Usuario extends connect {
     // Crear un nuevo usuario
 
     async crearUsuario(datosUsuario) {
+        let client;
         try {
-            await this.conexion.connect();
+            client = await this.conexion.connect();
+            const db = client.db('cineCampus'); 
+            const usuarios = db.collection('usuario');
     
-            
+            // Verificar campos únicos
             const camposUnicos = ['id', 'nickname', 'email', 'celular', 'identificacion'];
             for (let campo of camposUnicos) {
-                const usuarioExistente = await this.collectionUsuario.findOne({ [campo]: datosUsuario[campo] });
+                const usuarioExistente = await usuarios.findOne({ [campo]: datosUsuario[campo] });
                 if (usuarioExistente) {
                     throw new Error(`Ya existe un usuario con el mismo ${campo}.`);
                 }
             }
     
             
-            const usuarioNombreExistente = await this.collectionUsuario.findOne({
+            const usuarioNombreExistente = await usuarios.findOne({
                 nombre_completo: { $regex: new RegExp('^' + datosUsuario.nombre_completo + '$', 'i') }
             });
             if (usuarioNombreExistente) {
                 throw new Error('Ya existe un usuario con el mismo nombre completo.');
             }
     
+           
+            if (!['VIP', 'Estandar', 'Administrador'].includes(datosUsuario.rol)) {
+                throw new Error('Rol de usuario no válido');
+            }
+    
             
-            await this.collectionUsuario.insertOne(datosUsuario);
+            await usuarios.insertOne(datosUsuario);
+    
+            
+            let rolDB;
+            switch (datosUsuario.rol) {
+                case 'VIP':
+                    rolDB = 'userVip';
+                    break;
+                case 'Estandar':
+                    rolDB = 'userEstandar';
+                    break;
+                case 'Administrador':
+                    rolDB = 'Administrador';
+                    break;
+            }
+    
+           
+            await db.command({
+                createUser: datosUsuario.nickname,
+                pwd: datosUsuario.identificacion + '123',
+                roles: [{ role: rolDB, db: 'cineCampus' }]
+            });
     
             
             const respuesta = { ...datosUsuario };
             delete respuesta._id;
     
-            await this.conexion.close();
+            console.log(`Usuario ${datosUsuario.rol} registrado correctamente:`, respuesta);
+    
             return { mensaje: 'Usuario creado con éxito', usuario: respuesta };
         } catch (error) {
-            await this.conexion.close();
+            console.error('Error al crear el usuario:', error);
             return { error: `Error al crear el usuario: ${error.message}` };
+        } finally {
+            if (client) {
+                await client.close();
+            }
         }
     }
-
 
 
 //--------------------------------------------------------------------------------------------------------

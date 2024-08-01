@@ -164,24 +164,26 @@ import { Usuario } from './js/modules/usuario.js';
 
 //--------------------------------------------------------------------------------------------------------
 
-// let objUsuario = new Usuario();
+let objUsuario = new Usuario();
 
 // Caso de uso 5: Roles Definidos (Diana Carolina Moreno Cárdenas)
 
 // Crear un nuevo usuario
 
-// const datosUsuarioEstandar = {
-//     id: 20,
-//     nombre_completo: "Miguel Angel Castro",
-//     identificacion: "109785312",
-//     nickname: "MigueCastro",
-//     celular: "3131464905",
-//     email: "miguel.angel@email.com",
-//     telefono: "6019876543",
-//     rol: "VIP"
-// };
+const datosUsuarioEstandar = {
+    id: 20,
+    nombre_completo: "Miguel Angel Castro",
+    identificacion: "109785312",
+    nickname: "MigueCastro",
+    celular: "3131464905",
+    email: "miguel.angel@email.com",
+    telefono: "6019876543",
+    rol: "VIP"
+};
 
-// console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
+const usuario = new Usuario();
+const resultado = await usuario.crearUsuario(datosUsuarioEstandar);
+console.log(resultado);
 
 
 
@@ -224,7 +226,7 @@ import { Usuario } from './js/modules/usuario.js';
 // console.log(await objUsuario.consultarUsuarios({ rol: 'VIP' }));
 
 
-// objUsuario.destructor();
+objUsuario.destructor();
 
 
 //--------------------------------------------------------------------------------------------------------
