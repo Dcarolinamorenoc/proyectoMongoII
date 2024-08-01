@@ -55,7 +55,7 @@ export class Usuario extends connect {
             const db = client.db('cineCampus'); 
             const usuarios = db.collection('usuario');
     
-            // Verificar campos únicos
+            
             const camposUnicos = ['id', 'nickname', 'email', 'celular', 'identificacion'];
             for (let campo of camposUnicos) {
                 const usuarioExistente = await usuarios.findOne({ [campo]: datosUsuario[campo] });
@@ -72,7 +72,7 @@ export class Usuario extends connect {
                 throw new Error('Ya existe un usuario con el mismo nombre completo.');
             }
     
-           
+            
             if (!['VIP', 'Estandar', 'Administrador'].includes(datosUsuario.rol)) {
                 throw new Error('Rol de usuario no válido');
             }
@@ -81,27 +81,24 @@ export class Usuario extends connect {
             await usuarios.insertOne(datosUsuario);
     
             
-            let rolDB;
-            switch (datosUsuario.rol) {
-                case 'VIP':
-                    rolDB = 'userVip';
-                    break;
-                case 'Estandar':
-                    rolDB = 'userEstandar';
-                    break;
-                case 'Administrador':
-                    rolDB = 'Administrador';
-                    break;
+            if (datosUsuario.rol === 'Administrador') {
+                await db.command({
+                    createUser: datosUsuario.nickname,
+                    pwd: datosUsuario.identificacion,
+                    roles: [
+                        { role: "dbOwner", db: "cineCampus" }
+                    ]
+                });
+            } else {
+                let rolDB = datosUsuario.rol === 'VIP' ? 'userVip' : 'userEstandar';
+                await db.command({
+                    createUser: datosUsuario.nickname,
+                    pwd: datosUsuario.identificacion + '123',
+                    roles: [{ role: rolDB, db: 'cineCampus' }]
+                });
             }
     
            
-            await db.command({
-                createUser: datosUsuario.nickname,
-                pwd: datosUsuario.identificacion + '123',
-                roles: [{ role: rolDB, db: 'cineCampus' }]
-            });
-    
-            
             const respuesta = { ...datosUsuario };
             delete respuesta._id;
     
@@ -117,7 +114,6 @@ export class Usuario extends connect {
             }
         }
     }
-
 
 //--------------------------------------------------------------------------------------------------------
 

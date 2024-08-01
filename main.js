@@ -171,14 +171,14 @@ let objUsuario = new Usuario();
 // Crear un nuevo usuario
 
 const datosUsuarioEstandar = {
-    id: 20,
-    nombre_completo: "Miguel Angel Castro",
-    identificacion: "109785312",
-    nickname: "MigueCastro",
-    celular: "3131464905",
-    email: "miguel.angel@email.com",
-    telefono: "6019876543",
-    rol: "VIP"
+    id: 22,
+    nombre_completo: "Catalina del Carmen",
+    identificacion: "109783432",
+    nickname: "Cata",
+    celular: "3131423905",
+    email: "cata.carmen@email.com",
+    telefono: "6019834543",
+    rol: "Administrador"
 };
 
 const usuario = new Usuario();
