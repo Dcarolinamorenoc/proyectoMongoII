@@ -164,21 +164,21 @@ import { Usuario } from './js/modules/usuario.js';
 
 //--------------------------------------------------------------------------------------------------------
 
-// let objUsuario = new Usuario();
+let objUsuario = new Usuario();
 
 // Caso de uso 5: Roles Definidos (Diana Carolina Moreno Cárdenas)
 
 // Crear un nuevo usuario
 
 // const datosUsuarioEstandar = {
-//     id: 300,
-//     nombre_completo: "Juan Guillermo Diaz",
-//     identificacion: "1236654863",
-//     nickname: "paul",
-//     celular: "3134655333",
-//     email: "pau.paul@email.com",
-//     telefono: "6986347892",
-//     rol: "Estandar"
+//     id: 39,
+//     nombre_completo: "Lorenza Perez Almeida",
+//     identificacion: "1029234756",
+//     nickname: "lore",
+//     celular: "3334222333",
+//     email: "lorenza.lore@email.com",
+//     telefono: "6986389224",
+//     rol: "VIP"
 // };
 
 // console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
@@ -187,7 +187,7 @@ import { Usuario } from './js/modules/usuario.js';
 // Si el Usuario nuevo es registrado con un rol VIP es necesario crear su tarjeta Vip
 
 // const datosTarjetaVip = {
-//     identificacion: "109785312"
+//     identificacion: "1029234756"
 // };
 
 // console.log(await objUsuario.crearTarjetaVIP(datosTarjetaVip));
@@ -225,7 +225,7 @@ import { Usuario } from './js/modules/usuario.js';
 //     rol: 'VIP' 
 // }));
 
-// objUsuario.destructor();
+objUsuario.destructor();
 
 
 //--------------------------------------------------------------------------------------------------------
