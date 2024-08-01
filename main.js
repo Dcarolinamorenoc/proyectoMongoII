@@ -164,24 +164,24 @@ import { Usuario } from './js/modules/usuario.js';
 
 //--------------------------------------------------------------------------------------------------------
 
-let objUsuario = new Usuario();
+// let objUsuario = new Usuario();
 
 // Caso de uso 5: Roles Definidos (Diana Carolina Moreno Cárdenas)
 
 // Crear un nuevo usuario
 
-const datosUsuarioEstandar = {
-    id: 29,
-    nombre_completo: "Heidy Babilonia",
-    identificacion: "109634423",
-    nickname: "heidy",
-    celular: "3131444323",
-    email: "heidy.babi@email.com",
-    telefono: "6349454512",
-    rol: "VIP"
-};
+// const datosUsuarioEstandar = {
+//     id: 300,
+//     nombre_completo: "Juan Guillermo Diaz",
+//     identificacion: "1236654863",
+//     nickname: "paul",
+//     celular: "3134655333",
+//     email: "pau.paul@email.com",
+//     telefono: "6986347892",
+//     rol: "Estandar"
+// };
 
-console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
+// console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
 
 
 // Si el Usuario nuevo es registrado con un rol VIP es necesario crear su tarjeta Vip
@@ -210,7 +210,7 @@ console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
 // Actualización del rol de un usuario 
 
 // const datosActualizacion1 = {
-//     id: 20,
+//     id: 5,
 //     nuevoRol: 'Estandar'
 // };
 // console.log(await objUsuario.actualizarRolUsuario(datosActualizacion1));
@@ -223,7 +223,7 @@ console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
 // console.log(await objUsuario.consultarUsuarios({ rol: 'VIP' }));
 
 
-objUsuario.destructor();
+// objUsuario.destructor();
 
 
 //--------------------------------------------------------------------------------------------------------
