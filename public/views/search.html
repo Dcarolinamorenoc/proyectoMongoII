@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App Home</title>
+    <link rel="stylesheet" href="../css/home.css">
+    <script src="../javascript/home.js" defer></script>
+    <script src="../javascript/movies.js" defer></script>
+    <script src="../javascript/buscador.js" defer></script>
+    <script src="../javascript/search.js" defer></script>
+</head>
+<body>
+    <div id="main-content">
+        <header>
+            <div class="inicio">
+                <div class="user-info">
+                    <img src="" alt="User Avatar" class="avatar">
+                    <span>Hi, User!</span>
+                </div>
+                <div class="user-inf">
+                    <span>¡Veamos una película juntos!</span>
+                </div>
+            </div>
+            <div class="notification">
+                <img src="../storage/img/notifi.png" alt="Notification">
+            </div>
+        </header>
+
+        <section id="search-section" class="search">
+        <div class="search_bus">
+            <div class="search_wrapper">
+                <img src="../storage/img/lupa.svg" alt="Search" class="search_icon">
+                <input class="search_input" type="text" placeholder="Search movie, cinema, genre...">
+            </div>
+        </div>
+        </section>
+        
+
+        <section>
+            <div class="search-title">
+                <h1>Resultado de Búsqueda</h1>
+            </div>
+            <div class="search-cards">
+                <div class="search-card-container">
+                    <img src="https://lumiere-a.akamaihd.net/v1/images/encanto_ka_las_pay1_92ad7410.jpeg" alt="Puss in Boots">
+                    <div class="search-card-title">Puss In Boots</div>
+                    <div class="search-card-subtitle">Adventure</div>
+                </div>
+                <div class="search-card-container">
+                    <img src="https://lumiere-a.akamaihd.net/v1/images/encanto_ka_las_pay1_92ad7410.jpeg" alt="Puss in Boots">
+                    <div class="search-card-title">Puss In Boots</div>
+                    <div class="search-card-subtitle">Adventure</div>
+                </div>
+                <div class="search-card-container">
+                    <img src="https://lumiere-a.akamaihd.net/v1/images/encanto_ka_las_pay1_92ad7410.jpeg" alt="Puss in Boots">
+                    <div class="search-card-title">Puss In Boots</div>
+                    <div class="search-card-subtitle">Adventure</div>
+                </div>
+                <div class="search-card-container">
+                    <img src="https://lumiere-a.akamaihd.net/v1/images/encanto_ka_las_pay1_92ad7410.jpeg" alt="Puss in Boots">
+                    <div class="search-card-title">Puss In Boots</div>
+                    <div class="search-card-subtitle">Adventure</div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="bottom-nav">
+            <a href="#" class="active">
+                <img src="../storage/img/home.png" alt="Home">
+                <span>Home</span>
+            </a>
+            <a href="#search-section">
+                <img src="../storage/img/browse.png" alt="Browse">
+                <span>Browse</span>
+            </a>
+            <a href="#">
+                <img src="../storage/img/ticket.png" alt="Tickets">
+                <span>Tickets</span>
+            </a>
+            <a href="#">
+                <img src="../storage/img/user.png" alt="Profile">
+                <span>Profile</span>
+            </a>
+        </nav>
+    </div>
+
+    <div id="movie-details" class="movie-details-container" style="display: none;">
+        
+    </div>
+</body>
+</html>

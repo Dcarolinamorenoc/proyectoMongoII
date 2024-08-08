@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Cine Campus</title>
+    <link rel="stylesheet" href="../css/adminlogin.css">
+</head>
+<body>
+    <div class="container">
+        <div class="image-section">
+            <img src="../storage/img/adminregistrar.png" alt="Cine icon">
+        </div>
+        <div class="login-section">
+            <h1>Ingresa como Administrador para registrar un usuario</h1>
+            <form>
+                <div class="input-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="button" onclick="window.location.href='./registrar.html'">Login</button>
+            </form>
+            <p>¿No eres Administrador? <a href="../index.html">Register</a></p>
+        </div>
+    </div>
+</body>
+</html>

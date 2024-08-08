@@ -1,8 +1,13 @@
-import { pelicula } from './js/modules/pelicula.js';
-import { boleto } from './js/modules/boleto.js';
-import { reserva } from './js/modules/reserva.js';
-import { TarjetaVip } from './js/modules/tarjetaVip.js';
-import { Usuario } from './js/modules/usuario.js';
+import { pelicula } from'./module/pelicula.js';
+
+import  { boleto}  from './module/boleto.js';
+
+import  { reserva } from './module/reserva.js';
+
+import  { TarjetaVip }  from './module/tarjetaVip.js';
+
+import  { Usuario } from './module/usuario.js';
+
 
 
 
@@ -38,6 +43,12 @@ import { Usuario } from './js/modules/usuario.js';
 
 // ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
 
+// Peliculas por estado:
+
+// console.log(await objPelicula.obtenerPeliculasPorEstado({ estado: "En cartelera" }));
+
+// ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗⋅✧⋅∗ ──── ∗⋅✧⋅∗ ──── ∗⋅✧⋅∗
+
 // objPelicula.destructor();
 
 
@@ -56,10 +67,10 @@ import { Usuario } from './js/modules/usuario.js';
 //     id_pelicula: 1,
 //     id_horario_proyeccion: 1,
 //     id_usuario: 1,
-//     asientos_comprados: [48,49], 
+//     asientos_comprados: [3,4], 
 //     modo_compra: "virtual",
 //     metodo_pago: "tarjeta de crédito",
-//     id_reserva: 1
+//     id_reserva: null
 // };
 
 // console.log(await objBoleto.comprarBoletos(datosBoleto));
@@ -94,7 +105,7 @@ import { Usuario } from './js/modules/usuario.js';
 //     id_pelicula: 1,
 //     id_horario_proyeccion: 2,
 //     id_usuario: 2,
-//     asientos_reservados: [60, 61],
+//     asientos_reservados: [31, 32],
 // };
 
 // console.log(await objReserva.reservarAsientos(datosReserva));
@@ -104,12 +115,12 @@ import { Usuario } from './js/modules/usuario.js';
 // Cancelar parcialmente una reserva 
 
 // const datosCancelacionParcial = {
-//     id: 7,
-//     id_pelicula: 1,
-//     id_horario_proyeccion: 2,
-//     id_usuario: 2,
-//     asientos_reservados: [60],
-// };
+//         id: 7,
+//         id_pelicula: 1,
+//         id_horario_proyeccion: 2,
+//         id_usuario: 2,
+//         asientos_reservados: [31, 32],
+//     };
 
 // console.log(await objReserva.cancelarReserva(datosCancelacionParcial));
 
@@ -129,9 +140,9 @@ import { Usuario } from './js/modules/usuario.js';
 // const datosBoletoVip = {
 //     id: 20,
 //     id_pelicula: 4,
-//     id_horario_proyeccion: 11,
+//     id_horario_proyeccion: 12,
 //     id_usuario: 4,
-//     asientos_comprados: [107,108], 
+//     asientos_comprados: [276,277], 
 //     modo_compra: "virtual",
 //     metodo_pago: "efectivo",
 //     id_reserva: null
@@ -146,10 +157,10 @@ import { Usuario } from './js/modules/usuario.js';
 
 // const datosBoletoVip = {
 //     id: 20,
-//     id_pelicula: 6,
-//     id_horario_proyeccion: 18,
+//     id_pelicula: 1,
+//     id_horario_proyeccion: 2,
 //     id_usuario: 3,
-//     asientos_comprados: [86,87], 
+//     asientos_comprados: [28,29], 
 //     modo_compra: "virtual",
 //     metodo_pago: "efectivo",
 //     id_reserva: null
@@ -171,14 +182,16 @@ import { Usuario } from './js/modules/usuario.js';
 // Crear un nuevo usuario
 
 // const datosUsuarioEstandar = {
-//     id: 39,
-//     nombre_completo: "Lorenza Perez Almeida",
-//     identificacion: "1029234756",
-//     nickname: "lore",
-//     celular: "3334222333",
-//     email: "lorenza.lore@email.com",
-//     telefono: "6986389224",
-//     rol: "VIP"
+//     id: 61,
+//     nombre_completo: "Marta Susana Gomez",
+//     identificacion: "1097134756",
+//     nickname: "martica",
+//     celular: "3318226783",
+//     email: "martica.go@email.com",
+//     telefono: "6945389210",
+//     rol: "VIP",
+//     imagen_user: "https://i.pinimg.com/736x/f4/84/a0/f484a00c48c7013ee2dc56662697c262.jpg"
+
 // };
 
 // console.log(await objUsuario.crearUsuario(datosUsuarioEstandar));
@@ -187,7 +200,7 @@ import { Usuario } from './js/modules/usuario.js';
 // Si el Usuario nuevo es registrado con un rol VIP es necesario crear su tarjeta Vip
 
 // const datosTarjetaVip = {
-//     identificacion: "1029234756"
+//     identificacion: "1097134756"
 // };
 
 // console.log(await objUsuario.crearTarjetaVIP(datosTarjetaVip));
@@ -198,8 +211,8 @@ import { Usuario } from './js/modules/usuario.js';
 // Consultar información detallada sobre un usuario, incluyendo su rol y estado de tarjeta VIP.
 
 // console.log(await objUsuario.consultarUsuarioDetallado({
-//     admin_nickname: 'soni',
-//     admin_identificacion: '109634453',
+//     admin_nickname: 'FelixCB',
+//     admin_identificacion: '1098672134',
 //     id: 2
 // }));
 
@@ -220,8 +233,8 @@ import { Usuario } from './js/modules/usuario.js';
 // Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol
 
 // console.log(await objUsuario.consultarUsuarios({ 
-//     nickname: 'Cata', 
-//     identificacion: '109783432', 
+//     nickname: 'FelixCB', 
+//     identificacion: '1098672134', 
 //     rol: 'VIP' 
 // }));
 

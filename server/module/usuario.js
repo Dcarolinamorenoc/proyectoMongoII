@@ -1,6 +1,8 @@
-import { connect } from "../../helpers/db/connect.js";
+const connect = require ("../helpers/connect.js")
+const { ObjectId } = require ("mongodb")
 
-export class Usuario extends connect {
+module.exports = class Usuario extends connect {
+
     static instanceUsuario;
     db;
     collectionUsuario;
@@ -11,7 +13,7 @@ export class Usuario extends connect {
             return Usuario.instanceUsuario;
         }
         super();
-        this.db = this.conexion.db(this.getDbName);
+        this.db = this.conexion.db(process.env.MONGO_DB);
         this.collectionUsuario = this.db.collection('usuario');
         this.collectionTarjetaVip = this.db.collection('tarjeta_vip');
         Usuario.instanceUsuario = this;
@@ -346,11 +348,10 @@ export class Usuario extends connect {
             client = await this.conexion.connect();
             const db = client.db('cineCampus');
             const usuarios = db.collection('usuario');
-            const tarjetasVip = db.collection('tarjetaVip');
+            const tarjetasVip = db.collection('tarjeta_vip');
     
             const { id, nuevoRol } = datosActualizacion;
     
-            
             if (nuevoRol !== 'VIP' && nuevoRol !== 'Estandar') {
                 return { error: 'El nuevo rol debe ser VIP o Estandar.' };
             }
@@ -360,7 +361,6 @@ export class Usuario extends connect {
                 return { error: "Error al actualizar el rol: Usuario no encontrado" };
             }
     
-            
             if (nuevoRol === 'Administrador' || usuario.rol === 'Administrador') {
                 return { error: 'No se puede cambiar a o desde el rol de Administrador.' };
             }
@@ -381,40 +381,27 @@ export class Usuario extends connect {
             );
     
             if (nuevoRol === "VIP") {
-                const tarjetaVIP = await tarjetasVip.findOne({ id_usuario: id });
-                
-                if (tarjetaVIP) {
-                    await tarjetasVip.updateOne(
-                        { id_usuario: id },
-                        { $set: { estado: "activa" } }
-                    );
-                    return { mensaje: 'Eres un usuario Vip, Tu tarjeta VIP ha sido reactivada.' };
-                } else {
-                    return { mensaje: 'Ya eres un usuario Vip, Felicidades has obtenido acceso a la tarjeta premium. El siguiente paso es registrar tu tarjeta.' };
+                // Crear una nueva tarjeta VIP si es necesario
+                const tarjetaVIP = await this.collectionTarjetaVip.findOne({ id_usuario: id });
+                if (!tarjetaVIP) {
+                    const nuevaTarjeta = {
+                        id: await this.generarIdTarjeta(),
+                        id_usuario: id,
+                        numero: await this.generarNumeroTarjeta(),
+                        porcentaje_descuento: 15,
+                        fecha_expiracion: this.generarFechaExpiracion(),
+                        estado: 'activa'
+                    };
+                    await this.collectionTarjetaVip.insertOne(nuevaTarjeta);
                 }
-            } else if (nuevoRol === "Estandar") {
-                const tarjetaVIP = await tarjetasVip.findOne({ id_usuario: id });
-                if (tarjetaVIP) {
-                    await tarjetasVip.updateOne(
-                        { id_usuario: id },
-                        { $set: { estado: "cancelada" } }
-                    );
-                    return { mensaje: 'Tu rol ha sido actualizado a Estándar y tu tarjeta VIP ha sido cancelada.' };
-                } else {
-                    return { mensaje: 'Tu rol ha sido actualizado a Estándar.' };
-                }
+            } else {
+                // Manejar el caso si el nuevo rol es 'Estandar' y el usuario tiene una tarjeta VIP
+                await this.collectionTarjetaVip.deleteOne({ id_usuario: id });
             }
     
-            
-            let rolDB = nuevoRol === 'VIP' ? 'userVip' : 'userEstandar';
-            await db.command({
-                updateUser: usuario.nickname,
-                roles: [{ role: rolDB, db: 'cineCampus' }]
-            });
-    
-            return { mensaje: 'Rol actualizado exitosamente.' };
+            return { mensaje: 'Rol del usuario actualizado con éxito' };
         } catch (error) {
-            return { error: `Error al actualizar el rol del usuario: ${error.message}` };
+            return { error: `Error al actualizar el rol: ${error.message}` };
         } finally {
             if (client) {
                 await client.close();
@@ -504,7 +491,12 @@ export class Usuario extends connect {
                     identificacion: usuario.identificacion,
                     nickname: usuario.nickname,
                     email: usuario.email,
-                    rol: usuario.rol
+                    rol: usuario.rol,
+                    imagen: usuario.imagen_user,
+                    telefono: usuario.telefono,
+                    celular: usuario.celular,
+                    imagen_user:usuario.imagen_user,
+                    metodo_pago: usuario.metodo_pago,
                 })),
                 mensaje: mensaje
             };
@@ -516,4 +508,6 @@ export class Usuario extends connect {
             };
         }
     }
+
+    
 }

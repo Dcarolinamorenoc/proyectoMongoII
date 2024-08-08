@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="../css/infoUser.css">
+    
+    <script src="../javascript/userInfo.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="profile">
+            <h2>Perfil</h2>
+            <img id="userImage" src="" alt="Imagen de perfil" class="profile-image">
+            <div class="user-info">
+                <p><strong>Nickname:</strong> <span id="nickname"></span></p>
+                <p><strong>ID:</strong> <span id="userId"></span></p>
+                <p><strong>Rol:</strong> <span id="userRole"></span></p>
+                <p><strong>Nombre Completo:</strong> <span id="fullName"></span></p>
+                <p><strong>Identificación:</strong> <span id="identification"></span></p>
+                <p><strong>Celular:</strong> <span id="cellphone"></span></p>
+                <p><strong>Teléfono:</strong> <span id="phone"></span></p>
+                <p><strong>Email:</strong> <span id="email"></span></p>
+            </div>
+        </div>
+        <div class="payment-methods">
+            <h3>Métodos de pago</h3>
+            <div id="paymentMethodsContainer" class="slider-container"></div>
+        </div>        
+        <div id="vipCardContainer" class="vip-card" style="display: none;">
+            <h3>Tarjeta VIP</h3>
+            <img id="vipCardImage" src="" alt="Tarjeta VIP" class="vip-card-image">
+            <p><strong>Número:</strong> <span id="vipNumber"></span></p>
+            <p><strong>Porcentaje Descuento:</strong> <span id="vipDiscount"></span>%</p>
+            <p><strong>Fecha expiración:</strong> <span id="vipExpiration"></span></p>
+            <p><strong>Estado:</strong> <span id="vipStatus"></span></p>
+        </div>
+    </div>
+    
+    <nav class="bottom-nav">
+        <a href="../views/home.html" class="active">
+            <img src="../storage/img/home.png" alt="Home">
+            <span>Home</span>
+        </a>
+        <a href="#search-section">
+            <img src="../storage/img/browse.png" alt="Browse">
+            <span>Browse</span>
+        </a>
+        <a href="#">
+            <img src="../storage/img/ticket.png" alt="Tickets">
+            <span>Tickets</span>
+        </a>
+        <a href="#">
+            <img src="../storage/img/user.png" alt="Profile">
+            <span>Profile</span>
+        </a>
+    </nav>
+</body>
+</html>
