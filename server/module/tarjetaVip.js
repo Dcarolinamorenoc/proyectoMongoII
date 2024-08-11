@@ -1,6 +1,7 @@
-import { connect } from "../../helpers/db/connect.js";
+import {connect} from "../helpers/connect.js";
 
 export class TarjetaVip extends connect {
+
     static instanceTarjetaVip;
     db;
     collection;
@@ -10,7 +11,7 @@ export class TarjetaVip extends connect {
         return TarjetaVip.instanceTarjetaVip;
       }
       super();
-      this.db = this.conexion.db(this.getDbName);
+      this.db = this.conexion.db(process.env.MONGO_DB);
       this.collection = this.db.collection('boleto');
       TarjetaVip.instanceTarjetaVip = this;
     }

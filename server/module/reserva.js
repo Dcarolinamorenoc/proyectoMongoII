@@ -1,6 +1,7 @@
-import { connect } from "../../helpers/db/connect.js";
+import {connect} from "../helpers/connect.js";
 
 export class reserva extends connect {
+
     static instanceReserva;
     db;
     collection;
@@ -10,7 +11,7 @@ export class reserva extends connect {
         return reserva.instanceReserva;
       }
       super();
-      this.db = this.conexion.db(this.getDbName);
+      this.db = this.conexion.db(process.env.MONGO_DB);
       this.collection = this.db.collection('reserva');
       reserva.instanceReserva = this;
     }
@@ -172,76 +173,77 @@ export class reserva extends connect {
    * @throws {Error} Si la reserva no existe, el usuario no tiene permiso, o no se puede actualizar la reserva.
    */
 
-  // Cancelar parcialmente una reserva 
+  
   async cancelarReserva(datosReserva) {
-
     try {
-      await this.conexion.connect();
+        await this.conexion.connect();
 
-
-      const reservaExistente = await this.collection.findOne({ id: datosReserva.id });
-      if (!reservaExistente) {
-        throw new Error('La reserva no existe.');
-      }
-
-
-      if (reservaExistente.id_usuario !== datosReserva.id_usuario) {
-        throw new Error('No tienes permiso para modificar esta reserva.');
-      }
-
-      let nuevoEstado;
-      let nuevosAsientos;
-
-      if (datosReserva.asientos_reservados.length === 0) {
-
-        nuevoEstado = 'cancelada';
-        nuevosAsientos = [];
-      } else {
-
-        nuevoEstado = 'activa';
-        nuevosAsientos = datosReserva.asientos_reservados;
-      }
-
-
-      const resultado = await this.collection.updateOne(
-        { id: datosReserva.id },
-        { 
-          $set: { 
-            estado: nuevoEstado,
-            asientos_reservados: nuevosAsientos
-          }
+        
+        const reservaExistente = await this.collection.findOne({ id: datosReserva.id });
+        if (!reservaExistente) {
+            throw new Error('La reserva no existe.');
         }
-      );
 
-      if (resultado.modifiedCount === 0) {
-        throw new Error('No se pudo actualizar la reserva.');
-      }
+        
+        if (reservaExistente.id_usuario !== datosReserva.id_usuario) {
+            throw new Error('No tienes permiso para modificar esta reserva.');
+        }
 
+        let nuevoEstado;
+        let nuevosAsientos;
 
-      const asientosALiberar = reservaExistente.asientos_reservados.filter(
-        asiento => !nuevosAsientos.includes(asiento)
-      );
+        
+        if (!datosReserva.asientos_reservados || datosReserva.asientos_reservados.length === 0) {
+            nuevoEstado = 'cancelada';
+            nuevosAsientos = [];
+        } else {
+            
+            nuevosAsientos = reservaExistente.asientos_reservados.filter(
+                asiento => !datosReserva.asientos_reservados.includes(asiento)
+            );
+            nuevoEstado = nuevosAsientos.length === 0 ? 'cancelada' : 'activa';
+        }
 
-      if (asientosALiberar.length > 0) {
-        await this.db.collection('asiento').updateMany(
-          { id: { $in: asientosALiberar } },
-          { $set: { estado: 'disponible' } }
+        
+        const resultado = await this.collection.updateOne(
+            { id: datosReserva.id },
+            { 
+                $set: { 
+                    estado: nuevoEstado,
+                    asientos_reservados: nuevosAsientos
+                }
+            }
         );
-      }
 
-      await this.conexion.close();
-
-      return { 
-        mensaje: nuevoEstado === 'cancelada' ? 'Reserva cancelada con éxito' : 'Reserva actualizada con éxito',
-        detallesReserva: {
-          ...reservaExistente,
-          estado: nuevoEstado,
-          asientos_reservados: nuevosAsientos
+        if (resultado.modifiedCount === 0) {
+            throw new Error('No se pudo actualizar la reserva.');
         }
-      };
+
+        
+        const asientosALiberar = reservaExistente.asientos_reservados.filter(
+            asiento => !nuevosAsientos.includes(asiento)
+        );
+
+        if (asientosALiberar.length > 0) {
+            await this.db.collection('asiento').updateMany(
+                { id: { $in: asientosALiberar } },
+                { $set: { estado: 'disponible' } }
+            );
+        }
+
+        await this.conexion.close();
+
+        return { 
+            mensaje: nuevoEstado === 'cancelada' ? 'Reserva cancelada con éxito' : 'Reserva actualizada con éxito',
+            detallesReserva: {
+                ...reservaExistente,
+                estado: nuevoEstado,
+                asientos_reservados: nuevosAsientos
+            }
+        };
     } catch (error) {
-      await this.conexion.close();
-      return { error: `Error al cancelar/actualizar la reserva: ${error.message}` };
+        await this.conexion.close();
+        return { error: `Error al cancelar/actualizar la reserva: ${error.message}` };
     }
   }
 }

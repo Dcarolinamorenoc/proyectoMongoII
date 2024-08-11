@@ -4,12 +4,13 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "dev": "node --watch --env-file=.env main.js"
+    "dev": "node --watch --env-file=.env server/main.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.19.2",
     "mongodb": "^6.8.0"
   },
   "description": ""
