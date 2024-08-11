@@ -6,15 +6,21 @@
     <title>Movie App Home</title>
     <link rel="stylesheet" href="../css/home.css">
     <script src="../javascript/home.js" defer></script>
+    <script src="../javascript/movies.js" defer></script>
 </head>
 <body>
     <header>
-        <div class="user-info">
-            <img src="" alt="User Avatar" class="avatar">
-            <span>Hi, User!</span>
+        <div class="inicio">
+            <div class="user-info">
+                <img src="" alt="User Avatar" class="avatar">
+                <span>Hi, User!</span>
+            </div>
+            <div class="user-inf">
+                <span>Let’s watch movie together!</span>
+            </div>
         </div>
         <div class="notification">
-            <img src="path_to_bell_icon.png" alt="Notification">
+            <img src="../storage/img/noti.png" alt="Notification">
         </div>
     </header>
 
@@ -27,20 +33,11 @@
             <h2>Now playing</h2>
             <a href="#" class="see-all">See all</a>
         </div>
-        <div class="movie-slider">
-            <div class="movie-slide">
-                <img src="path_to_movie1.jpg" alt="Movie 1">
-                <h3>Puss In Boots The Last...</h3>
-                <p>Adventure</p>
-                <div class="rating">
-                    <span class="dot filled"></span>
-                    <span class="dot filled"></span>
-                    <span class="dot half-filled"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
+        <div class="movie-slider-container">
+            <div class="movie-slider" id="movieSlider">
+                <!-- Las películas se insertarán aquí dinámicamente -->
             </div>
-            <!-- Add more movie slides here -->
+            <div class="slider-dots" id="sliderDots"></div>
         </div>
     </section>
 
