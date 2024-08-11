@@ -506,7 +506,10 @@ module.exports = class Usuario extends connect {
                     identificacion: usuario.identificacion,
                     nickname: usuario.nickname,
                     email: usuario.email,
-                    rol: usuario.rol
+                    rol: usuario.rol,
+                    imagen: usuario.imagen_user,
+                    telefono: usuario.telefono,
+                    celular: usuario.celular
                 })),
                 mensaje: mensaje
             };
