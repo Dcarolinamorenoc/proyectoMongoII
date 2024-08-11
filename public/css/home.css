@@ -186,20 +186,30 @@ header {
 }
 
 .movie-slide h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px 0 5px;
     font-size: 16px;
+    /* border: 1px solid green;  */
 }
 
 .movie-slide p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0;
     font-size: 14px;
     color: #888;
+    /* border: 1px solid green;  */
 }
 
 .slider-dots {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: -20px;
+    margin-bottom: 25px;
+    /* border: 1px solid green;  */
 }
 
 .slider-dot {

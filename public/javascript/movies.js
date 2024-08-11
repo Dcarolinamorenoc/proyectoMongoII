@@ -29,7 +29,7 @@ function displayMovies(movies) {
         
         movieSlide.innerHTML = `
             <img src="${movie.imagen_pelicula}" alt="${movie.titulo}" onerror="this.src='path_to_default_image.jpg'">
-            <h3>${movie.titulo.length > 20 ? movie.titulo.substring(0, 20) + '...' : movie.titulo}</h3>
+            <h3>${movie.titulo.length > 20 ? movie.titulo.substring(0, 30) + '' : movie.titulo}</h3>
             <p>${movie.genero}</p>
         `;
         
