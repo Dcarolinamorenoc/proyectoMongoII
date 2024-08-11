@@ -1,6 +1,7 @@
-import {connect} from "../helpers/connect.js";
+const connect = require ("../helpers/connect.js")
+const { ObjectId } = require ("mongodb")
 
-export class Usuario extends connect {
+module.exports = class Usuario extends connect {
 
     static instanceUsuario;
     db;
