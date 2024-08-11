@@ -1,6 +1,7 @@
 const express = require('express');
 const peliculaRoutes = require('./router/pelicula.routes');
 const boletoRoutes = require('./router/boleto.routes');
+const reservaRoutes = require('./router/reserva.routes');
 const app = express();
 
 
@@ -10,6 +11,8 @@ app.use(express.json());
 app.use('/pelicula', peliculaRoutes);
 
 app.use('/boleto', boletoRoutes);
+
+app.use('/reserva', reservaRoutes);
 
 
 const host = process.env.EXPRESS_HOST || 'localhost';
