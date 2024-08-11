@@ -1,17 +1,19 @@
 {
   "name": "proyectomongoii",
   "version": "1.0.0",
-  "main": "main.js",
-  "type": "module",
+  "main": "app.js",
+  "type": "commonjs",
   "scripts": {
-    "dev": "node --watch --env-file=.env server/main.js"
+    "test": "node --watch --env-file=.env server/main.js",
+    "dev": "node --watch --env-file=.env server/app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Diana Carolina Moreno Cardenas",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
+    "express-validator": "^7.2.0",
     "mongodb": "^6.8.0"
   },
-  "description": ""
+  "description": "Proyecto sobre cineCampus"
 }
