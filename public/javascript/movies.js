@@ -135,55 +135,59 @@ async function displayMovieDetails(movieId, movieState) {
 
         document.body.innerHTML = `
             <div class="movie-details-container">
-                <div class="movie-header">
-                    <img src="../storage/img/back_arrow.png" alt="Back" class="back-button" onclick="goToHome()">
-                    <h1>Cinema Selection</h1>
-                    <img src="../storage/img/more_options.png" alt="More options" class="more-options">
-                </div>
-                <div class="movie-content">
-                    <div class="movie-poster">
-                        <img src="${movie.imagen_pelicula}" alt="${movie.titulo}">
-                    </div>
-                    <div class="movie-info">
-                        <h2>${movie.titulo}</h2>
-                        <p class="genre">${movie.genero}</p>
-                        <button class="watch-trailer" onclick="window.open('${movie.trailer}', '_blank')">Watch Trailer</button>
-                        <p class="description">${movie.sinopsis}</p>
-                    </div>
-                    <div class="cast">
-                        <h3>Cast</h3>
-                        <div class="cast-list">
-                            ${movie.reparto.map(actor => `
-                                <div class="actor">
-                                    <img src="${actor.imagen_actor}" alt="${actor.nombre_real}">
-                                    <p>${actor.nombre_real}</p>
-                                    <p>${actor.nombre_personaje}</p>
-                                </div>
-                            `).join('')}
+        <div class="movie-header">
+            <img src="../storage/img/return.png" alt="Back" class="back-button" onclick="goToHome()">
+            <h1>Cinema Selection</h1>
+            <img src="../storage/img/points.png" alt="More options" class="more-options">
+        </div>
+        <div class="movie-content">
+            <div class="movie-poster">
+                <img src="${movie.imagen_pelicula}" alt="${movie.titulo}">
+            </div>
+            <div class="movie-info">
+                <h2>${movie.titulo}</h2>
+                <button class="watch-trailer" onclick="window.open('${movie.trailer}', '_blank')">Watch Trailer</button>
+
+            </div>
+            <div class="movie-inf">
+                <p class="genre">${movie.genero}</p>
+                
+                <p class="description">${movie.sinopsis}</p>
+            </div>
+            <div class="cast">
+                <h3>Cast</h3>
+                <div class="cast-list">
+                    ${movie.reparto.map(actor => `
+                        <div class="actor">
+                            <img src="${actor.imagen_actor}" alt="${actor.nombre_real}">
+                            <p>${actor.nombre_real}</p>
+                            <p>${actor.nombre_personaje}</p>
                         </div>
-                    </div>
-                    ${movieState !== 'No disponible' ? `
-                        <div class="cinema">
-                            <h3>Cinema</h3>
-                            <div class="cinema-item">
-                                <div>
-                                    <p>Atrium Cinemas</p>
-                                    <p>Staff Lines, Saddar, Karachi</p>
-                                </div>
-                                <img src="../storage/img/cinema_logo.png" alt="Cinema logo">
-                            </div>
-                        </div>
-                        <div class="mode-selection">
-                            <h3>Mode</h3>
-                            <div class="mode-buttons">
-                                <button class="mode-button" onclick="selectMode(this, 'reserve')">Reserva</button>
-                                <button class="mode-button" onclick="selectMode(this, 'buy')">Comprar boleto</button>
-                            </div>
-                        </div>
-                        <button id="book-now" onclick="bookMovie()" disabled>Book Now</button>
-                    ` : ''}
+                    `).join('')}
                 </div>
             </div>
+            ${movieState !== 'No disponible' ? `
+                <div class="cinema">
+                    <h3>Cinema</h3>
+                    <div class="cinema-item">
+                        <div>
+                            <p>CineCampus</p>
+                            <p>Zona Franca Santander</p>
+                        </div>
+                        <img src="../storage/img/Cinecampus.png" alt="Cinema logo">
+                    </div>
+                </div>
+                <div class="mode-selection">
+                    <h3>Mode</h3>
+                    <div class="mode-buttons">
+                        <button class="mode-button" onclick="selectMode(this, 'reserve')">Reserva</button>
+                        <button class="mode-button" onclick="selectMode(this, 'buy')">Comprar boleto</button>
+                    </div>
+                </div>
+                <button id="book-now" onclick="bookMovie()" disabled>Book Now</button>
+            ` : ''}
+        </div>
+    </div>
         `;
 
         // Añadir estilos inline para lograr el diseño deseado
@@ -222,13 +226,18 @@ async function displayMovieDetails(movieId, movieState) {
                 border-radius: 10px;
             }
             .movie-info {
+                display: flex;
                 margin-top: 20px;
+                flex-direction: row;
+                justify-content: space-between;
             }
             h2 {
                 font-size: 24px;
                 margin: 10px 0;
             }
             .genre {
+                display: flex;
+                justify-content: start;
                 color: #888;
                 margin-bottom: 10px;
             }
@@ -250,6 +259,8 @@ async function displayMovieDetails(movieId, movieState) {
                 text-align: left;
             }
             .cast, .cinema, .mode-selection {
+                display: flex;
+                flex-direction: column;
                 margin-top: 20px;
                 text-align: left;
             }
@@ -264,6 +275,8 @@ async function displayMovieDetails(movieId, movieState) {
             }
             .actor {
                 flex: 0 0 auto;
+                width: 105px;
+                height: 100px;
                 text-align: center;
                 margin-right: 15px;
             }
@@ -271,6 +284,7 @@ async function displayMovieDetails(movieId, movieState) {
                 width: 60px;
                 height: 60px;
                 border-radius: 50%;
+                justify-content: space-around
             }
             .actor p {
                 margin: 5px 0;
