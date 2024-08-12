@@ -135,11 +135,11 @@ module.exports = class Pelicula extends connect {
                     }
                 }
             ).toArray();
-
+    
             if (peliculas.length === 0) {
                 return { error: `No se encontraron películas con el estado: ${estado}` };
             }
-
+    
             const peliculasConHorarios = await Promise.all(peliculas.map(async (pelicula) => {
                 const horarios = await this.db.collection('horario_proyeccion').find(
                     { id_pelicula: pelicula.id },
@@ -154,13 +154,14 @@ module.exports = class Pelicula extends connect {
                         }
                     }
                 ).toArray();
-
+    
                 return { ...pelicula, horarios_proyeccion: horarios };
             }));
-
+    
             return peliculasConHorarios;
         } catch (error) {
-            return { error: `Error al obtener las películas: ${error.message}` };
+            console.error(`Error al obtener las películas por estado: ${error.message}`);
+            return { error: `Error al obtener las películas por estado: ${error.message}` };
         }
     }
 };
