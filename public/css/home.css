@@ -129,10 +129,14 @@ header {
     margin-bottom: 20px;
 }
 
+.not-avaliable{
+    margin-bottom: 50px;
+}
+
 .not-avaliable .movie-item {
     display: flex;
     align-items: center;
-    margin-bottom: 3%;
+    margin-bottom: 8%;
 }
 
 .not-avaliable .movie-item img {
@@ -301,7 +305,42 @@ header {
     cursor: not-allowed;
 }
 
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #000000;
+    border-top: 1px solid #1b1b1b;
+    border-radius: 15px; /* Agrega el borde redondeado aquí */
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
 
+.bottom-nav a {
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+}
+
+.bottom-nav img {
+    width: 24px; /* Ajusta el tamaño del ícono aquí */
+    height: 24px; /* Ajusta el tamaño del ícono aquí */
+    display: block;
+    margin: 0 auto;
+}
+
+.bottom-nav span {
+    display: block;
+    font-size: 12px; /* Tamaño del texto debajo del ícono */
+    margin-top: 4px; /* Espacio entre el ícono y el texto */
+    color: #fff; /* Color de texto por defecto */
+}
+
+.bottom-nav a.active span,
+.bottom-nav a.active img {
+    color: red; /* Color del texto para el ícono activo */
+}
 
 
 @media (max-width: 768px) {
