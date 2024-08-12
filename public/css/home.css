@@ -238,6 +238,69 @@ header {
     background-color: #007bff;
 }
 
+
+.movie-details-container {
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
+}
+
+.movie-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-button, .more-options {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.movie-poster img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
+.watch-trailer {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.cast {
+    display: flex;
+    overflow-x: auto;
+}
+
+.actor {
+    margin-right: 10px;
+    text-align: center;
+}
+
+.actor img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+#book-now {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    cursor: pointer;
+}
+
+#book-now:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
     .movie-slide {
         width: 80%;

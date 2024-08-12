@@ -9,66 +9,69 @@
     <script src="../javascript/movies.js" defer></script>
 </head>
 <body>
-    <header>
-        <div class="inicio">
-            <div class="user-info">
-                <img src="" alt="User Avatar" class="avatar">
-                <span>Hi, User!</span>
+    <div id="main-content">
+        <header>
+            <div class="inicio">
+                <div class="user-info">
+                    <img src="" alt="User Avatar" class="avatar">
+                    <span>Hi, User!</span>
+                </div>
+                <div class="user-inf">
+                    <span>¡Veamos una película juntos!</span>
+                </div>
             </div>
-            <div class="user-inf">
-                <span>¡Veamos una película juntos!</span>
+            <div class="notification">
+                <img src="../storage/img/noti.png" alt="Notification">
             </div>
-        </div>
-        <div class="notification">
-            <img src="../storage/img/noti.png" alt="Notification">
-        </div>
-    </header>
+        </header>
 
-    <div class="search-bar">
-        <input type="text" placeholder="Search movie, cinema, genre...">
+        <div class="search-bar">
+            <input type="text" placeholder="Search movie, cinema, genre...">
+        </div>
+
+        <section class="now-playing">
+            <div class="section-header">
+                <h2>En cartelera</h2>
+                <a href="#" class="see-all">Ver Todo</a>
+            </div>
+            <div class="movie-slider-container">
+                <div class="movie-slider" id="movieSlider">
+
+                </div>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+        </section>
+
+        <section class="coming-soon">
+            <div class="section-header">
+                <h2>Próximo estreno</h2>
+                <a href="#" class="see-all">Ver Todo</a>
+            </div>
+            <div id="coming-soon-movies" class="movie-list">
+
+            </div>
+        </section>
+
+        <section class="not-avaliable">
+            <div class="section-header">
+                <h2>No disponible</h2>
+                <a href="#" class="see-all">Ver Todo</a>
+            </div>
+            <div id="not-avaliable-movies" class="movie-list">
+
+            </div>
+        </section>
+
+        <nav class="bottom-nav">
+            <a href="#" class="active"><img src="path_to_home_icon.png" alt="Home"></a>
+            <a href="#"><img src="path_to_browse_icon.png" alt="Browse"></a>
+            <a href="#"><img src="path_to_tickets_icon.png" alt="Tickets"></a>
+            <a href="#"><img src="path_to_profile_icon.png" alt="Profile"></a>
+        </nav>
     </div>
 
-    <section class="now-playing">
-        <div class="section-header">
-            <h2>En cartelera</h2>
-            <a href="#" class="see-all">Ver Todo</a>
-        </div>
-        <div class="movie-slider-container">
-            <div class="movie-slider" id="movieSlider">
-
-            </div>
-            <div class="slider-dots" id="sliderDots"></div>
-        </div>
-    </section>
-
-    <section class="coming-soon">
-        <div class="section-header">
-            <h2>Próximo estreno</h2>
-            <a href="#" class="see-all">Ver Todo</a>
-        </div>
-        <div id="coming-soon-movies" class="movie-list">
-
-        </div>
-    </section>
-
-    <section class="not-avaliable">
-        <div class="section-header">
-            <h2>No disponible</h2>
-            <a href="#" class="see-all">Ver Todo</a>
-        </div>
-        <div id="not-avaliable-movies" class="movie-list">
-
-        </div>
-    </section>
-    
-
-    <nav class="bottom-nav">
-        <a href="#" class="active"><img src="path_to_home_icon.png" alt="Home"></a>
-        <a href="#"><img src="path_to_browse_icon.png" alt="Browse"></a>
-        <a href="#"><img src="path_to_tickets_icon.png" alt="Tickets"></a>
-        <a href="#"><img src="path_to_profile_icon.png" alt="Profile"></a>
-    </nav>
-
-    <script src="home.js"></script>
+    <div id="movie-details" class="movie-details-container" style="display: none;">
+        <!-- Los detalles de la película se cargarán aquí dinámicamente -->
+    </div>
 </body>
 </html>
