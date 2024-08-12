@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     fetchMoviesEnCartelera();
     fetchMoviesProximoEstreno();
+    fetchMoviesNoDisponible();
+
 });
 
 async function fetchMoviesEnCartelera() {
@@ -30,6 +32,22 @@ async function fetchMoviesProximoEstreno() {
         }
     } catch (error) {
         console.error('Error al obtener las películas próximas a estrenar:', error);
+    }
+}
+
+
+async function fetchMoviesNoDisponible() {
+    try {
+        const response = await fetch('http://localhost:5001/pelicula/por-estado?estado=No%20disponible');
+        const data = await response.json();
+        
+        if (Array.isArray(data)) {
+            displayMoviesNoDisponible(data);
+        } else {
+            console.error('No se encontraron películas no disponibles o el formato de respuesta es incorrecto');
+        }
+    } catch (error) {
+        console.error('Error al obtener las películas no disponibles:', error);
     }
 }
 
@@ -76,6 +94,26 @@ function displayMoviesProximoEstreno(movies) {
             <p>${movie.genero}</p>
         </div>
     `;
+        
+        movieList.appendChild(movieElement);
+    });
+}
+
+function displayMoviesNoDisponible(movies) {
+    const movieList = document.getElementById('not-avaliable-movies');
+    movieList.innerHTML = '';
+    
+    movies.forEach((movie) => {
+        const movieElement = document.createElement('div');
+        movieElement.className = 'movie-item';
+        
+        movieElement.innerHTML = `
+            <img src="${movie.imagen_pelicula}" alt="${movie.titulo}" loading="lazy" onerror="this.src='path_to_default_image.jpg'">
+            <div class="movie-info">
+                <h3>${movie.titulo}</h3>
+                <p>${movie.genero}</p>
+            </div>
+        `;
         
         movieList.appendChild(movieElement);
     });
