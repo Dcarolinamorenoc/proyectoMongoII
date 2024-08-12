@@ -166,14 +166,21 @@ async function displayMovieDetails(movieId, movieState) {
                         <div class="cinema">
                             <h3>Cinema</h3>
                             <div class="cinema-item">
-                                <img src="../storage/img/cinema_logo.png" alt="Cinema logo">
                                 <div>
                                     <p>Atrium Cinemas</p>
                                     <p>Staff Lines, Saddar, Karachi</p>
                                 </div>
+                                <img src="../storage/img/cinema_logo.png" alt="Cinema logo">
                             </div>
                         </div>
-                        <button id="book-now" onclick="bookMovie()">Book Now</button>
+                        <div class="mode-selection">
+                            <h3>Mode</h3>
+                            <div class="mode-buttons">
+                                <button class="mode-button" onclick="selectMode(this, 'reserve')">Reserva</button>
+                                <button class="mode-button" onclick="selectMode(this, 'buy')">Comprar boleto</button>
+                            </div>
+                        </div>
+                        <button id="book-now" onclick="bookMovie()" disabled>Book Now</button>
                     ` : ''}
                 </div>
             </div>
@@ -242,11 +249,11 @@ async function displayMovieDetails(movieId, movieState) {
                 color: #ccc;
                 text-align: left;
             }
-            .cast, .cinema {
+            .cast, .cinema, .mode-selection {
                 margin-top: 20px;
                 text-align: left;
             }
-            .cast h3, .cinema h3 {
+            .cast h3, .cinema h3, .mode-selection h3 {
                 font-size: 18px;
                 margin-bottom: 10px;
             }
@@ -271,6 +278,7 @@ async function displayMovieDetails(movieId, movieState) {
             }
             .cinema-item {
                 display: flex;
+                justify-content: space-between;
                 align-items: center;
                 background-color: #222;
                 padding: 10px;
@@ -279,11 +287,28 @@ async function displayMovieDetails(movieId, movieState) {
             .cinema-item img {
                 width: 40px;
                 height: 40px;
-                margin-right: 10px;
             }
             .cinema-item p {
                 margin: 0;
                 font-size: 14px;
+            }
+            .mode-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .mode-button {
+                padding: 10px;
+                background-color: #222;
+                color: #fff;
+                border: 2px solid #222;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: all 0.3s ease;
+            }
+            .mode-button.selected {
+                border-color: #ff0000;
             }
             #book-now {
                 width: 100%;
@@ -296,6 +321,10 @@ async function displayMovieDetails(movieId, movieState) {
                 cursor: pointer;
                 font-weight: bold;
                 font-size: 16px;
+            }
+            #book-now:disabled {
+                background-color: #555;
+                cursor: not-allowed;
             }
         `;
         document.head.appendChild(styleElement);
@@ -325,8 +354,21 @@ function updateActiveDot(index) {
     });
 }
 
+function selectMode(button, mode) {
+    const buttons = document.querySelectorAll('.mode-button');
+    buttons.forEach(btn => btn.classList.remove('selected'));
+    button.classList.add('selected');
+    document.getElementById('book-now').disabled = false;
+}
+
 function bookMovie() {
-    alert('Funcionalidad de reserva no implementada');
+    const selectedMode = document.querySelector('.mode-button.selected');
+    if (selectedMode) {
+        const mode = selectedMode.textContent;
+        alert(`Has seleccionado: ${mode}`);
+    } else {
+        alert('Por favor, selecciona un modo de reserva');
+    }
 }
 
 // Evento para el slider de películas en cartelera
