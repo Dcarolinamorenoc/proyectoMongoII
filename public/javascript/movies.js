@@ -1,23 +1,39 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetchMovies();
+    fetchMoviesEnCartelera();
+    fetchMoviesProximoEstreno();
 });
 
-async function fetchMovies() {
+async function fetchMoviesEnCartelera() {
     try {
         const response = await fetch('http://localhost:5001/pelicula/por-estado?estado=En%20cartelera');
         const data = await response.json();
         
         if (Array.isArray(data)) {
-            displayMovies(data);
+            displayMoviesEnCartelera(data);
         } else {
-            console.error('No se encontraron películas o el formato de respuesta es incorrecto');
+            console.error('No se encontraron películas en cartelera o el formato de respuesta es incorrecto');
         }
     } catch (error) {
-        console.error('Error al obtener las películas:', error);
+        console.error('Error al obtener las películas en cartelera:', error);
     }
 }
 
-function displayMovies(movies) {
+async function fetchMoviesProximoEstreno() {
+    try {
+        const response = await fetch('http://localhost:5001/pelicula/por-estado?estado=Próximo%20estreno');
+        const data = await response.json();
+        
+        if (Array.isArray(data)) {
+            displayMoviesProximoEstreno(data);
+        } else {
+            console.error('No se encontraron películas próximas a estrenar o el formato de respuesta es incorrecto');
+        }
+    } catch (error) {
+        console.error('Error al obtener las películas próximas a estrenar:', error);
+    }
+}
+
+function displayMoviesEnCartelera(movies) {
     const slider = document.getElementById('movieSlider');
     const dotsContainer = document.getElementById('sliderDots');
     slider.innerHTML = '';
@@ -28,14 +44,13 @@ function displayMovies(movies) {
         movieSlide.className = 'movie-slide';
         
         movieSlide.innerHTML = `
-            <img src="${movie.imagen_pelicula}" alt="${movie.titulo}" onerror="this.src='path_to_default_image.jpg'">
-            <h3>${movie.titulo.length > 20 ? movie.titulo.substring(0, 30) + '' : movie.titulo}</h3>
+            <img src="${movie.imagen_pelicula}" alt="${movie.titulo}" loading="lazy" onerror="this.src='path_to_default_image.jpg'">
+            <h3>${movie.titulo.length > 20 ? movie.titulo.substring(0, 20) + '...' : movie.titulo}</h3>
             <p>${movie.genero}</p>
         `;
         
         slider.appendChild(movieSlide);
 
-        // Añadir punto al slider
         const dot = document.createElement('span');
         dot.className = 'slider-dot';
         dot.onclick = () => scrollToSlide(index);
@@ -43,6 +58,27 @@ function displayMovies(movies) {
     });
 
     updateActiveDot(0);
+}
+
+function displayMoviesProximoEstreno(movies) {
+    const movieList = document.getElementById('coming-soon-movies');
+    movieList.innerHTML = '';
+    
+    movies.forEach((movie) => {
+        const movieElement = document.createElement('div');
+        movieElement.className = 'movie-item';
+        
+        movieElement.innerHTML = `
+        <img src="${movie.imagen_pelicula}" alt="${movie.titulo}" loading="lazy" onerror="this.src='path_to_default_image.jpg'">
+        <div class="movie-info">
+            <h3>${movie.titulo}</h3>
+            <p>Estreno: ${movie.fecha_estreno}</p>
+            <p>${movie.genero}</p>
+        </div>
+    `;
+        
+        movieList.appendChild(movieElement);
+    });
 }
 
 function scrollToSlide(index) {
@@ -61,8 +97,10 @@ function updateActiveDot(index) {
     });
 }
 
-// Añadir evento de scroll al slider
-document.getElementById('movieSlider').addEventListener('scroll', function() {
-    const index = Math.round(this.scrollLeft / this.offsetWidth);
-    updateActiveDot(index);
-});
+// Evento para el slider de películas en cartelera
+if (document.getElementById('movieSlider')) {
+    document.getElementById('movieSlider').addEventListener('scroll', function() {
+        const index = Math.round(this.scrollLeft / this.offsetWidth);
+        updateActiveDot(index);
+    });
+}

@@ -86,4 +86,5 @@ appUsuario.get('/consultar-todos', [
 });
 
 
+
 module.exports = appUsuario;

@@ -179,7 +179,7 @@ header {
 
 .movie-slide img {
     width: 100%;
-    height: 370px;
+    height: 360px;
     border-radius: 8px;
     object-fit: cover;
     /* border: 1px solid green;  */
