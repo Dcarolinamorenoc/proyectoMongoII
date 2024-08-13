@@ -4,8 +4,8 @@
   "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "test": "node --watch --env-file=.env server/main.js",
-    "dev": "node --watch --env-file=.env server/app.js"
+    "test": "node --watch --env-file .env server/main.js",
+    "dev": "node --watch --env-file .env ./app.js"
   },
   "keywords": [],
   "author": "Diana Carolina Moreno Cardenas",
