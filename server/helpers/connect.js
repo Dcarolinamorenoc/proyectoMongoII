@@ -26,7 +26,7 @@ module.exports = class connect {
         this.#open();
         connect.instanceConnect = this;
     }
-    destructor(){
+    destructor() {
         connect.instanceConnect = undefined;
     }
     set setHost(host) {

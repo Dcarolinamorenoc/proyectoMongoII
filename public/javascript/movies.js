@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchMoviesEnCartelera() {
     try {
-        const response = await fetch('http://localhost:5001/pelicula/por-estado?estado=En%20cartelera');
+        const response = await fetch('http://localhost:5001/api/peliculas/estado/En%20cartelera');
         const data = await response.json();
         
         if (Array.isArray(data)) {
