@@ -378,6 +378,49 @@ header {
     padding: 0 10px; /* Ajustar el padding */
 }
 
+.movie-slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.movie-slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.movie-slide {
+    flex: 0 0 100%;
+    width: 100%;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+    width: 32px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: #ff0000;
+}
+
 @media (max-width: 768px) {
     .movie-slide {
         width: 80%;

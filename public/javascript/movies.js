@@ -49,13 +49,18 @@ async function fetchMoviesNoDisponible() {
     }
 }
 
+let currentIndex = 0;
+
 function displayMoviesEnCartelera(movies) {
     const slider = document.getElementById('movieSlider');
     const dotsContainer = document.getElementById('sliderDots');
     slider.innerHTML = '';
     dotsContainer.innerHTML = '';
     
-    movies.forEach((movie, index) => {
+    // Añadir la última película al principio y la primera al final para el efecto infinito
+    const extendedMovies = [movies[movies.length - 1], ...movies, movies[0]];
+    
+    extendedMovies.forEach((movie, index) => {
         const movieSlide = document.createElement('div');
         movieSlide.className = 'movie-slide';
         movieSlide.onclick = () => displayMovieDetails(movie.id, 'En cartelera');
@@ -67,18 +72,63 @@ function displayMoviesEnCartelera(movies) {
         `;
         
         slider.appendChild(movieSlide);
+    });
 
+    // Crear puntos solo para las películas reales (sin los duplicados)
+    movies.forEach((_, index) => {
         const dot = document.createElement('span');
         dot.className = 'slider-dot';
         dot.onclick = (e) => {
             e.stopPropagation();
-            scrollToSlide(index);
+            scrollToSlide(index + 1); // +1 porque ahora tenemos una película extra al principio
         };
         dotsContainer.appendChild(dot);
     });
 
     updateActiveDot(0);
+    setupInfiniteScroll();
 }
+
+function setupInfiniteScroll() {
+    const slider = document.getElementById('movieSlider');
+    slider.addEventListener('scroll', handleScroll);
+    slider.scrollLeft = slider.offsetWidth; // Iniciar en la primera película real
+}
+
+function handleScroll() {
+    const slider = document.getElementById('movieSlider');
+    const slideWidth = slider.offsetWidth;
+    const scrollPosition = slider.scrollLeft;
+    const totalWidth = slider.scrollWidth;
+
+    if (scrollPosition === 0) {
+        // Si llegamos al principio, saltar al final
+        slider.scrollLeft = totalWidth - slideWidth * 2;
+    } else if (scrollPosition >= totalWidth - slideWidth * 2) {
+        // Si llegamos al final, saltar al principio
+        slider.scrollLeft = slideWidth;
+    }
+
+    currentIndex = Math.round(scrollPosition / slideWidth) - 1;
+    updateActiveDot(currentIndex);
+}
+
+function scrollToSlide(index) {
+    const slider = document.getElementById('movieSlider');
+    slider.scrollLeft = slider.offsetWidth * index;
+}
+
+function updateActiveDot(index) {
+    const dots = document.querySelectorAll('.slider-dot');
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+    });
+}
+
+
+
+
+
 
 function displayMoviesProximoEstreno(movies) {
     const movieList = document.getElementById('coming-soon-movies');
