@@ -342,6 +342,41 @@ header {
     color: red; /* Color del texto para el ícono activo */
 }
 
+.slider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+    width: 32px;  /* Ancho del punto cuando está activo */
+    height: 8px;  /* Mantiene la altura pero se estira en ancho */
+    border-radius: 4px;  /* Bordes redondeados para dar un efecto de pill */
+    background-color: #ff0000; /* Rojo para el punto activo */
+}
+
+
+/* Ajustar el contenedor del slider */
+.movie-slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Ocultar las películas fuera de vista */
+}
+
+.movie-slider {
+    display: flex;
+    transition: transform 0.5s ease; /* Transición suave entre los slides */
+}
+
+.movie-slide {
+    flex: 0 0 100%; /* Cada slide ocupa el 100% del contenedor */
+    scroll-snap-align: start;
+    padding: 0 10px; /* Ajustar el padding */
+}
 
 @media (max-width: 768px) {
     .movie-slide {
