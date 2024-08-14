@@ -21,7 +21,7 @@ async function fetchMoviesEnCartelera() {
 
 async function fetchMoviesProximoEstreno() {
     try {
-        const response = await fetch('http://localhost:5001/pelicula/por-estado?estado=Próximo%20estreno');
+        const response = await fetch('http://localhost:5001/api/peliculas/estado/Pr%C3%B3ximo%20estreno');
         const data = await response.json();
         
         if (Array.isArray(data)) {
@@ -36,7 +36,7 @@ async function fetchMoviesProximoEstreno() {
 
 async function fetchMoviesNoDisponible() {
     try {
-        const response = await fetch('http://localhost:5001/pelicula/por-estado?estado=No%20disponible');
+        const response = await fetch('http://localhost:5001/api/peliculas/estado/No%20disponible');
         const data = await response.json();
         
         if (Array.isArray(data)) {
@@ -125,7 +125,7 @@ function displayMoviesNoDisponible(movies) {
 
 async function displayMovieDetails(movieId, movieState) {
     try {
-        const response = await fetch(`http://localhost:5001/pelicula/detalles?id_titulo=${movieId}`);
+        const response = await fetch(`http://localhost:5001/api/peliculas/${movieId}`);
         const movie = await response.json();
         
         if (movie.error) {
