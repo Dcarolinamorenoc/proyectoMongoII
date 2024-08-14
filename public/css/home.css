@@ -36,9 +36,10 @@ header {
 }
 
 .notification img {
-    width: 50%;  
-    height: 30%;
+    width: 70%;  
+    height: 70%;
     margin-left: 30%;
+    margin-top: 18%;
 }
 
 .user-inf {
@@ -55,7 +56,16 @@ header {
     margin-right: 10px;
 }
 
+.user-info span {
+    display: flex;
+    margin-top: -8%;
+    margin-left: 2%;
+}
 
+.user-inf span {
+    display: flex;
+    margin-top: -5%;
+}
 
 .search-bar {
     margin-bottom: 5%;
@@ -74,6 +84,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 10%;
     margin-bottom: 3%;
 }
 
@@ -94,10 +105,6 @@ header {
     margin-right: 5%;
 }
 
-.movie-slide img {
-    width: 100%;
-    border-radius: 10px;
-}
 
 .rating .dot {
     height: 10px;
@@ -186,19 +193,24 @@ header {
 }
 
 .movie-slide {
-    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    /* flex: 0 0 100%; */
     scroll-snap-align: start;
     padding: 20px;
     width: 100%;
     height: 30%;
+    justify-content: center;
+    align-items: center;
     /* border: 1px solid purple;  */
 }
 
 .movie-slide img {
-    width: 100%;
+    width: 70%;
     height: 360px;
-    border-radius: 8px;
+    border-radius: 20px;
     object-fit: cover;
+    padding: 5px;
     /* border: 1px solid green;  */
 }
 
@@ -221,22 +233,7 @@ header {
     /* border: 1px solid green;  */
 }
 
-.slider-dots {
-    display: flex;
-    justify-content: center;
-    margin-top: -20px;
-    margin-bottom: 25px;
-    /* border: 1px solid green;  */
-}
 
-.slider-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #ddd;
-    margin: 0 5px;
-    cursor: pointer;
-}
 
 .slider-dot.active {
     background-color: #007bff;
@@ -342,15 +339,6 @@ header {
     color: red; /* Color del texto para el ícono activo */
 }
 
-.slider-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #ddd;
-    margin: 0 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
 
 .slider-dot.active {
     width: 32px;  /* Ancho del punto cuando está activo */
@@ -396,12 +384,14 @@ header {
 
 .slider-dots {
     position: absolute;
-    bottom: 10px;
+    bottom: 0px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
+    /* margin-top: 10%; */
+    margin: 0; 
 }
 
 .slider-dot {
@@ -420,6 +410,13 @@ header {
     border-radius: 4px;
     background-color: #ff0000;
 }
+
+.notification img {
+    border: 1px solid #9A9A9A; 
+    border-radius: 5px; 
+    padding: 6px; 
+}
+
 
 @media (max-width: 768px) {
     .movie-slide {
