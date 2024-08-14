@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const identificacion = document.querySelector('#password').value;
 
         try {
-            const url = 'http://localhost:5001/api/usuario/consultar-todos?nickname=FelixCB&identificacion=1098672134&rol';
+            const url = 'http://localhost:5001/api/consultar-todos?nickname=FelixCB&identificacion=1098672134&rol';
 
             const response = await fetch(url, {
                 method: 'GET',

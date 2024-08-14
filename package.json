@@ -4,14 +4,16 @@
   "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "test": "node --watch --env-file .env server/main.js",
-    "dev": "node --watch --env-file .env ./app.js"
+    "test": "node --watch server/main.js",
+    "dev": "node --watch ./app.js"
   },
   "keywords": [],
   "author": "Diana Carolina Moreno Cardenas",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-validator": "^7.2.0",
     "mongodb": "^6.8.0"
   },
   "description": "Proyecto sobre cineCampus"
