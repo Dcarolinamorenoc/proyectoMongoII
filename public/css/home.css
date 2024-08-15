@@ -67,17 +67,65 @@ header {
     margin-top: -5%;
 }
 
-.search-bar {
-    margin-bottom: 5%;
+.search{
+    display: flex;
+    width: 100%;
+
+    margin-top: 0;
+    justify-content: center;
+    align-items: center;
 }
 
-.search-bar input {
+.search_bus{
+    display: flex;
+    /* border: 1px solid white; */
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 85vw;
+    height: 8vh;
+}
+
+.search_wrapper {
+    position: relative;
     width: 100%;
-    padding: 3%;
-    background-color: #333;
-    border: none;
-    border-radius: 20px;
-    color: #fff;
+}
+
+.search_icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px; 
+    height: 20px; 
+}
+
+.search_input{
+    display: flex;
+    border: 1px solid white;
+    background: #222222;
+    border-radius: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 5vh;
+    padding-left: 40px; 
+    box-sizing: border-box;
+    color: #ffff;
+}
+
+.search_input:placeholder {
+    color: #888; 
+}
+
+.search_input focus {
+    outline: none; 
+
+}
+
+.search_input -ms-clear {
+    display: none; 
 }
 
 .section-header {
@@ -123,17 +171,38 @@ header {
     background: linear-gradient(90deg, #ffd700 50%, #bbb 50%);
 }
 
+
+.coming-soon{
+    display: flex;
+    flex-direction: column;
+}
+
+
 .coming-soon .movie-item {
     display: flex;
     align-items: center;
+    margin-bottom: 5%;
+}
+
+.movie-item {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
     margin-bottom: 3%;
+    background: #272727;
+    border-radius: 20px;
+    padding: 8px; 
 }
 
 .coming-soon .movie-item img {
     width: 30%;
+    height: 70px;
     border-radius: 10px;
-    margin-right: 5%;
+    margin-left: 3%;
+    margin-right: 6%;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .not-avaliable{
@@ -148,8 +217,12 @@ header {
 
 .not-avaliable .movie-item img {
     width: 30%;
+    height: 70px;
     border-radius: 10px;
-    margin-right: 5%;
+    margin-left: 3%;
+    margin-right: 6%;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .bottom-nav {
