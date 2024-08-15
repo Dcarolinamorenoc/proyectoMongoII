@@ -107,6 +107,7 @@ module.exports = class Pelicula extends connect {
                 imagen_pelicula: pelicula.imagen_pelicula,
                 reparto: pelicula.reparto,
                 trailer: pelicula.trailer,
+                imagen_banner: pelicula.imagen_banner,
                 horarios_proyeccion: horarios
             };
         } catch (error) {
@@ -130,6 +131,7 @@ module.exports = class Pelicula extends connect {
                         estado: 1,
                         pais_origen: 1,
                         imagen_pelicula: 1,
+                        imagen_banner: 1,
                         reparto: 1,
                         trailer: 1
                     }
@@ -150,6 +152,7 @@ module.exports = class Pelicula extends connect {
                             horario_proyeccion: 1,
                             hora_finalizacion: 1,
                             id_sala: 1,
+                            imagen_banner:1,
                             precio_pelicula: 1
                         }
                     }

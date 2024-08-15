@@ -192,7 +192,7 @@ async function displayMovieDetails(movieId, movieState) {
         </div>
         <div class="movie-content">
             <div class="movie-poster">
-                <img src="${movie.imagen_pelicula}" alt="${movie.titulo}">
+                <img src="${movie.imagen_banner}" alt="${movie.titulo}">
             </div>
             <div class="movie-info">
                 <h2>${movie.titulo}</h2>
@@ -269,11 +269,18 @@ async function displayMovieDetails(movieId, movieState) {
             .movie-content {
                 text-align: center;
             }
+
+            .movie-poster{
+                width:100%
+                heigth:60px
+                border: 1px solid red
+            }
             .movie-poster img {
                 width: 100%;
-                max-width: 300px;
-                height: auto;
+                max-width: 400px;
+                height: 180px;
                 border-radius: 10px;
+                object-fit: cover;
             }
             .movie-info {
                 display: flex;

@@ -204,6 +204,7 @@ header {
     margin-right: 6%;
     margin-bottom: 20px;
     margin-top: 20px;
+    object-fit: cover;
 }
 
 .not-avaliable{
@@ -226,6 +227,8 @@ header {
     margin-right: 6%;
     margin-bottom: 20px;
     margin-top: 20px;
+    object-fit: cover;
+    
 }
 
 .bottom-nav {
