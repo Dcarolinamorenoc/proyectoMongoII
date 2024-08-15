@@ -343,7 +343,7 @@ async function displayMovieDetails(movieId, movieState) {
                 display: flex;
                 flex-direction: row;
                 flex: 0 0 auto;
-                width: 150px;
+                width: auto;
                 height: 70px;
                 text-align: center;
                 margin-right: 15px;
