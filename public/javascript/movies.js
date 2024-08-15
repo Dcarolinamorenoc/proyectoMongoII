@@ -210,8 +210,10 @@ async function displayMovieDetails(movieId, movieState) {
                     ${movie.reparto.map(actor => `
                         <div class="actor">
                             <img src="${actor.imagen_actor}" alt="${actor.nombre_real}">
-                            <p>${actor.nombre_real}</p>
-                            <p>${actor.nombre_personaje}</p>
+                            <div class="actors">
+                                <p>${actor.nombre_real}</p>
+                                <p>${actor.nombre_personaje}</p>
+                            </div>
                         </div>
                     `).join('')}
                 </div>
@@ -330,30 +332,47 @@ async function displayMovieDetails(movieId, movieState) {
                 overflow-x: auto;
                 padding-bottom: 10px;
             }
+            .actors {
+                display: flex;
+                flex-direction: column;
+                margin: 0px;
+                justify-content: center;
+            }
+            
             .actor {
+                display: flex;
+                flex-direction: row;
                 flex: 0 0 auto;
-                width: 105px;
-                height: 100px;
+                width: 150px;
+                height: 70px;
                 text-align: center;
                 margin-right: 15px;
+                gap: 10px;
             }
+
             .actor img {
                 width: 60px;
                 height: 60px;
                 border-radius: 50%;
                 justify-content: space-around
             }
+
             .actor p {
-                margin: 5px 0;
+                display: flex;
+                margin: 1px 0;
                 font-size: 12px;
+                align-items: flex-start;
+                font-weight: bold;
             }
+
             .cinema-item {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 background-color: #222;
                 padding: 10px;
-                border-radius: 5px;
+                border-radius: 12px;
+                border: 2px solid red
             }
             .cinema-item img {
                 width: 40px;
