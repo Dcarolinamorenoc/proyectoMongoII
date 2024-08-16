@@ -491,6 +491,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.querySelector('.search_input');
+    
+    // Cargar información del usuario
+    const userInfo = JSON.parse(localStorage.getItem('usuarioActual'));
+    if (userInfo) {
+        const avatarImg = document.querySelector('.avatar');
+        avatarImg.src = userInfo.imagen;
+        avatarImg.alt = `${userInfo.nombre}'s Avatar`;
+        
+        const userNameSpan = document.querySelector('.user-info span');
+        userNameSpan.textContent = `Hi, ${userInfo.nombre}!`;
+    } else {
+        console.error('No se encontró información del usuario');
+    }
+
+    searchInput.addEventListener('keypress', async (e) => {
+        if (e.key === 'Enter') {
+            const query = searchInput.value.trim();
+            if (query) {
+                try {
+                    const response = await fetch(`http://localhost:5001/api/peliculas/buscar?query=${encodeURIComponent(query)}`);
+                    const movies = await response.json();
+                    displaySearchResults(movies, query);
+                } catch (error) {
+                    console.error('Error al buscar películas:', error);
+                    displaySearchResults([], query);
+                }
+            }
+        }
+    });
+});
+
 // Función para mostrar los resultados de la búsqueda
 function displaySearchResults(movies, query) {
     const mainContent = document.getElementById('main-content');
@@ -546,7 +579,7 @@ function displaySearchResults(movies, query) {
         </section>
 
         <nav class="bottom-nav">
-            <a href="#" class="active">
+            <a href="home.html" class="active">
                 <img src="../storage/img/home.png" alt="Home">
                 <span>Home</span>
             </a>
@@ -577,6 +610,9 @@ function displaySearchResults(movies, query) {
             }
         }
     });
+
+    // Actualizar la información del usuario después de renderizar
+    updateUserInfo();
 }
 
 // Función auxiliar para fetch y display de resultados
@@ -588,5 +624,20 @@ async function fetchAndDisplaySearchResults(query) {
     } catch (error) {
         console.error('Error al buscar películas:', error);
         displaySearchResults([], query);
+    }
+}
+
+// Función para actualizar la información del usuario
+function updateUserInfo() {
+    const userInfo = JSON.parse(localStorage.getItem('usuarioActual'));
+    if (userInfo) {
+        const avatarImg = document.querySelector('.avatar');
+        avatarImg.src = userInfo.imagen;
+        avatarImg.alt = `${userInfo.nombre}'s Avatar`;
+        
+        const userNameSpan = document.querySelector('.user-info span');
+        userNameSpan.textContent = `Hi, ${userInfo.nombre}!`;
+    } else {
+        console.error('No se encontró información del usuario');
     }
 }
