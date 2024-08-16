@@ -508,17 +508,26 @@ header {
 
 
 
-section {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
 
-.title {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.search-title {
     margin-bottom: 20px;
 }
 
-.title h1 {
+.search-title h1 {
     display: flex;
     align-items: flex-start;
     font-size: 20px;
@@ -526,37 +535,31 @@ section {
     color: #fff;
 }
 
-.cards {
+.search-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
-.card-container {
+.search-card-container {
     text-align: center;
 }
 
-.card-container img {
+.search-card-container img {
     width: 100%;
     border-radius: 10px;
 }
 
-.card-title {
+.search-card-title {
     margin-top: 10px;
     font-size: 1.2em;
     font-weight: bold;
 }
 
-.card-subtitle {
+.search-card-subtitle {
     font-size: 1em;
     color: #aaa;
 }
-
-
-
-
-
-
 
 
 @media (max-width: 768px) {

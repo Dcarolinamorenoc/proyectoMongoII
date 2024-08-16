@@ -468,3 +468,125 @@ if (document.getElementById('movieSlider')) {
         updateActiveDot(index);
     });
 }
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.querySelector('.search_input');
+    
+    searchInput.addEventListener('keypress', async (e) => {
+        if (e.key === 'Enter') {
+            const query = searchInput.value.trim();
+            if (query) {
+                try {
+                    const response = await fetch(`http://localhost:5001/api/peliculas/buscar?query=${encodeURIComponent(query)}`);
+                    const movies = await response.json();
+                    displaySearchResults(movies, query);
+                } catch (error) {
+                    console.error('Error al buscar películas:', error);
+                    displaySearchResults([], query);
+                }
+            }
+        }
+    });
+});
+
+// Función para mostrar los resultados de la búsqueda
+function displaySearchResults(movies, query) {
+    const mainContent = document.getElementById('main-content');
+    
+    let html = `
+        <header>
+            <div class="inicio">
+                <div class="user-info">
+                    <img src="" alt="User Avatar" class="avatar">
+                    <span>Hi, User!</span>
+                </div>
+                <div class="user-inf">
+                    <span>¡Veamos una película juntos!</span>
+                </div>
+            </div>
+            <div class="notification">
+                <img src="../storage/img/notifi.png" alt="Notification">
+            </div>
+        </header>
+
+        <section id="search-section" class="search">
+            <div class="search_bus">
+                <div class="search_wrapper">
+                    <img src="../storage/img/lupa.svg" alt="Search" class="search_icon">
+                    <input class="search_input" type="text" placeholder="Search movie, cinema, genre..." value="${query}">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="search-title">
+                <h1>Resultado de Búsqueda</h1>
+            </div>
+            <div class="search-cards">
+    `;
+
+    if (movies.length === 0) {
+        html += `<p>No se encontraron resultados para "${query}"</p>`;
+    } else {
+        movies.forEach(movie => {
+            html += `
+                <div class="search-card-container" onclick="displayMovieDetails(${movie.id}, '${movie.estado}')">
+                    <img src="${movie.imagen_pelicula}" alt="${movie.titulo}">
+                    <div class="search-card-title">${movie.titulo}</div>
+                    <div class="search-card-subtitle">${movie.genero}</div>
+                </div>
+            `;
+        });
+    }
+
+    html += `
+            </div>
+        </section>
+
+        <nav class="bottom-nav">
+            <a href="#" class="active">
+                <img src="../storage/img/home.png" alt="Home">
+                <span>Home</span>
+            </a>
+            <a href="#search-section">
+                <img src="../storage/img/browse.png" alt="Browse">
+                <span>Browse</span>
+            </a>
+            <a href="#">
+                <img src="../storage/img/ticket.png" alt="Tickets">
+                <span>Tickets</span>
+            </a>
+            <a href="#">
+                <img src="../storage/img/user.png" alt="Profile">
+                <span>Profile</span>
+            </a>
+        </nav>
+    `;
+
+    mainContent.innerHTML = html;
+
+    // Volver a añadir el event listener para la búsqueda
+    const searchInput = document.querySelector('.search_input');
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            const newQuery = searchInput.value.trim();
+            if (newQuery) {
+                fetchAndDisplaySearchResults(newQuery);
+            }
+        }
+    });
+}
+
+// Función auxiliar para fetch y display de resultados
+async function fetchAndDisplaySearchResults(query) {
+    try {
+        const response = await fetch(`http://localhost:5001/api/peliculas/buscar?query=${encodeURIComponent(query)}`);
+        const movies = await response.json();
+        displaySearchResults(movies, query);
+    } catch (error) {
+        console.error('Error al buscar películas:', error);
+        displaySearchResults([], query);
+    }
+}
