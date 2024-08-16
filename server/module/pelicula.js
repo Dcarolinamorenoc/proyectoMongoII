@@ -174,11 +174,13 @@ module.exports = class Pelicula extends connect {
                 return { error: "Se requiere un término de búsqueda" };
             }
     
-            const regexQuery = new RegExp(query, 'i');
+            const cleanQuery = query.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+            const regexQuery = new RegExp(cleanQuery, 'i');
     
             const peliculas = await this.collection.find({
                 $or: [
-                    { titulo: regexQuery },
+                    { titulo: { $regex: regexQuery } },
                     { genero: regexQuery },
                     { pais_origen: regexQuery },
                     { estado: regexQuery },
