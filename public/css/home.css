@@ -496,7 +496,9 @@ header {
     padding: 6px; 
 }
 
-
+.bottom-nav a {
+    color: red;
+}
 
 @media (max-width: 768px) {
     .movie-slide {
