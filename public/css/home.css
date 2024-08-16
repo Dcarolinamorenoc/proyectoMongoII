@@ -500,6 +500,8 @@ header {
     color: red;
 }
 
+
+
 @media (max-width: 768px) {
     .movie-slide {
         width: 80%;
