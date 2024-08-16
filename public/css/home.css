@@ -502,6 +502,63 @@ header {
 
 
 
+
+
+
+
+
+
+section {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.title h1 {
+    display: flex;
+    align-items: flex-start;
+    font-size: 20px;
+    margin-top: 10px;
+    color: #fff;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.card-container {
+    text-align: center;
+}
+
+.card-container img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.card-title {
+    margin-top: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.card-subtitle {
+    font-size: 1em;
+    color: #aaa;
+}
+
+
+
+
+
+
+
+
 @media (max-width: 768px) {
     .movie-slide {
         width: 80%;
