@@ -23,8 +23,18 @@ const obtenerPeliculasPorEstado = async (req, res) => {
     obj.destructor();
     res.status(200).json(resultado);
 };
+
+const buscarPeliculas = async (req, res) => {
+    let obj = new Pelicula();
+    const { query } = req.query;
+    const resultado = await obj.buscarPeliculas(query);
+    obj.destructor();
+    res.status(200).json(resultado);
+};
+
 module.exports = {
     listarPeliculas,
     obtenerDetallesPelicula,
-    obtenerPeliculasPorEstado
+    obtenerPeliculasPorEstado,
+    buscarPeliculas
 }

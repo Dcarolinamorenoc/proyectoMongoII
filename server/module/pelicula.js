@@ -167,4 +167,33 @@ module.exports = class Pelicula extends connect {
             return { error: `Error al obtener las películas por estado: ${error.message}` };
         }
     }
+
+    async buscarPeliculas(query) {
+        try {
+            if (!query) {
+                return { error: "Se requiere un término de búsqueda" };
+            }
+    
+            const regexQuery = new RegExp(query, 'i');
+    
+            const peliculas = await this.collection.find({
+                $or: [
+                    { titulo: regexQuery },
+                    { genero: regexQuery },
+                    { pais_origen: regexQuery },
+                    { estado: regexQuery },
+                    { "reparto.nombre_real": regexQuery },
+                    { "reparto.nombre_personaje": regexQuery }
+                ]
+            }).toArray();
+    
+            if (peliculas.length === 0) {
+                return { message: "No se encontraron películas que coincidan con la búsqueda" };
+            }
+    
+            return peliculas;
+        } catch (error) {
+            return { error: `Error al buscar películas: ${error.message}` };
+        }
+    }
 };
