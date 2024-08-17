@@ -511,26 +511,6 @@ if (document.getElementById('movieSlider')) {
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.querySelector('.search_input');
     
-    searchInput.addEventListener('keypress', async (e) => {
-        if (e.key === 'Enter') {
-            const query = searchInput.value.trim();
-            if (query) {
-                try {
-                    const response = await fetch(`http://localhost:5001/api/peliculas/buscar?query=${encodeURIComponent(query)}`);
-                    const movies = await response.json();
-                    displaySearchResults(movies, query);
-                } catch (error) {
-                    console.error('Error al buscar películas:', error);
-                    displaySearchResults([], query);
-                }
-            }
-        }
-    });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.querySelector('.search_input');
-    
     // Cargar información del usuario
     const userInfo = JSON.parse(localStorage.getItem('usuarioActual'));
     if (userInfo) {
@@ -598,7 +578,12 @@ function displaySearchResults(movies, query) {
     `;
 
     if (movies.length === 0) {
-        html += `<p>No se encontraron resultados para "${query}"</p>`;
+        html += `
+            <div class="no-results">
+                <p>No Se Encontraron Resultados Para: "${query}"</p>
+                <img src="../storage/img/noResult.png" alt="No results found" class="no-results-image">
+            </div>
+        `;
     } else {
         movies.forEach(movie => {
             html += `

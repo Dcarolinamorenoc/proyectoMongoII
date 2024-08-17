@@ -614,9 +614,30 @@ header {
     color: rgb(209, 206, 206);
 }
 
+.no-results {
+    text-align: center;
+    padding: 20px;
+}
+
+.no-results p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.no-results-image {
+    width: 300px;
+    height: 300px;
+}
+
 
 @media (max-width: 768px) {
     .movie-slide {
         width: 80%;
+    }
+
+    .no-results p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        margin-left: -20px;
     }
 }
