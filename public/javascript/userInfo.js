@@ -47,7 +47,7 @@ function updateUserInterface(user) {
         methodElement.className = 'payment-method';
         methodElement.innerHTML = `
             <h4>${method.nombre_tarjeta}</h4>
-            <p>Número: ${method.numero_tarjeta}</p>
+            <p class="payment-method-number">Número: ${method.numero_tarjeta}</p>
             <img src="${method.imagen_tarjeta}" alt="${method.nombre_tarjeta}">
         `;
         paymentMethodsContainer.appendChild(methodElement);
@@ -55,8 +55,7 @@ function updateUserInterface(user) {
 }
 
 function fetchVipCardInfo(userId) {
-    // Simula una llamada a la API para obtener la información de la tarjeta VIP
-    // Reemplaza esto con tu llamada real a la API cuando esté disponible
+
     setTimeout(() => {
         const vipCardInfo = {
             id: 1,
