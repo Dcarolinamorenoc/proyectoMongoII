@@ -59,7 +59,7 @@ header {
 .user-info span {
     display: flex;
     margin-top: -8%;
-    margin-left: 2%;
+    margin-left: 1%;
 }
 
 .user-inf span {
@@ -601,7 +601,17 @@ header {
 .search-card-subtitle {
     font-size: 1em;
     color: #aaa;
-    margin-top: 10px;
+    margin-top: 10px
+}
+
+
+.user-inf span {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.search_input::placeholder {
+    color: rgb(209, 206, 206);
 }
 
 

@@ -186,7 +186,7 @@ async function displayMovieDetails(movieId, movieState) {
         document.body.innerHTML = `
             <div class="movie-details-container">
         <div class="movie-header">
-            <img src="../storage/img/return.png" alt="Back" class="back-button" onclick="goToHome()">
+            <img src="../storage/img/arrow.png" alt="Back" class="back-button" onclick="goToHome()">
             <h1>Cinema Selection</h1>
             <img src="../storage/img/points.png" alt="More options" class="more-options">
         </div>
@@ -196,8 +196,10 @@ async function displayMovieDetails(movieId, movieState) {
             </div>
             <div class="movie-info">
                 <h2>${movie.titulo}</h2>
-                <button class="watch-trailer" onclick="window.open('${movie.trailer}', '_blank')">Watch Trailer</button>
-
+                <button class="watch-trailer" onclick="window.open('${movie.trailer}', '_blank')">
+                    <img src="../storage/img/music.png" alt="Trailer Icon" class="trailer-icon">
+                    Watch Trailer
+                </button>
             </div>
             <div class="movie-inf">
                 <p class="genre">${movie.genero}</p>
@@ -211,8 +213,8 @@ async function displayMovieDetails(movieId, movieState) {
                         <div class="actor">
                             <img src="${actor.imagen_actor}" alt="${actor.nombre_real}">
                             <div class="actors">
-                                <p>${actor.nombre_real}</p>
-                                <p>${actor.nombre_personaje}</p>
+                                <p class="actor-name">${actor.nombre_real}</p>
+                                <p class="character-name">${actor.nombre_personaje}</p>
                             </div>
                         </div>
                     `).join('')}
@@ -227,13 +229,6 @@ async function displayMovieDetails(movieId, movieState) {
                             <p>Zona Franca Santander</p>
                         </div>
                         <img src="../storage/img/Cinecampus.png" alt="Cinema logo">
-                    </div>
-                </div>
-                <div class="mode-selection">
-                    <h3>Mode</h3>
-                    <div class="mode-buttons">
-                        <button class="mode-button" onclick="selectMode(this, 'reserve')">Reserva</button>
-                        <button class="mode-button" onclick="selectMode(this, 'buy')">Comprar boleto</button>
                     </div>
                 </div>
                 <button id="book-now" onclick="bookMovie()" disabled>Book Now</button>
@@ -262,11 +257,14 @@ async function displayMovieDetails(movieId, movieState) {
                 justify-content: space-between;
                 align-items: center;
                 margin-bottom: 20px;
+                margin-top:10px;
             }
             .back-button, .more-options {
                 width: 24px;
                 height: 24px;
                 cursor: pointer;
+                margin-right: 20px;
+                margin-left: 20px;
             }
             .movie-content {
                 text-align: center;
@@ -284,38 +282,54 @@ async function displayMovieDetails(movieId, movieState) {
                 border-radius: 10px;
                 object-fit: cover;
             }
+
             .movie-info {
                 display: flex;
                 margin-top: 20px;
                 flex-direction: row;
                 justify-content: space-between;
+                margin: 15px;
+                margin-top: 1px;
             }
+
             h2 {
-                font-size: 24px;
-                margin: 10px 0;
-            }
-            .genre {
-                display: flex;
-                justify-content: start;
-                color: #888;
-                margin-bottom: 10px;
-            }
-            .watch-trailer {
-                background-color: #ff0000;
-                color: #fff;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-                font-weight: bold;
                 font-size: 16px;
                 margin: 10px 0;
             }
+
+            .genre {
+                display: flex;
+                justify-content: start;
+                color: #efefef;
+                margin-bottom: 10px;
+                margin-top: -20px;
+                margin-left: 15px;
+                font-size: 14px;
+
+            }
+
+            .watch-trailer {
+                display: flex;
+                width: 130px;
+                height: 30px;
+                align-items: center;
+                font-size: 12px;
+                padding: 10px 20px;
+                border: none;
+                color: white;
+                cursor: pointer;
+                border-radius: 6px;
+                margin-top: 10px;
+                font-weight: bold;
+            }
+
             .description {
+                width: 318px;
                 margin-top: 10px;
                 font-size: 14px;
                 color: #ccc;
                 text-align: left;
+                margin-left: 15px;
             }
             .cast, .cinema, .mode-selection {
                 display: flex;
@@ -326,11 +340,13 @@ async function displayMovieDetails(movieId, movieState) {
             .cast h3, .cinema h3, .mode-selection h3 {
                 font-size: 18px;
                 margin-bottom: 10px;
+                margin-left: 15px;
             }
             .cast-list {
                 display: flex;
                 overflow-x: auto;
                 padding-bottom: 10px;
+                margin-left: 10px;
             }
             .actors {
                 display: flex;
@@ -362,7 +378,6 @@ async function displayMovieDetails(movieId, movieState) {
                 margin: 1px 0;
                 font-size: 12px;
                 align-items: flex-start;
-                font-weight: bold;
             }
 
             .cinema-item {
@@ -416,6 +431,28 @@ async function displayMovieDetails(movieId, movieState) {
                 background-color: #555;
                 cursor: not-allowed;
             }
+
+            .movie-header h1 {
+                font-size: 20px; 
+            }
+
+            .trailer-icon {
+                display: flex;
+                align-items: self-start;
+                margin-right: 10px;
+                width: 15px;
+                height: 20px;
+                margin-left: -10px;
+            }
+
+            .actor-name {
+                font-weight: bold; 
+            }
+
+            .character-name {
+                font-weight: normal;
+            }
+
         `;
         document.head.appendChild(styleElement);
 
