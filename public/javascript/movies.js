@@ -591,7 +591,7 @@ function displaySearchResults(movies, query) {
                 <img src="../storage/img/ticket.png" alt="Tickets">
                 <span>Tickets</span>
             </a>
-            <a href="#">
+            <a href="../views/infoUser.html">
                 <img src="../storage/img/user.png" alt="Profile">
                 <span>Profile</span>
             </a>

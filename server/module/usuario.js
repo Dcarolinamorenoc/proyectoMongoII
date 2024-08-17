@@ -494,7 +494,9 @@ module.exports = class Usuario extends connect {
                     rol: usuario.rol,
                     imagen: usuario.imagen_user,
                     telefono: usuario.telefono,
-                    celular: usuario.celular
+                    celular: usuario.celular,
+                    imagen_user:usuario.imagen_user,
+                    metodo_pago: usuario.metodo_pago,
                 })),
                 mensaje: mensaje
             };
