@@ -58,7 +58,7 @@ module.exports = class Usuario extends connect {
             const usuarios = db.collection('usuario');
     
             
-            const camposUnicos = ['id', 'nickname', 'email', 'celular', 'identificacion'];
+            const camposUnicos = ['id', 'nickname', 'email', 'celular', 'identificacion', 'imagen_user', 'numero_tarjeta'];
             for (let campo of camposUnicos) {
                 const usuarioExistente = await usuarios.findOne({ [campo]: datosUsuario[campo] });
                 if (usuarioExistente) {
