@@ -138,9 +138,26 @@ function setupCarousel() {
         }
     }
 
+    function updateCardVisibility() {
+        const containerCenter = cardsContainer.offsetWidth / 2;
+        const scrollPosition = cardsContainer.scrollLeft;
+        
+        allCards.forEach((card) => {
+            const cardCenter = card.offsetLeft - scrollPosition + (card.offsetWidth / 2);
+            const distanceFromCenter = Math.abs(containerCenter - cardCenter);
+            
+            if (distanceFromCenter < card.offsetWidth / 2) {
+                card.classList.add('active');
+            } else {
+                card.classList.remove('active');
+            }
+        });
+    }
+
     cardsContainer.addEventListener('scroll', () => {
         updateActiveIndicator();
         handleInfiniteScroll();
+        updateCardVisibility();
     });
 
     indicators.forEach((button, index) => {
@@ -154,6 +171,7 @@ function setupCarousel() {
     });
 
     updateActiveIndicator();
+    updateCardVisibility();
 }
 
 

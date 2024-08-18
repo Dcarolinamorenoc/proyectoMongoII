@@ -132,7 +132,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10%;
+    margin-top: 25%;
     margin-bottom: 3%;
 }
 
@@ -791,6 +791,14 @@ header {
     border-radius: 4px;
 }
 
+
+.cards_eachOne .cards_content {
+    transition: opacity 0.3s ease;
+  }
+  
+  .cards_eachOne:not(.active) .cards_content {
+    opacity: 0;
+  }
 
 @media (max-width: 768px) {
     .movie-slide {
