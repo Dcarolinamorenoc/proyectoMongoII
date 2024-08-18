@@ -1,13 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { query, validationResult } = require('express-validator');
-const {
-    crearUsuario,
-    crearTarjetaVIP,
-    consultarUsuarioDetallado,
-    actualizarRolUsuario,
-    consultarUsuarios
-} = require("../controllers/usuarioControllers");
+const { crearUsuario, crearTarjetaVIP, consultarUsuarioDetallado, actualizarRolUsuario, consultarUsuarios } = require("../controllers/usuarioControllers");
+
+
+router.use(express.json());
 
 router.post('/usuarios', crearUsuario);
 router.post('/usuarios/tarjeta-vip', crearTarjetaVIP);

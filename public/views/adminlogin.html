@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Cine Campus</title>
     <link rel="stylesheet" href="../css/adminlogin.css">
+    <script src="../javascript/adminlogin.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -13,7 +14,7 @@
         </div>
         <div class="login-section">
             <h1>Ingresa como Administrador para registrar un usuario</h1>
-            <form>
+            <form id="loginForm">
                 <div class="input-group">
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" required>
@@ -22,10 +23,13 @@
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                <button type="button" onclick="window.location.href='./registrar.html'">Login</button>
+                <button type="submit">Login</button>
             </form>
-            <p>¿No eres Administrador? <a href="../index.html">Register</a></p>
+            <p>¿No eres Administrador? <a href="../index.html">Login</a></p>
         </div>
+    </div>
+    <div id="errorPopup" class="error-popup" style="display: none;">
+        <p>Usuario o Contraseña incorrecta</p>
     </div>
 </body>
 </html>

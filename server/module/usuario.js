@@ -51,14 +51,14 @@ module.exports = class Usuario extends connect {
     
 
     async crearUsuario(datosUsuario) {
+        console.log('Datos recibidos en crearUsuario:', datosUsuario);
         let client;
         try {
             client = await this.conexion.connect();
             const db = client.db('cineCampus'); 
             const usuarios = db.collection('usuario');
     
-            
-            const camposUnicos = ['id', 'nickname', 'email', 'celular', 'identificacion'];
+            const camposUnicos = ['id', 'nickname', 'email', 'celular', 'identificacion', 'imagen_user'];
             for (let campo of camposUnicos) {
                 const usuarioExistente = await usuarios.findOne({ [campo]: datosUsuario[campo] });
                 if (usuarioExistente) {
@@ -66,7 +66,6 @@ module.exports = class Usuario extends connect {
                 }
             }
     
-            
             const usuarioNombreExistente = await usuarios.findOne({
                 nombre_completo: { $regex: new RegExp('^' + datosUsuario.nombre_completo + '$', 'i') }
             });
@@ -74,15 +73,21 @@ module.exports = class Usuario extends connect {
                 return { error: 'Error al crear el usuario: Ya existe un usuario con el mismo nombre completo.' };
             }
     
-            
             if (!['VIP', 'Estandar', 'Administrador'].includes(datosUsuario.rol)) {
                 return { error: 'Error al crear el usuario: Rol de usuario no válido' };
             }
     
-            
-            await usuarios.insertOne(datosUsuario);
+            // Asegúrate de que metodo_pago es un array
+            if (!Array.isArray(datosUsuario.metodo_pago)) {
+                datosUsuario.metodo_pago = datosUsuario.metodo_pago ? [datosUsuario.metodo_pago] : [];
+            }
     
-            
+            // Convertir el campo 'id' a número
+            datosUsuario.id = parseInt(datosUsuario.id);
+
+            const resultado = await usuarios.insertOne(datosUsuario);
+            console.log('Resultado de insertOne:', resultado);
+    
             if (datosUsuario.rol === 'Administrador') {
                 await db.command({
                     createUser: datosUsuario.nickname,
@@ -100,12 +105,11 @@ module.exports = class Usuario extends connect {
                 });
             }
     
-            
-            const respuesta = { ...datosUsuario };
-            delete respuesta._id;
+            const respuesta = { ...datosUsuario, _id: resultado.insertedId };
     
             return { mensaje: 'Usuario creado con éxito', usuario: respuesta };
         } catch (error) {
+            console.error('Error en crearUsuario:', error);
             return { error: `Error al crear el usuario: ${error.message}` };
         } finally {
             if (client) {
@@ -172,7 +176,8 @@ module.exports = class Usuario extends connect {
                 numero: await this.generarNumeroTarjeta(),
                 porcentaje_descuento: 15,
                 fecha_expiracion: this.generarFechaExpiracion(),
-                estado: 'activa'
+                estado: 'activa',
+                tarjeta_img: "https://i.pinimg.com/736x/a4/dc/ab/a4dcab9932c9e10f2f7efd77c022a979.jpg"
             };
 
             await this.collectionTarjetaVip.insertOne(nuevaTarjeta);
@@ -183,6 +188,7 @@ module.exports = class Usuario extends connect {
             return { error: error.message };
         }
     }
+    
     async generarIdTarjeta() {
         const ultimaTarjeta = await this.collectionTarjetaVip.findOne({}, { sort: { id: -1 } });
         return ultimaTarjeta ? ultimaTarjeta.id + 1 : 1;
