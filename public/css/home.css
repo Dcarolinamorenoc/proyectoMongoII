@@ -175,7 +175,7 @@ header {
 .coming-soon{
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    margin-top: 25px;
     gap: 5px;
     padding: 7%;
 }
@@ -657,7 +657,7 @@ header {
     height: 8vh;
     justify-content: center;
     align-items: center;
-    font-size: 105%;
+    font-size: 115%;
 }
 
 .section_title h2{
@@ -693,6 +693,7 @@ header {
     gap: 1rem;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    margin-top: -10px;
 }
 
 .cards_container::-webkit-scrollbar {
@@ -746,7 +747,7 @@ header {
     font-size: 110%;
     width: 100%;
     padding: 0;
-    margin: 12% 0 0 0;
+    margin: 1% 0 0 0;
 }
 
 .cards_content p {
@@ -771,7 +772,7 @@ header {
 .carousel-indicators {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: -40px;
 }
 
 .carousel-indicators button {
@@ -799,6 +800,24 @@ header {
   .cards_eachOne:not(.active) .cards_content {
     opacity: 0;
   }
+
+
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 7%;
+    margin-top: 25px;
+}
+
+
+
+
+
+
+
+
 
 @media (max-width: 768px) {
     .movie-slide {
