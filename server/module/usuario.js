@@ -1,29 +1,47 @@
-const connect = require ("../helpers/connect.js")
-const { ObjectId } = require ("mongodb")
+const connect = require("../helpers/connect.js");
+const { ObjectId } = require("mongodb");
 
 module.exports = class Usuario extends connect {
-
     static instanceUsuario;
     db;
     collectionUsuario;
-    collectionTarjetaVip;
-  
+    collectionTarjetaVIP;
+
     constructor() {
         if (Usuario.instanceUsuario) {
             return Usuario.instanceUsuario;
         }
         super();
-        this.db = this.conexion.db(process.env.MONGO_DB);
-        this.collectionUsuario = this.db.collection('usuario');
-        this.collectionTarjetaVip = this.db.collection('tarjeta_vip');
+        this.initializeCollections();
         Usuario.instanceUsuario = this;
     }
-  
+
+    async initializeCollections() {
+        try {
+            await this.conexion.connect();
+            this.db = this.conexion.db(process.env.MONGO_DB);
+            this.collectionUsuario = this.db.collection('usuario');
+            this.collectionTarjetaVIP = this.db.collection('tarjeta_vip');
+
+            // Verificar si las colecciones existen
+            const collections = await this.db.listCollections().toArray();
+            const collectionNames = collections.map(c => c.name);
+
+            if (!collectionNames.includes('usuario') || !collectionNames.includes('tarjeta_vip')) {
+                throw new Error('Las colecciones usuario o tarjeta_vip no existen en la base de datos');
+            }
+
+            console.log('Colecciones inicializadas correctamente');
+        } catch (error) {
+            console.error('Error al inicializar las colecciones:', error);
+            throw error;
+        }
+    }
+
     destructor() {
         Usuario.instanceUsuario = undefined;
         connect.instanceConnect = undefined;
     }
-
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -440,8 +458,8 @@ module.exports = class Usuario extends connect {
                 await this.conexion.connect();
             }
     
-            if (!this.collectionUsuario) {
-                throw new Error('La colección de usuarios no está definida');
+            if (!this.collectionUsuario || !this.collectionTarjetaVIP) {
+                throw new Error('Las colecciones de usuarios o tarjetas VIP no están definidas correctamente');
             }
     
             // Verificar si el usuario que hace la consulta es un Administrador
@@ -498,9 +516,7 @@ module.exports = class Usuario extends connect {
             const usuariosConTarjetaVIP = await Promise.all(usuarios.map(async (usuario) => {
                 let tarjetaVIP;
                 try {
-                    if (this.collectionTarjetaVIP) {
-                        tarjetaVIP = await this.collectionTarjetaVIP.findOne({ id_usuario: usuario.id });
-                    }
+                    tarjetaVIP = await this.collectionTarjetaVIP.findOne({ id_usuario: usuario.id });
                 } catch (error) {
                     console.error(`Error al buscar tarjeta VIP para el usuario ${usuario.id}:`, error);
                 }
