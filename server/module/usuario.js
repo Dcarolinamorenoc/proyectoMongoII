@@ -176,7 +176,8 @@ module.exports = class Usuario extends connect {
                 numero: await this.generarNumeroTarjeta(),
                 porcentaje_descuento: 15,
                 fecha_expiracion: this.generarFechaExpiracion(),
-                estado: 'activa'
+                estado: 'activa',
+                tarjeta_img: "https://i.pinimg.com/736x/a4/dc/ab/a4dcab9932c9e10f2f7efd77c022a979.jpg"
             };
 
             await this.collectionTarjetaVip.insertOne(nuevaTarjeta);
@@ -187,6 +188,7 @@ module.exports = class Usuario extends connect {
             return { error: error.message };
         }
     }
+    
     async generarIdTarjeta() {
         const ultimaTarjeta = await this.collectionTarjetaVip.findOne({}, { sort: { id: -1 } });
         return ultimaTarjeta ? ultimaTarjeta.id + 1 : 1;

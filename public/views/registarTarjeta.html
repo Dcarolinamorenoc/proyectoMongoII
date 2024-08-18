@@ -6,6 +6,7 @@
     <title>Registro de Tarjeta VIP</title>
     <link rel="stylesheet" href="../css/registrar.css">
     <link rel="stylesheet" href="../css/tarjeta.css">
+    <script src="../javascript/registrarTarjeta.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -17,11 +18,21 @@
             <br>
             <p>Ingresa el Nickname, id o identificación para crearla:</p>
             <br>
-            <input type="text" placeholder="Escribe aquí...">
+            <form id="tarjetaVipForm">
+                <input type="text" id="usuarioInput" placeholder="Escribe aquí...">
+                <button type="submit">Crear Tarjeta VIP</button>
+            </form>
+            <p id="mensajeResultado"></p>
             <p>Continuar en el sistema <a href="../index.html">Login</a></p>
         </div>
         <div class="image-container">
             <img src="../storage/img/tvip.png" alt="Palomitas" class="popcorn">
+        </div>
+    </div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p id="popupMessage"></p>
+            <button class="close-btn" onclick="closePopup()">Cerrar</button>
         </div>
     </div>
 </body>
