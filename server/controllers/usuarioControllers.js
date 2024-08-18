@@ -1,10 +1,16 @@
 const Usuario = require('../module/usuario');
 
 const crearUsuario = async (req, res) => {
-    let obj = new Usuario();
-    const resultado = await obj.crearUsuario(req.body);
-    obj.destructor();
-    res.status(200).json(resultado);
+    console.log('Datos recibidos en crearUsuario:', req.body);
+    try {
+        let obj = new Usuario();
+        const resultado = await obj.crearUsuario(req.body);
+        obj.destructor();
+        res.status(200).json(resultado);
+    } catch (error) {
+        console.error('Error en crearUsuario:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
 };
 
 const crearTarjetaVIP = async (req, res) => {

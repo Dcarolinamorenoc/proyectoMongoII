@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse - Cine Campus</title>
     <link rel="stylesheet" href="../css/registrar.css">
+    <script src="../javascript/registrar.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -13,11 +14,11 @@
         </div>
         <div class="form-section">
             <h1>¡Por favor rellene el formulario para registrarse!</h1>
-            <form>
+            <form id="registroForm">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="nombre">Nombre completo:</label>
-                        <input type="text" id="nombre" name="nombre" required>
+                        <input type="text" id="nombre" name="nombre_completo" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
@@ -36,12 +37,16 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="id">id:</label>
+                        <label for="id">ID:</label>
                         <input type="text" id="id" name="id" required>
                     </div>
                     <div class="form-group">
                         <label for="rol">Rol:</label>
-                        <input type="text" id="rol" name="rol" required>
+                        <select id="rol" name="rol" required>
+                            <option value="VIP">VIP</option>
+                            <option value="Estandar">Estandar</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-row">
@@ -57,14 +62,46 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="imagen">Imagen del Usuario:</label>
-                        <input type="url" id="imagen" name="imagen" placeholder="Ingrese el enlace de la imagen" required>
+                        <input type="url" id="imagen" name="imagen_user" placeholder="Ingrese el enlace de la imagen" required>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="metodo-pago">Metodo de Pago:</label>
-                        <input type="text" id="metodo-pago" name="metodo-pago" required>
+                <h2>Métodos de Pago</h2>
+                <div id="metodosPagoContainer">
+                    <div class="metodo-pago">
+                        <h3>Método de pago 1 (Obligatorio)</h3>
+                        <div class="form-group">
+                            <label for="nombre_tarjeta_0">Nombre de la tarjeta:</label>
+                            <input type="text" id="nombre_tarjeta_0" name="nombre_tarjeta_0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="numero_tarjeta_0">Número de la tarjeta:</label>
+                            <input type="text" id="numero_tarjeta_0" name="numero_tarjeta_0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="metodo-pago">
+                        <h3>Método de pago 2 (Opcional)</h3>
+                        <div class="form-group">
+                            <label for="nombre_tarjeta_1">Nombre de la tarjeta:</label>
+                            <input type="text" id="nombre_tarjeta_1" name="nombre_tarjeta_1">
+                        </div>
+                        <div class="form-group">
+                            <label for="numero_tarjeta_1">Número de la tarjeta:</label>
+                            <input type="text" id="numero_tarjeta_1" name="numero_tarjeta_1">
+                        </div>
+                    </div>
+                    
+                    <div class="metodo-pago">
+                        <h3>Método de pago 3 (Opcional)</h3>
+                        <div class="form-group">
+                            <label for="nombre_tarjeta_2">Nombre de la tarjeta:</label>
+                            <input type="text" id="nombre_tarjeta_2" name="nombre_tarjeta_2">
+                        </div>
+                        <div class="form-group">
+                            <label for="numero_tarjeta_2">Número de la tarjeta:</label>
+                            <input type="text" id="numero_tarjeta_2" name="numero_tarjeta_2">
+                        </div>
                     </div>
                 </div>
 
@@ -73,7 +110,13 @@
             <br>
             <p>Continuar en el sistema <a href="../index.html">Login</a></p>
             <br>
-            <p>Registar Tarjeta Usuarios VIP <a href="../index.html">Login</a></p>
+            <p>Registrar Tarjeta Usuarios VIP <a href="../index.html">Login</a></p>
+        </div>
+    </div>
+    <div id="popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <p id="popup-message"></p>
         </div>
     </div>
 </body>
