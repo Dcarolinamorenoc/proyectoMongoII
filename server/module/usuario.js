@@ -1,29 +1,47 @@
-const connect = require ("../helpers/connect.js")
-const { ObjectId } = require ("mongodb")
+const connect = require("../helpers/connect.js");
+const { ObjectId } = require("mongodb");
 
 module.exports = class Usuario extends connect {
-
     static instanceUsuario;
     db;
     collectionUsuario;
-    collectionTarjetaVip;
-  
+    collectionTarjetaVIP;
+
     constructor() {
         if (Usuario.instanceUsuario) {
             return Usuario.instanceUsuario;
         }
         super();
-        this.db = this.conexion.db(process.env.MONGO_DB);
-        this.collectionUsuario = this.db.collection('usuario');
-        this.collectionTarjetaVip = this.db.collection('tarjeta_vip');
+        this.initializeCollections();
         Usuario.instanceUsuario = this;
     }
-  
+
+    async initializeCollections() {
+        try {
+            await this.conexion.connect();
+            this.db = this.conexion.db(process.env.MONGO_DB);
+            this.collectionUsuario = this.db.collection('usuario');
+            this.collectionTarjetaVIP = this.db.collection('tarjeta_vip');
+
+            // Verificar si las colecciones existen
+            const collections = await this.db.listCollections().toArray();
+            const collectionNames = collections.map(c => c.name);
+
+            if (!collectionNames.includes('usuario') || !collectionNames.includes('tarjeta_vip')) {
+                throw new Error('Las colecciones usuario o tarjeta_vip no existen en la base de datos');
+            }
+
+            console.log('Colecciones inicializadas correctamente');
+        } catch (error) {
+            console.error('Error al inicializar las colecciones:', error);
+            throw error;
+        }
+    }
+
     destructor() {
         Usuario.instanceUsuario = undefined;
         connect.instanceConnect = undefined;
     }
-
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -436,9 +454,15 @@ module.exports = class Usuario extends connect {
         const rolesValidos = ['VIP', 'Estandar', 'Administrador'];
     
         try {
-            await this.conexion.connect();
+            if (!this.conexion || !this.conexion.topology || !this.conexion.topology.isConnected()) {
+                await this.conexion.connect();
+            }
     
-            // Primero, verificamos si el usuario que hace la consulta es un Administrador
+            if (!this.collectionUsuario || !this.collectionTarjetaVIP) {
+                throw new Error('Las colecciones de usuarios o tarjetas VIP no están definidas correctamente');
+            }
+    
+            // Verificar si el usuario que hace la consulta es un Administrador
             const usuarioAdmin = await this.collectionUsuario.findOne({
                 nickname: opciones.nickname,
                 identificacion: opciones.identificacion,
@@ -488,10 +512,24 @@ module.exports = class Usuario extends connect {
                 mensaje = `Se encontraron ${usuarios.length} usuario(s) en total.`;
             }
     
-            await this.conexion.close();
+            // Buscar tarjetas VIP para cada usuario
+            const usuariosConTarjetaVIP = await Promise.all(usuarios.map(async (usuario) => {
+                let tarjetaVIP;
+                try {
+                    tarjetaVIP = await this.collectionTarjetaVIP.findOne({ id_usuario: usuario.id });
+                } catch (error) {
+                    console.error(`Error al buscar tarjeta VIP para el usuario ${usuario.id}:`, error);
+                }
+                return {
+                    ...usuario,
+                    tarjeta_vip: tarjetaVIP || {
+                        mensaje: "Querido usuario, no tienes una tarjeta VIP pero puedes adquirir una."
+                    }
+                };
+            }));
     
             return {
-                usuarios: usuarios.map(usuario => ({
+                usuarios: usuariosConTarjetaVIP.map(usuario => ({
                     id: usuario.id,
                     nombre_completo: usuario.nombre_completo,
                     identificacion: usuario.identificacion,
@@ -501,19 +539,21 @@ module.exports = class Usuario extends connect {
                     imagen: usuario.imagen_user,
                     telefono: usuario.telefono,
                     celular: usuario.celular,
-                    imagen_user:usuario.imagen_user,
+                    imagen_user: usuario.imagen_user,
                     metodo_pago: usuario.metodo_pago,
+                    tarjeta_vip: usuario.tarjeta_vip
                 })),
                 mensaje: mensaje
             };
         } catch (error) {
-            await this.conexion.close();
+            console.error('Error en consultarUsuarios:', error);
             return {
                 usuarios: [],
                 mensaje: `Error al consultar usuarios: ${error.message}`
             };
+        } finally {
+            await this.conexion.close();
         }
     }
-
     
 }
