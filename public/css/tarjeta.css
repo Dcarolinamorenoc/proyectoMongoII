@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+}
+
+.container {
+    width: 100%;
+    max-width: 1500px;
+    height: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    flex-direction: row;
+    gap: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content h1 {
+    font-size: 2rem;
+    color: #e33e3e;
+    margin-bottom: 10px;
+}
+
+.highlighted-text {
+    font-size: 20px;
+    font-weight: bold; 
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.login {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #e33e3e;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.login:hover {
+    background-color: #d33a3a;
+}
+
+.highlight {
+    font-weight: bold;
+}
+
+.image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popcorn {
+    width: 80%;
+    max-width: 350px;
+    animation: bounce 2s infinite alternate ease-in-out;
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-15px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .image-container {
+        margin-top: 20px;
+    }
+
+    .popcorn {
+        width: 60%;
+    }
+}
+
+@media (max-width: 480px) {
+    .content h1 {
+        font-size: 1.5rem;
+    }
+
+    .content p {
+        font-size: 1rem;
+    }
+
+    input[type="text"] {
+        width: 90%;
+    }
+
+    .popcorn {
+        width: 50%;
+    }
+}
