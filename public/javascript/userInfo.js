@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const userInfo = JSON.parse(localStorage.getItem('usuarioActual'));
-
     if (userInfo) {
         fetchUserInfo(userInfo.nombre);
     } else {
@@ -10,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function fetchUserInfo(nombreCompleto) {
     const apiUrl = `http://localhost:5001/api/consultar-todos?nickname=FelixCB&identificacion=1098672134&rol`;
-
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
@@ -41,20 +39,28 @@ function updateUserInterface(user) {
 
     const paymentMethodsContainer = document.getElementById('paymentMethodsContainer');
     paymentMethodsContainer.innerHTML = ''; // Limpiar contenedor antes de agregar nuevos métodos
-    user.metodo_pago.forEach(method => {
-        const methodElement = document.createElement('div');
-        methodElement.className = 'payment-method';
-        methodElement.innerHTML = `
-            <h4>${method.nombre_tarjeta}</h4>
-            <p class="payment-method-number">Número: ${method.numero_tarjeta}</p>
-            <img src="${method.imagen_tarjeta}" alt="${method.nombre_tarjeta}">
-        `;
-        paymentMethodsContainer.appendChild(methodElement);
-    });
+
+    if (user.rol === 'Administrador') {
+        paymentMethodsContainer.innerHTML = '<p>Como administrador, no tienes métodos de pago asociados.</p>';
+    } else {
+        user.metodo_pago.forEach(method => {
+            const methodElement = document.createElement('div');
+            methodElement.className = 'payment-method';
+            methodElement.innerHTML = `
+                <h4>${method.nombre_tarjeta}</h4>
+                <p class="payment-method-number">Número: ${method.numero_tarjeta}</p>
+                <img src="${method.imagen_tarjeta}" alt="${method.nombre_tarjeta}">
+            `;
+            paymentMethodsContainer.appendChild(methodElement);
+        });
+    }
 
     // Actualizar información de la tarjeta VIP
     const vipCardContainer = document.getElementById('vipCardContainer');
-    if (user.tarjeta_vip && user.tarjeta_vip.id) {
+    if (user.rol === 'Administrador') {
+        vipCardContainer.innerHTML = '<h3>Tarjeta VIP</h3><p>Como administrador, no tienes una tarjeta VIP asociada.</p>';
+        
+    } else if (user.tarjeta_vip && user.tarjeta_vip.id) {
         vipCardContainer.innerHTML = `
             <h3>Tarjeta VIP</h3>
             <img id="vipCardImage" src="${user.tarjeta_vip.tarjeta_img}" alt="Tarjeta VIP" class="vip-card-image">
@@ -66,9 +72,7 @@ function updateUserInterface(user) {
     } else {
         vipCardContainer.innerHTML = `
             <h3>Tarjeta VIP</h3>
-            <p>${user.tarjeta_vip && user.tarjeta_vip.mensaje ? 
-                user.tarjeta_vip.mensaje : 
-                "Querido usuario, no tienes una tarjeta VIP pero puedes adquirir una."}</p>
+            <p>${user.tarjeta_vip && user.tarjeta_vip.mensaje ? user.tarjeta_vip.mensaje : "Querido usuario, no tienes una tarjeta VIP pero puedes adquirir una."}</p>
             <img src="../storage/img/vipaccess.png" alt="Adquiere tu tarjeta VIP" class="no-vip-image">
         `;
     }
