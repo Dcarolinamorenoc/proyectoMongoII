@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('#loginForm');
+    const errorPopup = document.getElementById('errorPopup');
+
+    function showErrorPopup(message) {
+        errorPopup.querySelector('p').textContent = message;
+        errorPopup.style.display = 'block';
+        setTimeout(() => {
+            errorPopup.style.display = 'none';
+        }, 3000);
+    }
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -23,22 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 const usuarioEncontrado = result.usuarios.find(u => u.nickname === nickname && u.identificacion === identificacion);
 
                 if (usuarioEncontrado) {
-                    // Guardar la información del usuario en localStorage
                     localStorage.setItem('usuarioActual', JSON.stringify({
                         nombre: usuarioEncontrado.nombre_completo,
-                        imagen: usuarioEncontrado.imagen
+                        imagen: usuarioEncontrado.imagen_user
                     }));
 
                     window.location.href = './views/home.html';
                 } else {
-                    alert('Usuario o contraseña incorrectos');
+                    showErrorPopup('Usuario o contraseña incorrectos');
                 }
             } else {
-                alert('No se pudo obtener la lista de usuarios');
+                showErrorPopup('No se pudo obtener la lista de usuarios');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Ocurrió un error al intentar iniciar sesión');
+            showErrorPopup('Ocurrió un error al intentar iniciar sesión');
         }
     });
 });
