@@ -11,6 +11,7 @@ async function fetchMoviesEnCartelera() {
         
         if (Array.isArray(data)) {
             displayMoviesEnCartelera(data);
+            setupCarousel();
         } else {
             console.error('No se encontraron películas en cartelera o el formato de respuesta es incorrecto');
         }
@@ -49,7 +50,6 @@ async function fetchMoviesNoDisponible() {
     }
 }
 
-
 function displayMoviesEnCartelera(movies) {
     const container = document.getElementById('now-playing-container');
     container.innerHTML = '';
@@ -65,7 +65,7 @@ function displayMoviesEnCartelera(movies) {
                 <img src="${movie.imagen_pelicula}" alt="${movie.titulo}" loading="lazy" onerror="this.src='path_to_default_image.jpg'">
             </div>
             <div class="cards_content">
-                <h1>${movie.titulo.length > 20 ? movie.titulo.substring(0, 20) + '...' : movie.titulo}</h1>
+                <h1>${movie.titulo}</h1>
                 <p>${movie.genero}</p>
             </div>
         `;
@@ -74,56 +74,98 @@ function displayMoviesEnCartelera(movies) {
     });
 }
 
-//     // Crear puntos solo para las películas reales (sin los duplicados)
-//     movies.forEach((_, index) => {
-//         const dot = document.createElement('span');
-//         dot.className = 'slider-dot';
-//         dot.onclick = (e) => {
-//             e.stopPropagation();
-//             scrollToSlide(index + 1); // +1 porque ahora tenemos una película extra al principio
-//         };
-//         dotsContainer.appendChild(dot);
-//     });
+function setupCarousel() {
+    const cardsContainer = document.querySelector('.cards_container');
+    const indicatorsContainer = document.createElement('div');
+    indicatorsContainer.className = 'carousel-indicators';
+    cardsContainer.parentNode.insertBefore(indicatorsContainer, cardsContainer.nextSibling);
 
-//     updateActiveDot(0);
-//     setupInfiniteScroll();
-// }
+    const cards = document.querySelectorAll('.cards_eachOne');
 
-// function setupInfiniteScroll() {
-//     const slider = document.getElementById('movieSlider');
-//     slider.addEventListener('scroll', handleScroll);
-//     slider.scrollLeft = slider.offsetWidth; // Iniciar en la primera película real
-// }
+    // Clonar las cards múltiples veces para crear un efecto infinito
+    const cloneCount = 3;
+    for (let i = 0; i < cloneCount; i++) {
+        cards.forEach(card => {
+            const clone = card.cloneNode(true);
+            cardsContainer.appendChild(clone);
+        });
+    }
 
-// function handleScroll() {
-//     const slider = document.getElementById('movieSlider');
-//     const slideWidth = slider.offsetWidth;
-//     const scrollPosition = slider.scrollLeft;
-//     const totalWidth = slider.scrollWidth;
+    const allCards = document.querySelectorAll('.cards_eachOne');
+    const cardWidth = cards[0].offsetWidth;
+    const containerWidth = cardsContainer.offsetWidth;
+    const visibleCards = Math.floor(containerWidth / cardWidth);
+    const scrollStep = cardWidth * visibleCards;
+    const totalWidth = cardWidth * cards.length;
 
-//     if (scrollPosition === 0) {
-//         // Si llegamos al principio, saltar al final
-//         slider.scrollLeft = totalWidth - slideWidth * 2;
-//     } else if (scrollPosition >= totalWidth - slideWidth * 2) {
-//         // Si llegamos al final, saltar al principio
-//         slider.scrollLeft = slideWidth;
-//     }
+    // Posicionar el scroll en la mitad
+    const initialIndex = Math.floor(cards.length / 2);
+    cardsContainer.scrollLeft = cardWidth * initialIndex;
 
-//     currentIndex = Math.round(scrollPosition / slideWidth) - 1;
-//     updateActiveDot(currentIndex);
-// }
+    // Crear 5 indicadores fijos
+    for (let i = 0; i < 5; i++) {
+        const button = document.createElement('button');
+        button.dataset.index = i;
+        indicatorsContainer.appendChild(button);
+    }
 
-// function scrollToSlide(index) {
-//     const slider = document.getElementById('movieSlider');
-//     slider.scrollLeft = slider.offsetWidth * index;
-// }
+    const indicators = document.querySelectorAll('.carousel-indicators button');
 
-// function updateActiveDot(index) {
-//     const dots = document.querySelectorAll('.slider-dot');
-//     dots.forEach((dot, i) => {
-//         dot.classList.toggle('active', i === index);
-//     });
-// }
+    function updateActiveIndicator() {
+        const scrollPosition = cardsContainer.scrollLeft;
+        const adjustedScrollPosition = scrollPosition % totalWidth;
+        const activeIndex = Math.floor((adjustedScrollPosition / totalWidth) * 5);
+        
+        indicators.forEach((indicator, i) => {
+            if (i === activeIndex) {
+                indicator.classList.add('active');
+                indicator.style.width = '24px';
+            } else {
+                indicator.classList.remove('active');
+                indicator.style.width = '8px';
+            }
+        });
+    }
+
+    function handleInfiniteScroll() {
+        const scrollLeft = cardsContainer.scrollLeft;
+        const maxScroll = cardsContainer.scrollWidth - cardsContainer.clientWidth;
+        
+        if (scrollLeft <= 0) {
+            cardsContainer.scrollLeft = totalWidth;
+        } else if (scrollLeft >= maxScroll) {
+            cardsContainer.scrollLeft = totalWidth;
+        }
+    }
+
+    cardsContainer.addEventListener('scroll', () => {
+        updateActiveIndicator();
+        handleInfiniteScroll();
+    });
+
+    indicators.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            const scrollPosition = (totalWidth / 5) * index + totalWidth;
+            cardsContainer.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    updateActiveIndicator();
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

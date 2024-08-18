@@ -177,6 +177,7 @@ header {
     flex-direction: column;
     margin-top: 10px;
     gap: 5px;
+    padding: 7%;
 }
 
 
@@ -211,6 +212,7 @@ header {
 .not-avaliable{
     display: flex;
     flex-direction: column;
+    padding: 0 7%;
     margin-bottom: 30px;
 }
 
@@ -762,6 +764,31 @@ header {
 
 .cards_container::-webkit-scrollbar {
     display: none;  /* Para Chrome, Safari y Opera */
+}
+
+
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.carousel-indicators button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background-color: #ccc;
+    margin: 0 5px;
+    padding: 0;
+    transition: width 0.3s ease;
+}
+
+.carousel-indicators button.active {
+    background-color: #ff0000;
+    width: 24px;
+    border-radius: 4px;
 }
 
 
