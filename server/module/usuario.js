@@ -436,9 +436,15 @@ module.exports = class Usuario extends connect {
         const rolesValidos = ['VIP', 'Estandar', 'Administrador'];
     
         try {
-            await this.conexion.connect();
+            if (!this.conexion || !this.conexion.topology || !this.conexion.topology.isConnected()) {
+                await this.conexion.connect();
+            }
     
-            // Primero, verificamos si el usuario que hace la consulta es un Administrador
+            if (!this.collectionUsuario) {
+                throw new Error('La colección de usuarios no está definida');
+            }
+    
+            // Verificar si el usuario que hace la consulta es un Administrador
             const usuarioAdmin = await this.collectionUsuario.findOne({
                 nickname: opciones.nickname,
                 identificacion: opciones.identificacion,
@@ -488,10 +494,26 @@ module.exports = class Usuario extends connect {
                 mensaje = `Se encontraron ${usuarios.length} usuario(s) en total.`;
             }
     
-            await this.conexion.close();
+            // Buscar tarjetas VIP para cada usuario
+            const usuariosConTarjetaVIP = await Promise.all(usuarios.map(async (usuario) => {
+                let tarjetaVIP;
+                try {
+                    if (this.collectionTarjetaVIP) {
+                        tarjetaVIP = await this.collectionTarjetaVIP.findOne({ id_usuario: usuario.id });
+                    }
+                } catch (error) {
+                    console.error(`Error al buscar tarjeta VIP para el usuario ${usuario.id}:`, error);
+                }
+                return {
+                    ...usuario,
+                    tarjeta_vip: tarjetaVIP || {
+                        mensaje: "Querido usuario, no tienes una tarjeta VIP pero puedes adquirir una."
+                    }
+                };
+            }));
     
             return {
-                usuarios: usuarios.map(usuario => ({
+                usuarios: usuariosConTarjetaVIP.map(usuario => ({
                     id: usuario.id,
                     nombre_completo: usuario.nombre_completo,
                     identificacion: usuario.identificacion,
@@ -501,19 +523,21 @@ module.exports = class Usuario extends connect {
                     imagen: usuario.imagen_user,
                     telefono: usuario.telefono,
                     celular: usuario.celular,
-                    imagen_user:usuario.imagen_user,
+                    imagen_user: usuario.imagen_user,
                     metodo_pago: usuario.metodo_pago,
+                    tarjeta_vip: usuario.tarjeta_vip
                 })),
                 mensaje: mensaje
             };
         } catch (error) {
-            await this.conexion.close();
+            console.error('Error en consultarUsuarios:', error);
             return {
                 usuarios: [],
                 mensaje: `Error al consultar usuarios: ${error.message}`
             };
+        } finally {
+            await this.conexion.close();
         }
     }
-
     
 }
