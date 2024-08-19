@@ -219,7 +219,7 @@ header {
 .not-avaliable .movie-item {
     display: flex;
     align-items: center;
-    margin-bottom: 8%;
+    margin-bottom: 6%;
 }
 
 .not-avaliable .movie-item img {
@@ -814,7 +814,11 @@ header {
 
 
 
-
+.not-avaliable{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 65px;
+}
 
 
 
