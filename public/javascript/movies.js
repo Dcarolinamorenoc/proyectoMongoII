@@ -239,56 +239,72 @@ async function displayMovieDetails(movieId, movieState) {
 
         document.body.innerHTML = `
             <div class="movie-details-container">
-        <div class="movie-header">
-            <img src="../storage/img/arrow.png" alt="Back" class="back-button" onclick="goToHome()">
-            <h1>Cinema Selection</h1>
-            <img src="../storage/img/points.png" alt="More options" class="more-options">
-        </div>
-        <div class="movie-content">
-            <div class="movie-poster">
-                <img src="${movie.imagen_banner}" alt="${movie.titulo}">
-            </div>
-            <div class="movie-info">
-                <h2>${movie.titulo}</h2>
-                <button class="watch-trailer" onclick="window.open('${movie.trailer}', '_blank')">
-                    <img src="../storage/img/music.png" alt="Trailer Icon" class="trailer-icon">
-                    Watch Trailer
-                </button>
-            </div>
-            <div class="movie-inf">
-                <p class="genre">${movie.genero}</p>
-                
-                <p class="description">${movie.sinopsis}</p>
-            </div>
-            <div class="cast">
-                <h3>Cast</h3>
-                <div class="cast-list">
-                    ${movie.reparto.map(actor => `
-                        <div class="actor">
-                            <img src="${actor.imagen_actor}" alt="${actor.nombre_real}">
-                            <div class="actors">
-                                <p class="actor-name">${actor.nombre_real}</p>
-                                <p class="character-name">${actor.nombre_personaje}</p>
+                <div class="movie-header">
+                    <img src="../storage/img/arrow.png" alt="Back" class="back-button" onclick="goToHome()">
+                    <h1>Cinema Selection</h1>
+                    <img src="../storage/img/points.png" alt="More options" class="more-options">
+                </div>
+                <div class="movie-content">
+                    <div class="movie-poster">
+                        <img src="${movie.imagen_banner}" alt="${movie.titulo}">
+                    </div>
+                    <div class="movie-info">
+                        <h2>${movie.titulo}</h2>
+                        <button class="watch-trailer" onclick="showTrailerPopup('${movie.trailer}')">
+                            <img src="../storage/img/music.png" alt="Trailer Icon" class="trailer-icon">
+                            Watch Trailer
+                        </button>
+                    </div>
+                    <div class="movie-inf">
+                        <p class="genre">${movie.genero}</p>
+                        <p class="description">${movie.sinopsis}</p>
+                    </div>
+                    <div class="cast">
+                        <h3>Cast</h3>
+                        <div class="cast-list">
+                            ${movie.reparto.map(actor => `
+                                <div class="actor">
+                                    <img src="${actor.imagen_actor}" alt="${actor.nombre_real}">
+                                    <div class="actors">
+                                        <p class="actor-name">${actor.nombre_real}</p>
+                                        <p class="character-name">${actor.nombre_personaje}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ${movieState !== 'No disponible' ? `
+                        <div class="cinema">
+                            <h3>Cinema</h3>
+                            <div class="cinema-item">
+                                <div>
+                                    <p>CineCampus</p>
+                                    <p>Zona Franca Santander</p>
+                                </div>
+                                <img src="../storage/img/Cinecampus.png" alt="Cinema logo">
                             </div>
                         </div>
-                    `).join('')}
+                        <button id="book-now" onclick="bookMovie()" disabled>Book Now</button>
+                    ` : ''}
                 </div>
             </div>
-            ${movieState !== 'No disponible' ? `
-                <div class="cinema">
-                    <h3>Cinema</h3>
-                    <div class="cinema-item">
-                        <div>
-                            <p>CineCampus</p>
-                            <p>Zona Franca Santander</p>
-                        </div>
-                        <img src="../storage/img/Cinecampus.png" alt="Cinema logo">
-                    </div>
+            
+            <!-- Popup para confirmar ver el trailer -->
+            <div id="trailer-popup" class="popup">
+                <div class="popup-content">
+                    <p>¿Estás seguro de que quieres ver el trailer?</p>
+                    <button onclick="playTrailer('${movie.trailer}')">Sí</button>
+                    <button onclick="closeTrailerPopup()">No</button>
                 </div>
-                <button id="book-now" onclick="bookMovie()" disabled>Book Now</button>
-            ` : ''}
-        </div>
-    </div>
+            </div>
+            
+            <!-- Contenedor del reproductor de video -->
+            <div id="video-player" class="video-player">
+                <div class="video-container">
+                    <button class="close-video" onclick="closeVideoPlayer()">X</button>
+                    <div id="youtube-player"></div>
+                </div>
+            </div>
         `;
 
         // Añadir estilos inline para lograr el diseño deseado
@@ -397,7 +413,7 @@ async function displayMovieDetails(movieId, movieState) {
             }
             .cast h3, .cinema h3, .mode-selection h3 {
                 font-size: 18px;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
                 margin-left: 15px;
             }
             .cast-list {
@@ -511,11 +527,136 @@ async function displayMovieDetails(movieId, movieState) {
                 font-weight: normal;
             }
 
+             .popup {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+
+            .popup-content {
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                text-align: center;
+                color: black;
+            }
+
+            .popup-content button {
+                margin: 10px;
+                padding: 5px 20px;
+                background-color: red;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            .video-player {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                justify-content: center;
+                align-items: center;
+                z-index: 1001;
+            }
+
+            .video-container {
+                position: relative;
+                width: 80%;
+                max-width: 800px;
+                aspect-ratio: 16 / 9;
+            }
+
+            .close-video {
+                position: absolute;
+                top: -40px;
+                right: 0px;
+                background-color: red;
+                color: white;
+                border: none;
+                font-size: 20px;
+                cursor: pointer;
+                padding: 5px 10px;
+                border-radius: 50%;
+            }
+
+            #youtube-player {
+                width: 100%;
+                height: 100%;
+            }
+
         `;
         document.head.appendChild(styleElement);
 
+        loadYouTubeAPI();
+
     } catch (error) {
         console.error('Error al obtener los detalles de la película:', error);
+    }
+}
+
+
+function loadYouTubeAPI() {
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+let player;
+function onYouTubeIframeAPIReady() {
+    // La API está lista, pero no creamos el reproductor aquí
+}
+
+function showTrailerPopup(trailerUrl) {
+    document.getElementById('trailer-popup').style.display = 'flex';
+}
+
+function closeTrailerPopup() {
+    document.getElementById('trailer-popup').style.display = 'none';
+}
+
+function playTrailer(trailerUrl) {
+    closeTrailerPopup();
+    const videoPlayer = document.getElementById('video-player');
+    videoPlayer.style.display = 'flex';
+    
+    // Extraer el ID del video de YouTube de la URL
+    const videoId = trailerUrl.split('v=')[1];
+    
+    if (player) {
+        player.loadVideoById(videoId);
+    } else {
+        player = new YT.Player('youtube-player', {
+            height: '100%',
+            width: '100%',
+            videoId: videoId,
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+}
+
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+
+function closeVideoPlayer() {
+    const videoPlayer = document.getElementById('video-player');
+    videoPlayer.style.display = 'none';
+    if (player) {
+        player.stopVideo();
     }
 }
 
