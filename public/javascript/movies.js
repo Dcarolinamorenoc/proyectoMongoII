@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/service-worker.js')
+            .then(registration => {
+              console.log('Service Worker registrado con éxito:', registration.scope);
+            })
+            .catch(error => {
+              console.log('Fallo al registrar el Service Worker:', error);
+            });
+        });
+      }
+      ~
     fetchMoviesEnCartelera();
     fetchMoviesProximoEstreno();
     fetchMoviesNoDisponible();
@@ -6,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchMoviesEnCartelera() {
     try {
-        const response = await fetch('http://localhost:5001/api/peliculas/estado/En%20cartelera');
+        const response = await fetch('/api/peliculas/estado/En%20cartelera');
         const data = await response.json();
         
         if (Array.isArray(data)) {
@@ -22,7 +35,7 @@ async function fetchMoviesEnCartelera() {
 
 async function fetchMoviesProximoEstreno() {
     try {
-        const response = await fetch('http://localhost:5001/api/peliculas/estado/Pr%C3%B3ximo%20estreno');
+        const response = await fetch('/api/peliculas/estado/Pr%C3%B3ximo%20estreno');
         const data = await response.json();
         
         if (Array.isArray(data)) {
@@ -37,7 +50,7 @@ async function fetchMoviesProximoEstreno() {
 
 async function fetchMoviesNoDisponible() {
     try {
-        const response = await fetch('http://localhost:5001/api/peliculas/estado/No%20disponible');
+        const response = await fetch('/api/peliculas/estado/No%20disponible');
         const data = await response.json();
         
         if (Array.isArray(data)) {
@@ -194,7 +207,7 @@ function displayMoviesProximoEstreno(movies) {
         movieElement.innerHTML = `
         <img src="${movie.imagen_pelicula}" alt="${movie.titulo}" loading="lazy" onerror="this.src='path_to_default_image.jpg'">
         <div class="movie-info">
-        <h3 style="font-size: 1rem;">${movie.titulo} (${año})</h3>
+        <h3>${movie.titulo} (${año})</h3>
             <p>${movie.genero}</p>
         </div>
     `;
@@ -202,6 +215,7 @@ function displayMoviesProximoEstreno(movies) {
         movieList.appendChild(movieElement);
     });
 }
+
 
 function displayMoviesNoDisponible(movies) {
     const movieList = document.getElementById('not-avaliable-movies');
@@ -229,7 +243,7 @@ function displayMoviesNoDisponible(movies) {
 
 async function displayMovieDetails(movieId, movieState) {
     try {
-        const response = await fetch(`http://localhost:5001/api/peliculas/${movieId}`);
+        const response = await fetch(`/api/peliculas/${movieId}`);
         const movie = await response.json();
         
         if (movie.error) {
@@ -239,59 +253,67 @@ async function displayMovieDetails(movieId, movieState) {
 
         document.body.innerHTML = `
             <div class="movie-details-container">
-        <div class="movie-header">
-            <img src="../storage/img/arrow.png" alt="Back" class="back-button" onclick="goToHome()">
-            <h1>Cinema Selection</h1>
-            <img src="../storage/img/points.png" alt="More options" class="more-options">
-        </div>
-        <div class="movie-content">
-            <div class="movie-poster">
-                <img src="${movie.imagen_banner}" alt="${movie.titulo}">
-            </div>
-            <div class="movie-info">
-                <h2>${movie.titulo}</h2>
-                <button class="watch-trailer" onclick="window.open('${movie.trailer}', '_blank')">
-                    <img src="../storage/img/music.png" alt="Trailer Icon" class="trailer-icon">
-                    Watch Trailer
-                </button>
-            </div>
-            <div class="movie-inf">
-                <p class="genre">${movie.genero}</p>
-                
-                <p class="description">${movie.sinopsis}</p>
-            </div>
-            <div class="cast">
-                <h3>Cast</h3>
-                <div class="cast-list">
-                    ${movie.reparto.map(actor => `
-                        <div class="actor">
-                            <img src="${actor.imagen_actor}" alt="${actor.nombre_real}">
-                            <div class="actors">
-                                <p class="actor-name">${actor.nombre_real}</p>
-                                <p class="character-name">${actor.nombre_personaje}</p>
+                <div class="movie-header">
+                    <img src="../storage/img/arrow.png" alt="Back" class="back-button" onclick="goToHome()">
+                    <h1>Cinema Selection</h1>
+                    <img src="../storage/img/points.png" alt="More options" class="more-options">
+                </div>
+                <div class="movie-content">
+                    <div class="movie-poster">
+                        <img id="movie-banner" src="${movie.imagen_banner}" alt="${movie.titulo}">
+                        <div id="youtube-player" style="display: none;"></div>
+                    </div>
+                    <div class="movie-info">
+                        <h2>${movie.titulo}</h2>
+                        <button id="trailer-button" class="watch-trailer" onclick="showTrailerPopup('${movie.trailer}')">
+                            <img src="../storage/img/music.png" alt="Trailer Icon" class="trailer-icon">
+                            Watch Trailer
+                        </button>
+                    </div>
+                    <div class="movie-inf">
+                        <p class="genre">${movie.genero}</p>
+                        <p class="description">${movie.sinopsis}</p>
+                    </div>
+                    <div class="cast">
+                        <h3>Cast</h3>
+                        <div class="cast-list">
+                            ${movie.reparto.map(actor => `
+                                <div class="actor">
+                                    <img src="${actor.imagen_actor}" alt="${actor.nombre_real}">
+                                    <div class="actors">
+                                        <p class="actor-name">${actor.nombre_real}</p>
+                                        <p class="character-name">${actor.nombre_personaje}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ${movieState !== 'No disponible' && movieState !== 'Próximo estreno' ? `
+                        <div class="cinema">
+                            <h3>Cinema</h3>
+                            <div id="cinecampus" class="cinema-item">
+                                <div>
+                                    <p>CineCampus</p>
+                                    <p>Zona Franca Santander</p>
+                                </div>
+                                <img src="../storage/img/Cinecampus.png" alt="Cinema logo">
                             </div>
                         </div>
-                    `).join('')}
+                    <button id="book-now" onclick="displaySeatSelection(${movieId})" ${movieState !== 'En cartelera' ? 'disabled' : ''}>Book Now</button>
+                    ` : ''}
                 </div>
             </div>
-            ${movieState !== 'No disponible' ? `
-                <div class="cinema">
-                    <h3>Cinema</h3>
-                    <div class="cinema-item">
-                        <div>
-                            <p>CineCampus</p>
-                            <p>Zona Franca Santander</p>
-                        </div>
-                        <img src="../storage/img/Cinecampus.png" alt="Cinema logo">
-                    </div>
+            
+            <div id="trailer-popup" class="popup">
+                <div class="popup-content">
+                    <p>¿Estás seguro de que quieres ver el trailer?</p>
+                    <button onclick="playTrailer('${movie.trailer}')">Sí</button>
+                    <button onclick="closeTrailerPopup()">No</button>
                 </div>
-                <button id="book-now" onclick="bookMovie()" disabled>Book Now</button>
-            ` : ''}
-        </div>
-    </div>
+            </div>
         `;
 
-        // Añadir estilos inline para lograr el diseño deseado
+
         const styleElement = document.createElement('style');
         styleElement.textContent = `
             body {
@@ -300,14 +322,16 @@ async function displayMovieDetails(movieId, movieState) {
                 font-family: Arial, sans-serif;
                 background-color: #000;
                 color: #fff;
-                padding: 7%;
+                padding: 0 7%;
+                margin-top: 7%;
+
             }
             .movie-details-container {
                 display: flex;
                 flex-direction: column;
                 width: 116%;
                 height: auto;
-                margin-left: -30px;
+                margin-left: -26px;
                 margin-top: -20px;
             }
             .movie-header {
@@ -347,7 +371,7 @@ async function displayMovieDetails(movieId, movieState) {
                 flex-direction: row;
                 justify-content: space-between;
                 margin: 15px;
-                margin-top: 1px;
+                margin-top: 6px;
             }
 
             h2 {
@@ -397,7 +421,7 @@ async function displayMovieDetails(movieId, movieState) {
             }
             .cast h3, .cinema h3, .mode-selection h3 {
                 font-size: 18px;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
                 margin-left: 15px;
             }
             .cast-list {
@@ -405,6 +429,7 @@ async function displayMovieDetails(movieId, movieState) {
                 overflow-x: auto;
                 padding-bottom: 10px;
                 margin-left: 10px;
+                scrollbar-width: none;
             }
             .actors {
                 display: flex;
@@ -445,7 +470,8 @@ async function displayMovieDetails(movieId, movieState) {
                 background-color: #222;
                 padding: 10px;
                 border-radius: 12px;
-                border: 2px solid red
+                border: 2px solid red,
+                
             }
             .cinema-item img {
                 width: 40px;
@@ -486,8 +512,10 @@ async function displayMovieDetails(movieId, movieState) {
                 font-size: 16px;
             }
             #book-now:disabled {
-                background-color: #555;
+                background-color: #ccc;
+                color: #666;
                 cursor: not-allowed;
+                margin-top: 60px;
             }
 
             .movie-header h1 {
@@ -511,17 +539,258 @@ async function displayMovieDetails(movieId, movieState) {
                 font-weight: normal;
             }
 
+             .popup {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+
+            .popup-content {
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                text-align: center;
+                color: black;
+            }
+
+            .popup-content button {
+                margin: 10px;
+                padding: 5px 20px;
+                background-color: red;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            .video-player {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                justify-content: center;
+                align-items: center;
+                z-index: 1001;
+            }
+
+            .video-container {
+                position: relative;
+                width: 80%;
+                max-width: 800px;
+                aspect-ratio: 16 / 9;
+            }
+
+            .close-video {
+                position: absolute;
+                top: -40px;
+                right: 0px;
+                background-color: red;
+                color: white;
+                border: none;
+                font-size: 20px;
+                cursor: pointer;
+                padding: 5px 10px;
+                border-radius: 50%;
+            }
+
+            #youtube-player {
+                width: 100%;
+                height: 100%;
+            }
+                .cinema-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #222;
+                padding: 10px;
+                border-radius: 12px;
+                border: 2px solid transparent;
+                cursor: pointer;
+                transition: border-color 0.3s ease;
+                margin-left: 3%;
+                width: 84vw;
+            }
+            .cinema-item.selected {
+                border-color: red;
+            }
+            .cinema-item img {
+                width: 40px;
+                height: 40px;
+            }
+            .cinema-item p {
+                margin: 0;
+                font-size: 14px;
+            }
+
+            #book-now {
+                width: 100%;
+                padding: 15px;
+                background-color: #ccc;
+                color: #666;
+                border: none;
+                border-radius: 10px;
+                margin-top: 15%;
+                cursor: not-allowed;
+                font-weight: bold;
+                font-size: 16px;
+                transition: all 0.3s ease;
+                width: 82vw;
+            }
+            #book-now.active {
+                background-color: red;
+                color: white;
+                cursor: pointer;
+                margin-top: 17%;
+            }
+
+            #youtube-player {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .movie-poster {
+                position: relative;
+                width: 100%;
+                height: 180px;
+            }
+
+            .video-stream html5-main-video{
+                width: 100%;
+                height: 180px;
+                left: px;
+                top: 0px;
+            }
+
         `;
         document.head.appendChild(styleElement);
+
+        loadYouTubeAPI();
+
+
+        const cinecampusDiv = document.getElementById('cinecampus');
+        const bookButton = document.getElementById('book-now');
+
+        cinecampusDiv.addEventListener('click', function() {
+            this.classList.toggle('selected');
+            if (this.classList.contains('selected')) {
+                bookButton.classList.add('active');
+                bookButton.disabled = false;
+            } else {
+                bookButton.classList.remove('active');
+                bookButton.disabled = true;
+            }
+        });
+
+        const bookNowButton = document.getElementById('book-now');
+        bookNowButton.addEventListener('click', () => {
+            displaySeatSelection(movieId);
+        });
 
     } catch (error) {
         console.error('Error al obtener los detalles de la película:', error);
     }
 }
 
+function loadYouTubeAPI() {
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+let player;
+function onYouTubeIframeAPIReady() {
+    console.log("YouTube API is ready");
+}
+
+function showTrailerPopup(trailerUrl) {
+    document.getElementById('trailer-popup').style.display = 'flex';
+}
+
+function closeTrailerPopup() {
+    document.getElementById('trailer-popup').style.display = 'none';
+}
+
+function playTrailer(trailerUrl) {
+    closeTrailerPopup();
+    const movieBanner = document.getElementById('movie-banner');
+    const youtubePlayer = document.getElementById('youtube-player');
+    const trailerButton = document.getElementById('trailer-button');
+    
+    movieBanner.style.display = 'none';
+    youtubePlayer.style.display = 'block';
+    
+    // Extraer el ID del video de YouTube de la URL
+    const videoId = trailerUrl.split('v=')[1];
+    
+    if (player) {
+        player.loadVideoById(videoId);
+    } else {
+        player = new YT.Player('youtube-player', {
+            height: '100%',
+            width: '100%',
+            videoId: videoId,
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+
+    trailerButton.textContent = 'Stop Trailer';
+    trailerButton.onclick = stopTrailer;
+}
+
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+
+function stopTrailer() {
+    const movieBanner = document.getElementById('movie-banner');
+    const youtubePlayer = document.getElementById('youtube-player');
+    const trailerButton = document.getElementById('trailer-button');
+
+    if (player) {
+        player.stopVideo();
+    }
+
+    movieBanner.style.display = 'block';
+    youtubePlayer.style.display = 'none';
+
+    trailerButton.innerHTML = `
+        <img src="../storage/img/music.png" alt="Trailer Icon" class="trailer-icon">
+        Watch Trailer
+    `;
+    trailerButton.onclick = function() {
+        showTrailerPopup(player.getVideoUrl());
+    };
+}
+
 function goToHome() {
     location.reload();
 }
+
+
+
+
+
+
+
+
+
+
+
 
 function scrollToSlide(index) {
     const slider = document.getElementById('movieSlider');
@@ -539,22 +808,7 @@ function updateActiveDot(index) {
     });
 }
 
-function selectMode(button, mode) {
-    const buttons = document.querySelectorAll('.mode-button');
-    buttons.forEach(btn => btn.classList.remove('selected'));
-    button.classList.add('selected');
-    document.getElementById('book-now').disabled = false;
-}
 
-function bookMovie() {
-    const selectedMode = document.querySelector('.mode-button.selected');
-    if (selectedMode) {
-        const mode = selectedMode.textContent;
-        alert(`Has seleccionado: ${mode}`);
-    } else {
-        alert('Por favor, selecciona un modo de reserva');
-    }
-}
 
 // Evento para el slider de películas en cartelera
 if (document.getElementById('movieSlider')) {
@@ -587,7 +841,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const query = searchInput.value.trim();
             if (query) {
                 try {
-                    const response = await fetch(`http://localhost:5001/api/peliculas/buscar?query=${encodeURIComponent(query)}`);
+                    const response = await fetch(`/api/peliculas/buscar?query=${encodeURIComponent(query)}`);
                     const movies = await response.json();
                     displaySearchResults(movies, query);
                 } catch (error) {
@@ -698,7 +952,7 @@ function displaySearchResults(movies, query) {
 // Función auxiliar para fetch y display de resultados
 async function fetchAndDisplaySearchResults(query) {
     try {
-        const response = await fetch(`http://localhost:5001/api/peliculas/buscar?query=${encodeURIComponent(query)}`);
+        const response = await fetch(`/api/peliculas/buscar?query=${encodeURIComponent(query)}`);
         const movies = await response.json();
         displaySearchResults(movies, query);
     } catch (error) {
@@ -720,4 +974,677 @@ function updateUserInfo() {
     } else {
         console.error('No se encontró información del usuario');
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+async function displaySeatSelection(movieId) {
+    try {
+        const response = await fetch(`/api/peliculas/${movieId}/info-completa`);
+        const movieData = await response.json();
+
+        console.log('Datos recibidos de la API:', movieData);
+
+        if (movieData.error) {
+            console.error(movieData.error);
+            return;
+        }
+
+        const styleElement = document.createElement('style');
+        styleElement.textContent = `
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html, body{
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+            }
+        
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #000;
+                color: #fff;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            .movie-details-container2 {
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .movie-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 40px;
+                margin-bottom: 20px;
+            }
+
+            .back-button2, .more-options {
+                width: 24px;
+                height: 24px;
+                cursor: pointer;
+                margin-right: 18px;
+                margin-left: 20px;
+            }
+
+            .movie-header h1 {
+                font-size: 20px;
+                margin: 0;
+            }
+
+            .screen {
+                text-align: center;
+                font-size: 14px;
+                margin-bottom: 20px;
+                position: relative;
+                margin-top: 30px;
+            }
+
+            .seats {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .row {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .row-letter {
+                width: 20px;
+                text-align: right;
+                margin-right: 10px;
+                font-weight: bold;
+            }
+
+            .seat {
+                width: 30px;
+                height: 30px;
+                margin: 0 5px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                font-size: 12px;
+                color: #fff;
+            }
+
+            .seat.disponible {
+                background-color: #323232;
+            }
+
+            .seat.reservado {
+                background-color: #CECECE;
+                color: #000;
+                cursor: not-allowed;
+            }
+
+            .seat.ocupado {
+                background-color: #632727;
+                cursor: not-allowed;
+            }
+
+            .seat.selected {
+                background-color: #FE0000;
+            }
+
+            .legend {
+                display: flex;
+                justify-content: space-around;
+                margin-bottom: 20px;
+                gap: 5px;
+            }
+
+            .legend-item {
+                display: flex;
+                align-items: center;
+                font-size: 12px;
+            }
+
+            .seat-icon {
+                width: 15px;
+                height: 15px;
+                border-radius: 3px;
+                margin-right: 5px;
+            }
+
+            .seat-icon.available {
+                background-color: #323232;
+                border-radius: 20px;
+            }
+
+            .seat-icon.reserved {
+                background-color: #CECECE;
+                border-radius: 20px;
+            }
+
+            .seat-icon.ocupado {
+                background-color: #632727;
+                border-radius: 20px;
+            }
+
+            .seat-icon.selected {
+                background-color: #FE0000;
+                border-radius: 20px;
+            }
+
+            .time-selector {
+                display: flex;
+                overflow-x: auto;
+                margin-bottom: 20px;
+                scrollbar-width: none;
+                overflow-x: auto;
+                margin-left: 5%;
+
+            }
+
+            .date-selector {
+                display: flex;
+                overflow-x: auto;
+                margin-bottom: 20px;
+                margin-left: 7%;
+                scrollbar-width: none;
+
+            }
+
+            .time-btn {
+                background-color: #fff;
+                border: none;
+                color: #969696;
+                padding: 10px;
+                margin-right: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                min-width: 60px;
+                text-align: center;
+                width: 26vw;
+            }
+
+            .date-btn{
+                background-color: #fff;
+                border: none;
+                color: #969696;
+                padding: 10px;
+                margin-right: 10px;
+                height: 90px;
+                border-radius: 8px;
+                cursor: pointer;
+                min-width: 60px;
+                text-align: center;
+            }
+
+            .date-btn span{
+                color: #000;
+                font-size: 25px;
+                margin-top: 4%;
+            }
+
+                .time{
+                color: #000;
+                font-size: 25px;
+                margin-top: 4%;
+            }
+
+
+            .span.date-number{
+                margin-top: 5%;
+            }
+
+            .date-btn.selected {
+                background-color: #e50914;
+                width: 15vw;
+                height: 10vh;
+                height: 90px;
+                color: #fff;
+            }
+
+            .date-btn.selected span{
+                background-color: #e50914;
+                width: 15vw;
+                height: 10vh;
+                color: #fff;
+            }
+
+            .time-btn.selected {
+                background-color: #e50914;
+                width: 26vw;
+                height: 8vh;
+                color: #fff;
+            }
+
+            .time-btn.selected .time{
+                color: #fff;
+            }
+
+
+
+            .day {
+                font-size: 12px;
+            }
+
+            .date-number {
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .time {
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            .price {
+                font-size: 0.7rem;
+                font-weight: bold;
+            }
+
+            .price-section {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-left: 5%;
+                width: 90vw;
+            }
+
+            .total-precio {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: baseline;
+                gap: 5px; 
+                margin-top:20px;
+                margin-left: 2%;
+            }
+
+            .total-price {
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            .buy-btn {
+                background-color: #e50914;
+                color: #fff;
+                border: none;
+                padding: 15px 30px;
+                border-radius: 5px;
+                font-size: 18px;
+                cursor: pointer;
+                margin-top: 20px;
+                margin-right: 4%;
+            }
+
+            .seat {
+                width: 30px;
+                height: 30px;
+                margin: 0 5px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                font-size: 12px;
+                color: #fff;
+            }
+
+            .seat.disponible {
+                background-color: #323232;
+            }
+
+            .seat.reservado {
+                background-color: #CECECE;
+                color: #000;
+                cursor: not-allowed;
+            }
+
+            .seat.ocupado {
+                background-color: #632727;
+                cursor: not-allowed;
+            }
+
+            .seat.selected {
+                background-color: #FE0000 !important;
+            }
+
+            .seats-container {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .row {
+                display: flex;
+                align-items: center;
+            }
+            .row-letter {
+                width: 2px;
+                text-align: right;
+                margin-right: 10px;
+                font-weight: bold;
+                margin-right: 15px;
+                margin-left: -20px;
+                font-size: 0.8rem;
+                margin-left: 1px;
+
+            }
+            
+            .seats-row {
+                display: flex;
+                margin-bottom: -10px;
+            }
+            
+            .seat-spacer {
+                width: 35px;
+                height: 30px;
+            }
+            
+            .seat {
+                width: 30px;
+                height: 30px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                font-size: 10px;
+                color: #fff;
+                margin: 3px;
+            }
+
+            .row-b {
+                margin-bottom: 40px;
+            }
+
+            .time-selector {
+                display: flex;
+                overflow-x: auto;
+                margin-bottom: 20px;
+                margin-left: 7%;
+                margin-right: 5%;
+                scrollbar-width: none;  /* Para Firefox */
+                -ms-overflow-style: none;  /* Para Internet Explorer y Edge */
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch; /* Para un desplazamiento suave en iOS */
+            }
+            
+            /* Ocultar la barra de desplazamiento para Chrome, Safari y Opera */
+            .date-selector::-webkit-scrollbar,
+            .time-selector::-webkit-scrollbar {
+                display: none;
+            }
+
+            .date-btn,
+            .time-btn {
+                flex-shrink: 0;
+            }
+
+            .date-btn .day {
+                margin-bottom: 8px;
+                font-size: 1rem;
+            }
+            
+        `;
+
+        document.head.appendChild(styleElement);
+
+        let totalPrice = 0;
+
+        const seatSelectionHTML = `
+            <div class="movie-details-container2">
+                <div class="movie-header">
+                <img src="../storage/img/arrow.png" alt="Back" class="back-button2" onclick="goBack(${movieId}, '${movieData.estado}')">
+                    <h1>Escoger Asientos</h1>
+                    <img src="../storage/img/points.png" alt="More options" class="more-options">
+                </div>
+                
+                <div class="screen">
+                    <img src="../storage/img/pantalla.png" alt="screen">
+                </div>
+                
+                <div class="seats">
+                    ${generateSeats(movieData.proyecciones[0].asientos)}
+                </div>
+                
+                <div class="legend">
+                    <span class="legend-item"><span class="seat-icon available"></span> Disponible</span>
+                    <span class="legend-item"><span class="seat-icon ocupado"></span> Ocupado</span>
+                    <span class="legend-item"><span class="seat-icon reserved"></span> Reservado</span>
+                    <span class="legend-item"><span class="seat-icon selected"></span> Seleccionado</span>
+                </div>
+                
+                <div class="date-selector">
+                    ${generateDateButtons(movieData.proyecciones)}
+                </div>
+                
+                <div class="time-selector">
+                    ${generateTimeButtons(movieData.proyecciones.filter(p => p.horario.fecha_proyeccion === getSelectedDate()))}
+                </div>
+                
+                <div class="price-section">
+                    <div class="total-precio" >
+                        <span>Precio Total</span>
+                        <span class="total-price">$${totalPrice.toFixed(2)}</span>
+                    </div>
+                    <button class="buy-btn">Comprar boleto</button>
+                </div>
+            </div>
+        `;
+        
+        document.body.innerHTML = seatSelectionHTML;
+        addEventListeners(movieData);
+
+        function getSelectedDate() {
+            const selectedDateBtn = document.querySelector('.date-btn.selected');
+            return selectedDateBtn ? selectedDateBtn.dataset.date : movieData.proyecciones[0].horario.fecha_proyeccion;
+        }
+
+        function getSelectedProjection() {
+            const selectedTimeBtn = document.querySelector('.time-btn.selected');
+            const selectedDateBtn = document.querySelector('.date-btn.selected');
+            return selectedTimeBtn 
+                ? movieData.proyecciones.find(p => p.horario.horario_proyeccion === selectedTimeBtn.dataset.time && p.horario.fecha_proyeccion === selectedDateBtn.dataset.date) 
+                : movieData.proyecciones.find(p => p.horario.fecha_proyeccion === getSelectedDate());
+        }
+
+        function generateSeats(asientos) {
+            const rows = ['A', 'B', 'C', 'D', 'E', 'F'];
+            let seatsHTML = '<div class="seats-container">';
+            
+            rows.forEach(row => {
+                const rowSeats = asientos.filter(seat => seat.fila === row);
+                if (rowSeats.length > 0) {
+                    seatsHTML += `
+                        <div class="row ${row === 'B' ? 'row-b' : ''}">
+                            <span class="row-letter">${row}</span>
+                            <div class="seats-row">
+                                ${row === 'A' ? '<div class="seat-spacer"></div><div class="seat-spacer"></div>' : ''}
+                                ${row === 'B' ? '<div class="seat-spacer"></div>' : ''}
+                                ${rowSeats.map(seat => `
+                                    <div class="seat ${seat.estado}" 
+                                         data-id="${seat.id}"
+                                         data-row="${seat.fila}" 
+                                         data-number="${seat.numero}" 
+                                         data-estado="${seat.estado}" 
+                                         data-price="${seat.Precio}"
+                                         style="background-color: ${getSeatColor(seat.estado)};">
+                                        ${seat.numero}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            seatsHTML += '</div>';
+            return seatsHTML;
+        }
+        
+
+        function getSeatColor(estado) {
+            switch (estado) {
+                case 'disponible':
+                    return '#323232'; // Color para asientos disponibles
+                case 'reservado':
+                    return '#CECECE'; // Color para asientos reservados
+                case 'ocupado':
+                    return '#632727'; // Color para asientos ocupados
+                default:
+                    return '#323232'; // Color por defecto (disponible)
+            }
+        }
+
+        function generateDateButtons(proyecciones) {
+            const uniqueDates = [...new Set(proyecciones.map(p => p.horario.fecha_proyeccion))];
+
+            return uniqueDates.map((date, index) => {
+                const dateObj = new Date(date.split('/').reverse().join('-'));
+                dateObj.setDate(dateObj.getDate() + 1);  // Ajuste en la fecha
+
+                return `
+                    <button class="date-btn ${index === 0 ? 'selected' : ''}" data-date="${date}">
+                        <div class="day">${dateObj.toLocaleDateString('es-ES', { weekday: 'short' })}</div>
+                        <div class="date">
+                            <span class="date-number">${dateObj.getDate()}</span>
+                        </div>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function generateTimeButtons(proyecciones) {
+            return proyecciones.map((proyeccion, index) => `
+                <button class="time-btn ${index === 0 ? 'selected' : ''}" 
+                        data-date="${proyeccion.horario.fecha_proyeccion}" 
+                        data-time="${proyeccion.horario.horario_proyeccion}"
+                        data-sala="${proyeccion.sala.id}">
+                    <div class="time">${proyeccion.horario.horario_proyeccion}</div>
+                    <div class="price">$${proyeccion.horario.precio_pelicula.toFixed(2)} - ${proyeccion.sala.tipo}</div>
+                </button>
+            `).join('');
+        }
+
+        function addEventListeners(movieData) {
+            document.querySelectorAll('.seat').forEach(seat => {
+                seat.addEventListener('click', (e) => {
+                    const seatElement = e.currentTarget;
+                    if (seatElement.classList.contains('disponible')) {
+                        seatElement.classList.toggle('selected');
+                        const seatPrice = parseFloat(seatElement.dataset.price);
+                        const moviePrice = parseFloat(getSelectedProjection().horario.precio_pelicula);
+
+                        if (seatElement.classList.contains('selected')) {
+                            totalPrice += (seatPrice + moviePrice);
+                        } else {
+                            totalPrice -= (seatPrice + moviePrice);
+                        }
+
+                        // Actualiza el precio total sumando el precio de la película más los asientos seleccionados
+                        document.querySelector('.total-price').textContent = `$${totalPrice.toFixed(2)}`;
+
+                        seatElement.style.backgroundColor = seatElement.classList.contains('selected') ? '#FF0000' : getSeatColor(seatElement.dataset.estado);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.date-btn').forEach(dateBtn => {
+                dateBtn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.date-btn').forEach(btn => btn.classList.remove('selected'));
+                    e.currentTarget.classList.add('selected');
+                    updateAvailableTimes();
+                });
+            });
+
+            document.querySelectorAll('.time-btn').forEach(timeBtn => {
+                timeBtn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('selected'));
+                    e.currentTarget.classList.add('selected');
+                    updateSeats();
+                });
+            });
+        }
+
+        function updateAvailableTimes() {
+            const selectedDate = getSelectedDate();
+            const filteredProjections = movieData.proyecciones.filter(p => p.horario.fecha_proyeccion === selectedDate);
+            
+            document.querySelector('.time-selector').innerHTML = generateTimeButtons(filteredProjections);
+            
+            // Agregar event listeners para las nuevas horas
+            document.querySelectorAll('.time-btn').forEach(timeBtn => {
+                timeBtn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('selected'));
+                    e.currentTarget.classList.add('selected');
+                    updateSeats();
+                });
+            });
+    
+            // Actualiza los asientos basados en la nueva selección de hora
+            updateSeats();
+        }
+
+        function updateSeats() {
+            const selectedProjection = getSelectedProjection();
+            document.querySelector('.seats').innerHTML = generateSeats(selectedProjection.asientos);
+            
+            // Resetea el precio total cuando se cambia de proyección
+            totalPrice = 0;
+
+            // Actualiza el precio basado en la nueva selección
+            document.querySelector('.total-price').textContent = `$${totalPrice.toFixed(2)}`;
+            
+            // Reaplicar event listeners para la selección de asientos
+            document.querySelectorAll('.seat').forEach(seat => {
+                seat.addEventListener('click', (e) => {
+                    const seatElement = e.currentTarget;
+                    if (seatElement.classList.contains('disponible')) {
+                        seatElement.classList.toggle('selected');
+                        const seatPrice = parseFloat(seatElement.dataset.price);
+                        const moviePrice = parseFloat(getSelectedProjection().horario.precio_pelicula);
+
+                        if (seatElement.classList.contains('selected')) {
+                            totalPrice += (seatPrice + moviePrice);
+                        } else {
+                            totalPrice -= (seatPrice + moviePrice);
+                        }
+
+
+                        document.querySelector('.total-price').textContent = `$${totalPrice.toFixed(2)}`;
+
+                        seatElement.style.backgroundColor = seatElement.classList.contains('selected') ? '#FF0000' : getSeatColor(seatElement.dataset.estado);
+                    }
+                });
+            });
+        }
+
+    } catch (error) {
+        console.error('Error al cargar los datos de la película:', error);
+    }
+}
+
+function goBack(movieId, movieState) {
+    console.log('Volviendo a los detalles de la película con ID:', movieId, 'y estado:', movieState);
+    displayMovieDetails(movieId, movieState);
 }

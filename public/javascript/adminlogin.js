@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log('Intentando iniciar sesión con:', username, password);
 
-        fetch('http://localhost:5001/api/consultar-todos?nickname=FelixCB&identificacion=1098672134&rol')
+        fetch('/api/consultar-todos?nickname=FelixCB&identificacion=1098672134&rol')
             .then(response => response.json())
             .then(data => {
                 console.log('Datos recibidos de la API:', data);

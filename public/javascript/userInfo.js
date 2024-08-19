@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchUserInfo(nombreCompleto) {
-    const apiUrl = `http://localhost:5001/api/consultar-todos?nickname=FelixCB&identificacion=1098672134&rol`;
+    const apiUrl = `/api/consultar-todos?nickname=FelixCB&identificacion=1098672134&rol`;
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
@@ -25,6 +25,8 @@ function fetchUserInfo(nombreCompleto) {
         })
         .catch(error => console.error('Error al obtener datos del usuario:', error));
 }
+
+
 
 function updateUserInterface(user) {
     document.getElementById('userImage').src = user.imagen_user;

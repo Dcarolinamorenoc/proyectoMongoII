@@ -1,0 +1,395 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    padding: 0 7%;
+    margin-top: 7%;
+
+}
+.movie-details-container {
+    display: flex;
+    flex-direction: column;
+    width: 116%;
+    height: auto;
+    margin-left: -26px;
+    margin-top: -20px;
+}
+.movie-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top:40px;
+}
+.back-button, .more-options {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.screen {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+    position: relative;
+    margin-top: 30px;
+}
+
+
+
+.seats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: -17%;
+    margin-left: 3%;
+}
+
+.rowB {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: -17%;
+    margin-left: 3%;
+    margin-bottom: -20px;
+}
+
+.rowA {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: -20%;
+    margin-left: 3%;
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.seatA {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+
+.seatB {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 40px;
+}
+
+
+.seatC {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.seatD {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.seatE {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.seatF {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.seat.selected {
+    background-color: #ff0000;
+}
+
+.seat.available {
+    background-color: #323232;
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 10px;
+}
+
+.seat-icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 30px;
+}
+
+.seat-icon.available {
+    background-color: #323232;
+}
+
+.seat-icon.reserved {
+    background-color: #ffffff;
+}
+
+.seat-icon.selected {
+    background-color: #ff0000;
+}
+
+.date-selector, .time-selector {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.date-btn{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    min-width: 60px;
+    text-align: center;
+}
+
+.date-btn.active, .time-btn.active {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+.time-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.price {
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.price-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.total-price {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.buy-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.lettersA{
+    display: flex;
+    width: 20px;
+}
+
+.lettersB{
+    display: flex;
+    width: 20px;
+}
+
+.lettersB h5{
+    display: flex;
+    width: 20px;
+    margin-top: 50%;
+}
+
+.lettersC{
+    display: flex;
+    width: 20px;
+}
+
+.lettersD h5{
+    display: flex;
+    width: 20px;
+    margin-top: 50%;
+}
+
+.lettersD{
+    display: flex;
+    width: 20px;
+}
+
+.lettersE h5{
+    display: flex;
+    width: 20px;
+    margin-top: 50%;
+}
+
+.lettersE{
+    display: flex;
+    width: 20px;
+}
+
+.lettersF h5{
+    display: flex;
+    width: 20px;
+    margin-top: 50%;
+}
+
+.lettersF{
+    display: flex;
+    width: 20px;
+}
+.date-selector {
+    display: flex;
+    gap: 20px; 
+}
+
+.date-btn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    max-width: 70px;
+    height: 90px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.time-selector {
+    display: flex;
+    gap: 10px; /* Ajusta el espacio entre botones */
+}
+
+.time-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    min-width: 90px;
+    height: 70px;
+    border-radius: 6px;
+}
+
+.price {
+    display: block; 
+    margin-top: 5px; 
+}
+
+
+.price-section {
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px; 
+    margin-top: 50px;
+}
+
+.total-price {
+    font-size: 24px; 
+    font-weight: bold;
+}
+
+.buy-btn {
+    align-self: flex-end; 
+    padding: 15px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.date-number {
+    font-weight: bold; 
+}
+
+.date {
+    font-size: 24px;
+}
+
+
+.time {
+    font-size: 20px; 
+    font-weight: bold; 
+}
+
+.price {
+    font-size: 12px;
+    margin-top: 5px; 
+}

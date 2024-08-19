@@ -1,5 +1,4 @@
 const connect = require("../helpers/connect.js");
-const { ObjectId } = require("mongodb");
 
 module.exports = class Usuario extends connect {
     static instanceUsuario;
@@ -14,6 +13,11 @@ module.exports = class Usuario extends connect {
         super();
         this.initializeCollections();
         Usuario.instanceUsuario = this;
+    }
+
+    destructor() {
+        Usuario.instanceUsuario = undefined;
+        connect.instanceConnect = undefined;
     }
 
     async initializeCollections() {
@@ -36,11 +40,6 @@ module.exports = class Usuario extends connect {
             console.error('Error al inicializar las colecciones:', error);
             throw error;
         }
-    }
-
-    destructor() {
-        Usuario.instanceUsuario = undefined;
-        connect.instanceConnect = undefined;
     }
 
 //--------------------------------------------------------------------------------------------------------

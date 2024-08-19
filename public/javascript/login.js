@@ -1,4 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/service-worker.js')
+            .then(registration => {
+              console.log('Service Worker registrado con éxito:', registration.scope);
+            })
+            .catch(error => {
+              console.log('Fallo al registrar el Service Worker:', error);
+            });
+        });
+      }
+
+
+
+
+
+
+
+
     const form = document.querySelector('#loginForm');
     const errorPopup = document.getElementById('errorPopup');
 
@@ -17,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const identificacion = document.querySelector('#password').value;
 
         try {
-            const url = 'http://localhost:5001/api/consultar-todos?nickname=FelixCB&identificacion=1098672134&rol';
+            const url = '/api/consultar-todos?nickname=FelixCB&identificacion=1098672134&rol';
 
             const response = await fetch(url, {
                 method: 'GET',

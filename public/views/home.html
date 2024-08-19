@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
     <title>Movie App Home</title>
     <link rel="stylesheet" href="../css/home.css">
     <script src="../javascript/home.js" defer></script>
@@ -45,9 +45,9 @@
     </section>
     <section class="cards">
         <div id="now-playing-container" class="cards_container">
-            <!-- Las tarjetas de películas se insertarán aquí -->
+
         </div>
-        <!-- Los indicadores se insertarán aquí automáticamente -->
+
     </section>
 
         <section class="coming-soon">
@@ -64,7 +64,7 @@
 
         <section class="not-avaliable">
             <div class="section_title">
-                <h1>No Disponible</h1>
+                <h1>Funciones Antiguas</h1>
                 <a href="">
                     <h2>Ver Todo</h2>
                 </a>
@@ -95,7 +95,22 @@
     </div>
 
     <div id="movie-details" class="movie-details-container" style="display: none;">
-        
+        <script>
+            window.addEventListener('load', function() {
+                if (window.location.hash === '#search-section') {
+                    const searchSection = document.getElementById('search-section');
+                    if (searchSection) {
+                        searchSection.scrollIntoView({behavior: 'smooth'});
+                        
+                        // Activar el buscador
+                        const searchInput = document.querySelector('.search_input');
+                        if (searchInput) {
+                            searchInput.focus();
+                        }
+                    }
+                }
+            });
+        </script>
     </div>
 </body>
 </html>
