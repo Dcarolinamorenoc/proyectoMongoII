@@ -87,6 +87,8 @@ function setupCarousel() {
     for (let i = 0; i < cloneCount; i++) {
         cards.forEach(card => {
             const clone = card.cloneNode(true);
+            // Asegúrate de que el clon tenga el mismo evento de clic que el original
+            clone.onclick = card.onclick;
             cardsContainer.appendChild(clone);
         });
     }
@@ -173,7 +175,6 @@ function setupCarousel() {
     updateActiveIndicator();
     updateCardVisibility();
 }
-
 
 
 
