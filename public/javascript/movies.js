@@ -300,11 +300,15 @@ async function displayMovieDetails(movieId, movieState) {
                 font-family: Arial, sans-serif;
                 background-color: #000;
                 color: #fff;
+                padding: 7%;
             }
             .movie-details-container {
-                padding: 20px;
-                max-width: 600px;
-                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                width: 116%;
+                height: auto;
+                margin-left: -30px;
+                margin-top: -20px;
             }
             .movie-header {
                 display: flex;
