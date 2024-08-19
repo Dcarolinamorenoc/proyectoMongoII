@@ -179,18 +179,6 @@ function setupCarousel() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 function displayMoviesProximoEstreno(movies) {
     const movieList = document.getElementById('coming-soon-movies');
     movieList.innerHTML = '';
@@ -200,11 +188,13 @@ function displayMoviesProximoEstreno(movies) {
         movieElement.className = 'movie-item';
         movieElement.onclick = () => displayMovieDetails(movie.id, 'Próximo estreno');
         
+        // Extraer el año de la fecha de estreno
+        const año = movie.fecha_estreno.split('/')[2];
+        
         movieElement.innerHTML = `
         <img src="${movie.imagen_pelicula}" alt="${movie.titulo}" loading="lazy" onerror="this.src='path_to_default_image.jpg'">
         <div class="movie-info">
-            <h3>${movie.titulo}</h3>
-            <p>Estreno: ${movie.fecha_estreno}</p>
+        <h3 style="font-size: 1rem;">${movie.titulo} (${año})</h3>
             <p>${movie.genero}</p>
         </div>
     `;
@@ -222,10 +212,13 @@ function displayMoviesNoDisponible(movies) {
         movieElement.className = 'movie-item';
         movieElement.onclick = () => displayMovieDetails(movie.id, 'No disponible');
         
+        // Extraer el año de la fecha de estreno
+        const año = movie.fecha_estreno ? movie.fecha_estreno.split('/')[2] : 'Desconocido';
+        
         movieElement.innerHTML = `
             <img src="${movie.imagen_pelicula}" alt="${movie.titulo}" loading="lazy" onerror="this.src='path_to_default_image.jpg'">
             <div class="movie-info">
-                <h3>${movie.titulo}</h3>
+            <h3 style="font-size: 1rem;">${movie.titulo} (${año})</h3>
                 <p>${movie.genero}</p>
             </div>
         `;
