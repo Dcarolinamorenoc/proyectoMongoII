@@ -21,7 +21,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    margin-top:10px;
+    margin-top:40px;
 }
 .back-button, .more-options {
     width: 24px;
@@ -67,6 +67,7 @@ h1 {
     gap: 5px;
     margin-top: -17%;
     margin-left: 3%;
+    margin-bottom: -20px;
 }
 
 .rowA {
@@ -164,7 +165,7 @@ h1 {
 }
 
 .seat.available {
-    background-color: #fff;
+    background-color: #323232;
 }
 
 .legend {
@@ -189,11 +190,11 @@ h1 {
 }
 
 .seat-icon.available {
-    background-color: #fff;
+    background-color: #323232;
 }
 
 .seat-icon.reserved {
-    background-color: #333;
+    background-color: #ffffff;
 }
 
 .seat-icon.selected {
@@ -207,7 +208,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-.date-btn, .time-btn {
+.date-btn{
     padding: 10px;
     border-radius: 5px;
     background-color: #fff;
@@ -308,4 +309,66 @@ h1 {
 .lettersF{
     display: flex;
     width: 20px;
+}
+.date-selector {
+    display: flex;
+    gap: 20px; 
+}
+
+.date-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    max-width: 70px;
+    height: 80px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.time-selector {
+    display: flex;
+    gap: 10px; /* Ajusta el espacio entre botones */
+}
+
+.time-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    min-width: 90px;
+    height: 65px;
+    border-radius: 6px;
+}
+
+.price {
+    display: block; 
+    margin-top: 5px; 
+}
+
+
+.price-section {
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px; 
+    margin-top: 50px;
+}
+
+.total-price {
+    font-size: 24px; 
+    font-weight: bold;
+}
+
+.buy-btn {
+    align-self: flex-end; 
+    padding: 15px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
 }
