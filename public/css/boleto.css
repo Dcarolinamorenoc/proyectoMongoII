@@ -70,6 +70,77 @@ h1 {
     font-size: 12px;
 }
 
+.seatA {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+
+.seatB {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 40px;
+}
+
+
+.seatC {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.seatD {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.seatE {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.seatF {
+    width: 30px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
 .seat.selected {
     background-color: #ff0000;
 }
@@ -90,12 +161,13 @@ h1 {
     display: flex;
     align-items: center;
     gap: 5px;
+    border-radius: 10px;
 }
 
 .seat-icon {
     width: 15px;
     height: 15px;
-    border-radius: 3px;
+    border-radius: 30px;
 }
 
 .seat-icon.available {

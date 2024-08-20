@@ -671,25 +671,6 @@ async function displayMovieDetails(movieId, movieState) {
 }
 
 
-document.getElementById('book-now').style.cssText = `
-    background-color: #ccc;
-    color: #666;
-    cursor: not-allowed;
-`;
-
-// Agregar evento de clic al div de CineCampus
-document.getElementById('cinecampus').addEventListener('click', function() {
-    const bookButton = document.getElementById('book-now');
-    bookButton.disabled = false;
-    bookButton.style.cssText = `
-        background-color: red;
-        color: white;
-        cursor: pointer;
-    `;
-});
-
-
-
 function loadYouTubeAPI() {
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
