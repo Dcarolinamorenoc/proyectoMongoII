@@ -277,7 +277,7 @@ async function displayMovieDetails(movieId, movieState) {
                     ${movieState !== 'No disponible' ? `
                         <div class="cinema">
                             <h3>Cinema</h3>
-                            <div class="cinema-item">
+                            <div id="cinecampus" class="cinema-item">
                                 <div>
                                     <p>CineCampus</p>
                                     <p>Zona Franca Santander</p>
@@ -290,7 +290,6 @@ async function displayMovieDetails(movieId, movieState) {
                 </div>
             </div>
             
-            <!-- Popup para confirmar ver el trailer -->
             <div id="trailer-popup" class="popup">
                 <div class="popup-content">
                     <p>¿Estás seguro de que quieres ver el trailer?</p>
@@ -299,7 +298,6 @@ async function displayMovieDetails(movieId, movieState) {
                 </div>
             </div>
             
-            <!-- Contenedor del reproductor de video -->
             <div id="video-player" class="video-player">
                 <div class="video-container">
                     <button class="close-video" onclick="closeVideoPlayer()">X</button>
@@ -504,8 +502,10 @@ async function displayMovieDetails(movieId, movieState) {
                 font-size: 16px;
             }
             #book-now:disabled {
-                background-color: #555;
+                background-color: #ccc;
+                color: #666;
                 cursor: not-allowed;
+                margin-top: 70px;
             }
 
             .movie-header h1 {
@@ -596,16 +596,92 @@ async function displayMovieDetails(movieId, movieState) {
                 width: 100%;
                 height: 100%;
             }
+                .cinema-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #222;
+                padding: 10px;
+                border-radius: 12px;
+                border: 2px solid transparent;
+                cursor: pointer;
+                transition: border-color 0.3s ease;
+            }
+            .cinema-item.selected {
+                border-color: red;
+            }
+            .cinema-item img {
+                width: 40px;
+                height: 40px;
+            }
+            .cinema-item p {
+                margin: 0;
+                font-size: 14px;
+            }
+
+            #book-now {
+                width: 100%;
+                padding: 15px;
+                background-color: #ccc;
+                color: #666;
+                border: none;
+                border-radius: 5px;
+                margin-top: 20px;
+                cursor: not-allowed;
+                font-weight: bold;
+                font-size: 16px;
+                transition: all 0.3s ease;
+            }
+            #book-now.active {
+                background-color: red;
+                color: white;
+                cursor: pointer;
+                margin-top: 70px;
+            }
 
         `;
         document.head.appendChild(styleElement);
 
         loadYouTubeAPI();
 
+        // Agregar evento de clic al div de CineCampus
+        const cinecampusDiv = document.getElementById('cinecampus');
+        const bookButton = document.getElementById('book-now');
+
+        cinecampusDiv.addEventListener('click', function() {
+            this.classList.toggle('selected');
+            if (this.classList.contains('selected')) {
+                bookButton.classList.add('active');
+                bookButton.disabled = false;
+            } else {
+                bookButton.classList.remove('active');
+                bookButton.disabled = true;
+            }
+        });
+
     } catch (error) {
         console.error('Error al obtener los detalles de la película:', error);
     }
 }
+
+
+document.getElementById('book-now').style.cssText = `
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+`;
+
+// Agregar evento de clic al div de CineCampus
+document.getElementById('cinecampus').addEventListener('click', function() {
+    const bookButton = document.getElementById('book-now');
+    bookButton.disabled = false;
+    bookButton.style.cssText = `
+        background-color: red;
+        color: white;
+        cursor: pointer;
+    `;
+});
+
 
 
 function loadYouTubeAPI() {
@@ -682,22 +758,7 @@ function updateActiveDot(index) {
     });
 }
 
-function selectMode(button, mode) {
-    const buttons = document.querySelectorAll('.mode-button');
-    buttons.forEach(btn => btn.classList.remove('selected'));
-    button.classList.add('selected');
-    document.getElementById('book-now').disabled = false;
-}
 
-function bookMovie() {
-    const selectedMode = document.querySelector('.mode-button.selected');
-    if (selectedMode) {
-        const mode = selectedMode.textContent;
-        alert(`Has seleccionado: ${mode}`);
-    } else {
-        alert('Por favor, selecciona un modo de reserva');
-    }
-}
 
 // Evento para el slider de películas en cartelera
 if (document.getElementById('movieSlider')) {
