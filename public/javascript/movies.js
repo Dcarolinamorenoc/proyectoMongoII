@@ -507,7 +507,7 @@ async function displayMovieDetails(movieId, movieState) {
                 background-color: #ccc;
                 color: #666;
                 cursor: not-allowed;
-                margin-top: 70px;
+                margin-top: 60px;
             }
 
             .movie-header h1 {
@@ -642,7 +642,7 @@ async function displayMovieDetails(movieId, movieState) {
                 background-color: red;
                 color: white;
                 cursor: pointer;
-                margin-top: 70px;
+                margin-top: 60px;
             }
 
         `;
