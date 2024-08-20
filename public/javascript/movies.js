@@ -194,7 +194,7 @@ function displayMoviesProximoEstreno(movies) {
         movieElement.innerHTML = `
         <img src="${movie.imagen_pelicula}" alt="${movie.titulo}" loading="lazy" onerror="this.src='path_to_default_image.jpg'">
         <div class="movie-info">
-        <h3 style="font-size: 1rem;">${movie.titulo} (${año})</h3>
+        <h3>${movie.titulo} (${año})</h3>
             <p>${movie.genero}</p>
         </div>
     `;
@@ -202,6 +202,7 @@ function displayMoviesProximoEstreno(movies) {
         movieList.appendChild(movieElement);
     });
 }
+
 
 function displayMoviesNoDisponible(movies) {
     const movieList = document.getElementById('not-avaliable-movies');
@@ -323,7 +324,7 @@ async function displayMovieDetails(movieId, movieState) {
                 flex-direction: column;
                 width: 116%;
                 height: auto;
-                margin-left: -30px;
+                margin-left: -26px;
                 margin-top: -20px;
             }
             .movie-header {
@@ -461,7 +462,8 @@ async function displayMovieDetails(movieId, movieState) {
                 background-color: #222;
                 padding: 10px;
                 border-radius: 12px;
-                border: 2px solid red
+                border: 2px solid red,
+                
             }
             .cinema-item img {
                 width: 40px;
