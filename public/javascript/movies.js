@@ -274,7 +274,7 @@ async function displayMovieDetails(movieId, movieState) {
                             `).join('')}
                         </div>
                     </div>
-                    ${movieState !== 'No disponible' ? `
+                    ${movieState !== 'No disponible' && movieState !== 'Próximo estreno' ? `
                         <div class="cinema">
                             <h3>Cinema</h3>
                             <div id="cinecampus" class="cinema-item">
