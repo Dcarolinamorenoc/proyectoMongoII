@@ -665,6 +665,11 @@ async function displayMovieDetails(movieId, movieState) {
             }
         });
 
+        const bookNowButton = document.getElementById('book-now');
+        bookNowButton.addEventListener('click', () => {
+            window.location.href = '../views/comprarBoletos.html';
+        });
+
     } catch (error) {
         console.error('Error al obtener los detalles de la película:', error);
     }
