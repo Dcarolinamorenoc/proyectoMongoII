@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchMoviesEnCartelera() {
     try {
-        const response = await fetch('http://localhost:5001/api/peliculas/estado/En%20cartelera');
+        const response = await fetch('/api/peliculas/estado/En%20cartelera');
         const data = await response.json();
         
         if (Array.isArray(data)) {
@@ -22,7 +22,7 @@ async function fetchMoviesEnCartelera() {
 
 async function fetchMoviesProximoEstreno() {
     try {
-        const response = await fetch('http://localhost:5001/api/peliculas/estado/Pr%C3%B3ximo%20estreno');
+        const response = await fetch('/api/peliculas/estado/Pr%C3%B3ximo%20estreno');
         const data = await response.json();
         
         if (Array.isArray(data)) {
@@ -37,7 +37,7 @@ async function fetchMoviesProximoEstreno() {
 
 async function fetchMoviesNoDisponible() {
     try {
-        const response = await fetch('http://localhost:5001/api/peliculas/estado/No%20disponible');
+        const response = await fetch('/api/peliculas/estado/No%20disponible');
         const data = await response.json();
         
         if (Array.isArray(data)) {
@@ -230,7 +230,7 @@ function displayMoviesNoDisponible(movies) {
 
 async function displayMovieDetails(movieId, movieState) {
     try {
-        const response = await fetch(`http://localhost:5001/api/peliculas/${movieId}`);
+        const response = await fetch(`/api/peliculas/${movieId}`);
         const movie = await response.json();
         
         if (movie.error) {
@@ -783,7 +783,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const query = searchInput.value.trim();
             if (query) {
                 try {
-                    const response = await fetch(`http://localhost:5001/api/peliculas/buscar?query=${encodeURIComponent(query)}`);
+                    const response = await fetch(`/api/peliculas/buscar?query=${encodeURIComponent(query)}`);
                     const movies = await response.json();
                     displaySearchResults(movies, query);
                 } catch (error) {
@@ -894,7 +894,7 @@ function displaySearchResults(movies, query) {
 // Función auxiliar para fetch y display de resultados
 async function fetchAndDisplaySearchResults(query) {
     try {
-        const response = await fetch(`http://localhost:5001/api/peliculas/buscar?query=${encodeURIComponent(query)}`);
+        const response = await fetch(`/api/peliculas/buscar?query=${encodeURIComponent(query)}`);
         const movies = await response.json();
         displaySearchResults(movies, query);
     } catch (error) {
