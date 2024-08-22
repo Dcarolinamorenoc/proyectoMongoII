@@ -26,6 +26,8 @@ function fetchUserInfo(nombreCompleto) {
         .catch(error => console.error('Error al obtener datos del usuario:', error));
 }
 
+
+
 function updateUserInterface(user) {
     document.getElementById('userImage').src = user.imagen_user;
     document.getElementById('nickname').textContent = user.nickname;

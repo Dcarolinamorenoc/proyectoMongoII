@@ -95,7 +95,22 @@
     </div>
 
     <div id="movie-details" class="movie-details-container" style="display: none;">
-        
+        <script>
+            window.addEventListener('load', function() {
+                if (window.location.hash === '#search-section') {
+                    const searchSection = document.getElementById('search-section');
+                    if (searchSection) {
+                        searchSection.scrollIntoView({behavior: 'smooth'});
+                        
+                        // Activar el buscador
+                        const searchInput = document.querySelector('.search_input');
+                        if (searchInput) {
+                            searchInput.focus();
+                        }
+                    }
+                }
+            });
+        </script>
     </div>
 </body>
 </html>
