@@ -1194,13 +1194,13 @@ async function displaySeatSelection(movieId) {
             </div>
             
             <div class="time-selector">
-                ${generateTimeButtons(movieData.proyecciones, movieData.proyecciones[0].horario.fecha_proyeccion)}
+                ${generateTimeButtons(movieData.proyecciones.filter(p => p.horario.fecha_proyeccion === getSelectedDate()))}
             </div>
             
             <div class="price-section">
                 <div>
                     <span>Price</span>
-                    <span class="total-price">$${movieData.proyecciones[0].horario.precio_pelicula.toFixed(2)}</span>
+                    <span class="total-price">$${getSelectedProjection().horario.precio_pelicula.toFixed(2)}</span>
                 </div>
                 <button class="buy-btn">Buy ticket</button>
             </div>
@@ -1209,6 +1209,19 @@ async function displaySeatSelection(movieId) {
     
     document.body.innerHTML = seatSelectionHTML;
     addEventListeners(movieData);
+    
+    function getSelectedDate() {
+        const selectedDateBtn = document.querySelector('.date-btn.selected');
+        return selectedDateBtn ? selectedDateBtn.dataset.date : movieData.proyecciones[0].horario.fecha_proyeccion;
+    }
+    
+    function getSelectedProjection() {
+        const selectedTimeBtn = document.querySelector('.time-btn.selected');
+        const selectedDateBtn = document.querySelector('.date-btn.selected');
+        return selectedTimeBtn 
+            ? movieData.proyecciones.find(p => p.horario.horario_proyeccion === selectedTimeBtn.dataset.time && p.horario.fecha_proyeccion === selectedDateBtn.dataset.date) 
+            : movieData.proyecciones.find(p => p.horario.fecha_proyeccion === getSelectedDate());
+    }
     
     function generateSeats(asientos) {
         const rows = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -1226,7 +1239,7 @@ async function displaySeatSelection(movieId) {
                                  data-row="${seat.fila}" 
                                  data-number="${seat.numero}" 
                                  data-estado="${seat.estado}" 
-                                 data-price="${seat.Precio}"
+                                 data-price="${seat.precio}"
                                  style="background-color: ${getSeatColor(seat.estado)};">
                                 ${seat.numero}
                             </div>
@@ -1257,6 +1270,7 @@ async function displaySeatSelection(movieId) {
     
         return uniqueDates.map((date, index) => {
             const dateObj = new Date(date.split('/').reverse().join('-'));
+            dateObj.setDate(dateObj.getDate() + 1);  // Ajuste en la fecha
     
             return `
                 <button class="date-btn ${index === 0 ? 'selected' : ''}" data-date="${date}">
@@ -1269,10 +1283,8 @@ async function displaySeatSelection(movieId) {
         }).join('');
     }
     
-    function generateTimeButtons(proyecciones, selectedDate) {
-        const filteredProyecciones = proyecciones.filter(proyeccion => proyeccion.horario.fecha_proyeccion === selectedDate);
-        
-        return filteredProyecciones.map((proyeccion, index) => `
+    function generateTimeButtons(proyecciones) {
+        return proyecciones.map((proyeccion, index) => `
             <button class="time-btn ${index === 0 ? 'selected' : ''}" 
                     data-date="${proyeccion.horario.fecha_proyeccion}" 
                     data-time="${proyeccion.horario.horario_proyeccion}"
@@ -1297,9 +1309,7 @@ async function displaySeatSelection(movieId) {
             dateBtn.addEventListener('click', (e) => {
                 document.querySelectorAll('.date-btn').forEach(btn => btn.classList.remove('selected'));
                 e.currentTarget.classList.add('selected');
-    
-                const selectedDate = e.currentTarget.getAttribute('data-date');
-                updateTimes(movieData, selectedDate);
+                updateAvailableTimes();
             });
         });
     
@@ -1307,22 +1317,37 @@ async function displaySeatSelection(movieId) {
             timeBtn.addEventListener('click', (e) => {
                 document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('selected'));
                 e.currentTarget.classList.add('selected');
+                updateSeats();
             });
         });
     }
     
-    function updateTimes(movieData, selectedDate) {
-        const timeButtonsHTML = generateTimeButtons(movieData.proyecciones, selectedDate);
-        document.querySelector('.time-selector').innerHTML = timeButtonsHTML;
-    
-        // Re-add event listeners for the new time buttons
+    function updateAvailableTimes() {
+        const selectedDate = getSelectedDate();
+        const filteredProjections = movieData.proyecciones.filter(p => p.horario.fecha_proyeccion === selectedDate);
+        
+        document.querySelector('.time-selector').innerHTML = generateTimeButtons(filteredProjections);
+        
+        // Agregar event listeners para las nuevas horas
         document.querySelectorAll('.time-btn').forEach(timeBtn => {
             timeBtn.addEventListener('click', (e) => {
                 document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('selected'));
                 e.currentTarget.classList.add('selected');
+                updateSeats();
             });
         });
+
+        // Actualiza los asientos basados en la nueva selección de hora
+        updateSeats();
     }
+    
+    function updateSeats() {
+        const selectedProjection = getSelectedProjection();
+        document.querySelector('.seats').innerHTML = generateSeats(selectedProjection.asientos);
+        // Actualizar el precio basado en la nueva selección
+        document.querySelector('.total-price').textContent = `$${selectedProjection.horario.precio_pelicula.toFixed(2)}`;
+    }
+    
 } catch (error) {
     console.error('Error al obtener los datos de la película:', error);
 }
