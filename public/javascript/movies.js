@@ -1201,10 +1201,10 @@ async function displaySeatSelection(movieId) {
                 
                 <div class="price-section">
                     <div>
-                        <span>Price</span>
+                        <span>Precio Total</span>
                         <span class="total-price">$${totalPrice.toFixed(2)}</span>
                     </div>
-                    <button class="buy-btn">Buy ticket</button>
+                    <button class="buy-btn">Comprar boleto</button>
                 </div>
             </div>
         `;
@@ -1304,11 +1304,12 @@ async function displaySeatSelection(movieId) {
                     if (seatElement.classList.contains('disponible')) {
                         seatElement.classList.toggle('selected');
                         const seatPrice = parseFloat(seatElement.dataset.price);
+                        const moviePrice = parseFloat(getSelectedProjection().horario.precio_pelicula);
 
                         if (seatElement.classList.contains('selected')) {
-                            totalPrice += seatPrice;
+                            totalPrice += (seatPrice + moviePrice);
                         } else {
-                            totalPrice -= seatPrice;
+                            totalPrice -= (seatPrice + moviePrice);
                         }
 
                         // Actualiza el precio total sumando el precio de la película más los asientos seleccionados
@@ -1372,11 +1373,12 @@ async function displaySeatSelection(movieId) {
                     if (seatElement.classList.contains('disponible')) {
                         seatElement.classList.toggle('selected');
                         const seatPrice = parseFloat(seatElement.dataset.price);
+                        const moviePrice = parseFloat(getSelectedProjection().horario.precio_pelicula);
 
                         if (seatElement.classList.contains('selected')) {
-                            totalPrice += seatPrice;
+                            totalPrice += (seatPrice + moviePrice);
                         } else {
-                            totalPrice -= seatPrice;
+                            totalPrice -= (seatPrice + moviePrice);
                         }
 
                         // Actualiza el precio total sumando el precio de la película más los asientos seleccionados
@@ -1389,6 +1391,10 @@ async function displaySeatSelection(movieId) {
         }
 
     } catch (error) {
-        console.error('Error al obtener los datos de la película:', error);
+        console.error('Error al cargar los datos de la película:', error);
     }
+}
+
+function goBack() {
+    window.history.back();
 }
