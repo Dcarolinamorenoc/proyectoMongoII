@@ -927,9 +927,7 @@ function updateUserInfo() {
 
 
 
-// movies.js
 
-// movies.js
 
 async function displaySeatSelection(movieId) {
     try {
@@ -943,8 +941,233 @@ async function displaySeatSelection(movieId) {
             return;
         }
 
+        const styleElement = document.createElement('style');
+        styleElement.textContent = `
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #000;
+                color: #fff;
+                margin: 0;
+                padding: 0;
+            }
+
+            .movie-details-container {
+                max-width: 400px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            .movie-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .back-button, .more-options {
+                width: 24px;
+                height: 24px;
+                cursor: pointer;
+            }
+
+            .movie-header h1 {
+                font-size: 20px;
+                margin: 0;
+            }
+
+            .screen {
+                text-align: center;
+                font-size: 14px;
+                margin-bottom: 20px;
+                position: relative;
+                margin-top: 30px;
+            }
+
+            .seats {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .row {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .row-letter {
+                width: 20px;
+                text-align: right;
+                margin-right: 10px;
+                font-weight: bold;
+            }
+
+            .seat {
+                width: 30px;
+                height: 30px;
+                margin: 0 5px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                font-size: 12px;
+                color: #fff;
+            }
+
+            .seat.disponible {
+                background-color: #323232;
+            }
+
+            .seat.reservado {
+                background-color: #CECECE;
+                color: #000;
+                cursor: not-allowed;
+            }
+
+            .seat.ocupado {
+                background-color: #632727;
+                cursor: not-allowed;
+            }
+
+            .seat.selected {
+                background-color: #FE0000;
+            }
+
+            .legend {
+                display: flex;
+                justify-content: space-around;
+                margin-bottom: 20px;
+            }
+
+            .legend-item {
+                display: flex;
+                align-items: center;
+                font-size: 12px;
+            }
+
+            .seat-icon {
+                width: 15px;
+                height: 15px;
+                border-radius: 3px;
+                margin-right: 5px;
+            }
+
+            .seat-icon.available {
+                background-color: #323232;
+            }
+
+            .seat-icon.reserved {
+                background-color: #CECECE;
+            }
+
+            .seat-icon.ocupado {
+                background-color: #632727;
+            }
+
+            .seat-icon.selected {
+                background-color: #FE0000;
+            }
+
+            .date-selector, .time-selector {
+                display: flex;
+                overflow-x: auto;
+                margin-bottom: 20px;
+            }
+
+            .date-btn, .time-btn {
+                background-color: #333;
+                border: none;
+                color: #fff;
+                padding: 10px;
+                margin-right: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                min-width: 60px;
+                text-align: center;
+            }
+
+            .date-btn.selected, .time-btn.selected {
+                background-color: #e50914;
+            }
+
+            .day {
+                font-size: 12px;
+            }
+
+            .date-number {
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .time {
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            .price {
+                font-size: 12px;
+            }
+
+            .price-section {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .total-price {
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            .buy-btn {
+                background-color: #e50914;
+                color: #fff;
+                border: none;
+                padding: 15px 30px;
+                border-radius: 5px;
+                font-size: 18px;
+                cursor: pointer;
+            }
+
+            .seat {
+            width: 30px;
+            height: 30px;
+            margin: 0 5px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .seat.disponible {
+            background-color: #323232;
+        }
+
+        .seat.reservado {
+            background-color: #CECECE;
+            color: #000;
+            cursor: not-allowed;
+        }
+
+        .seat.ocupado {
+            background-color: #632727;
+            cursor: not-allowed;
+        }
+
+        .seat.selected {
+            background-color: #FE0000 !important;
+        }
+        `;
+
+        document.head.appendChild(styleElement);
+
         const seatSelectionHTML = `
-        <div class="container">
+        <div class="movie-details-container">
             <div class="movie-header">
                 <img src="../storage/img/arrow.png" alt="Back" class="back-button" onclick="goBack()">
                 <h1>Escoger Asientos</h1>
@@ -952,7 +1175,7 @@ async function displaySeatSelection(movieId) {
             </div>
             
             <div class="screen">
-                <p>Screen This Way</p>
+                <img src="../storage/img/pantalla.png" alt="screen">
             </div>
             
             <div class="seats">
@@ -960,8 +1183,9 @@ async function displaySeatSelection(movieId) {
             </div>
             
             <div class="legend">
-                <span class="legend-item"><span class="seat-icon disponible"></span> Disponible</span>
-                <span class="legend-item"><span class="seat-icon reservado"></span> Reservado</span>
+                <span class="legend-item"><span class="seat-icon available"></span> Disponible</span>
+                <span class="legend-item"><span class="seat-icon ocupado"></span> Ocupado</span>
+                <span class="legend-item"><span class="seat-icon reserved"></span> Reservado</span>
                 <span class="legend-item"><span class="seat-icon selected"></span> Seleccionado</span>
             </div>
             
@@ -1007,8 +1231,9 @@ function generateSeats(asientos) {
                              data-row="${seat.fila}" 
                              data-number="${seat.numero}" 
                              data-estado="${seat.estado}" 
-                             data-price="${seat.Precio}">
-                            ${seat.estado === 'disponible' ? seat.numero : ''}
+                             data-price="${seat.Precio}"
+                             style="background-color: ${getSeatColor(seat.estado)};">
+                            ${seat.numero}
                         </div>
                     `).join('')}
                 </div>
@@ -1017,6 +1242,19 @@ function generateSeats(asientos) {
     });
 
     return seatsHTML;
+}
+
+function getSeatColor(estado) {
+    switch (estado) {
+        case 'disponible':
+            return '#323232';
+        case 'reservado':
+            return '#CECECE';
+        case 'ocupado':
+            return '#632727';
+        default:
+            return '#323232';
+    }
 }
 
 function generateDateButtons(proyecciones) {
@@ -1047,7 +1285,6 @@ function generateTimeButtons(proyecciones) {
 }
 
 function addEventListeners(movieData) {
-    // Event listeners para los asientos
     document.querySelectorAll('.seats .seat').forEach(seat => {
         seat.addEventListener('click', function() {
             if (this.dataset.estado === 'disponible') {
@@ -1057,7 +1294,6 @@ function addEventListeners(movieData) {
         });
     });
 
-    // Event listeners para los botones de fecha
     document.querySelectorAll('.date-btn').forEach(button => {
         button.addEventListener('click', function() {
             document.querySelectorAll('.date-btn').forEach(btn => btn.classList.remove('selected'));
@@ -1066,7 +1302,6 @@ function addEventListeners(movieData) {
         });
     });
 
-    // Event listeners para los botones de hora
     document.querySelectorAll('.time-btn').forEach(button => {
         button.addEventListener('click', function() {
             document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('selected'));
@@ -1075,7 +1310,6 @@ function addEventListeners(movieData) {
         });
     });
 
-    // Event listener para el botón de compra
     document.querySelector('.buy-btn').addEventListener('click', function() {
         console.log('Procesando compra...');
     });
