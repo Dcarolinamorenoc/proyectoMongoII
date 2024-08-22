@@ -25,10 +25,15 @@ const comprarBoletos = async (req, res) => {
 
 const consultarDisponibilidadAsientos = async (req, res) => {
     let obj = new Boleto();
-    const idHorarioProyeccion = req.params.idHorarioProyeccion;
-    const resultado = await obj.consultarDisponibilidadAsientos(idHorarioProyeccion);
-    obj.destructor();
-    res.status(200).json(resultado);
+    try {
+        const idHorarioProyeccion = req.params.idHorarioProyeccion;
+        const resultado = await obj.consultarDisponibilidadAsientos(idHorarioProyeccion);
+        res.status(200).json(resultado);
+    } catch (error) {
+        res.status(404).json({ error: `Error al consultar disponibilidad de asientos: ${error.message}` });
+    } finally {
+        obj.destructor();
+    }
 };
 
 const pagosEnLinea = async (req, res) => {
@@ -47,11 +52,25 @@ const confirmacionCompra = async (req, res) => {
     res.status(200).json(resultado);
 };
 
+const obtenerInfoPeliculaCompleta = async (req, res) => {
+    let obj = new Boleto();
+    try {
+        const idPelicula = req.params.idPelicula;
+        const resultado = await obj.obtenerInfoPeliculaCompleta(idPelicula);
+        res.status(200).json(resultado);
+    } catch (error) {
+        res.status(404).json({ error: `Error al obtener información completa de la película: ${error.message}` });
+    } finally {
+        obj.destructor();
+    }
+};
+
 module.exports = {
     listarBoletos,
     obtenerDetalleBoleto,
     comprarBoletos,
     consultarDisponibilidadAsientos,
     pagosEnLinea,
-    confirmacionCompra
+    confirmacionCompra,
+    obtenerInfoPeliculaCompleta
 };

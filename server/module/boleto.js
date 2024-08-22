@@ -208,66 +208,63 @@ module.exports = class boleto extends connect {
      */
 
 
-    // Consultar disponibilidad de asientos en una sala específica
+
 
     async consultarDisponibilidadAsientos(idHorarioProyeccion) {
-
         try {
-        await this.conexion.connect();
-    
-        
-        const horarioProyeccion = await this.db.collection('horario_proyeccion').findOne({ id: idHorarioProyeccion });
-        if (!horarioProyeccion) {
-            throw new Error('Horario de proyección no encontrado.');
-        }
-    
-        
-        const sala = await this.db.collection('sala').findOne({ id: horarioProyeccion.id_sala });
-        if (!sala) {
-            throw new Error('Sala no encontrada.');
-        }
-    
-        
-        const boletosVendidos = await this.collection.find({ id_horario_proyeccion: idHorarioProyeccion }).toArray();
-        const asientosOcupados = boletosVendidos.flatMap(boleto => boleto.asientos_comprados);
-    
-        
-        const asientosDisponibles = await this.db.collection('asiento').find(
-            { 
-            id: { $in: sala.asientos, $nin: asientosOcupados },
-            estado: 'disponible'
+            await this.conexion.connect();
+            
+
+            const idHorarioProyeccionNum = parseInt(idHorarioProyeccion);
+            
+            // Buscar por id numérico
+            const horarioProyeccion = await this.db.collection('horario_proyeccion').findOne({ id: idHorarioProyeccionNum });
+            if (!horarioProyeccion) {
+                throw new Error('Horario de proyección no encontrado.');
             }
-        ).toArray();
+            
+            const sala = await this.db.collection('sala').findOne({ id: horarioProyeccion.id_sala });
+            if (!sala) {
+                throw new Error('Sala no encontrada.');
+            }
+            
+            const boletosVendidos = await this.collection.find({ id_horario_proyeccion: idHorarioProyeccionNum }).toArray();
+            const asientosOcupados = boletosVendidos.flatMap(boleto => boleto.asientos_comprados);
+            
+            const asientosDisponibles = await this.db.collection('asiento').find(
+                { 
+                    id: { $in: sala.asientos, $nin: asientosOcupados },
+                    estado: 'disponible'
+                }
+            ).toArray();
+            
+            const asientosDisponibilidad = asientosDisponibles.map(asiento => ({
+                id: asiento.id,
+                nombre: asiento.nombre_general,
+                fila: asiento.fila,
+                numero: asiento.numero,
+                tipo: asiento.tipo,
+                estado: asiento.estado
+            }));
+            
+            await this.conexion.close();
     
-        
-        const asientosDisponibilidad = asientosDisponibles.map(asiento => ({
-            id: asiento.id,
-            nombre: asiento.nombre_general,
-            fila: asiento.fila,
-            numero: asiento.numero,
-            tipo: asiento.tipo,
-            estado: asiento.estado
-        }));
+            return {
+                idHorarioProyeccion: horarioProyeccion.id,
+                fechaProyeccion: horarioProyeccion.fecha_proyeccion,
+                horarioProyeccion: horarioProyeccion.horario_proyeccion,
+                idSala: sala.id,
+                nombreSala: sala.nombre,
+                capacidadTotal: sala.capacidad,
+                asientosDisponibles: asientosDisponibilidad.length,
+                asientos: asientosDisponibilidad
+            };
     
-        await this.conexion.close();
-
-        return {
-            idHorarioProyeccion: horarioProyeccion.id,
-            fechaProyeccion: horarioProyeccion.fecha_proyeccion,
-            horarioProyeccion: horarioProyeccion.horario_proyeccion,
-            idSala: sala.id,
-            nombreSala: sala.nombre,
-            capacidadTotal: sala.capacidad,
-            asientosDisponibles: asientosDisponibilidad.length,
-            asientos: asientosDisponibilidad
-        };
-
         } catch (error) {
-        await this.conexion.close();
-        return { error: `Error al consultar disponibilidad de asientos: ${error.message}` };
+            await this.conexion.close();
+            throw error; 
         }
     }
-
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -568,4 +565,82 @@ module.exports = class boleto extends connect {
           return { error: `Error al realizar la compra: ${error.message}` };
         }
       }
+
+
+      async obtenerInfoPeliculaCompleta(idPelicula) {
+        try {
+            await this.conexion.connect();
+
+            const idPeliculaNum = parseInt(idPelicula);
+
+            const pelicula = await this.db.collection('pelicula').findOne({ id: idPeliculaNum });
+            if (!pelicula) {
+                throw new Error('Película no encontrada.');
+            }
+
+            const horariosProyeccion = await this.db.collection('horario_proyeccion')
+                .find({ id_pelicula: idPeliculaNum }).toArray();
+
+            const infoCompleta = await Promise.all(horariosProyeccion.map(async (horario) => {
+
+                const sala = await this.db.collection('sala').findOne({ id: horario.id_sala });
+                if (!sala) {
+                    throw new Error(`Sala no encontrada para el horario ${horario.id}.`);
+                }
+
+                const asientos = await this.db.collection('asiento')
+                    .find({ id: { $in: sala.asientos } }).toArray();
+
+                const boletosVendidos = await this.collection.find({ id_horario_proyeccion: horario.id }).toArray();
+                const asientosOcupados = boletosVendidos.flatMap(boleto => boleto.asientos_comprados);
+    
+                const asientosConEstado = asientos.map(asiento => ({
+                    ...asiento,
+                    estado: asientosOcupados.includes(asiento.id) ? 'ocupado' : 'disponible'
+                }));
+    
+                return {
+                    horario: {
+                        id: horario.id,
+                        fecha_proyeccion: horario.fecha_proyeccion,
+                        horario_proyeccion: horario.horario_proyeccion,
+                        hora_finalizacion: horario.hora_finalizacion,
+                        precio_pelicula: horario.precio_pelicula
+                    },
+                    sala: {
+                        id: sala.id,
+                        nombre: sala.nombre,
+                        tipo: sala.tipo,
+                        descripcion: sala.descripcion,
+                        capacidad: sala.capacidad
+                    },
+                    asientos: asientosConEstado
+                };
+            }));
+    
+            await this.conexion.close();
+    
+            return {
+                pelicula: {
+                    id: pelicula.id,
+                    titulo: pelicula.titulo,
+                    sinopsis: pelicula.sinopsis,
+                    fecha_estreno: pelicula.fecha_estreno,
+                    genero: pelicula.genero,
+                    duracion: pelicula.duracion,
+                    estado: pelicula.estado,
+                    pais_origen: pelicula.pais_origen,
+                    imagen_pelicula: pelicula.imagen_pelicula,
+                    imagen_banner: pelicula.imagen_banner,
+                    reparto: pelicula.reparto,
+                    trailer: pelicula.trailer
+                },
+                proyecciones: infoCompleta
+            };
+    
+        } catch (error) {
+            await this.conexion.close();
+            throw error;
+        }
+    }
 }
