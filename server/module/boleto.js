@@ -566,38 +566,46 @@ module.exports = class boleto extends connect {
         }
       }
 
-
       async obtenerInfoPeliculaCompleta(idPelicula) {
         try {
             await this.conexion.connect();
-
+    
             const idPeliculaNum = parseInt(idPelicula);
-
             const pelicula = await this.db.collection('pelicula').findOne({ id: idPeliculaNum });
             if (!pelicula) {
                 throw new Error('Película no encontrada.');
             }
-
+    
             const horariosProyeccion = await this.db.collection('horario_proyeccion')
                 .find({ id_pelicula: idPeliculaNum }).toArray();
-
+    
             const infoCompleta = await Promise.all(horariosProyeccion.map(async (horario) => {
-
                 const sala = await this.db.collection('sala').findOne({ id: horario.id_sala });
                 if (!sala) {
                     throw new Error(`Sala no encontrada para el horario ${horario.id}.`);
                 }
-
+    
                 const asientos = await this.db.collection('asiento')
                     .find({ id: { $in: sala.asientos } }).toArray();
-
-                const boletosVendidos = await this.collection.find({ id_horario_proyeccion: horario.id }).toArray();
+    
+                const boletosVendidos = await this.db.collection('boletos')
+                    .find({ id_horario_proyeccion: horario.id }).toArray();
                 const asientosOcupados = boletosVendidos.flatMap(boleto => boleto.asientos_comprados);
     
-                const asientosConEstado = asientos.map(asiento => ({
-                    ...asiento,
-                    estado: asientosOcupados.includes(asiento.id) ? 'ocupado' : 'disponible'
-                }));
+                const asientosConEstado = asientos.map(asiento => {
+                    if (asiento.estado === 'reservado') {
+                        // Si el asiento ya está reservado, mantenemos ese estado.
+                        return asiento;
+                    } else if (asientosOcupados.includes(asiento.id)) {
+                        // Si no está reservado pero está en la lista de ocupados, lo marcamos como "ocupado".
+                        return {
+                            ...asiento,
+                            estado: 'ocupado'
+                        };
+                    }
+                    // Si no está ni ocupado ni reservado, se deja su estado como está (normalmente "disponible").
+                    return asiento;
+                });
     
                 return {
                     horario: {
@@ -643,4 +651,5 @@ module.exports = class boleto extends connect {
             throw error;
         }
     }
+    
 }
