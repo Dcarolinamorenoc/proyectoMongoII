@@ -931,7 +931,7 @@ function updateUserInfo() {
 
 async function displaySeatSelection(movieId) {
     try {
-        const response = await fetch(`http://localhost:5001/api/peliculas/${movieId}/info-completa`);
+        const response = await fetch(`/api/peliculas/${movieId}/info-completa`);
         const movieData = await response.json();
 
         console.log('Datos recibidos de la API:', movieData);
