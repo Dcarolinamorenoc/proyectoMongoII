@@ -16,26 +16,38 @@ body {
 .container {
     display: flex;
     width: 80%;
+    height: 70vh;
     max-width: 1000px;
     background-color: #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border: 3px solid black;
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
 }
 
-.image-section {
-    flex: 1;
-    background-color: #ffffff;
+.image-section {    
+    width: 100%;
+    height: 50vh;
+    margin-top: 0;
+    padding: 0;
+    background-color: #121315;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5%;
 }
 
-.image-section img {
-    max-width: 100%;
-    height: auto;
+.image-section-img{
+    display: flex;
+    border: 1px solid red;
+    width: 40vw;
+    height:20vh;
 }
+
+/* .image-section img {
+    border-radius: 20px;
+} */
 
 .login-section {
     flex: 1;
