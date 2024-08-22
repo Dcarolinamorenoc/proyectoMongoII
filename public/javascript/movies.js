@@ -1184,7 +1184,7 @@ async function displaySeatSelection(movieId) {
         const seatSelectionHTML = `
             <div class="movie-details-container">
                 <div class="movie-header">
-                    <img src="../storage/img/arrow.png" alt="Back" class="back-button" onclick="goBack()">
+                <img src="../storage/img/arrow.png" alt="Back" class="back-button" onclick="goBack(${movieId}, '${movieData.estado}')">
                     <h1>Escoger Asientos</h1>
                     <img src="../storage/img/points.png" alt="More options" class="more-options">
                 </div>
@@ -1408,6 +1408,7 @@ async function displaySeatSelection(movieId) {
     }
 }
 
-function goBack() {
-    window.history.back();
+function goBack(movieId, movieState) {
+    console.log('Volviendo a los detalles de la película con ID:', movieId, 'y estado:', movieState);
+    displayMovieDetails(movieId, movieState);
 }
