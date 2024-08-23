@@ -667,6 +667,13 @@ async function displayMovieDetails(movieId, movieState) {
                 height: 180px;
             }
 
+            .video-stream html5-main-video{
+                width: 100%;
+                height: 180px;
+                left: px;
+                top: 0px;
+            }
+
         `;
         document.head.appendChild(styleElement);
 
@@ -706,7 +713,7 @@ function loadYouTubeAPI() {
 
 let player;
 function onYouTubeIframeAPIReady() {
-    // La API está lista, pero no creamos el reproductor aquí
+    console.log("YouTube API is ready");
 }
 
 function showTrailerPopup(trailerUrl) {
