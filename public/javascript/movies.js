@@ -260,11 +260,12 @@ async function displayMovieDetails(movieId, movieState) {
                 </div>
                 <div class="movie-content">
                     <div class="movie-poster">
-                        <img src="${movie.imagen_banner}" alt="${movie.titulo}">
+                        <img id="movie-banner" src="${movie.imagen_banner}" alt="${movie.titulo}">
+                        <div id="youtube-player" style="display: none;"></div>
                     </div>
                     <div class="movie-info">
                         <h2>${movie.titulo}</h2>
-                        <button class="watch-trailer" onclick="showTrailerPopup('${movie.trailer}')">
+                        <button id="trailer-button" class="watch-trailer" onclick="showTrailerPopup('${movie.trailer}')">
                             <img src="../storage/img/music.png" alt="Trailer Icon" class="trailer-icon">
                             Watch Trailer
                         </button>
@@ -310,14 +311,8 @@ async function displayMovieDetails(movieId, movieState) {
                     <button onclick="closeTrailerPopup()">No</button>
                 </div>
             </div>
-            
-            <div id="video-player" class="video-player">
-                <div class="video-container">
-                    <button class="close-video" onclick="closeVideoPlayer()">X</button>
-                    <div id="youtube-player"></div>
-                </div>
-            </div>
         `;
+
 
         // Añadir estilos inline para lograr el diseño deseado
         const styleElement = document.createElement('style');
@@ -658,12 +653,26 @@ async function displayMovieDetails(movieId, movieState) {
                 margin-top: 60px;
             }
 
+            #youtube-player {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .movie-poster {
+                position: relative;
+                width: 100%;
+                height: 180px;
+            }
+
         `;
         document.head.appendChild(styleElement);
 
         loadYouTubeAPI();
 
-        // Agregar evento de clic al div de CineCampus
+
         const cinecampusDiv = document.getElementById('cinecampus');
         const bookButton = document.getElementById('book-now');
 
@@ -688,7 +697,6 @@ async function displayMovieDetails(movieId, movieState) {
     }
 }
 
-
 function loadYouTubeAPI() {
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
@@ -711,8 +719,12 @@ function closeTrailerPopup() {
 
 function playTrailer(trailerUrl) {
     closeTrailerPopup();
-    const videoPlayer = document.getElementById('video-player');
-    videoPlayer.style.display = 'flex';
+    const movieBanner = document.getElementById('movie-banner');
+    const youtubePlayer = document.getElementById('youtube-player');
+    const trailerButton = document.getElementById('trailer-button');
+    
+    movieBanner.style.display = 'none';
+    youtubePlayer.style.display = 'block';
     
     // Extraer el ID del video de YouTube de la URL
     const videoId = trailerUrl.split('v=')[1];
@@ -729,23 +741,50 @@ function playTrailer(trailerUrl) {
             }
         });
     }
+
+    trailerButton.textContent = 'Stop Trailer';
+    trailerButton.onclick = stopTrailer;
 }
 
 function onPlayerReady(event) {
     event.target.playVideo();
 }
 
-function closeVideoPlayer() {
-    const videoPlayer = document.getElementById('video-player');
-    videoPlayer.style.display = 'none';
+function stopTrailer() {
+    const movieBanner = document.getElementById('movie-banner');
+    const youtubePlayer = document.getElementById('youtube-player');
+    const trailerButton = document.getElementById('trailer-button');
+
     if (player) {
         player.stopVideo();
     }
+
+    movieBanner.style.display = 'block';
+    youtubePlayer.style.display = 'none';
+
+    trailerButton.innerHTML = `
+        <img src="../storage/img/music.png" alt="Trailer Icon" class="trailer-icon">
+        Watch Trailer
+    `;
+    trailerButton.onclick = function() {
+        showTrailerPopup(player.getVideoUrl());
+    };
 }
 
 function goToHome() {
     location.reload();
 }
+
+
+
+
+
+
+
+
+
+
+
 
 function scrollToSlide(index) {
     const slider = document.getElementById('movieSlider');
