@@ -65,6 +65,19 @@ const obtenerInfoPeliculaCompleta = async (req, res) => {
     }
 };
 
+const obtenerBoletosUsuario = async (req, res) => {
+    let obj = new Boleto();
+    try {
+        const idUsuario = req.params.idUsuario;
+        const resultado = await obj.obtenerBoletosUsuario(idUsuario);
+        res.status(200).json(resultado);
+    } catch (error) {
+        res.status(404).json({ error: `Error al obtener los boletos del usuario: ${error.message}` });
+    } finally {
+        obj.destructor();
+    }
+};
+
 module.exports = {
     listarBoletos,
     obtenerDetalleBoleto,
@@ -72,5 +85,6 @@ module.exports = {
     consultarDisponibilidadAsientos,
     pagosEnLinea,
     confirmacionCompra,
-    obtenerInfoPeliculaCompleta
+    obtenerInfoPeliculaCompleta,
+    obtenerBoletosUsuario
 };

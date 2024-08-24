@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/filtro.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+    <script src="../js/tickets.js" defer></script>
+    <title>Mis Boletos</title>
+</head>
+<body>
+    <div class="container">
+        <div class="movie-header">
+            <img src="../storage/img/arrow.png" alt="Back" class="back-button" onclick="goToHome()">
+            <h1>Boletos</h1>
+            <img src="../storage/img/points.png" alt="More options" class="more-options">
+        </div>
+    </div>
+    <div class="box1">
+        <div class="box_title">
+            <h1>Mis Compras</h1>
+        </div>
+    </div>
+    <div id="boletos-container" class="main">
+
+    </div>
+
+    <nav class="bottom-nav">
+    </nav>
+
+    <nav class="bottom-nav">
+        <a href="../views/home.html" class="active">
+            <img src="../storage/img/home.png" alt="Principal">
+            <span>Home</span>
+        </a>
+        <a href="../views/home.html#search-section">
+            <img src="../storage/img/browse.png" alt="Buscador">
+            <span>Browse</span>
+        </a>
+        <a href="../views/filtro.html">
+            <img src="../storage/img/ticket.png" alt="Boletos">
+            <span>Tickets</span>
+        </a>
+        <a href="../views/infoUser.html">
+            <img src="../storage/img/user.png" alt="Perfil">
+            <span>Profile</span>
+        </a>
+    </nav>
+</body>
+</html>

@@ -19,10 +19,9 @@ const crearTarjetaVIP = async (req, res) => {
         const resultado = await obj.crearTarjetaVIP(req.body);
         obj.destructor();
         if (resultado.error) {
-            res.status(400).json({ error: resultado.error });
-        } else {
-            res.status(200).json(resultado);
+            return res.status(400).json({ error: resultado.error });
         }
+        res.status(200).json(resultado);
     } catch (error) {
         console.error('Error en crearTarjetaVIP:', error);
         res.status(500).json({ error: 'Error interno del servidor' });

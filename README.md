@@ -1,9 +1,42 @@
-# Integrante:
+## Estudiante:
 
-```
--Diana Carolina Moreno Cárdenas
+```js
+Diana Carolina Moreno Cárdenas
 ```
 
+
+
+### Instalaciones Necesarias
+
+- Necesario para conectar y interactuar con la base de datos MongoDB.
+
+```js
+npm i mongodb
+```
+
+- Framework web esencial para crear y gestionar el servidor de la aplicación.
+
+```js
+npm i express
+```
+
+- Permite cargar variables de entorno desde un archivo .env, crucial para la configuración segura de la aplicación.
+
+```js
+npm i dotenv
+```
+
+- Utilizado para validar y sanear los datos de entrada en las rutas de la API.
+
+```js
+npm i express-validator
+```
+
+- Para iniciar la aplicación en modo de desarrollo, utiliza el siguiente comando:
+
+```js
+npm run dev
+```
 
 
 ─────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀──────────❀◦❀◦❀─────
@@ -2864,3 +2897,2456 @@ user: "NikollMan"
 pwd: "1095828793"
 
 mongodb://NikollMan:1095828793@roundhouse.proxy.rlwy.net:58497/cineCampus
+
+
+
+# APIS
+
+
+
+# Documentación de la API de Películas
+
+## Endpoints
+
+### 1. Listar Películas
+
+- **URL**: `/peliculas`
+- **Método**: GET
+- **Descripción**: Obtiene una lista de todas las películas en cartelera o próximos estrenos.
+- **Respuesta exitosa**:
+  - Código: 200
+  - Contenido: Array de objetos de película
+- Ejemplo: http://localhost:5001/api/peliculas
+
+```
+[
+  {
+    "id": 7,
+    "titulo": "Lugar Tranquilo",
+    "sinopsis": "En un mundo invadido y arrasado por unos letales extraterrestres que se guían por el sonido, Evelyn y Lee Abbott sobreviven con sus hijos en una granja aislada en el bosque, sumidos en el más profundo silencio. Mientras no hagan ruido, estarán a salvo.",
+    "fecha_estreno": "09/02/2024",
+    "genero": "Drama musical",
+    "duracion": "135 minutos",
+    "estado": "Próximo estreno",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/736x/fd/2a/82/fd2a82b3e9f7cc89793f7d773bd2744a.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Shameik Moore",
+        "nombre_personaje": "Curtis 'Grandmaster Flash' Brown",
+        "imagen_actor": "https://i.pinimg.com/564x/2b/b4/74/2bb474f66bdadcd4895c1a43f87b5839.jpg"
+      },
+      {
+        "nombre_real": "Lakeith Stanfield",
+        "nombre_personaje": "DJ Kool Herc",
+        "imagen_actor": "https://i.pinimg.com/564x/62/3e/c8/623ec848c6bb05db78bb96e6fef156b0.jpg"
+      },
+      {
+        "nombre_real": "Zoe Saldana",
+        "nombre_personaje": "Gloria Brown",
+        "imagen_actor": "https://i.pinimg.com/564x/e5/b0/5f/e5b05f9d64d912169b62e470a1ddcfc9.jpg"
+      },
+      {
+        "nombre_real": "Mahershala Ali",
+        "nombre_personaje": "DJ Disco Wiz",
+        "imagen_actor": "https://i.pinimg.com/564x/48/b8/a8/48b8a8964f80e1f8f0f768f9a4c32b00.jpg"
+      },
+      {
+        "nombre_real": "Jharrel Jerome",
+        "nombre_personaje": "DJ Hollywood",
+        "imagen_actor": "https://i.pinimg.com/564x/84/83/b2/8483b29cb4c42818a4de33f85eb515f0.jpg"
+      },
+      {
+        "nombre_real": "Tessa Thompson",
+        "nombre_personaje": "Cindy Campbell",
+        "imagen_actor": "https://i.pinimg.com/564x/23/e9/ee/23e9ee8b5edd0e25bd2e552e1244be08.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=G6x44coQzRo",
+    "horarios_proyeccion": [
+      
+    ]
+  },
+  {
+    "id": 8,
+    "titulo": "Coraline",
+    "sinopsis": "Remake live-action del clásico de animación sobre una niña que descubre una realidad alternativa siniestra.Una joven atraviesa una puerta secreta en su nuevo hogar y descubre una versión alterna de su vida. En la superficie, esta realidad paralela es sorprendentemente similar a su vida real,pero mucho mejor.",
+    "fecha_estreno": "25/10/2024",
+    "genero": "Fantasia",
+    "duracion": "100 minutos",
+    "estado": "En cartelera",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/564x/33/f8/70/33f870f74805b8c09a187310cea4f68a.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Millie Bobby Brown",
+        "nombre_personaje": "Coraline Jones",
+        "imagen_actor": "https://i.pinimg.com/736x/b2/62/5e/b2625e56e7f5d8d27c74c880f05a7abf.jpg"
+      },
+      {
+        "nombre_real": "Tilda Swinton",
+        "nombre_personaje": "La Otra Madre",
+        "imagen_actor": "https://i.pinimg.com/564x/1f/2e/96/1f2e96076a514905ecb2c80b4f286a7d.jpg"
+      },
+      {
+        "nombre_real": "Timothée Chalamet",
+        "nombre_personaje": "Wybie Lovat",
+        "imagen_actor": "https://i.pinimg.com/736x/7a/1d/b7/7a1db7fd9297c92458e35dbd11c31146.jpg"
+      },
+      {
+        "nombre_real": "Helena Bonham Carter",
+        "nombre_personaje": "La Madre",
+        "imagen_actor": "https://i.pinimg.com/564x/6f/3a/27/6f3a2732df70d3f877ac67768c599829.jpg"
+      },
+      {
+        "nombre_real": "Idris Elba",
+        "nombre_personaje": "El Sr. Bobinsky",
+        "imagen_actor": "https://i.pinimg.com/564x/08/46/fc/0846fc2b7188d37748a40e9e22b20704.jpg"
+      },
+      {
+        "nombre_real": "Anya Taylor-Joy",
+        "nombre_personaje": "La Otra Coraline",
+        "imagen_actor": "https://i.pinimg.com/564x/c3/53/f8/c353f853acdfccba89c88e3aec2fd334.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=T6iQnnHNF50",
+    "horarios_proyeccion": [
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 1,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 2,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 3,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 4,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 5,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 6,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 7,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 8,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 9,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 10,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 11,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 12,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 13,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 14,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 15,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 16,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "31/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 17,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "31/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 18,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "31/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 19,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "31/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 20,
+        "precio_pelicula": 15000
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "titulo": "Masacre en el tren",
+    "sinopsis": "Cuando el comando de las fuerzas especiales Amrit descubre que su verdadero amor, Tulika, está comprometida en contra de su voluntad, aborda un tren con destino a Nueva Delhi en una audaz misión para detener el matrimonio arreglado.",
+    "fecha_estreno": "13/09/2024",
+    "genero": "Terror",
+    "duracion": "95 minutos",
+    "estado": "Próximo estreno",
+    "pais_origen": "Reino Unido",
+    "imagen_pelicula": "https://i.pinimg.com/736x/27/11/96/271196800ac651f1f1d396256fc86ec3.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Daniel Kaluuya",
+        "nombre_personaje": "John Carter",
+        "imagen_actor": "https://i.pinimg.com/564x/bf/b9/7e/bfb97e6eb3848ca6394634077a30553c.jpg"
+      },
+      {
+        "nombre_real": "Florence Pugh",
+        "nombre_personaje": "Emily Harper",
+        "imagen_actor": "https://i.pinimg.com/736x/24/08/d6/2408d6c1d6f2d6ade2c5441887573356.jpg"
+      },
+      {
+        "nombre_real": "Richard Madden",
+        "nombre_personaje": "Detective Harris",
+        "imagen_actor": "https://i.pinimg.com/564x/d8/1f/cf/d81fcf88297bd9ec3d1a1c6f47145b4f.jpg"
+      },
+      {
+        "nombre_real": "Jodie Comer",
+        "nombre_personaje": "Claire Daniels",
+        "imagen_actor": "https://i.pinimg.com/564x/11/e2/bb/11e2bb71ad0fcc717c638e46d5773c40.jpg"
+      },
+      {
+        "nombre_real": "Tom Hiddleston",
+        "nombre_personaje": "Asesino",
+        "imagen_actor": "https://i.pinimg.com/736x/35/6e/f9/356ef9c588f19f8420092b60443516dc.jpg"
+      },
+      {
+        "nombre_real": "Saoirse Ronan",
+        "nombre_personaje": "Anna Thompson",
+        "imagen_actor": "https://i.pinimg.com/736x/08/68/f3/0868f3c48a663bddfe07ed545cc0aa0a.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=YuTSYppl3t8",
+    "horarios_proyeccion": [
+      
+    ]
+  },
+  {
+    "id": 10,
+    "titulo": "Herencia Siniestra",
+    "sinopsis": "Edward y su novia Riley se embarcan en un viaje al norte de Portugal para encontrarse con la familia perdida de Edward. Al llegar a la magnífica villa, Edward está encantado de conocer a su madre y a su hermano gemelo ansioso por conectarse con sus orígenes. Pronto Edward descubrirá el terrible secreto que lo une a ellos.",
+    "fecha_estreno": "01/11/2024",
+    "genero": "Terror",
+    "duracion": "112 minutos",
+    "estado": "Próximo estreno",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/736x/38/58/59/3858598f9085d072287439a27e0d0593.jpg",
+    "reparto": [
+      {
+        "nombre_real": "James McAvoy",
+        "nombre_personaje": "Henry Collins",
+        "imagen_actor": "https://i.pinimg.com/564x/56/44/f2/5644f262b29865987aee6d38471e224c.jpg"
+      },
+      {
+        "nombre_real": "Jessica Chastain",
+        "nombre_personaje": "Sarah Collins",
+        "imagen_actor": "https://i.pinimg.com/564x/82/14/5a/82145acab0148a21c1d58f13db680374.jpg"
+      },
+      {
+        "nombre_real": "Tom Hiddleston",
+        "nombre_personaje": "Victor Blackwood",
+        "imagen_actor": "https://i.pinimg.com/564x/5a/03/9c/5a039c8726915e79144760e78c49e58d.jpg"
+      },
+      {
+        "nombre_real": "Anya Taylor-Joy",
+        "nombre_personaje": "Emma Collins",
+        "imagen_actor": "https://i.pinimg.com/736x/d0/b6/bf/d0b6bfaa7d95815a2f3023a6db53ccce.jpg"
+      },
+      {
+        "nombre_real": "Toni Collette",
+        "nombre_personaje": "Eleanor Blackwood",
+        "imagen_actor": "https://i.pinimg.com/564x/f1/79/a1/f179a1ed87507446e703bbdf99386f8c.jpg"
+      },
+      {
+        "nombre_real": "Bill Skarsgård",
+        "nombre_personaje": "Charles Blackwood",
+        "imagen_actor": "https://i.pinimg.com/736x/d4/71/c5/d471c5322646969269cf97946d8a76b1.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=9lBlqLm7cwY",
+    "horarios_proyeccion": [
+      
+    ]
+  },
+  {
+    "id": 15,
+    "titulo": "Alien: Romulus",
+    "sinopsis": "En un futuro lejano, un grupo de jóvenes colonos se encuentra atrapado en un planeta hostil, enfrentándose a la amenaza de una criatura alienígena letal que pone en peligro su supervivencia. La batalla por la supervivencia se convierte en una lucha por la esperanza mientras descubren secretos oscuros sobre el planeta y su propia humanidad.",
+    "fecha_estreno": "15/08/2024",
+    "genero": "Ciencia ficción",
+    "duracion": "115 minutos",
+    "estado": "En cartelera",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/736x/5e/b9/99/5eb999a7262d61432a13924865899215.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Felicity Jones",
+        "nombre_personaje": "Dr. Emily Carter",
+        "imagen_actor": "https://i.pinimg.com/564x/d1/58/92/d15892f382d8ba11262630859f668f07.jpg"
+      },
+      {
+        "nombre_real": "Tom Hardy",
+        "nombre_personaje": "Jack Hunter",
+        "imagen_actor": "https://i.pinimg.com/564x/1a/53/65/1a536583c78a17794238e220b2868e8b.jpg"
+      },
+      {
+        "nombre_real": "Daniel Kaluuya",
+        "nombre_personaje": "Marcus Lee",
+        "imagen_actor": "https://i.pinimg.com/564x/8d/34/f3/8d34f3215f46199c846922d1346f9924.jpg"
+      },
+      {
+        "nombre_real": "Jessica Chastain",
+        "nombre_personaje": "Lt. Sarah Cole",
+        "imagen_actor": "https://i.pinimg.com/564x/3f/04/8d/3f048d47d60a4a7af7aa1216e38153da.jpg"
+      },
+      {
+        "nombre_real": "Idris Elba",
+        "nombre_personaje": "Commander Harris",
+        "imagen_actor": "https://i.pinimg.com/736x/8c/68/b0/8c68b09afbfd004b3bb995b8ef2362f9.jpg"
+      },
+      {
+        "nombre_real": "Riley Keough",
+        "nombre_personaje": "Sophie Adams",
+        "imagen_actor": "https://i.pinimg.com/564x/07/f8/10/07f8109caae4cf46c731e243ba48e06a.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=5nWH2Pd-x-c",
+    "horarios_proyeccion": [
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 21,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 22,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 23,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 24,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 25,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 26,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 27,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 28,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 29,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 30,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 31,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 32,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 33,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 34,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 35,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 36,
+        "precio_pelicula": 12000
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "titulo": "Viuda Clicquot",
+    "sinopsis": "La película narra la vida de Barbe-Nicole Clicquot, una mujer que, tras quedar viuda, se convierte en una figura pionera en la industria del champán. Enfrentando desafíos personales y profesionales, Barbe-Nicole transforma la pequeña casa de champán heredada de su esposo en una marca icónica, luchando contra adversidades y cambiando el curso de la historia del vino espumoso.",
+    "fecha_estreno": "15/08/2024",
+    "genero": "Histórico",
+    "duracion": "108 minutos",
+    "estado": "En cartelera",
+    "pais_origen": "Francia",
+    "imagen_pelicula": "https://i.pinimg.com/564x/b0/83/71/b08371f6aed0797b5952816c005f92ae.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Charlize Theron",
+        "nombre_personaje": "Barbe-Nicole Clicquot",
+        "imagen_actor": "https://i.pinimg.com/564x/23/1c/f1/231cf1214ef6f1d98aa4e5d649a699f2.jpg"
+      },
+      {
+        "nombre_real": "Javier Bardem",
+        "nombre_personaje": "Philippe Clicquot",
+        "imagen_actor": "https://i.pinimg.com/564x/dc/92/99/dc92995a02337bf0674ec451acb85fdb.jpg"
+      },
+      {
+        "nombre_real": "Catherine Deneuve",
+        "nombre_personaje": "Madame Fleury",
+        "imagen_actor": "https://i.pinimg.com/564x/7c/68/6f/7c686f67f36a3b0e3627b536e75d0e95.jpg"
+      },
+      {
+        "nombre_real": "Omar Sy",
+        "nombre_personaje": "Jean-Baptiste",
+        "imagen_actor": "https://i.pinimg.com/564x/b3/f4/b8/b3f4b869ce190e158bc7a1d789c7d87b.jpg"
+      },
+      {
+        "nombre_real": "Emily Blunt",
+        "nombre_personaje": "Alice",
+        "imagen_actor": "https://i.pinimg.com/564x/24/60/b9/2460b9032ea20596e8e7c4a31d12ff0f.jpg"
+      },
+      {
+        "nombre_real": "Ralph Fiennes",
+        "nombre_personaje": "Louis",
+        "imagen_actor": "https://i.pinimg.com/564x/0b/26/3b/0b263b794e1451dad7d8dee42d94c0db.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=ax53qVmtCKg",
+    "horarios_proyeccion": [
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 37,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 38,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 39,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 40,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 41,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 42,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 43,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 44,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 45,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 46,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 47,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 48,
+        "precio_pelicula": 12000
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "titulo": "Borderlands",
+    "sinopsis": "Basada en el popular videojuego, 'Borderlands' sigue a una banda de mercenarios en busca de un misterioso artefacto en un planeta desolado. Confrontando criaturas salvajes y enemigos despiadados, el grupo debe superar traiciones y desafíos épicos para desentrañar los secretos del artefacto y salvar el planeta de una amenaza inminente.",
+    "fecha_estreno": "08/08/2024",
+    "genero": "Aventura",
+    "duracion": "130 minutos",
+    "estado": "En cartelera",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/564x/fe/40/ee/fe40ee003c72d01fe6eb214dce6734ec.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Cate Blanchett",
+        "nombre_personaje": "Lilith",
+        "imagen_actor": "https://i.pinimg.com/564x/82/25/71/8225713692c5ce2a860e9c26a42a365c.jpg"
+      },
+      {
+        "nombre_real": "Kevin Hart",
+        "nombre_personaje": "Roland",
+        "imagen_actor": "https://i.pinimg.com/564x/7b/f4/80/7bf480e26a64d54a3933ddeb84f925f0.jpg"
+      },
+      {
+        "nombre_real": "Jamie Lee Curtis",
+        "nombre_personaje": "Tannis",
+        "imagen_actor": "https://i.pinimg.com/564x/96/9f/40/969f40293c6a3f45affffbf98dd4c561.jpg"
+      },
+      {
+        "nombre_real": "Jack Black",
+        "nombre_personaje": "Claptrap",
+        "imagen_actor": "https://i.pinimg.com/564x/b3/46/59/b346591df6538403991ecf1b97cc284e.jpg"
+      },
+      {
+        "nombre_real": "Eiza González",
+        "nombre_personaje": "Moxxi",
+        "imagen_actor": "https://i.pinimg.com/564x/59/29/a5/5929a55998cd75e770220abdf1e3fed1.jpg"
+      },
+      {
+        "nombre_real": "Edgar Ramirez",
+        "nombre_personaje": "Handsome Jack",
+        "imagen_actor": "https://i.pinimg.com/564x/05/f8/fa/05f8fa6dfec1c9d97d9bda7bfd8b7735.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=hdZnvMQRyCo",
+    "horarios_proyeccion": [
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 49,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 50,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 51,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 52,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 53,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 54,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 55,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 56,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 57,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 58,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 59,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 60,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 61,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 62,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 63,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 64,
+        "precio_pelicula": 12000
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "titulo": "Cacería Sangrante",
+    "sinopsis": "En una remota región montañosa, un grupo de amigos se embarca en una excursión de caza que se convierte en una pesadilla cuando descubren que son el objetivo de un despiadado asesino en serie. Mientras luchan por sobrevivir, deberán enfrentarse a sus propios miedos y traiciones mientras intentan desentrañar el oscuro motivo detrás de la cacería mortal.",
+    "fecha_estreno": "19/09/2024",
+    "genero": "Suspenso",
+    "duracion": "105 minutos",
+    "estado": "Próximo estreno",
+    "pais_origen": "España",
+    "imagen_pelicula": "https://i.pinimg.com/736x/7c/02/68/7c0268eea86fd2dfe4f74c6b4549c389.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Mario Casas",
+        "nombre_personaje": "David",
+        "imagen_actor": "https://i.pinimg.com/564x/c9/f4/79/c9f47942b431ab1d83368c9b3caad658.jpg"
+      },
+      {
+        "nombre_real": "Aura Garrido",
+        "nombre_personaje": "Laura",
+        "imagen_actor": "https://i.pinimg.com/564x/75/93/df/7593dfd6b4df2b9983799ae6d60ce6b7.jpg"
+      },
+      {
+        "nombre_real": "Javier Rey",
+        "nombre_personaje": "Sergio",
+        "imagen_actor": "https://i.pinimg.com/564x/c8/b6/4c/c8b64c8bba1e858f27bb70fbfd4290fe.jpg"
+      },
+      {
+        "nombre_real": "Blanca Suárez",
+        "nombre_personaje": "Ana",
+        "imagen_actor": "https://i.pinimg.com/564x/53/9f/78/539f780f5362e23b3ad03ed1306f5f24.jpg"
+      },
+      {
+        "nombre_real": "José Coronado",
+        "nombre_personaje": "Inspector Ruiz",
+        "imagen_actor": "https://i.pinimg.com/736x/14/dd/67/14dd67f55da6abaf8cf96325768c38b9.jpg"
+      },
+      {
+        "nombre_real": "Luis Tosar",
+        "nombre_personaje": "El Cazador",
+        "imagen_actor": "https://i.pinimg.com/564x/8e/68/1c/8e681cae8214d03b93bd57c220fcc8b9.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=nkXcokdlZa4",
+    "horarios_proyeccion": [
+      
+    ]
+  },
+  {
+    "id": 20,
+    "titulo": "Guasón 2",
+    "sinopsis": "En esta esperada secuela, seguimos al infame Joker mientras navega por las consecuencias de sus actos y la creciente notoriedad que ha ganado en Gotham. La película explora su turbulenta relación con la sociedad y su impacto en el caos que envuelve a la ciudad. A medida que nuevos y antiguos enemigos surgen, el Guasón enfrenta desafíos aún más oscuros y complejos, con un viaje psicológico que desafía la moralidad y la cordura.",
+    "fecha_estreno": "04/10/2024",
+    "genero": "Thriller",
+    "duracion": "122 minutos",
+    "estado": "Próximo estreno",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/736x/ae/67/e3/ae67e3ddfe4ff6ded37149847a67c875.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Joaquin Phoenix",
+        "nombre_personaje": "Arthur Fleck / Guasón",
+        "imagen_actor": "https://i.pinimg.com/564x/31/75/11/317511069390af6d816474a868022fcf.jpg"
+      },
+      {
+        "nombre_real": "Lady Gaga",
+        "nombre_personaje": "Harley Quinn",
+        "imagen_actor": "https://i.pinimg.com/564x/eb/da/14/ebda14fdbd752d241bdaa609eee37797.jpg"
+      },
+      {
+        "nombre_real": "Robert De Niro",
+        "nombre_personaje": "Murray Franklin",
+        "imagen_actor": "https://i.pinimg.com/736x/5a/56/36/5a5636746628aa4e1d476b21b804dbe4.jpg"
+      },
+      {
+        "nombre_real": "Zazie Beetz",
+        "nombre_personaje": "Sophie Dumond",
+        "imagen_actor": "https://i.pinimg.com/564x/bd/5e/50/bd5e502daf1a94b344790fd90b0543b6.jpg"
+      },
+      {
+        "nombre_real": "Bryan Tyree Henry",
+        "nombre_personaje": "Detective",
+        "imagen_actor": "https://i.pinimg.com/564x/db/9c/ed/db9cedc9831e2d998117c3d9d29c1c3c.jpg"
+      },
+      {
+        "nombre_real": "Shea Whigham",
+        "nombre_personaje": "Detective Burke",
+        "imagen_actor": "https://i.pinimg.com/564x/71/ed/c4/71edc4d51181b33e7952cb64ff784c8a.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=ANNyx8tNTS4",
+    "horarios_proyeccion": [
+      
+    ]
+  },
+  {
+    "id": 21,
+    "titulo": "Robot Salvaje",
+    "sinopsis": "En un futuro cercano, un ingeniero de robótica desarrolla un avanzado robot de combate que se vuelve descontrolado y comienza a causar caos en la ciudad. Con la amenaza de un colapso total, un equipo de élite debe enfrentarse al robot salvaje y desentrañar el misterio detrás de su programación para evitar una catástrofe global.",
+    "fecha_estreno": "03/10/2024",
+    "genero": "Ciencia ficcion",
+    "duracion": "140 minutos",
+    "estado": "Próximo estreno",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/736x/f2/83/7b/f2837b8c138760e9eda426f539b2caac.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Chris Hemsworth",
+        "nombre_personaje": "Ethan Parker",
+        "imagen_actor": "https://i.pinimg.com/736x/9b/da/6a/9bda6ac11f31732985c2d6af3338ab3b.jpg"
+      },
+      {
+        "nombre_real": "Tessa Thompson",
+        "nombre_personaje": "Dr. Laura Adams",
+        "imagen_actor": "https://i.pinimg.com/564x/13/19/5b/13195b77b53da12cdbf1d5984c077f75.jpg"
+      },
+      {
+        "nombre_real": "Idris Elba",
+        "nombre_personaje": "General Carter",
+        "imagen_actor": "https://i.pinimg.com/564x/9d/d6/bc/9dd6bc25789b220ed0367ba0b2606799.jpg"
+      },
+      {
+        "nombre_real": "Zendaya",
+        "nombre_personaje": "Sam",
+        "imagen_actor": "https://i.pinimg.com/564x/c7/4e/41/c74e41a3cc33f2b05693676b9f9a1320.jpg"
+      },
+      {
+        "nombre_real": "Rami Malek",
+        "nombre_personaje": "Victor Ryker",
+        "imagen_actor": "https://i.pinimg.com/736x/e3/ef/21/e3ef2131b89e86ed61f15bc3d34ee3e4.jpg"
+      },
+      {
+        "nombre_real": "Emma Watson",
+        "nombre_personaje": "Eliza",
+        "imagen_actor": "https://i.pinimg.com/564x/dd/86/b6/dd86b635382fd8047919b6c32188b096.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=sEXyPinA4lE",
+    "horarios_proyeccion": [
+      
+    ]
+  },
+  {
+    "id": 22,
+    "titulo": "Wicked",
+    "sinopsis": "Basada en el exitoso musical, 'Wicked' explora la historia no contada de las brujas de Oz. La película sigue a Elphaba, la bruja malvada del Oeste, y Glinda, la bruja buena del Norte, revelando los eventos que llevaron a su aparente conflicto. La trama profundiza en sus orígenes, sus sueños, y la amistad que las une, mostrando un mundo de magia, traición y redención.",
+    "fecha_estreno": "24/12/2024",
+    "genero": "Fantasia",
+    "duracion": "135 minutos",
+    "estado": "Próximo estreno",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/736x/e5/7a/ca/e57acaf9257bc107394be2fe8d5c2215.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Ariana Grande",
+        "nombre_personaje": "Glinda",
+        "imagen_actor": "https://i.pinimg.com/736x/2f/48/38/2f48388777bf2118cf1a5fd116e97c73.jpg"
+      },
+      {
+        "nombre_real": "Cynthia Erivo",
+        "nombre_personaje": "Elphaba",
+        "imagen_actor": "https://i.pinimg.com/564x/12/9d/1c/129d1c1d86b774a20e5ac5e695b67715.jpg"
+      },
+      {
+        "nombre_real": "Jeff Goldblum",
+        "nombre_personaje": "El Mago de Oz",
+        "imagen_actor": "https://i.pinimg.com/564x/55/b8/f5/55b8f5faac3fb1afbb7bb19276955098.jpg"
+      },
+      {
+        "nombre_real": "Michelle Yeoh",
+        "nombre_personaje": "Madame Morrible",
+        "imagen_actor": "https://i.pinimg.com/564x/39/cb/ea/39cbea77ee500fc9fb6a2fde1e777e45.jpg"
+      },
+      {
+        "nombre_real": "Josh Gad",
+        "nombre_personaje": "Boq",
+        "imagen_actor": "https://i.pinimg.com/736x/8c/94/bb/8c94bbbd1e7f6a37224f852c27d4305c.jpg"
+      },
+      {
+        "nombre_real": "Jonathan Groff",
+        "nombre_personaje": "Fiyero",
+        "imagen_actor": "https://i.pinimg.com/736x/20/44/d9/2044d9eb4bcc5cef4326b79ac4be3a1c.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=kaWXHtZcCQQ",
+    "horarios_proyeccion": [
+      
+    ]
+  },
+  {
+    "id": 23,
+    "titulo": "Romper el Círculo",
+    "sinopsis": "Lily Bloom se enamora de un neurocirujano tras mudarse a Boston con el objetivo de abrir su propio negocio. Sin embargo, el primer amor de su vida retoma el contacto con ella, y Lily ahora no sabe qué hacer.",
+    "fecha_estreno": "15/08/2024",
+    "genero": "Romance",
+    "duracion": "130 minutos",
+    "estado": "Próximo estreno",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/736x/dd/ac/3f/ddac3f5afffd61c1a75a358e1eee5cc7.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Blake Lively",
+        "nombre_personaje": "Lily Bloom",
+        "imagen_actor": "https://i.pinimg.com/564x/53/19/09/5319097fe03b2ab32fa7a11c5f49caa6.jpg"
+      },
+      {
+        "nombre_real": "Justin Baldoni",
+        "nombre_personaje": "Ryle Kincaid",
+        "imagen_actor": "https://i.pinimg.com/564x/4f/0f/fe/4f0ffe374077a211ac48f25497f9be5b.jpg"
+      },
+      {
+        "nombre_real": "Brandon Sklenar",
+        "nombre_personaje": "Atlas Corrigan",
+        "imagen_actor": "https://i.pinimg.com/736x/42/ca/2e/42ca2e8a9ca0c17e3b3ccb2526097ae6.jpg"
+      },
+      {
+        "nombre_real": "Jennifer Garner",
+        "nombre_personaje": "Ellie Bloom",
+        "imagen_actor": "https://i.pinimg.com/564x/dc/a5/68/dca5685edb95ee347d2cb5f5260625f2.jpg"
+      },
+      {
+        "nombre_real": "Chris Pine",
+        "nombre_personaje": "Jack Sullivan",
+        "imagen_actor": "https://i.pinimg.com/564x/4d/1c/79/4d1c7989603f7a09bb675f9d719267f9.jpg"
+      },
+      {
+        "nombre_real": "Octavia Spencer",
+        "nombre_personaje": "Dr. Marcia Jones",
+        "imagen_actor": "https://i.pinimg.com/564x/6b/5d/bc/6b5dbcc563f9ef855be807d30b4229e4.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=aT_IzP2eJaU",
+    "horarios_proyeccion": [
+      
+    ]
+  },
+  {
+    "id": 24,
+    "titulo": "Mascotas en Apuros",
+    "sinopsis": "Un grupo de adorables mascotas se embarca en una emocionante aventura para salvar a su dueño, quien ha sido secuestrado por una misteriosa organización. Con habilidades especiales y mucho coraje, estos valientes animales deben superar desafíos y resolver acertijos para rescatar a su humano y devolver la paz a su hogar.",
+    "fecha_estreno": "22/09/2024",
+    "genero": "Animacion",
+    "duracion": "95 minutos",
+    "estado": "Próximo estreno",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/736x/93/01/53/930153f57e421386cd9b6c2e44baf6a3.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Kevin Hart",
+        "nombre_personaje": "Max (el perro)",
+        "imagen_actor": "https://i.pinimg.com/564x/49/1d/be/491dbecb772d2685903cd8daa66922c4.jpg"
+      },
+      {
+        "nombre_real": "Tiffany Haddish",
+        "nombre_personaje": "Roxy (la gata)",
+        "imagen_actor": "https://i.pinimg.com/564x/1c/fd/64/1cfd6434c391819f600ce581d5dca675.jpg"
+      },
+      {
+        "nombre_real": "John Cena",
+        "nombre_personaje": "Rex (el bulldog)",
+        "imagen_actor": "https://i.pinimg.com/564x/b3/e6/ac/b3e6ac0ffedd75940ce66a5aaaec0412.jpg"
+      },
+      {
+        "nombre_real": "Lupita Nyong'o",
+        "nombre_personaje": "Bella (la conejita)",
+        "imagen_actor": "https://i.pinimg.com/564x/11/53/64/115364a77990dcd7949bd2bb40f8edcc.jpg"
+      },
+      {
+        "nombre_real": "Milo Ventimiglia",
+        "nombre_personaje": "Spike (el loro)",
+        "imagen_actor": "https://i.pinimg.com/564x/45/d5/68/45d5682c352577d5527e6d8980edc9cf.jpg"
+      },
+      {
+        "nombre_real": "Awkwafina",
+        "nombre_personaje": "Zuzu (la cobaya)",
+        "imagen_actor": "https://i.pinimg.com/564x/1c/fe/18/1cfe18c69c59746df354590cae7687e1.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=9OetykV5pMg",
+    "horarios_proyeccion": [
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 65,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 66,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 67,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 68,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 69,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 70,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 71,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 72,
+        "precio_pelicula": 12000
+      }
+    ]
+  }
+]
+```
+
+
+
+### 2. Obtener Detalles de una Película
+
+- **URL**: `/peliculas/:idOTitulo`
+- **Método**: GET
+- **Parámetros de URL**:
+  - `idOTitulo`: ID o título de la película
+- **Descripción**: Obtiene los detalles de una película específica por su ID o título.
+- **Respuesta exitosa**:
+  - Código: 200
+  - Contenido: Objeto con los detalles de la película
+- Ejemplo: http://localhost:5001/api/peliculas/1
+
+```
+{
+  "id": 1,
+  "titulo": "Intensamente 2",
+  "sinopsis": "Ahora que es adolescente, Riley experimenta nuevos sentimientos como Ansiedad y Envidia, que se imponen a los viejos mientras ella duda sobre si abandonar a sus antiguas amigas por otras de la escuela secundaria.",
+  "fecha_estreno": "14/06/2024",
+  "genero": "Animacion",
+  "duracion": "107 minutos",
+  "estado": "No disponible",
+  "pais_origen": "Estados Unidos",
+  "imagen_pelicula": "https://i.pinimg.com/564x/3b/d5/89/3bd589bab0753149306adc1b888c40a3.jpg",
+  "reparto": [
+    {
+      "nombre_real": "Amy Poehler",
+      "nombre_personaje": "Alegría",
+      "imagen_actor": "https://i.pinimg.com/564x/51/8b/ef/518bef98d3bde3d6375efb2d8d3dd342.jpg"
+    },
+    {
+      "nombre_real": "Phyllis Smith",
+      "nombre_personaje": "Tristeza",
+      "imagen_actor": "https://i.pinimg.com/564x/37/52/6b/37526bc89eceb9897e7d499631e4d72c.jpg"
+    },
+    {
+      "nombre_real": "Bill Hader",
+      "nombre_personaje": "Miedo",
+      "imagen_actor": "https://i.pinimg.com/564x/76/7d/37/767d371db0569340c13216aed542bce1.jpg"
+    },
+    {
+      "nombre_real": "Lewis Black",
+      "nombre_personaje": "Furia",
+      "imagen_actor": "https://i.pinimg.com/564x/b4/4e/d6/b44ed6fe7f945f7b1c53915169b62072.jpg"
+    },
+    {
+      "nombre_real": "Mindy Kaling",
+      "nombre_personaje": "Desagrado",
+      "imagen_actor": "https://i.pinimg.com/564x/0e/a6/99/0ea699f452caff2688bfcc0db68792b7.jpg"
+    },
+    {
+      "nombre_real": "Kaitlyn Dias",
+      "nombre_personaje": "Riley",
+      "imagen_actor": "https://i.pinimg.com/736x/9c/2e/7a/9c2e7a3b6ec24bdb610ad59bd2da6587.jpg"
+    }
+  ],
+  "trailer": "https://www.youtube.com/watch?v=9bol4Yyx9Gs",
+  "imagen_banner": "https://i.pinimg.com/564x/b2/42/4a/b2424a5dcf405c21a86beace9e22a5f4.jpg",
+  "horarios_proyeccion": [
+    {
+      "fecha_proyeccion": "27/08/2024",
+      "horario_proyeccion": "15:00",
+      "hora_finalizacion": "16:40",
+      "id_sala": 73,
+      "precio_pelicula": 14000
+    },
+    {
+      "fecha_proyeccion": "27/08/2024",
+      "horario_proyeccion": "17:00",
+      "hora_finalizacion": "18:40",
+      "id_sala": 74,
+      "precio_pelicula": 14000
+    },
+    {
+      "fecha_proyeccion": "27/08/2024",
+      "horario_proyeccion": "18:30",
+      "hora_finalizacion": "20:10",
+      "id_sala": 75,
+      "precio_pelicula": 14000
+    },
+    {
+      "fecha_proyeccion": "27/08/2024",
+      "horario_proyeccion": "20:00",
+      "hora_finalizacion": "21:40",
+      "id_sala": 76,
+      "precio_pelicula": 14000
+    },
+    {
+      "fecha_proyeccion": "28/08/2024",
+      "horario_proyeccion": "15:00",
+      "hora_finalizacion": "16:40",
+      "id_sala": 77,
+      "precio_pelicula": 14000
+    },
+    {
+      "fecha_proyeccion": "28/08/2024",
+      "horario_proyeccion": "17:00",
+      "hora_finalizacion": "18:40",
+      "id_sala": 78,
+      "precio_pelicula": 14000
+    },
+    {
+      "fecha_proyeccion": "28/08/2024",
+      "horario_proyeccion": "18:30",
+      "hora_finalizacion": "20:10",
+      "id_sala": 79,
+      "precio_pelicula": 14000
+    },
+    {
+      "fecha_proyeccion": "28/08/2024",
+      "horario_proyeccion": "20:00",
+      "hora_finalizacion": "21:40",
+      "id_sala": 80,
+      "precio_pelicula": 14000
+    },
+    {
+      "fecha_proyeccion": "29/08/2024",
+      "horario_proyeccion": "15:00",
+      "hora_finalizacion": "16:40",
+      "id_sala": 81,
+      "precio_pelicula": 14000
+    },
+    {
+      "fecha_proyeccion": "29/08/2024",
+      "horario_proyeccion": "17:00",
+      "hora_finalizacion": "18:40",
+      "id_sala": 82,
+      "precio_pelicula": 14000
+    },
+    {
+      "fecha_proyeccion": "29/08/2024",
+      "horario_proyeccion": "18:30",
+      "hora_finalizacion": "20:10",
+      "id_sala": 83,
+      "precio_pelicula": 14000
+    },
+    {
+      "fecha_proyeccion": "29/08/2024",
+      "horario_proyeccion": "20:00",
+      "hora_finalizacion": "21:40",
+      "id_sala": 84,
+      "precio_pelicula": 14000
+    }
+  ]
+}
+```
+
+
+
+### 3. Obtener Películas por Estado
+
+- **URL**: `/peliculas/estado/:estado`
+- **Método**: GET
+- **Parámetros de URL**:
+  - `estado`: Estado de las películas (e.g., "En cartelera", "Próximo estreno")
+- **Descripción**: Obtiene una lista de películas según su estado.
+- **Respuesta exitosa**:
+  - Código: 200
+  - Contenido: Array de objetos de película
+- Ejemplo: http://localhost:5001/api/peliculas/estado/En%20cartelera
+
+```
+[
+  {
+    "id": 8,
+    "titulo": "Coraline",
+    "sinopsis": "Remake live-action del clásico de animación sobre una niña que descubre una realidad alternativa siniestra.Una joven atraviesa una puerta secreta en su nuevo hogar y descubre una versión alterna de su vida. En la superficie, esta realidad paralela es sorprendentemente similar a su vida real,pero mucho mejor.",
+    "fecha_estreno": "25/10/2024",
+    "genero": "Fantasia",
+    "duracion": "100 minutos",
+    "estado": "En cartelera",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/564x/33/f8/70/33f870f74805b8c09a187310cea4f68a.jpg",
+    "imagen_banner": "https://i.pinimg.com/564x/9f/ff/93/9fff931bf20f2338546532111e0ce261.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Millie Bobby Brown",
+        "nombre_personaje": "Coraline Jones",
+        "imagen_actor": "https://i.pinimg.com/736x/b2/62/5e/b2625e56e7f5d8d27c74c880f05a7abf.jpg"
+      },
+      {
+        "nombre_real": "Tilda Swinton",
+        "nombre_personaje": "La Otra Madre",
+        "imagen_actor": "https://i.pinimg.com/564x/1f/2e/96/1f2e96076a514905ecb2c80b4f286a7d.jpg"
+      },
+      {
+        "nombre_real": "Timothée Chalamet",
+        "nombre_personaje": "Wybie Lovat",
+        "imagen_actor": "https://i.pinimg.com/736x/7a/1d/b7/7a1db7fd9297c92458e35dbd11c31146.jpg"
+      },
+      {
+        "nombre_real": "Helena Bonham Carter",
+        "nombre_personaje": "La Madre",
+        "imagen_actor": "https://i.pinimg.com/564x/6f/3a/27/6f3a2732df70d3f877ac67768c599829.jpg"
+      },
+      {
+        "nombre_real": "Idris Elba",
+        "nombre_personaje": "El Sr. Bobinsky",
+        "imagen_actor": "https://i.pinimg.com/564x/08/46/fc/0846fc2b7188d37748a40e9e22b20704.jpg"
+      },
+      {
+        "nombre_real": "Anya Taylor-Joy",
+        "nombre_personaje": "La Otra Coraline",
+        "imagen_actor": "https://i.pinimg.com/564x/c3/53/f8/c353f853acdfccba89c88e3aec2fd334.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=T6iQnnHNF50",
+    "horarios_proyeccion": [
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 1,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 2,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 3,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 4,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 5,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 6,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 7,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 8,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 9,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 10,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 11,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 12,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 13,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 14,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 15,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 16,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "31/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 17,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "31/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 18,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "31/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 19,
+        "precio_pelicula": 15000
+      },
+      {
+        "fecha_proyeccion": "31/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 20,
+        "precio_pelicula": 15000
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "titulo": "Alien: Romulus",
+    "sinopsis": "En un futuro lejano, un grupo de jóvenes colonos se encuentra atrapado en un planeta hostil, enfrentándose a la amenaza de una criatura alienígena letal que pone en peligro su supervivencia. La batalla por la supervivencia se convierte en una lucha por la esperanza mientras descubren secretos oscuros sobre el planeta y su propia humanidad.",
+    "fecha_estreno": "15/08/2024",
+    "genero": "Ciencia ficción",
+    "duracion": "115 minutos",
+    "estado": "En cartelera",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/736x/5e/b9/99/5eb999a7262d61432a13924865899215.jpg",
+    "imagen_banner": "https://i.pinimg.com/564x/2e/c1/f0/2ec1f0a0e7f26228e814c22467ffac8d.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Felicity Jones",
+        "nombre_personaje": "Dr. Emily Carter",
+        "imagen_actor": "https://i.pinimg.com/564x/d1/58/92/d15892f382d8ba11262630859f668f07.jpg"
+      },
+      {
+        "nombre_real": "Tom Hardy",
+        "nombre_personaje": "Jack Hunter",
+        "imagen_actor": "https://i.pinimg.com/564x/1a/53/65/1a536583c78a17794238e220b2868e8b.jpg"
+      },
+      {
+        "nombre_real": "Daniel Kaluuya",
+        "nombre_personaje": "Marcus Lee",
+        "imagen_actor": "https://i.pinimg.com/564x/8d/34/f3/8d34f3215f46199c846922d1346f9924.jpg"
+      },
+      {
+        "nombre_real": "Jessica Chastain",
+        "nombre_personaje": "Lt. Sarah Cole",
+        "imagen_actor": "https://i.pinimg.com/564x/3f/04/8d/3f048d47d60a4a7af7aa1216e38153da.jpg"
+      },
+      {
+        "nombre_real": "Idris Elba",
+        "nombre_personaje": "Commander Harris",
+        "imagen_actor": "https://i.pinimg.com/736x/8c/68/b0/8c68b09afbfd004b3bb995b8ef2362f9.jpg"
+      },
+      {
+        "nombre_real": "Riley Keough",
+        "nombre_personaje": "Sophie Adams",
+        "imagen_actor": "https://i.pinimg.com/564x/07/f8/10/07f8109caae4cf46c731e243ba48e06a.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=5nWH2Pd-x-c",
+    "horarios_proyeccion": [
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 21,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 22,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 23,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 24,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 25,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 26,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 27,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 28,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 29,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 30,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 31,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 32,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 33,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 34,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 35,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 36,
+        "precio_pelicula": 12000
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "titulo": "Viuda Clicquot",
+    "sinopsis": "La película narra la vida de Barbe-Nicole Clicquot, una mujer que, tras quedar viuda, se convierte en una figura pionera en la industria del champán. Enfrentando desafíos personales y profesionales, Barbe-Nicole transforma la pequeña casa de champán heredada de su esposo en una marca icónica, luchando contra adversidades y cambiando el curso de la historia del vino espumoso.",
+    "fecha_estreno": "15/08/2024",
+    "genero": "Histórico",
+    "duracion": "108 minutos",
+    "estado": "En cartelera",
+    "pais_origen": "Francia",
+    "imagen_pelicula": "https://i.pinimg.com/564x/b0/83/71/b08371f6aed0797b5952816c005f92ae.jpg",
+    "imagen_banner": "https://i.pinimg.com/564x/4e/10/c1/4e10c1b4085e08b822cf646e44b138e0.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Charlize Theron",
+        "nombre_personaje": "Barbe-Nicole Clicquot",
+        "imagen_actor": "https://i.pinimg.com/564x/23/1c/f1/231cf1214ef6f1d98aa4e5d649a699f2.jpg"
+      },
+      {
+        "nombre_real": "Javier Bardem",
+        "nombre_personaje": "Philippe Clicquot",
+        "imagen_actor": "https://i.pinimg.com/564x/dc/92/99/dc92995a02337bf0674ec451acb85fdb.jpg"
+      },
+      {
+        "nombre_real": "Catherine Deneuve",
+        "nombre_personaje": "Madame Fleury",
+        "imagen_actor": "https://i.pinimg.com/564x/7c/68/6f/7c686f67f36a3b0e3627b536e75d0e95.jpg"
+      },
+      {
+        "nombre_real": "Omar Sy",
+        "nombre_personaje": "Jean-Baptiste",
+        "imagen_actor": "https://i.pinimg.com/564x/b3/f4/b8/b3f4b869ce190e158bc7a1d789c7d87b.jpg"
+      },
+      {
+        "nombre_real": "Emily Blunt",
+        "nombre_personaje": "Alice",
+        "imagen_actor": "https://i.pinimg.com/564x/24/60/b9/2460b9032ea20596e8e7c4a31d12ff0f.jpg"
+      },
+      {
+        "nombre_real": "Ralph Fiennes",
+        "nombre_personaje": "Louis",
+        "imagen_actor": "https://i.pinimg.com/564x/0b/26/3b/0b263b794e1451dad7d8dee42d94c0db.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=ax53qVmtCKg",
+    "horarios_proyeccion": [
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 37,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 38,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 39,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 40,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 41,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 42,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 43,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 44,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 45,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 46,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 47,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 48,
+        "precio_pelicula": 12000
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "titulo": "Borderlands",
+    "sinopsis": "Basada en el popular videojuego, 'Borderlands' sigue a una banda de mercenarios en busca de un misterioso artefacto en un planeta desolado. Confrontando criaturas salvajes y enemigos despiadados, el grupo debe superar traiciones y desafíos épicos para desentrañar los secretos del artefacto y salvar el planeta de una amenaza inminente.",
+    "fecha_estreno": "08/08/2024",
+    "genero": "Aventura",
+    "duracion": "130 minutos",
+    "estado": "En cartelera",
+    "pais_origen": "Estados Unidos",
+    "imagen_pelicula": "https://i.pinimg.com/564x/fe/40/ee/fe40ee003c72d01fe6eb214dce6734ec.jpg",
+    "imagen_banner": "https://i.pinimg.com/736x/fb/a9/78/fba978973f59209464a6de704e007564.jpg",
+    "reparto": [
+      {
+        "nombre_real": "Cate Blanchett",
+        "nombre_personaje": "Lilith",
+        "imagen_actor": "https://i.pinimg.com/564x/82/25/71/8225713692c5ce2a860e9c26a42a365c.jpg"
+      },
+      {
+        "nombre_real": "Kevin Hart",
+        "nombre_personaje": "Roland",
+        "imagen_actor": "https://i.pinimg.com/564x/7b/f4/80/7bf480e26a64d54a3933ddeb84f925f0.jpg"
+      },
+      {
+        "nombre_real": "Jamie Lee Curtis",
+        "nombre_personaje": "Tannis",
+        "imagen_actor": "https://i.pinimg.com/564x/96/9f/40/969f40293c6a3f45affffbf98dd4c561.jpg"
+      },
+      {
+        "nombre_real": "Jack Black",
+        "nombre_personaje": "Claptrap",
+        "imagen_actor": "https://i.pinimg.com/564x/b3/46/59/b346591df6538403991ecf1b97cc284e.jpg"
+      },
+      {
+        "nombre_real": "Eiza González",
+        "nombre_personaje": "Moxxi",
+        "imagen_actor": "https://i.pinimg.com/564x/59/29/a5/5929a55998cd75e770220abdf1e3fed1.jpg"
+      },
+      {
+        "nombre_real": "Edgar Ramirez",
+        "nombre_personaje": "Handsome Jack",
+        "imagen_actor": "https://i.pinimg.com/564x/05/f8/fa/05f8fa6dfec1c9d97d9bda7bfd8b7735.jpg"
+      }
+    ],
+    "trailer": "https://www.youtube.com/watch?v=hdZnvMQRyCo",
+    "horarios_proyeccion": [
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 49,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 50,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 51,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "27/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 52,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 53,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 54,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 55,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "28/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 56,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 57,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 58,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 59,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "29/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 60,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "15:00",
+        "hora_finalizacion": "16:40",
+        "id_sala": 61,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "17:00",
+        "hora_finalizacion": "18:40",
+        "id_sala": 62,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "18:30",
+        "hora_finalizacion": "20:10",
+        "id_sala": 63,
+        "precio_pelicula": 12000
+      },
+      {
+        "fecha_proyeccion": "30/08/2024",
+        "horario_proyeccion": "20:00",
+        "hora_finalizacion": "21:40",
+        "id_sala": 64,
+        "precio_pelicula": 12000
+      }
+    ]
+  }
+]
+```
+
+
+
+### 4. Buscar Películas
+
+- **URL**: `/peliculas/buscar`
+- **Método**: GET
+- **Parámetros de consulta**:
+  - `query`: Término de búsqueda
+- **Descripción**: Busca películas basándose en un término de búsqueda.
+- **Respuesta exitosa**:
+  - Código: 200
+  - Contenido: Array de objetos de película que coinciden con la búsqueda
+- Ejemplo:
+  http://localhost:5001/api/peliculas/coraline
+
+```
+{
+  "id": 8,
+  "titulo": "Coraline",
+  "sinopsis": "Remake live-action del clásico de animación sobre una niña que descubre una realidad alternativa siniestra.Una joven atraviesa una puerta secreta en su nuevo hogar y descubre una versión alterna de su vida. En la superficie, esta realidad paralela es sorprendentemente similar a su vida real,pero mucho mejor.",
+  "fecha_estreno": "25/10/2024",
+  "genero": "Fantasia",
+  "duracion": "100 minutos",
+  "estado": "En cartelera",
+  "pais_origen": "Estados Unidos",
+  "imagen_pelicula": "https://i.pinimg.com/564x/33/f8/70/33f870f74805b8c09a187310cea4f68a.jpg",
+  "reparto": [
+    {
+      "nombre_real": "Millie Bobby Brown",
+      "nombre_personaje": "Coraline Jones",
+      "imagen_actor": "https://i.pinimg.com/736x/b2/62/5e/b2625e56e7f5d8d27c74c880f05a7abf.jpg"
+    },
+    {
+      "nombre_real": "Tilda Swinton",
+      "nombre_personaje": "La Otra Madre",
+      "imagen_actor": "https://i.pinimg.com/564x/1f/2e/96/1f2e96076a514905ecb2c80b4f286a7d.jpg"
+    },
+    {
+      "nombre_real": "Timothée Chalamet",
+      "nombre_personaje": "Wybie Lovat",
+      "imagen_actor": "https://i.pinimg.com/736x/7a/1d/b7/7a1db7fd9297c92458e35dbd11c31146.jpg"
+    },
+    {
+      "nombre_real": "Helena Bonham Carter",
+      "nombre_personaje": "La Madre",
+      "imagen_actor": "https://i.pinimg.com/564x/6f/3a/27/6f3a2732df70d3f877ac67768c599829.jpg"
+    },
+    {
+      "nombre_real": "Idris Elba",
+      "nombre_personaje": "El Sr. Bobinsky",
+      "imagen_actor": "https://i.pinimg.com/564x/08/46/fc/0846fc2b7188d37748a40e9e22b20704.jpg"
+    },
+    {
+      "nombre_real": "Anya Taylor-Joy",
+      "nombre_personaje": "La Otra Coraline",
+      "imagen_actor": "https://i.pinimg.com/564x/c3/53/f8/c353f853acdfccba89c88e3aec2fd334.jpg"
+    }
+  ],
+  "trailer": "https://www.youtube.com/watch?v=T6iQnnHNF50",
+  "imagen_banner": "https://i.pinimg.com/564x/9f/ff/93/9fff931bf20f2338546532111e0ce261.jpg",
+  "horarios_proyeccion": [
+    {
+      "fecha_proyeccion": "27/08/2024",
+      "horario_proyeccion": "15:00",
+      "hora_finalizacion": "16:40",
+      "id_sala": 1,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "27/08/2024",
+      "horario_proyeccion": "17:00",
+      "hora_finalizacion": "18:40",
+      "id_sala": 2,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "27/08/2024",
+      "horario_proyeccion": "18:30",
+      "hora_finalizacion": "20:10",
+      "id_sala": 3,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "27/08/2024",
+      "horario_proyeccion": "20:00",
+      "hora_finalizacion": "21:40",
+      "id_sala": 4,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "28/08/2024",
+      "horario_proyeccion": "15:00",
+      "hora_finalizacion": "16:40",
+      "id_sala": 5,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "28/08/2024",
+      "horario_proyeccion": "17:00",
+      "hora_finalizacion": "18:40",
+      "id_sala": 6,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "28/08/2024",
+      "horario_proyeccion": "18:30",
+      "hora_finalizacion": "20:10",
+      "id_sala": 7,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "28/08/2024",
+      "horario_proyeccion": "20:00",
+      "hora_finalizacion": "21:40",
+      "id_sala": 8,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "29/08/2024",
+      "horario_proyeccion": "15:00",
+      "hora_finalizacion": "16:40",
+      "id_sala": 9,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "29/08/2024",
+      "horario_proyeccion": "17:00",
+      "hora_finalizacion": "18:40",
+      "id_sala": 10,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "29/08/2024",
+      "horario_proyeccion": "18:30",
+      "hora_finalizacion": "20:10",
+      "id_sala": 11,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "29/08/2024",
+      "horario_proyeccion": "20:00",
+      "hora_finalizacion": "21:40",
+      "id_sala": 12,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "30/08/2024",
+      "horario_proyeccion": "15:00",
+      "hora_finalizacion": "16:40",
+      "id_sala": 13,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "30/08/2024",
+      "horario_proyeccion": "17:00",
+      "hora_finalizacion": "18:40",
+      "id_sala": 14,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "30/08/2024",
+      "horario_proyeccion": "18:30",
+      "hora_finalizacion": "20:10",
+      "id_sala": 15,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "30/08/2024",
+      "horario_proyeccion": "20:00",
+      "hora_finalizacion": "21:40",
+      "id_sala": 16,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "31/08/2024",
+      "horario_proyeccion": "15:00",
+      "hora_finalizacion": "16:40",
+      "id_sala": 17,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "31/08/2024",
+      "horario_proyeccion": "17:00",
+      "hora_finalizacion": "18:40",
+      "id_sala": 18,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "31/08/2024",
+      "horario_proyeccion": "18:30",
+      "hora_finalizacion": "20:10",
+      "id_sala": 19,
+      "precio_pelicula": 15000
+    },
+    {
+      "fecha_proyeccion": "31/08/2024",
+      "horario_proyeccion": "20:00",
+      "hora_finalizacion": "21:40",
+      "id_sala": 20,
+      "precio_pelicula": 15000
+    }
+  ]
+}
+```
+
+
+
+## Estructura de Datos
+
+### Objeto Película
+
+```javascript
+{
+  id: Number,
+  titulo: String,
+  sinopsis: String,
+  fecha_estreno: Date,
+  genero: String,
+  duracion: Number,
+  estado: String,
+  pais_origen: String,
+  imagen_pelicula: String,
+  reparto: [
+    {
+      nombre_real: String,
+      nombre_personaje: String
+    }
+  ],
+  trailer: String,
+  horarios_proyeccion: [
+    {
+      fecha_proyeccion: Date,
+      horario_proyeccion: String,
+      hora_finalizacion: String,
+      id_sala: Number,
+      precio_pelicula: Number
+    }
+  ]
+}
+```
+
+## Notas Adicionales
+
+- Todos los endpoints devuelven los datos en formato JSON.
+- En caso de error, los endpoints devolverán un objeto con una propiedad `error` que contiene un mensaje descriptivo del error.
+- La función `destructor()` se llama después de cada operación para limpiar las instancias.
+
+
+
+# Documentación de la API de Boletos
+
+## Endpoints
+
+### 1. Listar Boletos
+
+- **URL**: `/boletos`
+- **Método**: GET
+- **Descripción**: Obtiene una lista de todos los boletos.
+- Respuesta exitosa:
+  - Código: 200
+  - Contenido: Array de objetos de boleto
+
+### 2. Obtener Detalle de un Boleto
+
+- **URL**: `/boletos/:id`
+
+- **Método**: GET
+
+- Parámetros de URL
+
+  :
+
+  - `id`: ID del boleto
+
+- **Descripción**: Obtiene los detalles de un boleto específico por su ID.
+
+- Respuesta exitosa
+
+  :
+
+  - Código: 200
+  - Contenido: Objeto con los detalles del boleto
+
+### 3. Comprar Boletos
+
+- **URL**: `/boletos/comprar`
+- **Método**: POST
+- **Datos del cuerpo**: Objeto con los detalles del boleto a comprar
+- **Descripción**: Realiza la compra de boletos.
+- Respuesta exitosa:
+  - Código: 200
+  - Contenido: Objeto con el resultado de la operación de compra
+
+### 4. Consultar Disponibilidad de Asientos
+
+- **URL**: `/boletos/disponibilidad/:idHorarioProyeccion`
+- **Método**: GET
+- Parámetros de URL:
+  - `idHorarioProyeccion`: ID del horario de proyección
+- **Descripción**: Consulta la disponibilidad de asientos para un horario de proyección específico.
+- Respuesta exitosa:
+  - Código: 200
+  - Contenido: Objeto con la información de disponibilidad de asientos
+
+### 5. Pagos en Línea
+
+- **URL**: `/boletos/pago-en-linea`
+- **Método**: POST
+- **Datos del cuerpo**: Objeto con los detalles del pago en línea
+- **Descripción**: Procesa un pago en línea para la compra de boletos.
+- Respuesta exitosa:
+  - Código: 200
+  - Contenido: Objeto con el resultado de la operación de pago
+
+### 6. Confirmación de Compra
+
+- **URL**: `/boletos/confirmacion-compra`
+- **Método**: POST
+- **Datos del cuerpo**: Objeto con los detalles del boleto a confirmar
+- **Descripción**: Confirma la compra de boletos.
+- Respuesta exitosa:
+  - Código: 200
+  - Contenido: Objeto con el resultado de la confirmación de compra
+
+### 7. Obtener Información Completa de Película
+
+- **URL**: `/peliculas/:idPelicula/info-completa`
+- **Método**: GET
+- Parámetros de URL:
+  - `idPelicula`: ID de la película
+- **Descripción**: Obtiene información completa de una película, incluyendo horarios y asientos disponibles.
+- Respuesta exitosa:
+  - Código: 200
+  - Contenido: Objeto con la información completa de la película
+
+### 8. Obtener Boletos de Usuario
+
+- **URL**: `/boletos/usuario/:idUsuario`
+- **Método**: GET
+- Parámetros de URL:
+  - `idUsuario`: ID del usuario
+- **Descripción**: Obtiene todos los boletos comprados por un usuario específico.
+- Respuesta exitosa:
+  - Código: 200
+  - Contenido: Array de objetos de boleto del usuario
+
+## Notas Adicionales
+
+- Todos los endpoints devuelven los datos en formato JSON.
+- En caso de error, los endpoints devolverán un objeto con una propiedad `error` que contiene un mensaje descriptivo del error.
+- La función `destructor()` se llama después de cada operación para limpiar las instancias.
+- Los controladores utilizan una instancia de la clase `Boleto` para realizar las operaciones.
+
+
+
+# Documentación de la API de Reservas
+
+## Endpoints
+
+### 1. Reservar Asientos
+
+- **URL**: `/reservas`
+
+- **Método**: POST
+
+- **Descripción**: Realiza una reserva de asientos para una película en un horario específico.
+
+- Datos del cuerpo
+
+  : Objeto con los detalles de la reserva
+
+  - `id`: ID único de la reserva
+  - `id_pelicula`: ID de la película
+  - `id_horario_proyeccion`: ID del horario de proyección
+  - `id_usuario`: ID del usuario que realiza la reserva
+  - `asientos_reservados`: Lista de IDs de asientos a reservar
+  - `fecha_reserva` (opcional): Fecha de la reserva
+  - `estado` (opcional): Estado de la reserva
+  - `fecha_expiracion` (opcional): Fecha de expiración de la reserva
+
+- Respuesta exitosa:
+
+  - Código: 201
+  - Contenido: Objeto con el mensaje de éxito y los detalles de la reserva
+
+- Respuesta de error:
+
+  - Código: 400 o 500
+  - Contenido: Objeto con el mensaje de error
+
+### 2. Cancelar o Modificar Reserva
+
+- **URL**: `/reservas/cancelar`
+- **Método**: PUT
+- **Descripción**: Cancela o actualiza una reserva existente.
+- Datos del cuerpo: Objeto con los detalles de la reserva a cancelar o actualizar
+  - `id`: ID de la reserva
+  - `id_usuario`: ID del usuario que solicita la cancelación/actualización
+  - `asientos_reservados`: Nueva lista de IDs de asientos reservados (vacía para cancelación total)
+- Respuesta exitosa:
+  - Código: 200
+  - Contenido: Objeto con el mensaje de éxito y los detalles actualizados de la reserva
+- Respuesta de error:
+  - Código: 400 o 500
+  - Contenido: Objeto con el mensaje de error
+
+## Notas Adicionales
+
+- Todos los endpoints devuelven los datos en formato JSON.
+- En caso de error, los endpoints devolverán un objeto con una propiedad `error` que contiene un mensaje descriptivo del error.
+- La función `destructor()` se llama después de cada operación para limpiar las instancias.
+- Los controladores utilizan una instancia de la clase `reserva` para realizar las operaciones.
+- La reserva de asientos verifica la disponibilidad de la película, el horario de proyección, la validez de los asientos y la existencia del usuario antes de procesar la reserva.
+- La cancelación o modificación de una reserva permite liberar asientos o actualizar la lista de asientos reservados.
+
+
+
+# Documentación de la API de Usuarios
+
+## Endpoints
+
+### 1. Crear Usuario
+
+* **URL**: `/usuarios`
+* **Método**: POST
+* **Descripción**: Crea un nuevo usuario en el sistema.
+* **Datos del cuerpo**: Objeto con los detalles del usuario a crear
+  * `id`: ID único del usuario (número)
+  * `nombre_completo`: Nombre completo del usuario
+  * `nickname`: Apodo único del usuario
+  * `email`: Correo electrónico único del usuario
+  * `celular`: Número de celular único del usuario
+  * `identificacion`: Número de identificación único del usuario
+  * `telefono` (opcional): Número de teléfono del usuario
+  * `rol`: Rol del usuario ('VIP', 'Estandar', 'Administrador')
+  * `imagen_user`: URL de la imagen del usuario
+  * `metodo_pago`: Array con los métodos de pago del usuario
+* **Respuesta exitosa**:
+  * Código: 200
+  * Contenido: Objeto con el mensaje de éxito y los detalles del usuario creado
+* **Respuesta de error**:
+  * Código: 500
+  * Contenido: Objeto con el mensaje de error
+
+### 2. Crear Tarjeta VIP
+
+* **URL**: `/usuarios/tarjeta-vip`
+* **Método**: POST
+* **Descripción**: Crea una nueva tarjeta VIP para un usuario existente.
+* **Datos del cuerpo**: Objeto con los datos para crear la tarjeta VIP
+  * `id_usuario` o `nickname` o `identificacion`: Identificador del usuario
+* **Respuesta exitosa**:
+  * Código: 200
+  * Contenido: Objeto con los detalles de la tarjeta VIP creada
+* **Respuesta de error**:
+  * Código: 400 o 500
+  * Contenido: Objeto con el mensaje de error
+
+### 3. Consultar Usuario Detallado
+
+* **URL**: `/usuarios/detalle`
+* **Método**: GET
+* **Descripción**: Consulta información detallada de un usuario, incluyendo su rol y estado de tarjeta VIP.
+* **Datos del cuerpo**: Objeto con los datos para realizar la consulta
+  * `admin_nickname`: Nickname del administrador que realiza la consulta
+  * `admin_identificacion`: Identificación del administrador
+  * `id` o `identificacion` o `nickname` o `nombre_completo`: Identificador del usuario a consultar
+* **Respuesta exitosa**:
+  * Código: 200
+  * Contenido: Objeto con la información detallada del usuario
+* **Respuesta de error**:
+  * Código: 200 (con propiedad 'error')
+  * Contenido: Objeto con el mensaje de error
+
+### 4. Actualizar Rol de Usuario
+
+* **URL**: `/usuarios/rol`
+* **Método**: PUT
+* **Descripción**: Actualiza el rol de un usuario y gestiona su tarjeta VIP si es necesario.
+* **Datos del cuerpo**: Objeto con los datos para realizar la actualización
+  * `id`: ID del usuario
+  * `nuevoRol`: Nuevo rol a asignar al usuario ("VIP" o "Estandar")
+* **Respuesta exitosa**:
+  * Código: 200
+  * Contenido: Objeto con un mensaje indicando el resultado de la operación
+* **Respuesta de error**:
+  * Código: 200 (con propiedad 'error')
+  * Contenido: Objeto con el mensaje de error
+
+### 5. Consultar Todos los Usuarios
+
+* **URL**: `/consultar-todos`
+* **Método**: GET
+* **Descripción**: Consulta todos los usuarios del sistema con opción de filtrar por rol.
+* **Parámetros de consulta**:
+  * `nickname`: Nickname del administrador (requerido)
+  * `identificacion`: Identificación del administrador (requerido)
+  * `rol` (opcional): Rol para filtrar los usuarios ('VIP', 'Estandar', 'Administrador')
+  * `nombre` (opcional): Nombre para filtrar los usuarios
+* **Respuesta exitosa**:
+  * Código: 200
+  * Contenido: Objeto con la lista de usuarios y mensaje de estado
+* **Respuesta de error**:
+  * Código: 400
+  * Contenido: Array con los errores de validación
+
+## Notas Adicionales
+
+* Todos los endpoints devuelven los datos en formato JSON.
+* La autenticación y autorización se manejan a nivel de base de datos y roles de usuario.
+* Los controladores utilizan una instancia de la clase `Usuario` para realizar las operaciones.
+* Se debe cerrar la conexión a la base de datos después de cada operación usando el método `destructor()`.
+* La creación de usuarios incluye la asignación de roles y la creación de tarjetas VIP para usuarios con rol 'VIP'.
+* La consulta de usuarios está restringida a administradores y permite filtrar por rol y nombre.

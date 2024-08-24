@@ -1,3 +1,9 @@
+/**
+ * Registra un Service Worker y maneja el formulario de inicio de sesión.
+ * 
+ * @function
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -13,14 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
 
-
-
-
-
-
-
     const form = document.querySelector('#loginForm');
     const errorPopup = document.getElementById('errorPopup');
+
+    /**
+     * Muestra un mensaje de error en un popup durante 3 segundos.
+     * 
+     * @param {string} message - El mensaje de error a mostrar.
+     */
 
     function showErrorPopup(message) {
         errorPopup.querySelector('p').textContent = message;
@@ -53,11 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (usuarioEncontrado) {
                     localStorage.setItem('usuarioActual', JSON.stringify({
+                        id: usuarioEncontrado.id,
                         nombre: usuarioEncontrado.nombre_completo,
-                        imagen: usuarioEncontrado.imagen_user
+                        imagen: usuarioEncontrado.imagen_user,
+                        metodosPago: usuarioEncontrado.metodo_pago,
+                        rol: usuarioEncontrado.rol
                     }));
-
-                    window.location.href = './views/home.html';
+                
+                    window.location.href = '../views/home.html';
                 } else {
                     showErrorPopup('Usuario o contraseña incorrectos');
                 }

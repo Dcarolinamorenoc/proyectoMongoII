@@ -1,8 +1,24 @@
+/**
+ * Maneja el formulario de registro de usuario, incluyendo el procesamiento de métodos de pago
+ * y la visualización de mensajes emergentes.
+ * 
+ * @function
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('registroForm');
     const popup = document.getElementById('popup');
     const popupMessage = document.getElementById('popup-message');
     const closePopup = document.querySelector('.close');
+
+    /**
+     * Imágenes asociadas con los tipos de tarjetas de crédito.
+     * 
+     * @constant {Object}
+     * @property {string} Visa - URL de la imagen de la tarjeta Visa.
+     * @property {string} Mastercard - URL de la imagen de la tarjeta Mastercard.
+     * @property {string} Diners Club - URL de la imagen de la tarjeta Diners Club.
+     * @property {string} American Express - URL de la imagen de la tarjeta American Express.
+     */
 
     const tarjetasImagenes = {
         'Visa': 'https://i.pinimg.com/736x/ec/69/18/ec69182974fa21bb0a2c36b511c01cf1.jpg',
@@ -70,6 +86,12 @@ document.addEventListener('DOMContentLoaded', function() {
             showPopup('Error al registrar el usuario: ' + error.message);
         });
     });
+
+    /**
+     * Muestra un mensaje emergente en el popup.
+     * 
+     * @param {string} message - El mensaje a mostrar en el popup.
+     */
 
     function showPopup(message) {
         popupMessage.textContent = message;

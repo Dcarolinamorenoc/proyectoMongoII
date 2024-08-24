@@ -1,3 +1,9 @@
+/**
+ * Maneja la carga inicial de la página y recupera la información del usuario desde el almacenamiento local.
+ * 
+ * @function
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
     const userInfo = JSON.parse(localStorage.getItem('usuarioActual'));
     if (userInfo) {
@@ -6,6 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('No se encontró información del usuario en localStorage');
     }
 });
+
+
+/**
+ * Obtiene la información del usuario desde la API y actualiza la interfaz de usuario.
+ * 
+ * @param {string} nombreCompleto - El nombre completo del usuario para buscar en la respuesta de la API.
+ * 
+ * @function
+ */
+
 
 function fetchUserInfo(nombreCompleto) {
     const apiUrl = `/api/consultar-todos?nickname=FelixCB&identificacion=1098672134&rol`;
@@ -26,7 +42,24 @@ function fetchUserInfo(nombreCompleto) {
         .catch(error => console.error('Error al obtener datos del usuario:', error));
 }
 
-
+/**
+ * Actualiza la interfaz de usuario con la información del usuario.
+ * 
+ * @param {Object} user - El objeto que contiene los datos del usuario.
+ * @param {string} user.imagen_user - URL de la imagen del usuario.
+ * @param {string} user.nickname - Apodo del usuario.
+ * @param {string} user.id - ID del usuario.
+ * @param {string} user.rol - Rol del usuario (por ejemplo, 'Administrador').
+ * @param {string} user.nombre_completo - Nombre completo del usuario.
+ * @param {string} user.identificacion - Identificación del usuario.
+ * @param {string} user.celular - Número de celular del usuario.
+ * @param {string} user.telefono - Número de teléfono del usuario.
+ * @param {string} user.email - Correo electrónico del usuario.
+ * @param {Array<Object>} user.metodo_pago - Métodos de pago asociados al usuario.
+ * @param {Object} user.tarjeta_vip - Información de la tarjeta VIP del usuario.
+ * 
+ * @function
+ */
 
 function updateUserInterface(user) {
     document.getElementById('userImage').src = user.imagen_user;

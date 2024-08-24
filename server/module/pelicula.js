@@ -22,6 +22,19 @@ module.exports = class Pelicula extends connect {
         connect.instanceConnect = undefined;
     }
 
+/**
+ * Lista todas las películas que están en cartelera o que son próximos estrenos.
+ * 
+ * @async
+ * @function listarPeliculas
+ * @returns {Promise<Array<Object>|Object>} - Una lista de películas con sus respectivos horarios o un objeto de error.
+ * 
+ * @example
+ * const peliculas = await listarPeliculas();
+ */
+
+
+
     async listarPeliculas() {
         try {
             const peliculas = await this.collection.find({
@@ -64,6 +77,19 @@ module.exports = class Pelicula extends connect {
             return { error: `Error al listar las películas: ${error.message}` };
         }
     }
+
+/**
+ * Obtiene los detalles de una película específica, ya sea por su ID o por su título.
+ * 
+ * @async
+ * @function obtenerDetallesPelicula
+ * @param {number|string} idOTitulo - ID o título de la película.
+ * @returns {Promise<Object>} - Un objeto con los detalles de la película o un objeto de error.
+ * 
+ * @example
+ * const detalles = await obtenerDetallesPelicula('12345');
+ */
+
 
     async obtenerDetallesPelicula(idOTitulo) {
         try {
@@ -114,6 +140,21 @@ module.exports = class Pelicula extends connect {
             return { error: `Error al obtener los detalles de la película: ${error.message}` };
         }
     }
+
+
+/**
+ * Obtiene una lista de películas según su estado (e.g., "En cartelera", "Próximo estreno").
+ * 
+ * @async
+ * @function obtenerPeliculasPorEstado
+ * @param {Object} params - Parámetros de búsqueda.
+ * @param {string} params.estado - Estado de las películas a buscar.
+ * @returns {Promise<Array<Object>|Object>} - Una lista de películas con sus horarios o un objeto de error.
+ * 
+ * @example
+ * const peliculas = await obtenerPeliculasPorEstado({ estado: 'En cartelera' });
+ */
+
 
     async obtenerPeliculasPorEstado({ estado }) {
         try {
@@ -167,6 +208,19 @@ module.exports = class Pelicula extends connect {
             return { error: `Error al obtener las películas por estado: ${error.message}` };
         }
     }
+
+/**
+ * Busca películas en la base de datos basándose en un término de búsqueda.
+ * 
+ * @async
+ * @function buscarPeliculas
+ * @param {string} query - Término de búsqueda.
+ * @returns {Promise<Array<Object>|Object>} - Una lista de películas que coinciden con el término de búsqueda o un objeto de error.
+ * 
+ * @example
+ * const resultados = await buscarPeliculas('acción');
+ */
+
 
     async buscarPeliculas(query) {
         try {

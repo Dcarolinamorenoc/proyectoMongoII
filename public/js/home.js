@@ -1,3 +1,9 @@
+/**
+ * Ejecuta una vez que el DOM se ha cargado completamente.
+ * 
+ * @function
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
   const userInfo = JSON.parse(localStorage.getItem('usuarioActual'));
 

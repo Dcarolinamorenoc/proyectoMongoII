@@ -1,3 +1,9 @@
+/**
+ * Maneja el envío del formulario para la creación de una tarjeta VIP.
+ * 
+ * @function
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('tarjetaVipForm');
     
@@ -40,6 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+/**
+ * Muestra un mensaje emergente en el popup.
+ * 
+ * @param {string} message - El mensaje a mostrar en el popup.
+ * 
+ * @function
+ */
+
 function showPopup(message) {
     const popup = document.getElementById('popup');
     const popupMessage = document.getElementById('popupMessage');
@@ -50,6 +64,12 @@ function showPopup(message) {
         console.error('Elementos del popup no encontrados');
     }
 }
+
+/**
+ * Oculta el mensaje emergente en el popup.
+ * 
+ * @function
+ */
 
 function closePopup() {
     const popup = document.getElementById('popup');
