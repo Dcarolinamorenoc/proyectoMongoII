@@ -1115,7 +1115,7 @@ async function displaySeatSelection(movieId) {
                 display: flex;
                 justify-content: space-around;
                 margin-bottom: 20px;
-                gap: 8px;
+                gap: 5px;
             }
 
             .legend-item {
@@ -1165,15 +1165,15 @@ async function displaySeatSelection(movieId) {
                 display: flex;
                 overflow-x: auto;
                 margin-bottom: 20px;
-                margin-left: 5%;
+                margin-left: 7%;
                 scrollbar-width: none;
 
             }
 
             .time-btn {
-                background-color: #333;
+                background-color: #fff;
                 border: none;
-                color: #fff;
+                color: #969696;
                 padding: 10px;
                 margin-right: 10px;
                 border-radius: 5px;
@@ -1186,10 +1186,11 @@ async function displaySeatSelection(movieId) {
             .date-btn{
                 background-color: #fff;
                 border: none;
-                color: #C3C3C3;
+                color: #969696;
                 padding: 10px;
                 margin-right: 10px;
-                border-radius: 5px;
+                height: 90px;
+                border-radius: 8px;
                 cursor: pointer;
                 min-width: 60px;
                 text-align: center;
@@ -1201,6 +1202,13 @@ async function displaySeatSelection(movieId) {
                 margin-top: 4%;
             }
 
+                .time{
+                color: #000;
+                font-size: 25px;
+                margin-top: 4%;
+            }
+
+
             .span.date-number{
                 margin-top: 5%;
             }
@@ -1209,6 +1217,8 @@ async function displaySeatSelection(movieId) {
                 background-color: #e50914;
                 width: 15vw;
                 height: 10vh;
+                height: 90px;
+                color: #fff;
             }
 
             .date-btn.selected span{
@@ -1222,9 +1232,14 @@ async function displaySeatSelection(movieId) {
                 background-color: #e50914;
                 width: 26vw;
                 height: 8vh;
+                color: #fff;
             }
 
+            .time-btn.selected .time{
+                color: #fff;
             }
+
+
 
             .day {
                 font-size: 12px;
@@ -1241,7 +1256,8 @@ async function displaySeatSelection(movieId) {
             }
 
             .price {
-                font-size: 12px;
+                font-size: 0.7rem;
+                font-weight: bold;
             }
 
             .price-section {
@@ -1259,6 +1275,7 @@ async function displaySeatSelection(movieId) {
                 align-items: baseline;
                 gap: 5px; 
                 margin-top:20px;
+                margin-left: 2%;
             }
 
             .total-price {
@@ -1275,6 +1292,7 @@ async function displaySeatSelection(movieId) {
                 font-size: 18px;
                 cursor: pointer;
                 margin-top: 20px;
+                margin-right: 4%;
             }
 
             .seat {
@@ -1363,7 +1381,7 @@ async function displaySeatSelection(movieId) {
                 display: flex;
                 overflow-x: auto;
                 margin-bottom: 20px;
-                margin-left: 5%;
+                margin-left: 7%;
                 margin-right: 5%;
                 scrollbar-width: none;  /* Para Firefox */
                 -ms-overflow-style: none;  /* Para Internet Explorer y Edge */
@@ -1384,6 +1402,7 @@ async function displaySeatSelection(movieId) {
 
             .date-btn .day {
                 margin-bottom: 8px;
+                font-size: 1rem;
             }
             
         `;
