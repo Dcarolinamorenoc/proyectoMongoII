@@ -371,7 +371,7 @@ async function displayMovieDetails(movieId, movieState) {
                 flex-direction: row;
                 justify-content: space-between;
                 margin: 15px;
-                margin-top: 1px;
+                margin-top: 6px;
             }
 
             h2 {
@@ -616,7 +616,7 @@ async function displayMovieDetails(movieId, movieState) {
                 cursor: pointer;
                 transition: border-color 0.3s ease;
                 margin-left: 3%;
-                width: 330px;
+                width: 84vw;
             }
             .cinema-item.selected {
                 border-color: red;
@@ -637,19 +637,18 @@ async function displayMovieDetails(movieId, movieState) {
                 color: #666;
                 border: none;
                 border-radius: 10px;
-                margin-top: 20px;
+                margin-top: 15%;
                 cursor: not-allowed;
                 font-weight: bold;
                 font-size: 16px;
                 transition: all 0.3s ease;
-                margin-left: -1%;
-                width: 330px;
+                width: 82vw;
             }
             #book-now.active {
                 background-color: red;
                 color: white;
                 cursor: pointer;
-                margin-top: 60px;
+                margin-top: 17%;
             }
 
             #youtube-player {
