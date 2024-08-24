@@ -1002,18 +1002,33 @@ async function displaySeatSelection(movieId) {
 
         const styleElement = document.createElement('style');
         styleElement.textContent = `
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html, body{
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+            }
+        
             body {
                 font-family: Arial, sans-serif;
                 background-color: #000;
                 color: #fff;
                 margin: 0;
                 padding: 0;
+                box-sizing: border-box;
             }
 
             .movie-details-container {
-                max-width: 400px;
+                max-width: 100%;
                 margin: 0 auto;
-                padding: 20px;
             }
 
             .movie-header {
@@ -1129,13 +1144,31 @@ async function displaySeatSelection(movieId) {
                 background-color: #FE0000;
             }
 
-            .date-selector, .time-selector {
+            .time-selector {
                 display: flex;
                 overflow-x: auto;
                 margin-bottom: 20px;
             }
 
-            .date-btn, .time-btn {
+            .date-selector {
+                display: flex;
+                overflow-x: auto;
+                margin-bottom: 20px;
+            }
+
+            .time-btn {
+                background-color: #333;
+                border: none;
+                color: #fff;
+                padding: 10px;
+                margin-right: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                min-width: 60px;
+                text-align: center;
+            }
+
+            .date-btn{
                 background-color: #333;
                 border: none;
                 color: #fff;
@@ -1221,6 +1254,57 @@ async function displaySeatSelection(movieId) {
             .seat.selected {
                 background-color: #FE0000 !important;
             }
+
+            .seats-container {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .row {
+                display: flex;
+                align-items: center;
+            }
+            .row-letter {
+                width: 2px;
+                text-align: right;
+                margin-right: 10px;
+                font-weight: bold;
+                margin-right: 15px;
+                margin-left: -20px;
+                font-size: 0.8rem;
+                margin-left: 1px;
+
+            }
+            
+            .seats-row {
+                display: flex;
+                margin-bottom: -10px;
+            }
+            
+            .seat-spacer {
+                width: 35px;
+                height: 30px;
+            }
+            
+            .seat {
+                width: 30px;
+                height: 30px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                font-size: 10px;
+                color: #fff;
+                margin: 3px;
+            }
+
+            .row-b {
+                margin-bottom: 40px;
+            }
+            
         `;
 
         document.head.appendChild(styleElement);
@@ -1286,32 +1370,38 @@ async function displaySeatSelection(movieId) {
 
         function generateSeats(asientos) {
             const rows = ['A', 'B', 'C', 'D', 'E', 'F'];
-            let seatsHTML = '';
-
+            let seatsHTML = '<div class="seats-container">';
+            
             rows.forEach(row => {
                 const rowSeats = asientos.filter(seat => seat.fila === row);
                 if (rowSeats.length > 0) {
                     seatsHTML += `
-                        <div class="row">
+                        <div class="row ${row === 'B' ? 'row-b' : ''}">
                             <span class="row-letter">${row}</span>
-                            ${rowSeats.map(seat => `
-                                <div class="seat ${seat.estado}" 
-                                     data-id="${seat.id}"
-                                     data-row="${seat.fila}" 
-                                     data-number="${seat.numero}" 
-                                     data-estado="${seat.estado}" 
-                                     data-price="${seat.Precio}"
-                                     style="background-color: ${getSeatColor(seat.estado)};">
-                                    ${seat.numero}
-                                </div>
-                            `).join('')}
+                            <div class="seats-row">
+                                ${row === 'A' ? '<div class="seat-spacer"></div><div class="seat-spacer"></div>' : ''}
+                                ${row === 'B' ? '<div class="seat-spacer"></div>' : ''}
+                                ${rowSeats.map(seat => `
+                                    <div class="seat ${seat.estado}" 
+                                         data-id="${seat.id}"
+                                         data-row="${seat.fila}" 
+                                         data-number="${seat.numero}" 
+                                         data-estado="${seat.estado}" 
+                                         data-price="${seat.Precio}"
+                                         style="background-color: ${getSeatColor(seat.estado)};">
+                                        ${seat.numero}
+                                    </div>
+                                `).join('')}
+                            </div>
                         </div>
                     `;
                 }
             });
-
+            
+            seatsHTML += '</div>';
             return seatsHTML;
         }
+        
 
         function getSeatColor(estado) {
             switch (estado) {
@@ -1440,7 +1530,7 @@ async function displaySeatSelection(movieId) {
                             totalPrice -= (seatPrice + moviePrice);
                         }
 
-                        // Actualiza el precio total sumando el precio de la película más los asientos seleccionados
+
                         document.querySelector('.total-price').textContent = `$${totalPrice.toFixed(2)}`;
 
                         seatElement.style.backgroundColor = seatElement.classList.contains('selected') ? '#FF0000' : getSeatColor(seatElement.dataset.estado);
