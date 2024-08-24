@@ -7,7 +7,8 @@ const {
     consultarDisponibilidadAsientos,
     pagosEnLinea,
     confirmacionCompra,
-    obtenerInfoPeliculaCompleta
+    obtenerInfoPeliculaCompleta,
+    obtenerBoletosUsuario
 } = require("../controllers/boletoControllers");
 
 router.get('/boletos', listarBoletos);
@@ -17,5 +18,6 @@ router.get('/boletos/disponibilidad/:idHorarioProyeccion', consultarDisponibilid
 router.post('/boletos/pago-en-linea', pagosEnLinea);
 router.post('/boletos/confirmacion-compra', confirmacionCompra);
 router.get('/peliculas/:idPelicula/info-completa', obtenerInfoPeliculaCompleta);
+router.get('/boletos/usuario/:idUsuario', obtenerBoletosUsuario);
 
 module.exports = router;

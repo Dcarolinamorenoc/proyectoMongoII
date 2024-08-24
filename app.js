@@ -3,6 +3,7 @@ const app = express();
 const peliculaRoutes = require("./server/router/pelicula.routes");
 const usuarioRoutes = require("./server/router/usuario.routes");
 const boletoRoutes = require("./server/router/boleto.routes");
+const reservaRoutes = require('./server/router/reserva.routes');
 require('dotenv').config();
 
 app.use(express.static('public'));
@@ -17,6 +18,7 @@ app.get("/", function (req, res) {
 app.use('/api', peliculaRoutes);
 app.use('/api', usuarioRoutes);
 app.use('/api', boletoRoutes);
+app.use('/api', reservaRoutes); 
 
 app.listen({
     host: process.env.EXPRESS_HOST,

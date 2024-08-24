@@ -458,13 +458,13 @@ module.exports = class boleto extends connect {
         try {
           await this.conexion.connect();
       
-          const boletoExistente = await this.collection.findOne({ id: detallesBoletoUser.id });
+          const boletoExistente = await this.collection.findOne({ id: parseInt(detallesBoletoUser.id, 10) });
           if (boletoExistente) {
             throw new Error('El ID del boleto ya existe.');
           }
       
           const pelicula = await this.db.collection('pelicula').findOne({
-            id: detallesBoletoUser.id_pelicula,
+            id: parseInt(detallesBoletoUser.id_pelicula, 10),
             estado: { $in: ["En cartelera", "Próximo estreno"] }
           });
           if (!pelicula) {
@@ -472,30 +472,32 @@ module.exports = class boleto extends connect {
           }
       
           const horarioProyeccion = await this.db.collection('horario_proyeccion').findOne({
-            id: detallesBoletoUser.id_horario_proyeccion,
-            id_pelicula: detallesBoletoUser.id_pelicula
+            id: parseInt(detallesBoletoUser.id_horario_proyeccion, 10),
+            id_pelicula: parseInt(detallesBoletoUser.id_pelicula, 10)
           });
           if (!horarioProyeccion) {
             throw new Error('El horario de proyección no es válido para esta película.');
           }
       
-          const usuario = await this.db.collection('usuario').findOne({ id: detallesBoletoUser.id_usuario });
+          const usuario = await this.db.collection('usuario').findOne({ id: parseInt(detallesBoletoUser.id_usuario, 10) });
           if (!usuario) {
             throw new Error('El usuario especificado no existe.');
           }
       
-          const sala = await this.db.collection('sala').findOne({ id: horarioProyeccion.id_sala });
+          const sala = await this.db.collection('sala').findOne({ id: parseInt(horarioProyeccion.id_sala, 10) });
           if (!sala) {
             throw new Error('No se encontró la sala asociada a este horario de proyección.');
           }
       
-          const asientosValidos = detallesBoletoUser.asientos_comprados.every(asientoId => sala.asientos.includes(asientoId));
+          const asientosValidos = detallesBoletoUser.asientos_comprados.every(asientoId => 
+            sala.asientos.includes(parseInt(asientoId, 10))
+          );
           if (!asientosValidos) {
             throw new Error('Uno o más asientos seleccionados no pertenecen a la sala de esta proyección.');
           }
       
           const asientosDisponibles = await this.db.collection('asiento').countDocuments({
-            id: { $in: detallesBoletoUser.asientos_comprados },
+            id: { $in: detallesBoletoUser.asientos_comprados.map(id => parseInt(id, 10)) },
             estado: 'disponible'
           });
           if (asientosDisponibles !== detallesBoletoUser.asientos_comprados.length) {
@@ -503,7 +505,7 @@ module.exports = class boleto extends connect {
           }
       
           const asiento = await this.db.collection('asiento').findOne({
-            id: detallesBoletoUser.asientos_comprados[0]
+            id: parseInt(detallesBoletoUser.asientos_comprados[0], 10)
           });
           const precioAsiento = asiento.Precio;
       
@@ -511,7 +513,7 @@ module.exports = class boleto extends connect {
           let mensajeDescuento = '';
           if (usuario.rol === 'VIP') {
             const tarjetaVIP = await this.db.collection('tarjeta_vip').findOne({
-              id_usuario: usuario.id
+              id_usuario: parseInt(usuario.id, 10)
             });
             if (tarjetaVIP) {
               if (tarjetaVIP.estado === 'activa') {
@@ -541,7 +543,7 @@ module.exports = class boleto extends connect {
           await this.collection.insertOne(nuevoBoleto);
       
           await this.db.collection('asiento').updateMany(
-            { id: { $in: detallesBoletoUser.asientos_comprados } },
+            { id: { $in: detallesBoletoUser.asientos_comprados.map(id => parseInt(id, 10)) } },
             { $set: { estado: 'ocupado' } }
           );
       
@@ -649,6 +651,45 @@ module.exports = class boleto extends connect {
         } catch (error) {
             await this.conexion.close();
             throw error;
+        }
+    }
+
+
+    async obtenerBoletosUsuario(idUsuario) {
+        try {
+            await this.conexion.connect();
+    
+            const boletos = await this.collection.find({ id_usuario: parseInt(idUsuario) }).toArray();
+    
+            if (boletos.length === 0) {
+                return { mensaje: "El usuario no tiene boletos registrados." };
+            }
+    
+            const boletosConDetalles = await Promise.all(boletos.map(async (boleto) => {
+                const pelicula = await this.db.collection('pelicula').findOne({ id: boleto.id_pelicula });
+                const horarioProyeccion = await this.db.collection('horario_proyeccion').findOne({ id: boleto.id_horario_proyeccion });
+    
+                return {
+                    id_boleto: boleto.id,
+                    pelicula: {
+                        titulo: pelicula.titulo,
+                        imagen_pelicula: pelicula.imagen_pelicula
+                    },
+                    fecha_compra: boleto.fecha_compra,
+                    asientos_comprados: boleto.asientos_comprados,
+                    fecha_proyeccion: horarioProyeccion.fecha_proyeccion,
+                    horario_proyeccion: horarioProyeccion.horario_proyeccion,
+                    total: boleto.total,
+                    estado_compra: boleto.estado_compra
+                };
+            }));
+    
+            await this.conexion.close();
+    
+            return boletosConDetalles;
+        } catch (error) {
+            await this.conexion.close();
+            throw new Error(`Error al obtener los boletos del usuario: ${error.message}`);
         }
     }
     

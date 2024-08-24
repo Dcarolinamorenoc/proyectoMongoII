@@ -113,19 +113,24 @@ module.exports = class reserva extends connect {
         }
   
         
-        const asientosValidos = datosReserva.asientos_reservados.every(asientoId => sala.asientos.includes(asientoId));
+        const asientosValidos = datosReserva.asientos_reservados.every(asientoId => 
+          sala.asientos.includes(parseInt(asientoId, 10))
+        );
         if (!asientosValidos) {
           throw new Error('Uno o más asientos seleccionados no pertenecen a la sala de esta proyección.');
         }
+        
   
 
         const asientosDisponibles = await this.db.collection('asiento').countDocuments({ 
-          id: { $in: datosReserva.asientos_reservados }, 
+          id: { $in: datosReserva.asientos_reservados.map(id => parseInt(id, 10)) }, 
           estado: 'disponible' 
         });
-        if (asientosDisponibles !== datosReserva.asientos_reservados.length) {
+        
+      if (asientosDisponibles !== datosReserva.asientos_reservados.length) {
           throw new Error('Uno o más asientos seleccionados no están disponibles.');
-        }
+      }
+      
 
         const nuevaReserva = {
           ...datosReserva,
@@ -138,7 +143,7 @@ module.exports = class reserva extends connect {
   
 
         await this.db.collection('asiento').updateMany(
-          { id: { $in: datosReserva.asientos_reservados } },
+          { id: { $in: datosReserva.asientos_reservados.map(id => parseInt(id, 10)) } },
           { $set: { estado: 'reservado' } }
         );
   
