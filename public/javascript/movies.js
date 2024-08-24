@@ -314,7 +314,6 @@ async function displayMovieDetails(movieId, movieState) {
         `;
 
 
-        // Añadir estilos inline para lograr el diseño deseado
         const styleElement = document.createElement('style');
         styleElement.textContent = `
             body {
@@ -1026,7 +1025,7 @@ async function displaySeatSelection(movieId) {
                 box-sizing: border-box;
             }
 
-            .movie-details-container {
+            .movie-details-container2 {
                 max-width: 100%;
                 margin: 0 auto;
             }
@@ -1035,13 +1034,16 @@ async function displaySeatSelection(movieId) {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                margin-top: 40px;
                 margin-bottom: 20px;
             }
 
-            .back-button, .more-options {
+            .back-button2, .more-options {
                 width: 24px;
                 height: 24px;
                 cursor: pointer;
+                margin-right: 18px;
+                margin-left: 20px;
             }
 
             .movie-header h1 {
@@ -1113,6 +1115,7 @@ async function displaySeatSelection(movieId) {
                 display: flex;
                 justify-content: space-around;
                 margin-bottom: 20px;
+                gap: 8px;
             }
 
             .legend-item {
@@ -1130,30 +1133,41 @@ async function displaySeatSelection(movieId) {
 
             .seat-icon.available {
                 background-color: #323232;
+                border-radius: 20px;
             }
 
             .seat-icon.reserved {
                 background-color: #CECECE;
+                border-radius: 20px;
             }
 
             .seat-icon.ocupado {
                 background-color: #632727;
+                border-radius: 20px;
             }
 
             .seat-icon.selected {
                 background-color: #FE0000;
+                border-radius: 20px;
             }
 
             .time-selector {
                 display: flex;
                 overflow-x: auto;
                 margin-bottom: 20px;
+                scrollbar-width: none;
+                overflow-x: auto;
+                margin-left: 5%;
+
             }
 
             .date-selector {
                 display: flex;
                 overflow-x: auto;
                 margin-bottom: 20px;
+                margin-left: 5%;
+                scrollbar-width: none;
+
             }
 
             .time-btn {
@@ -1166,12 +1180,13 @@ async function displaySeatSelection(movieId) {
                 cursor: pointer;
                 min-width: 60px;
                 text-align: center;
+                width: 26vw;
             }
 
             .date-btn{
-                background-color: #333;
+                background-color: #fff;
                 border: none;
-                color: #fff;
+                color: #C3C3C3;
                 padding: 10px;
                 margin-right: 10px;
                 border-radius: 5px;
@@ -1180,8 +1195,35 @@ async function displaySeatSelection(movieId) {
                 text-align: center;
             }
 
-            .date-btn.selected, .time-btn.selected {
+            .date-btn span{
+                color: #000;
+                font-size: 25px;
+                margin-top: 4%;
+            }
+
+            .span.date-number{
+                margin-top: 5%;
+            }
+
+            .date-btn.selected {
                 background-color: #e50914;
+                width: 15vw;
+                height: 10vh;
+            }
+
+            .date-btn.selected span{
+                background-color: #e50914;
+                width: 15vw;
+                height: 10vh;
+                color: #fff;
+            }
+
+            .time-btn.selected {
+                background-color: #e50914;
+                width: 26vw;
+                height: 8vh;
+            }
+
             }
 
             .day {
@@ -1206,6 +1248,17 @@ async function displaySeatSelection(movieId) {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                margin-left: 5%;
+                width: 90vw;
+            }
+
+            .total-precio {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: baseline;
+                gap: 5px; 
+                margin-top:20px;
             }
 
             .total-price {
@@ -1221,6 +1274,7 @@ async function displaySeatSelection(movieId) {
                 border-radius: 5px;
                 font-size: 18px;
                 cursor: pointer;
+                margin-top: 20px;
             }
 
             .seat {
@@ -1304,6 +1358,33 @@ async function displaySeatSelection(movieId) {
             .row-b {
                 margin-bottom: 40px;
             }
+
+            .time-selector {
+                display: flex;
+                overflow-x: auto;
+                margin-bottom: 20px;
+                margin-left: 5%;
+                margin-right: 5%;
+                scrollbar-width: none;  /* Para Firefox */
+                -ms-overflow-style: none;  /* Para Internet Explorer y Edge */
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch; /* Para un desplazamiento suave en iOS */
+            }
+            
+            /* Ocultar la barra de desplazamiento para Chrome, Safari y Opera */
+            .date-selector::-webkit-scrollbar,
+            .time-selector::-webkit-scrollbar {
+                display: none;
+            }
+
+            .date-btn,
+            .time-btn {
+                flex-shrink: 0;
+            }
+
+            .date-btn .day {
+                margin-bottom: 8px;
+            }
             
         `;
 
@@ -1312,9 +1393,9 @@ async function displaySeatSelection(movieId) {
         let totalPrice = 0;
 
         const seatSelectionHTML = `
-            <div class="movie-details-container">
+            <div class="movie-details-container2">
                 <div class="movie-header">
-                <img src="../storage/img/arrow.png" alt="Back" class="back-button" onclick="goBack(${movieId}, '${movieData.estado}')">
+                <img src="../storage/img/arrow.png" alt="Back" class="back-button2" onclick="goBack(${movieId}, '${movieData.estado}')">
                     <h1>Escoger Asientos</h1>
                     <img src="../storage/img/points.png" alt="More options" class="more-options">
                 </div>
@@ -1343,7 +1424,7 @@ async function displaySeatSelection(movieId) {
                 </div>
                 
                 <div class="price-section">
-                    <div>
+                    <div class="total-precio" >
                         <span>Precio Total</span>
                         <span class="total-price">$${totalPrice.toFixed(2)}</span>
                     </div>
