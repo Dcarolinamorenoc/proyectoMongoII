@@ -429,6 +429,7 @@ async function displayMovieDetails(movieId, movieState) {
                 overflow-x: auto;
                 padding-bottom: 10px;
                 margin-left: 10px;
+                scrollbar-width: none;
             }
             .actors {
                 display: flex;
