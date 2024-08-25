@@ -1481,7 +1481,7 @@ async function displaySeatSelection(movieId) {
             .seat .seat-number {
                 display: none;
             }
-                
+
             .seat.selected .seat-number {
                 display: block;
                 font-size: 1rem;
@@ -2202,7 +2202,7 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
                         <h2>${movieData.pelicula.titulo}</h2>
                         <p class="genero">${movieData.pelicula.genero}</p>
                         <p class="cine-campus">CINE CAMPUS</p>
-                        <p class="fecha">${selectedDate}, ${selectedTime}</p>
+                        <p class="fecha">${formatearFecha(selectedDate)}, ${selectedTime}</p>
                     </div>
                 </div>
             </div>
@@ -2289,6 +2289,16 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
     });
 }
 
+function formatearFecha(fecha) {
+    const diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+    const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    
+    const [dia, mes, anio] = fecha.split('/');
+    const fechaObj = new Date(anio, mes - 1, dia);
+    
+    return `${diasSemana[fechaObj.getDay()]}, ${dia} ${meses[fechaObj.getMonth()]} ${anio}`;
+}
+
 function startTimer(duration, display) {
     let timer = duration, minutes, seconds;
     return setInterval(function () {
@@ -2363,10 +2373,20 @@ async function handleTicketPurchase(movieId, movieData, selectedSeats, paymentMe
             },
             body: JSON.stringify(purchaseData),
         });
-
+    
         if (response.ok) {
             const result = await response.json();
-            alert('Compra realizada con éxito');
+            
+            // Crear y mostrar el popup
+            const popup = document.createElement('div');
+            popup.className = 'exito-compra';
+            popup.textContent = 'Compra realizada con éxito';
+            document.body.appendChild(popup);
+    
+            // Eliminar el popup después de 3 segundos
+            setTimeout(() => {
+                document.body.removeChild(popup);
+            }, 3000);
             
             // Mostrar el ticket
             await showTicketDetails(purchaseData, movieData, movieId);
@@ -2377,12 +2397,11 @@ async function handleTicketPurchase(movieId, movieData, selectedSeats, paymentMe
         console.error('Error:', error);
         alert('Error al procesar la compra');
     }
-}
-
-function goBack(movieId, movieState) {
-    console.log('Volviendo a los detalles de la película con ID:', movieId, 'y estado:', movieState);
-    displayMovieDetails(movieId, movieState);
-}
+    
+    function goBack(movieId, movieState) {
+        console.log('Volviendo a los detalles de la película con ID:', movieId, 'y estado:', movieState);
+        displayMovieDetails(movieId, movieState);
+    }
 
 async function showTicketDetails(purchaseData, movieData, movieId) {
     // Crear el elemento de estilo
@@ -2495,6 +2514,21 @@ async function showTicketDetails(purchaseData, movieData, movieId) {
             color: #D9D9D9;
             margin-top: 4%;
         }
+
+        .exito-compra {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            text-align: center;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
         
     `;
     document.head.appendChild(styleElement);
@@ -2585,4 +2619,5 @@ function formatearFecha(fechaString) {
 function goBack(movieId, movieState) {
     console.log('Volviendo a los detalles de la película con ID:', movieId, 'y estado:', movieState);
     displayMovieDetails(movieId, movieState);
+}
 }
