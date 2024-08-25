@@ -1545,12 +1545,8 @@ async function displaySeatSelection(movieId) {
             document.body.appendChild(popup);
         
             document.getElementById('reserveButton').addEventListener('click', () => handleReservation(movieId, movieData, 'reserve'));
-            document.getElementById('buyTicketButton').addEventListener('click', () => redirectToPrincipal());
+            document.getElementById('buyTicketButton').addEventListener('click', () => showOrderSummary(movieId, movieData, selectedSeats));
             document.getElementById('cancelButton').addEventListener('click', () => popup.remove());
-        }
-
-        function redirectToPrincipal() {
-            window.location.href = '../views/principal.js';
         }
 
         async function handleReservation(movieId, movieData, action) {
@@ -1790,4 +1786,83 @@ async function displaySeatSelection(movieId) {
 function goBack(movieId, movieState) {
     console.log('Volviendo a los detalles de la película con ID:', movieId, 'y estado:', movieState);
     displayMovieDetails(movieId, movieState);
+}
+
+
+
+
+
+
+function showOrderSummary(movieId, movieData, selectedSeats) {
+    const selectedDate = document.querySelector('.date-btn.selected').dataset.date;
+    const selectedTime = document.querySelector('.time-btn.selected').dataset.time;
+    const selectedProjection = movieData.proyecciones.find(p =>
+        p.horario.fecha_proyeccion === selectedDate && p.horario.horario_proyeccion === selectedTime
+    );
+
+    const moviePrice = selectedProjection.horario.precio_pelicula;
+    let regularSeats = [];
+    let vipSeats = [];
+    let seatNames = [];
+
+    selectedSeats.forEach(seat => {
+        const seatData = selectedProjection.asientos.find(s => s.id.toString() === seat.dataset.id);
+        if (seatData) {
+            seatNames.push(seatData.nombre_general);
+            if (seatData.tipo === "Preferencial") {
+                vipSeats.push(seatData);
+            } else {
+                regularSeats.push(seatData);
+            }
+        }
+    });
+
+    const regularSeatPrice = regularSeats.length > 0 ? regularSeats[0].Precio + moviePrice : 0;
+    const vipSeatPrice = vipSeats.length > 0 ? vipSeats[0].Precio + moviePrice : 0;
+
+    const totalRegularPrice = regularSeatPrice * regularSeats.length;
+    const totalVipPrice = vipSeatPrice * vipSeats.length;
+    const serviceFee = 1.99 * selectedSeats.length;
+    const totalPrice = totalRegularPrice + totalVipPrice + serviceFee;
+
+    const orderSummaryHTML = `
+        <div class="movie-details-container2">
+            <div class="movie-header">
+                <img src="../storage/img/arrow.png" alt="Back" class="back-button2" onclick="goBack(${movieId}, '${movieData.pelicula.estado}')">
+                <h1>Resumen de Pedido</h1>
+                <img src="../storage/img/points.png" alt="More options" class="more-options">
+            </div>
+            <div class="order-summary">
+                <div class="movie-info">
+                    <img src="${movieData.pelicula.imagen_pelicula}" alt="${movieData.pelicula.titulo}" class="movie-poster">
+                    <div class="movie-details">
+                        <h2>${movieData.pelicula.titulo}</h2>
+                        <p>${movieData.pelicula.genero}</p>
+                        <p>${selectedProjection.sala.nombre}</p>
+                        <p>${selectedDate}, ${selectedTime}</p>
+                    </div>
+                </div>
+                <div class="order-details">
+                    <p>ORDER NUMBER: ${Math.floor(Math.random() * 100000000)}</p>
+                    <p>${selectedSeats.length} TICKET(S): ${seatNames.join(', ')}</p>
+                    ${regularSeats.length > 0 ? `<p>REGULAR SEAT: $${regularSeatPrice.toFixed(2)} x ${regularSeats.length}</p>` : ''}
+                    ${vipSeats.length > 0 ? `<p>VIP SEAT: $${vipSeatPrice.toFixed(2)} x ${vipSeats.length}</p>` : ''}
+                    <p>SERVICE FEE: $${serviceFee.toFixed(2)}</p>
+                    <p>TOTAL: $${totalPrice.toFixed(2)}</p>
+                    <div class="payment-method">
+                        <h3>Payment method</h3>
+                        <div class="card-info">
+                            <img src="../storage/img/mastercard-logo.png" alt="MasterCard">
+                            <span>**** **** **** 7865</span>
+                        </div>
+                    </div>
+                    <button class="buy-ticket-btn">Buy ticket</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.innerHTML = orderSummaryHTML;
+
+    document.querySelector('.buy-ticket-btn').addEventListener('click', () => handleTicketPurchase(movieId, movieData, selectedSeats));
 }
