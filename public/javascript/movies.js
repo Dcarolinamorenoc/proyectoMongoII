@@ -296,7 +296,7 @@ async function displayMovieDetails(movieId, movieState) {
                                     <p>CineCampus</p>
                                     <p>Zona Franca Santander</p>
                                 </div>
-                                <img src="../storage/img/Cinecampus.png" alt="Cinema logo">
+                                <img src="../storage/img//newLogo.webp" alt="Cinema logo">
                             </div>
                         </div>
                     <button id="book-now" onclick="displaySeatSelection(${movieId})" ${movieState !== 'En cartelera' ? 'disabled' : ''}>Book Now</button>
