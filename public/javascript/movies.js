@@ -1470,6 +1470,12 @@ async function displaySeatSelection(movieId) {
             .custom-popup-close:hover {
                 background-color: #2980b9;
             }
+
+            .text-screen{
+                font-size: 0.8rem;
+                margin-top: -5%;
+                margin-bottom: 10%;
+            }
         `;
 
         document.head.appendChild(styleElement);
@@ -1487,7 +1493,8 @@ async function displaySeatSelection(movieId) {
                 </div>
                 
                 <div class="screen">
-                    <img src="../storage/img/pantalla.png" alt="screen">
+                    <img src="../storage/img/onlyscreen.png" alt="screen">
+                    <p class="text-screen">Pantalla de esta manera</p>
                 </div>
                 
                 <div class="seats">
@@ -2472,6 +2479,13 @@ async function showTicketDetails(purchaseData, movieData, movieId) {
         .card_order{
             margin-right: 8%;
         }
+
+
+        .liner{
+            color: #D9D9D9;
+            margin-top: 4%;
+        }
+        
     `;
     document.head.appendChild(styleElement);
 
@@ -2490,6 +2504,7 @@ async function showTicketDetails(purchaseData, movieData, movieId) {
                 <h2 class="titulo-ticket">${movieData.pelicula.titulo}</h2>
                 <p>Muestra este boleto en la entrada.</p>
             </div>
+            <p class="liner">________________________________</p>
             <div class="card_content">
                 <div class="card_left">
                     <h1 class="color-gray">Cine</h1>
