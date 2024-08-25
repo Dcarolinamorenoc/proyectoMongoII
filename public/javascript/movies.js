@@ -1825,44 +1825,327 @@ function showOrderSummary(movieId, movieData, selectedSeats) {
     const serviceFee = 1.99 * selectedSeats.length;
     const totalPrice = totalRegularPrice + totalVipPrice + serviceFee;
 
+    // Obtener la información del usuario actual desde localStorage
+    const userInfo = JSON.parse(localStorage.getItem('usuarioActual'));
+
+    // Generar HTML para los métodos de pago
+    let paymentMethodsHTML = '';
+    if (userInfo && userInfo.metodosPago && userInfo.metodosPago.length > 0) {
+        paymentMethodsHTML = userInfo.metodosPago.map((method, index) => `
+            <div class="payment-method-option">
+                <label for="${method.nombre_tarjeta}">
+                    <img src="${method.imagen_tarjeta}" alt="${method.nombre_tarjeta}">
+                    <div class="union">
+                    <span class="tarjet-name">${method.nombre_tarjeta} </span>
+                    <span class="number-tarjet">**** **** ${method.numero_tarjeta.slice(-8)}</span>
+                    </div>
+                    <input type="radio" id="${method.nombre_tarjeta}" name="payment-method" value="${method.nombre_tarjeta}" ${index === 0 ? 'checked' : ''}>
+                </label>
+            </div>
+        `).join('');
+    } else {
+        paymentMethodsHTML = '<p>No se encontraron métodos de pago</p>';
+    }
+
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .movie-details-container4part {
+            background-color: #121212;
+            padding: 20px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .movie-header4 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-top: 5%;
+        }
+
+        .back-button2, .more-options {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .movie-information {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .movie-image {
+            width: 100px;
+            height: 35vw;
+            margin-left: 6%;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .movie-details h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color:red;
+        }
+
+
+        .order-details p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+    .payment-method h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+        color: #ffffff;
+        margin-top: 8%;
+    }
+
+.payment-method-option {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    height: 70px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 80vw;
+    border: 1px solid #b9b9b994;
+}
+
+    .payment-method-option label {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .payment-method-option img {
+        width: 70px;
+        height: 50px;
+        margin-right: 15px;
+        border-radius: 10px;
+    }
+
+
+
+    .payment-method-option input[type="radio"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid #ffffff;
+        outline: none;
+        margin-left: auto;
+    }
+
+    .payment-method-option input[type="radio"]:checked {
+        background-color: #e50914;
+        border-color: #e50914;
+    }
+
+    .payment-method-option input[type="radio"]:checked::before {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        margin: 3px auto;
+    }
+
+        .buy-ticket-btn {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .buy-ticket-btn:hover {
+            background-color: #f40612;
+        }
+
+        .order-summary{
+            margin-top: 12%;
+        }
+
+        .movie-details{
+            margin-left: 5%;
+        }
+
+        .cine-campus{
+        margin-top: 20%;
+        margin-bottom: 5%;
+        color: white;
+        font-weight: bold;
+        }
+
+        .genero{
+            font-size: 0.9rem;
+            color: gray;
+        }
+        
+        .fecha{
+            color: gray;
+            font-size: 0.9rem;
+        }
+
+        .order-details{
+            margin: 7% 10%;
+        }
+
+        .union{
+            display: flex;
+            flex-direction: column;
+        }
+
+        tarjet-name{
+            font-size: 1.1rem;
+        font-weight: bold;
+        }
+
+        .line {
+            margin-top: -3%;
+            margin-bottom: 6%;
+        }
+
+        .number-tarjet{
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 5%;
+        }
+        
+
+        .movie-details-containerpay {
+            width: 100%;
+        }
+
+        .order-details {
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+    `;
+
+    // Añade el estilo al documento
+    document.head.appendChild(styleElement);
+
     const orderSummaryHTML = `
-        <div class="movie-details-container2">
-            <div class="movie-header">
+        <div class="movie-details-container4part">
+            <div class="movie-header4">
                 <img src="../storage/img/arrow.png" alt="Back" class="back-button2" onclick="goBack(${movieId}, '${movieData.pelicula.estado}')">
                 <h1>Resumen de Pedido</h1>
                 <img src="../storage/img/points.png" alt="More options" class="more-options">
             </div>
             <div class="order-summary">
-                <div class="movie-info">
-                    <img src="${movieData.pelicula.imagen_pelicula}" alt="${movieData.pelicula.titulo}" class="movie-poster">
+                <div class="movie-information">
+                    <img src="${movieData.pelicula.imagen_pelicula}" alt="${movieData.pelicula.titulo}" class="movie-image">
                     <div class="movie-details">
                         <h2>${movieData.pelicula.titulo}</h2>
-                        <p>${movieData.pelicula.genero}</p>
-                        <p>${selectedProjection.sala.nombre}</p>
-                        <p>${selectedDate}, ${selectedTime}</p>
+                        <p class="genero">${movieData.pelicula.genero}</p>
+                        <p class="cine-campus">CINE CAMPUS</p>
+                        <p class="fecha">${selectedDate}, ${selectedTime}</p>
                     </div>
                 </div>
-                <div class="order-details">
-                    <p>ORDER NUMBER: ${Math.floor(Math.random() * 100000000)}</p>
-                    <p>${selectedSeats.length} TICKET(S): ${seatNames.join(', ')}</p>
-                    ${regularSeats.length > 0 ? `<p>REGULAR SEAT: $${regularSeatPrice.toFixed(2)} x ${regularSeats.length}</p>` : ''}
-                    ${vipSeats.length > 0 ? `<p>VIP SEAT: $${vipSeatPrice.toFixed(2)} x ${vipSeats.length}</p>` : ''}
-                    <p>SERVICE FEE: $${serviceFee.toFixed(2)}</p>
-                    <p>TOTAL: $${totalPrice.toFixed(2)}</p>
+            </div>
+        </div>
+        <div class="movie-details-containerpay">
+            <div class="order-details">
+                <p>ORDER NUMBER: ${Math.floor(Math.random() * 100000000)}</p>
+
+                <p class="line">________________________________________</p>
+
+                <div class="flex-row">
+                    <p>${selectedSeats.length} TICKET(S):</p>
+                    <p>${seatNames.join(', ')}</p>
+                </div>
+
+                <p class="line">________________________________________</p>
+
+                ${regularSeats.length > 0 ? `<div class="flex-row"><p>REGULAR SEAT:</p><p>$${regularSeatPrice.toFixed(2)} x ${regularSeats.length}</p></div>` : ''}
+
+                ${vipSeats.length > 0 ? `<div class="flex-row"><p>VIP SEAT:</p><p>$${vipSeatPrice.toFixed(2)} x ${vipSeats.length}</p></div>` : ''}
+
+                <p class="line">________________________________________</p>
+
+                <div class="flex-row">
+                    <p>SERVICE FEE:</p>
+                    <p>$${serviceFee.toFixed(2)}</p>
+                </div>
+
+                <p class="line">________________________________________</p>
+
+                <div class="flex-row">
+                    <p>TOTAL:</p>
+                    <p>$${totalPrice.toFixed(2)}</p>
+                </div>
+
+                <p class="line">________________________________________</p>
+
+
+
+
                     <div class="payment-method">
-                        <h3>Payment method</h3>
-                        <div class="card-info">
-                            <img src="../storage/img/mastercard-logo.png" alt="MasterCard">
-                            <span>**** **** **** 7865</span>
+                        <h3 class="Payment">Payment method</h3>
+                        <div id="payment-methods-container">
+                            ${paymentMethodsHTML}
                         </div>
                     </div>
                     <button class="buy-ticket-btn">Buy ticket</button>
                 </div>
-            </div>
         </div>
     `;
 
     document.body.innerHTML = orderSummaryHTML;
 
-    document.querySelector('.buy-ticket-btn').addEventListener('click', () => handleTicketPurchase(movieId, movieData, selectedSeats));
+    document.querySelector('.buy-ticket-btn').addEventListener('click', () => {
+        const selectedPaymentMethod = document.querySelector('input[name="payment-method"]:checked');
+        if (selectedPaymentMethod) {
+            handleTicketPurchase(movieId, movieData, selectedSeats, selectedPaymentMethod.value);
+        } else {
+            alert('Por favor, selecciona un método de pago');
+        }
+    });
 }

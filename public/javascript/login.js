@@ -53,9 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (usuarioEncontrado) {
                     localStorage.setItem('usuarioActual', JSON.stringify({
-                        id: usuarioEncontrado.id, // Agrega el id del usuario
+                        id: usuarioEncontrado.id,
                         nombre: usuarioEncontrado.nombre_completo,
-                        imagen: usuarioEncontrado.imagen_user
+                        imagen: usuarioEncontrado.imagen_user,
+                        metodosPago: usuarioEncontrado.metodo_pago,
+                        rol: usuarioEncontrado.rol
                     }));
                 
                     window.location.href = './views/home.html';
