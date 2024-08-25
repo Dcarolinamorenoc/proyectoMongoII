@@ -1421,12 +1421,55 @@ async function displaySeatSelection(movieId) {
                 padding: 20px;
                 border-radius: 5px;
                 text-align: center;
+                margin: 15%;
             }
             .popup-content button {
                 margin: 10px;
                 padding: 10px 20px;
+                border-radius: 10px;
             }
             
+            .custom-popup {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+            .custom-popup-content {
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                text-align: center;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                color: black; /* Asegura que el texto sea negro en todos los popups */
+            }
+            .custom-popup-info .custom-popup-content {
+                border-top: 5px solid #3498db;
+            }
+            .custom-popup-success .custom-popup-content {
+                border-top: 5px solid #2ecc71;
+            }
+            .custom-popup-error .custom-popup-content {
+                border-top: 5px solid #e74c3c;
+            }
+            .custom-popup-close {
+                margin-top: 10px;
+                padding: 5px 10px;
+                background-color: #3498db;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+            .custom-popup-close:hover {
+                background-color: #2980b9;
+            }
         `;
 
         document.head.appendChild(styleElement);
@@ -1484,7 +1527,7 @@ async function displaySeatSelection(movieId) {
         function showPurchasePopup(movieId, movieData) {
             const selectedSeats = document.querySelectorAll('.seat.selected');
             if (selectedSeats.length === 0) {
-                alert('Por favor, selecciona al menos un asiento.');
+                createCustomPopup('Por favor, selecciona al menos un asiento.', 'error');
                 return;
             }
 
@@ -1518,7 +1561,7 @@ async function displaySeatSelection(movieId) {
 
             const userInfo = JSON.parse(localStorage.getItem('usuarioActual'));
             if (!userInfo || !userInfo.id) {
-                alert('No se pudo encontrar la información del usuario. Por favor, inicia sesión nuevamente.');
+                createCustomPopup('No se pudo encontrar la información del usuario. Por favor, inicia sesión nuevamente.', 'error');
                 return;
             }
         
@@ -1550,12 +1593,17 @@ async function displaySeatSelection(movieId) {
                     throw new Error(errorData.error || 'Error al realizar la reserva');
                 }
         
-                alert(action === 'reserve' ? 'Reserva realizada con éxito' : 'Compra realizada con éxito');
-        
-                window.location.href = action === 'reserve' ? '../views/home.html' : '../views/principal.js';
-            } catch (error) {
+                createCustomPopup(
+                    action === 'reserve' ? 'Reserva realizada con éxito' : 'Compra realizada con éxito',
+                    'success',
+                    3000
+                );   
+                setTimeout(() => {
+                    window.location.href = action === 'reserve' ? '../views/home.html' : '../views/principal.js';
+                }, 3500)
+            }catch (error) {
                 console.error('Error:', error);
-                alert('Hubo un error al procesar tu solicitud. Por favor, intenta de nuevo.');
+                createCustomPopup('Hubo un error al procesar tu solicitud. Por favor, intenta de nuevo.', 'error');
             }
         }
         
@@ -1619,6 +1667,31 @@ async function displaySeatSelection(movieId) {
                     return '#323232';
             }
         }
+
+
+
+        function createCustomPopup(message, type = 'info', duration = null) {
+            const popup = document.createElement('div');
+            popup.className = `custom-popup custom-popup-${type}`;
+            popup.innerHTML = `
+                <div class="custom-popup-content">
+                    <p>${message}</p>
+                    ${duration === null ? '<button class="custom-popup-close">Cerrar</button>' : ''}
+                </div>
+            `;
+            document.body.appendChild(popup);
+        
+            if (duration === null) {
+                popup.querySelector('.custom-popup-close').addEventListener('click', () => {
+                    popup.remove();
+                });
+            } else {
+                setTimeout(() => {
+                    popup.remove();
+                }, duration);
+            }
+        }
+
 
         function generateDateButtons(proyecciones) {
             const uniqueDates = [...new Set(proyecciones.map(p => p.horario.fecha_proyeccion))];
