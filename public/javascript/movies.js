@@ -1524,13 +1524,14 @@ async function displaySeatSelection(movieId) {
 
         document.getElementById('buyButton').addEventListener('click', () => showPurchasePopup(movieId, movieData));
 
+
         function showPurchasePopup(movieId, movieData) {
             const selectedSeats = document.querySelectorAll('.seat.selected');
             if (selectedSeats.length === 0) {
                 createCustomPopup('Por favor, selecciona al menos un asiento.', 'error');
                 return;
             }
-
+        
             const popup = document.createElement('div');
             popup.className = 'popup';
             popup.innerHTML = `
@@ -1542,13 +1543,22 @@ async function displaySeatSelection(movieId) {
                 </div>
             `;
             document.body.appendChild(popup);
-
+        
             document.getElementById('reserveButton').addEventListener('click', () => handleReservation(movieId, movieData, 'reserve'));
-            document.getElementById('buyTicketButton').addEventListener('click', () => handleReservation(movieId, movieData, 'buy'));
+            document.getElementById('buyTicketButton').addEventListener('click', () => redirectToPrincipal());
             document.getElementById('cancelButton').addEventListener('click', () => popup.remove());
         }
 
+        function redirectToPrincipal() {
+            window.location.href = '../views/principal.js';
+        }
+
         async function handleReservation(movieId, movieData, action) {
+            if (action !== 'reserve') {
+                console.error('Acción no válida');
+                return;
+            }
+        
             // Selecciona los asientos con el campo `data-id` que corresponde al `id` (no `_id`)
             const selectedSeats = Array.from(document.querySelectorAll('.seat.selected')).map(seat => seat.dataset.id);
         
@@ -1558,25 +1568,23 @@ async function displaySeatSelection(movieId) {
             const selectedProjection = movieData.proyecciones.find(p =>
                 p.horario.fecha_proyeccion === selectedDate && p.horario.horario_proyeccion === selectedTime
             );
-
+        
             const userInfo = JSON.parse(localStorage.getItem('usuarioActual'));
             if (!userInfo || !userInfo.id) {
                 createCustomPopup('No se pudo encontrar la información del usuario. Por favor, inicia sesión nuevamente.', 'error');
                 return;
             }
         
-        
             const reservationData = {
                 id: Math.floor(Math.random() * 1000000),
                 id_usuario: userInfo.id, // Aquí se usa el ID del usuario actual
                 fecha_reserva: new Date().toLocaleDateString('es-ES'),
-                estado: action === 'reserve' ? 'reservada' : 'comprada', // Dependiendo de la acción (reservar o comprar)
+                estado: 'reservada',
                 fecha_expiracion: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toLocaleDateString('es-ES'),
                 asientos_reservados: selectedSeats,
                 id_pelicula: movieId,
                 id_horario_proyeccion: selectedProjection.horario.id
             };
-             
         
             try {
                 const response = await fetch('/api/reservas', {
@@ -1593,20 +1601,15 @@ async function displaySeatSelection(movieId) {
                     throw new Error(errorData.error || 'Error al realizar la reserva');
                 }
         
-                createCustomPopup(
-                    action === 'reserve' ? 'Reserva realizada con éxito' : 'Compra realizada con éxito',
-                    'success',
-                    3000
-                );   
+                createCustomPopup('Reserva realizada con éxito', 'success', 3000);   
                 setTimeout(() => {
-                    window.location.href = action === 'reserve' ? '../views/home.html' : '../views/principal.js';
-                }, 3500)
-            }catch (error) {
+                    window.location.href = '../views/home.html';
+                }, 3500);
+            } catch (error) {
                 console.error('Error:', error);
                 createCustomPopup('Hubo un error al procesar tu solicitud. Por favor, intenta de nuevo.', 'error');
             }
         }
-        
 
         function getSelectedDate() {
             const selectedDateBtn = document.querySelector('.date-btn.selected');
