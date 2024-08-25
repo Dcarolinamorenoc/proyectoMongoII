@@ -1347,6 +1347,7 @@ async function displaySeatSelection(movieId) {
                 margin-left: -20px;
                 font-size: 0.8rem;
                 margin-left: 1px;
+                margin-top: 3%;
 
             }
             
@@ -1475,6 +1476,16 @@ async function displaySeatSelection(movieId) {
                 font-size: 0.8rem;
                 margin-top: -5%;
                 margin-bottom: 10%;
+            }
+
+            .seat .seat-number {
+                display: none;
+            }
+                
+            .seat.selected .seat-number {
+                display: block;
+                font-size: 1rem;
+                font-weight: bold;
             }
         `;
 
@@ -1630,7 +1641,7 @@ async function displaySeatSelection(movieId) {
         function generateSeats(asientos) {
             const rows = ['A', 'B', 'C', 'D', 'E', 'F'];
             let seatsHTML = '<div class="seats-container">';
-
+        
             rows.forEach(row => {
                 const rowSeats = asientos.filter(seat => seat.fila === row);
                 if (rowSeats.length > 0) {
@@ -1648,7 +1659,7 @@ async function displaySeatSelection(movieId) {
                                          data-estado="${seat.estado}" 
                                          data-price="${seat.Precio}"
                                          style="background-color: ${getSeatColor(seat.estado)};">
-                                        ${seat.numero}
+                                        <span class="seat-number">${seat.numero}</span>
                                     </div>
                                 `).join('')}
                             </div>
@@ -1656,7 +1667,7 @@ async function displaySeatSelection(movieId) {
                     `;
                 }
             });
-
+        
             seatsHTML += '</div>';
             return seatsHTML;
         }
@@ -1736,22 +1747,21 @@ async function displaySeatSelection(movieId) {
         }
         function addEventListeners(movieData) {
             const seatElements = document.querySelectorAll('.seat');
-
+        
             seatElements.forEach(seatElement => {
                 if (seatElement.dataset.estado === 'disponible') {
                     seatElement.addEventListener('click', () => {
                         seatElement.classList.toggle('selected');
                         const seatPrice = parseFloat(seatElement.dataset.price);
                         const moviePrice = parseFloat(getSelectedProjection().horario.precio_pelicula);
-
+        
                         if (seatElement.classList.contains('selected')) {
                             totalPrice += seatPrice + moviePrice;
                         } else {
                             totalPrice -= seatPrice + moviePrice;
                         }
-
+        
                         document.querySelector('.total-price').textContent = `${totalPrice.toLocaleString('es-CO', { minimumFractionDigits: 2 })}`;
-
                     });
                 }
             });
