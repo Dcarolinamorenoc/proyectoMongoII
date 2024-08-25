@@ -53,10 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (usuarioEncontrado) {
                     localStorage.setItem('usuarioActual', JSON.stringify({
+                        id: usuarioEncontrado.id, // Agrega el id del usuario
                         nombre: usuarioEncontrado.nombre_completo,
                         imagen: usuarioEncontrado.imagen_user
                     }));
-
+                
                     window.location.href = './views/home.html';
                 } else {
                     showErrorPopup('Usuario o contraseña incorrectos');

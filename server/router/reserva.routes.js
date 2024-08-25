@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { reservarAsientos, cancelarReserva } = require('../controllers/reservaController');
+const { reservarAsientos, cancelarReserva } = require('../controllers/reservaControllers');
 
 // Ruta para reservar asientos
 router.post('/reservas', reservarAsientos);
