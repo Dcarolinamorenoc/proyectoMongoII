@@ -1512,7 +1512,7 @@ async function displaySeatSelection(movieId) {
                 <div class="price-section">
                     <div class="total-precio">
                         <span>Precio Total</span>
-                        <span class="total-price">$${totalPrice.toFixed(2)}</span>
+                            <span class="total-price">COP ${totalPrice.toFixed(2)}</span>
                     </div>
                     <button class="buy-btn" id="buyButton">Comprar boleto</button>
                 </div>
@@ -1711,17 +1711,22 @@ async function displaySeatSelection(movieId) {
         }
 
         function generateTimeButtons(proyecciones) {
-            return proyecciones.map((proyeccion, index) => `
-                <button class="time-btn ${index === 0 ? 'selected' : ''}" 
-                        data-date="${proyeccion.horario.fecha_proyeccion}" 
-                        data-time="${proyeccion.horario.horario_proyeccion}"
-                        data-sala="${proyeccion.sala.id}">
-                    <div class="time">${proyeccion.horario.horario_proyeccion}</div>
-                    <div class="price">$${proyeccion.horario.precio_pelicula}</div>
-                </button>
-            `).join('');
-        }
+            return proyecciones.map((proyeccion, index) => {
+                const salaType = proyeccion.sala.tipo; 
+                const price = proyeccion.horario.precio_pelicula;
+                
+                return `
+                    <button class="time-btn ${index === 0 ? 'selected' : ''}" 
+                            data-date="${proyeccion.horario.fecha_proyeccion}" 
+                            data-time="${proyeccion.horario.horario_proyeccion}"
+                            data-sala="${proyeccion.sala.id}">
+                        <div class="time">${proyeccion.horario.horario_proyeccion}</div>
+                        <div class="price">${price.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })} · ${salaType}</div>
 
+                    </button>
+                `;
+            }).join('');
+        }
         function addEventListeners(movieData) {
             const seatElements = document.querySelectorAll('.seat');
 
@@ -1738,7 +1743,8 @@ async function displaySeatSelection(movieId) {
                             totalPrice -= seatPrice + moviePrice;
                         }
 
-                        document.querySelector('.total-price').textContent = `$${totalPrice.toFixed(2)}`;
+                        document.querySelector('.total-price').textContent = `${totalPrice.toLocaleString('es-CO', { minimumFractionDigits: 2 })}`;
+
                     });
                 }
             });
@@ -1787,6 +1793,17 @@ function goBack(movieId, movieState) {
     console.log('Volviendo a los detalles de la película con ID:', movieId, 'y estado:', movieState);
     displayMovieDetails(movieId, movieState);
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2130,39 +2147,39 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
 
                 ${regularSeats.length > 0 ? `
                     <div class="flex-row">
-                        <p>REGULAR SEAT${vipDiscount > 0 ? ` (${vipDiscount * 100}% VIP Discount Applied)` : ''}:</p>
-                        <p>$${regularSeatPrice.toFixed(2)} x ${regularSeats.length}</p>
+                        <p>ASIENTO REGULAR${vipDiscount > 0 ? ` (${vipDiscount * 100}% Descuento VIP Aplicado)` : ''}:</p>
+                        <p>${regularSeatPrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })} x ${regularSeats.length}</p>
                     </div>` : ''}
 
                 ${vipSeats.length > 0 ? `
                     <div class="flex-row">
-                        <p>VIP SEAT${vipDiscount > 0 ? ` (${vipDiscount * 100}% VIP Discount Applied)` : ''}:</p>
-                        <p>$${vipSeatPrice.toFixed(2)} x ${vipSeats.length}</p>
+                        <p>ASIENTO VIP${vipDiscount > 0 ? ` (${vipDiscount * 100}% Descuento VIP Aplicado)` : ''}:</p>
+                        <p>${vipSeatPrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })} x ${vipSeats.length}</p>
                     </div>` : ''}
 
                 <p class="line">________________________________________</p>
 
                 <div class="flex-row">
-                    <p>SERVICE FEE:</p>
-                    <p>$${serviceFee.toFixed(2)}</p>
+                    <p>CARGO POR SERVICIO:</p>
+                    <p>${serviceFee.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</p>
                 </div>
 
                 <p class="line">________________________________________</p>
 
                 <div class="flex-row">
                     <p>TOTAL:</p>
-                    <p>$${totalPrice.toFixed(2)}</p>
+                    <p>${totalPrice.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</p>
                 </div>
 
                 <p class="line">________________________________________</p>
 
                 <div class="payment-method">
-                    <h3 class="Payment">Payment method</h3>
+                    <h3 class="Payment">Método de pago</h3>
                     <div id="payment-methods-container">
                         ${paymentMethodsHTML}
                     </div>
                 </div>
-                <button class="buy-ticket-btn">Buy ticket</button>
+                <button class="buy-ticket-btn">Comprar boleto</button>
             </div>
         </div>
     `;
