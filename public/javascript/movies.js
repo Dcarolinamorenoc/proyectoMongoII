@@ -1848,15 +1848,21 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
     
     // Obtener el porcentaje de descuento de la tarjeta VIP del usuario
     let vipDiscount = 0;
+    let isVip = false;
     if (userInfo && userInfo.tarjeta_vip) {
         vipDiscount = userInfo.tarjeta_vip.porcentaje_descuento / 100;
+        isVip = true;
     }
 
     let regularSeatPrice = regularSeats.length > 0 ? regularSeats[0].Precio + moviePrice : 0;
     let vipSeatPrice = vipSeats.length > 0 ? vipSeats[0].Precio + moviePrice : 0;
 
+    // Calcular precios con y sin descuento
+    const regularPriceNoDiscount = regularSeatPrice;
+    const vipPriceNoDiscount = vipSeatPrice;
+
     // Aplicar descuento si el usuario tiene tarjeta VIP
-    if (vipDiscount > 0) {
+    if (isVip) {
         regularSeatPrice *= (1 - vipDiscount);
         vipSeatPrice *= (1 - vipDiscount);
     }
@@ -2036,6 +2042,7 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
+            height: 12vw;
             margin-top: 20px;
         }
 
@@ -2106,6 +2113,57 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
         .flex-row {
             display: flex;
             justify-content: space-between;
+        }
+
+        .timer-display {
+        background-color: rgba(66, 10, 10, 0.8); /* Dark red with some transparency */
+        color: white;
+        width: 80vw;
+        padding: 10px 15px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 16px;
+        font-weight: normal;
+        box-sizing: border-box;
+        margin-top: 5%;
+        margin-bottom: 10%;
+        }
+
+        #time {
+        font-weight: bold;
+        color: #ff0000; /* Bright red for the timer */
+        }
+
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        #close-popup {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #FE0000;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
         }
 
     `;
@@ -2179,24 +2237,34 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
                         ${paymentMethodsHTML}
                     </div>
                 </div>
-                    <p id="timer">Complete su pago en: 15:00</p>
+                    <div class="timer-display">
+                    <span id="message">Complete your payment in</span>
+                    <span id="time"></span>
+                    </div>
+
                 <button class="buy-ticket-btn">Comprar boleto</button>
+            </div>
+
+                        <div id="expiration-popup" class="popup" style="display:none;">
+                <div class="popup-content">
+                    <h2>Tiempo Expirado</h2>
+                    <p>El tiempo para completar el pago ha expirado.</p>
+                    <button id="close-popup">Aceptar</button>
+                </div>
             </div>
         </div>
     `;
 
     document.body.innerHTML = orderSummaryHTML;
 
-    document.body.innerHTML = orderSummaryHTML;
-
-    const timerDisplay = document.getElementById('timer');
-    const timerDuration = 15 * 60; // 15 minutos en segundos
+    const timerDisplay = document.querySelector('.timer-display');
+    const timerDuration = 15 * 60; // 15 minutos
     const timerId = startTimer(timerDuration, timerDisplay);
 
     document.querySelector('.buy-ticket-btn').addEventListener('click', async () => {
         const selectedPaymentMethod = document.querySelector('input[name="payment-method"]:checked');
         if (selectedPaymentMethod) {
-            clearInterval(timerId); // Detener el temporizador si se hace clic en "Comprar boleto"
+            clearInterval(timerId);
             await handleTicketPurchase(movieId, movieData, seatsArray, selectedPaymentMethod.value, orderNumber, totalPrice, selectedProjection);
         } else {
             alert('Por favor, selecciona un método de pago');
@@ -2206,22 +2274,30 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
 
 function startTimer(duration, display) {
     let timer = duration, minutes, seconds;
-    const intervalId = setInterval(function () {
+    return setInterval(function () {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        display.textContent = `Complete su pago en: ${minutes}:${seconds}`;
+        display.querySelector('#time').textContent = minutes + ":" + seconds;
 
         if (--timer < 0) {
-            clearInterval(intervalId);
-            window.location.href = "../views/home.html";
+            clearInterval(this);
+            showExpirationPopup();
         }
     }, 1000);
+}
 
-    return intervalId;
+function showExpirationPopup() {
+    const popup = document.getElementById('expiration-popup');
+    popup.style.display = 'flex';
+
+    document.getElementById('close-popup').addEventListener('click', function() {
+        popup.style.display = 'none';
+        window.location.href = '../views/home.html';
+    });
 }
 
 async function handleTicketPurchase(movieId, movieData, selectedSeats, paymentMethod, orderNumber, totalPrice, selectedProjection) {
@@ -2247,6 +2323,21 @@ async function handleTicketPurchase(movieId, movieData, selectedSeats, paymentMe
         estado_compra: "completada"
     };
 
+    // Generar el código de barras
+    const canvas = document.createElement('canvas');
+    JsBarcode(canvas, orderNumber.toString(), {
+        format: "CODE128",
+        width: 2,
+        height: 100,
+        displayValue: false 
+    });
+
+    // Convertir el canvas a una cadena base64
+    const barcodeBase64 = canvas.toDataURL("image/png");
+
+    // Añadir el código de barras a purchaseData
+    purchaseData.barcode = barcodeBase64;
+
     try {
         const response = await fetch('/api/boletos/confirmacion-compra', {
             method: 'POST',
@@ -2259,7 +2350,9 @@ async function handleTicketPurchase(movieId, movieData, selectedSeats, paymentMe
         if (response.ok) {
             const result = await response.json();
             alert('Compra realizada con éxito');
-            // Aquí puedes redirigir al usuario o mostrar un mensaje de confirmación
+            
+            // Mostrar el ticket
+            await showTicketDetails(purchaseData, movieData, movieId);
         } else {
             alert('Error al realizar la compra');
         }
@@ -2269,6 +2362,201 @@ async function handleTicketPurchase(movieId, movieData, selectedSeats, paymentMe
     }
 }
 
+function goBack(movieId, movieState) {
+    console.log('Volviendo a los detalles de la película con ID:', movieId, 'y estado:', movieState);
+    displayMovieDetails(movieId, movieState);
+}
+
+async function showTicketDetails(purchaseData, movieData, movieId) {
+    // Crear el elemento de estilo
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .movie-header5 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-top: 10%;
+        }
+
+        .header {
+            background-color: #111;
+            padding: 10px;
+        }
+        .header_content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header_content img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            /* width: 300px; */
+            border-radius: 10px;
+            margin: 8vw;
+            padding: 20px;
+            color: black;
+        }
+
+        .back-button2, .more-options {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            margin-left: 9%;
+            margin-right: 6%;
+        }
+
+
+        .card_img img {
+            width: 100%;
+            border-radius: 10px;
+            height: 15vh;
+        }
+        .card_title h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            margin-top: 2%;
+        }
+        .card_title p {
+            color: #888;
+        }
+        .card_content, .card_boxes, .card_boxes1, .card_boxes2 {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .card_right img {
+            width: 50px;
+            border-radius: 10px;
+        }
+        .line img {
+            width: 100%;
+            margin: 20px 0;
+        }
+        .barras img {
+            width: 100%;
+            height: 8vh;
+            margin-top: -10%;
+        }
+            
+        .color-gray {
+            color: gray;
+        }
+
+        .titulo-ticket{
+            font-size: 1.2rem;
+        }
+
+        .card_time{
+            margin-right: 20%;
+        }
+
+        .card_seat{
+            margin-right: 3%;
+        }
+
+        .card_order{
+            margin-right: 8%;
+        }
+    `;
+    document.head.appendChild(styleElement);
+
+ 
+        const ticketHTML = `
+        <div class="movie-header5">
+            <img src="../storage/img/arrow.png" alt="Back" class="back-button2" onclick="goBack(${movieId}, '${movieData.pelicula.estado}')">
+            <h1>Resumen de Pedido</h1>
+            <img src="../storage/img/points.png" alt="More options" class="more-options">
+        </div>
+        <section class="card">
+            <div class="card_img">
+                <img src="${movieData.pelicula.imagen_banner}" alt="${movieData.pelicula.titulo}">
+            </div>
+            <div class="card_title">
+                <h2 class="titulo-ticket">${movieData.pelicula.titulo}</h2>
+                <p>Muestra este boleto en la entrada.</p>
+            </div>
+            <div class="card_content">
+                <div class="card_left">
+                    <h1 class="color-gray">Cine</h1>
+                    <h2>Cine Campus</h2>
+                </div>
+                <div class="card_right">
+                    <img src="../storage/img/newLogo.webp" alt="">
+                </div>
+            </div>
+            <div class="card_boxes">
+                <div class="card_date">
+                    <h1 class="color-gray">Día</h1>
+                    <h2>${formatearFecha(movieData.proyecciones.find(p => p.horario.id === purchaseData.id_horario_proyeccion)?.horario.fecha_proyeccion || 'N/A')}</h2>
+                </div>
+                <div class="card_time">
+                    <h1 class="color-gray">Hora</h1>
+                    <h2>${movieData.proyecciones.find(p => p.horario.id === purchaseData.id_horario_proyeccion)?.horario.horario_proyeccion || 'N/A'}</h2>
+                </div>
+            </div>
+            <div class="card_boxes1">
+                <div class="card_cinema">
+                    <h1 class="color-gray">Sala #</h1>
+                    <h2>${movieData.proyecciones.find(p => p.horario.id === purchaseData.id_horario_proyeccion)?.sala.nombre || 'N/A'}</h2>
+                </div>
+                <div class="card_seat">
+                    <h1 class="color-gray">Asiento(s)</h1>
+                    <h2>${purchaseData.asientos_comprados.map(id => 
+                        movieData.proyecciones.find(p => p.horario.id === purchaseData.id_horario_proyeccion)?.asientos.find(a => a.id === id)?.nombre_general
+                    ).join(', ')}</h2>
+                </div>
+            </div>
+            <div class="card_boxes2">
+                <div class="card_cost">
+                    <h1 class="color-gray">Costo</h1>
+                    <h2>$${purchaseData.total.toLocaleString('es-CO')}</h2>
+                </div>
+                <div class="card_order">
+                    <h1 class="color-gray">ID Orden</h1>
+                    <h2>${purchaseData.id}</h2>
+                </div>
+            </div>
+            <div class="line">
+                <img src="../storage/img/Line.svg" alt="line">
+            </div>
+            <div class="barras">
+                <img src="${purchaseData.barcode}" alt="Código de barras">
+            </div>
+        </section>
+    `;
+
+
+    document.body.innerHTML = ticketHTML;
+}
+
+function formatearFecha(fechaString) {
+    const [dia, mes, año] = fechaString.split('/');
+    const fecha = new Date(año, mes - 1, dia); // Mes es 0-indexado en JavaScript
+    const diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+    const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    
+    const diaSemana = diasSemana[fecha.getDay()];
+    const diaNum = fecha.getDate();
+    const mesNombre = meses[fecha.getMonth()];
+    const añoNum = fecha.getFullYear();
+    
+    return `${diaSemana}, ${diaNum} ${mesNombre} ${añoNum}`;
+}
 function goBack(movieId, movieState) {
     console.log('Volviendo a los detalles de la película con ID:', movieId, 'y estado:', movieState);
     displayMovieDetails(movieId, movieState);
