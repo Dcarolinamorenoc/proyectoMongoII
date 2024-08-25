@@ -2179,6 +2179,7 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
                         ${paymentMethodsHTML}
                     </div>
                 </div>
+                    <p id="timer">Complete su pago en: 15:00</p>
                 <button class="buy-ticket-btn">Comprar boleto</button>
             </div>
         </div>
@@ -2186,14 +2187,41 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
 
     document.body.innerHTML = orderSummaryHTML;
 
+    document.body.innerHTML = orderSummaryHTML;
+
+    const timerDisplay = document.getElementById('timer');
+    const timerDuration = 15 * 60; // 15 minutos en segundos
+    const timerId = startTimer(timerDuration, timerDisplay);
+
     document.querySelector('.buy-ticket-btn').addEventListener('click', async () => {
         const selectedPaymentMethod = document.querySelector('input[name="payment-method"]:checked');
         if (selectedPaymentMethod) {
+            clearInterval(timerId); // Detener el temporizador si se hace clic en "Comprar boleto"
             await handleTicketPurchase(movieId, movieData, seatsArray, selectedPaymentMethod.value, orderNumber, totalPrice, selectedProjection);
         } else {
             alert('Por favor, selecciona un método de pago');
         }
     });
+}
+
+function startTimer(duration, display) {
+    let timer = duration, minutes, seconds;
+    const intervalId = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = `Complete su pago en: ${minutes}:${seconds}`;
+
+        if (--timer < 0) {
+            clearInterval(intervalId);
+            window.location.href = "../views/home.html";
+        }
+    }, 1000);
+
+    return intervalId;
 }
 
 async function handleTicketPurchase(movieId, movieData, selectedSeats, paymentMethod, orderNumber, totalPrice, selectedProjection) {
