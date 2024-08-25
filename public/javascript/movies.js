@@ -1793,19 +1793,28 @@ function goBack(movieId, movieState) {
 
 
 
-function showOrderSummary(movieId, movieData, selectedSeats) {
+async function showOrderSummary(movieId, movieData, selectedSeats) {
     const selectedDate = document.querySelector('.date-btn.selected').dataset.date;
     const selectedTime = document.querySelector('.time-btn.selected').dataset.time;
     const selectedProjection = movieData.proyecciones.find(p =>
         p.horario.fecha_proyeccion === selectedDate && p.horario.horario_proyeccion === selectedTime
     );
 
+    if (!selectedProjection) {
+        console.error('No se encontró la proyección seleccionada');
+        alert('Error al cargar los detalles de la proyección');
+        return;
+    }
+
     const moviePrice = selectedProjection.horario.precio_pelicula;
     let regularSeats = [];
     let vipSeats = [];
     let seatNames = [];
 
-    selectedSeats.forEach(seat => {
+    // Convertir selectedSeats a un array si no lo es
+    const seatsArray = Array.isArray(selectedSeats) ? selectedSeats : Array.from(selectedSeats);
+
+    seatsArray.forEach(seat => {
         const seatData = selectedProjection.asientos.find(s => s.id.toString() === seat.dataset.id);
         if (seatData) {
             seatNames.push(seatData.nombre_general);
@@ -1817,16 +1826,31 @@ function showOrderSummary(movieId, movieData, selectedSeats) {
         }
     });
 
-    const regularSeatPrice = regularSeats.length > 0 ? regularSeats[0].Precio + moviePrice : 0;
-    const vipSeatPrice = vipSeats.length > 0 ? vipSeats[0].Precio + moviePrice : 0;
+    // Obtener la información del usuario actual desde localStorage
+    const userInfo = JSON.parse(localStorage.getItem('usuarioActual'));
+    
+    // Obtener el porcentaje de descuento de la tarjeta VIP del usuario
+    let vipDiscount = 0;
+    if (userInfo && userInfo.tarjeta_vip) {
+        vipDiscount = userInfo.tarjeta_vip.porcentaje_descuento / 100;
+    }
+
+    let regularSeatPrice = regularSeats.length > 0 ? regularSeats[0].Precio + moviePrice : 0;
+    let vipSeatPrice = vipSeats.length > 0 ? vipSeats[0].Precio + moviePrice : 0;
+
+    // Aplicar descuento si el usuario tiene tarjeta VIP
+    if (vipDiscount > 0) {
+        regularSeatPrice *= (1 - vipDiscount);
+        vipSeatPrice *= (1 - vipDiscount);
+    }
 
     const totalRegularPrice = regularSeatPrice * regularSeats.length;
     const totalVipPrice = vipSeatPrice * vipSeats.length;
-    const serviceFee = 1.99 * selectedSeats.length;
+    const serviceFee = 1.99 * seatsArray.length;
     const totalPrice = totalRegularPrice + totalVipPrice + serviceFee;
 
-    // Obtener la información del usuario actual desde localStorage
-    const userInfo = JSON.parse(localStorage.getItem('usuarioActual'));
+    // Generar ORDER NUMBER
+    const orderNumber = Math.floor(Math.random() * 100000000);
 
     // Generar HTML para los métodos de pago
     let paymentMethodsHTML = '';
@@ -2007,7 +2031,7 @@ function showOrderSummary(movieId, movieData, selectedSeats) {
         }
 
         .movie-details{
-            margin-left: 5%;
+            margin-left: 8%;
         }
 
         .cine-campus{
@@ -2093,20 +2117,28 @@ function showOrderSummary(movieId, movieData, selectedSeats) {
         </div>
         <div class="movie-details-containerpay">
             <div class="order-details">
-                <p>ORDER NUMBER: ${Math.floor(Math.random() * 100000000)}</p>
+                <p>ORDER NUMBER: ${orderNumber}</p>
 
                 <p class="line">________________________________________</p>
 
                 <div class="flex-row">
-                    <p>${selectedSeats.length} TICKET(S):</p>
+                    <p>${seatsArray.length} TICKET(S):</p>
                     <p>${seatNames.join(', ')}</p>
                 </div>
 
                 <p class="line">________________________________________</p>
 
-                ${regularSeats.length > 0 ? `<div class="flex-row"><p>REGULAR SEAT:</p><p>$${regularSeatPrice.toFixed(2)} x ${regularSeats.length}</p></div>` : ''}
+                ${regularSeats.length > 0 ? `
+                    <div class="flex-row">
+                        <p>REGULAR SEAT${vipDiscount > 0 ? ` (${vipDiscount * 100}% VIP Discount Applied)` : ''}:</p>
+                        <p>$${regularSeatPrice.toFixed(2)} x ${regularSeats.length}</p>
+                    </div>` : ''}
 
-                ${vipSeats.length > 0 ? `<div class="flex-row"><p>VIP SEAT:</p><p>$${vipSeatPrice.toFixed(2)} x ${vipSeats.length}</p></div>` : ''}
+                ${vipSeats.length > 0 ? `
+                    <div class="flex-row">
+                        <p>VIP SEAT${vipDiscount > 0 ? ` (${vipDiscount * 100}% VIP Discount Applied)` : ''}:</p>
+                        <p>$${vipSeatPrice.toFixed(2)} x ${vipSeats.length}</p>
+                    </div>` : ''}
 
                 <p class="line">________________________________________</p>
 
@@ -2124,28 +2156,75 @@ function showOrderSummary(movieId, movieData, selectedSeats) {
 
                 <p class="line">________________________________________</p>
 
-
-
-
-                    <div class="payment-method">
-                        <h3 class="Payment">Payment method</h3>
-                        <div id="payment-methods-container">
-                            ${paymentMethodsHTML}
-                        </div>
+                <div class="payment-method">
+                    <h3 class="Payment">Payment method</h3>
+                    <div id="payment-methods-container">
+                        ${paymentMethodsHTML}
                     </div>
-                    <button class="buy-ticket-btn">Buy ticket</button>
                 </div>
+                <button class="buy-ticket-btn">Buy ticket</button>
+            </div>
         </div>
     `;
 
     document.body.innerHTML = orderSummaryHTML;
 
-    document.querySelector('.buy-ticket-btn').addEventListener('click', () => {
+    document.querySelector('.buy-ticket-btn').addEventListener('click', async () => {
         const selectedPaymentMethod = document.querySelector('input[name="payment-method"]:checked');
         if (selectedPaymentMethod) {
-            handleTicketPurchase(movieId, movieData, selectedSeats, selectedPaymentMethod.value);
+            await handleTicketPurchase(movieId, movieData, seatsArray, selectedPaymentMethod.value, orderNumber, totalPrice, selectedProjection);
         } else {
             alert('Por favor, selecciona un método de pago');
         }
     });
+}
+
+async function handleTicketPurchase(movieId, movieData, selectedSeats, paymentMethod, orderNumber, totalPrice, selectedProjection) {
+    const userInfo = JSON.parse(localStorage.getItem('usuarioActual'));
+
+    if (!selectedProjection || !selectedProjection.horario) {
+        console.error('No se encontró la proyección seleccionada o falta información del horario');
+        alert('Error al procesar la compra. Faltan datos de la proyección.');
+        return;
+    }
+
+    const purchaseData = {
+        id: orderNumber,
+        id_pelicula: movieId,
+        id_horario_proyeccion: selectedProjection.horario.id,
+        id_usuario: userInfo.id,
+        asientos_comprados: selectedSeats.map(seat => parseInt(seat.dataset.id)),
+        modo_compra: "virtual",
+        fecha_compra: new Date().toLocaleDateString('en-US'),
+        total: totalPrice,
+        metodo_pago: "tarjeta de crédito",
+        id_reserva: null,
+        estado_compra: "completada"
+    };
+
+    try {
+        const response = await fetch('/api/boletos/confirmacion-compra', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(purchaseData),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert('Compra realizada con éxito');
+            // Aquí puedes redirigir al usuario o mostrar un mensaje de confirmación
+        } else {
+            alert('Error al realizar la compra');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al procesar la compra');
+    }
+}
+
+function goBack(movieId, movieState) {
+    console.log('Volviendo a los detalles de la película con ID:', movieId, 'y estado:', movieState);
+    displayMovieDetails(movieId, movieState);
 }
