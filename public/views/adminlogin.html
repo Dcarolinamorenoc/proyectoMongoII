@@ -9,29 +9,48 @@
 </head>
 <body>
     <div class="container">
-        <div class="image-section">
-            <div class="image-section-img">
-                <img src="../storage/img/newLogo.webg" alt="Cine icon">
-            </div>
-        </div>
         <div class="login-section">
-            <h1>Ingresa como Administrador para registrar un usuario</h1>
+            <div class="boxes">
+                <div class="boxes-base">
+                    <a href="/index.html" class="boxes-left">
+                        <p>Iniciar Sesión</p>
+                    </a>
+                    <a href="/views/adminlogin.html" class="boxes-right">                        
+                        <p>Registrarse</p>
+                    </a>
+                </div>
+            </div>
             <form id="loginForm">
+                <!-- <h2>Bienvenido:</h2> -->
+                 <h1 class="login-h1">Ingrese como administrador para <br>registrar un usuario</h1>
                 <div class="input-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
+                    <span class="input-icon">
+                        <img src="/storage/img/usuario.svg" alt="User Icon">
+                    </span>
+                    <input class="input-username" type="text" id="username" name="username" placeholder="Alias" required>
                 </div>
                 <div class="input-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
+                    <span class="input-icon2">
+                        <img src="/storage/img/password.svg" alt="Lock Icon">
+                    </span>
+                    <input class="input-password" type="password" id="password" name="password" placeholder="Password" required>
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit">Acceso</button>
             </form>
-            <p>¿No eres Administrador? <a href="../index.html">Login</a></p>
+            
+        </div>
+        <div class="image-section">
+            <div class="image-img">
+                <img src="../storage/img/newLogo.webp" alt="Cine Campus Logo">
+            </div>
+            <div class="image-title">
+                <h1>Cine Campus</h1>
+            </div>
         </div>
     </div>
     <div id="errorPopup" class="error-popup" style="display: none;">
         <p>Usuario o Contraseña incorrecta</p>
     </div>
+    <script src="/javascript/login.js"></script>
 </body>
 </html>
