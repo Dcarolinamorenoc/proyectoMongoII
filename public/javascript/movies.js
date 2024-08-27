@@ -1709,6 +1709,11 @@ async function displaySeatSelection(movieId) {
             }
         }
 
+        function resetTotalPrice() {
+            totalPrice = 0;
+            document.querySelector('.total-price').textContent = `COP ${totalPrice.toFixed(2)}`;
+        }
+
 
         function generateDateButtons(proyecciones) {
             const uniqueDates = [...new Set(proyecciones.map(p => p.horario.fecha_proyeccion))];
@@ -1775,7 +1780,7 @@ async function displaySeatSelection(movieId) {
                     updateSeats();
                 });
             });
-
+            
             const timeButtons = document.querySelectorAll('.time-btn');
             timeButtons.forEach(timeButton => {
                 timeButton.addEventListener('click', () => {
@@ -1788,16 +1793,27 @@ async function displaySeatSelection(movieId) {
             function updateAvailableTimes() {
                 const selectedDate = getSelectedDate();
                 const filteredProjections = movieData.proyecciones.filter(p => p.horario.fecha_proyeccion === selectedDate);
-
+            
                 const timeSelector = document.querySelector('.time-selector');
                 timeSelector.innerHTML = generateTimeButtons(filteredProjections);
+            
+                // Deseleccionar todos los asientos
+                const selectedSeats = document.querySelectorAll('.seat.selected');
+                selectedSeats.forEach(seat => seat.classList.remove('selected'));
+            
+                // Resetear el precio total
+                resetTotalPrice();
             }
+
 
             function updateSeats() {
                 const selectedProjection = getSelectedProjection();
                 const seatsContainer = document.querySelector('.seats');
                 seatsContainer.innerHTML = generateSeats(selectedProjection.asientos);
                 addEventListeners(movieData);
+            
+                // Resetear el precio total
+                resetTotalPrice();
             }
         }
 
