@@ -1,0 +1,199 @@
+*{
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #000;
+        /* position: fixed; */
+        top: 0;
+        left: 0;
+    }
+    
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: white;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .container{
+        display: flex;
+        /* border: 1px solid green; */
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 6vh;
+        margin-top: 7%;
+    }
+    
+    .movie-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* border: 1px solid purple; */
+        width: 87vw;
+        height: 100%;
+    }
+    
+    .back-button, .more-options {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+    
+    h1 {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .box1{
+        display: flex;
+        /* border: 1px solid green; */
+        margin-top: 8%;
+        width: 100vw;
+        height: 5vh;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box1 h1{
+         font-size: 160%;
+    }
+
+    .main{
+        display: flex;
+        /* border: 1px solid green; */
+        flex-direction: column;
+        margin-top: 10%;
+        margin-bottom: 15%;
+        width: 100vw;
+        /* height: 71vh; */
+        /* justify-content: center; */
+        align-items: center;
+        gap: 25px;
+        overflow-y: auto;
+        scrollbar-width: none;
+        padding: 5%;
+    }
+
+    .main_box{
+        display: flex;
+        /* border: 1px solid rgb(0, 60, 255); */
+        background: #C3C3C3;
+        border-radius: 15px;
+        width: 90vw;
+        height: 35vh;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4%;   
+    }
+
+    .main_box_img{
+        display: flex;
+        /* border: 1px solid yellow; */
+        flex-direction: column;
+        justify-content: space-between;
+        width: 35vw;
+        height: 26vh;
+    }
+
+    .main_box_img img{
+        display: flex;
+        width: 100%;
+        height: 80%;
+        border-radius: 15px;
+    }
+
+    .main_box button{
+        display: flex;
+        /* border: 1px solid red; */
+        width: 100%;
+        height: 3vh;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        background-color: red;
+        border-radius: 10px;
+        font-weight: bold;
+        border: none;
+    }
+
+
+    .main_box_content{
+        display: flex;
+        /* border: 1px solid white; */
+        flex-direction: column;
+        width: 40vw;
+        height: 30vh;
+        color: #000;
+    }
+
+    .main_box_content h1{
+        font-size: 120%;
+        margin-bottom: 12%;
+    }
+
+    .main_box_content P{
+        font-size: 100%;
+        margin-bottom: 4%;
+        color: #787878;
+    }
+
+
+
+
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #000000;
+        border-top: 1px solid #1b1b1b;
+        border-radius: 15px 15px 0 0;
+        padding: 10px 5px;
+    }
+    
+    .bottom-nav a {
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+    }
+    
+    .bottom-nav img {
+        width: 24px;
+        height: 24px;
+        display: block;
+        margin: 0 auto;
+    }
+    
+    .bottom-nav span {
+        display: block;
+        font-size: 12px;
+        margin-top: 4px;
+        color: #fff;
+    }
+    
+    .bottom-nav a.active span,
+    .bottom-nav a.active img {
+        color: red;
+    }
+
+    .titulo_boletico h1{
+        font-size: 1.2rem;
+    
+    }
+}
+

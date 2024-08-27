@@ -299,7 +299,7 @@ async function displayMovieDetails(movieId, movieState) {
                                 <img src="../storage/img//newLogo.webp" alt="Cinema logo">
                             </div>
                         </div>
-                    <button id="book-now" onclick="displaySeatSelection(${movieId})" ${movieState !== 'En cartelera' ? 'disabled' : ''}>Comora ahora</button>
+                    <button id="book-now" onclick="displaySeatSelection(${movieId})" ${movieState !== 'En cartelera' ? 'disabled' : ''}>Comprar ahora</button>
                     ` : ''}
                 </div>
             </div>
@@ -529,6 +529,7 @@ async function displayMovieDetails(movieId, movieState) {
                 width: 15px;
                 height: 20px;
                 margin-left: -10px;
+                margin-right: 20px;
             }
 
             .actor-name {
@@ -748,7 +749,7 @@ function playTrailer(trailerUrl) {
         });
     }
 
-    trailerButton.textContent = 'Detener remolque';
+    trailerButton.textContent = 'Detener Trailer';
     trailerButton.onclick = stopTrailer;
 }
 
@@ -1266,6 +1267,7 @@ async function displaySeatSelection(movieId) {
                 align-items: center;
                 margin-left: 5%;
                 width: 90vw;
+                margin-top: -10px;
             }
 
             .total-precio {
@@ -2000,7 +2002,7 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
 
 
         .order-details p {
-            font-size: 14px;
+            font-size: 3.6vw;
             margin-bottom: 10px;
         }
 
@@ -2462,6 +2464,7 @@ async function showTicketDetails(purchaseData, movieData, movieId) {
             margin: 8vw;
             padding: 20px;
             color: black;
+            margin-top: 10px;
         }
 
         .back-button2, .more-options {

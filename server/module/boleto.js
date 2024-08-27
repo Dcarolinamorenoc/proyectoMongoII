@@ -653,5 +653,44 @@ module.exports = class boleto extends connect {
             throw error;
         }
     }
+
+
+    async obtenerBoletosUsuario(idUsuario) {
+        try {
+            await this.conexion.connect();
+    
+            const boletos = await this.collection.find({ id_usuario: parseInt(idUsuario) }).toArray();
+    
+            if (boletos.length === 0) {
+                return { mensaje: "El usuario no tiene boletos registrados." };
+            }
+    
+            const boletosConDetalles = await Promise.all(boletos.map(async (boleto) => {
+                const pelicula = await this.db.collection('pelicula').findOne({ id: boleto.id_pelicula });
+                const horarioProyeccion = await this.db.collection('horario_proyeccion').findOne({ id: boleto.id_horario_proyeccion });
+    
+                return {
+                    id_boleto: boleto.id,
+                    pelicula: {
+                        titulo: pelicula.titulo,
+                        imagen_pelicula: pelicula.imagen_pelicula
+                    },
+                    fecha_compra: boleto.fecha_compra,
+                    asientos_comprados: boleto.asientos_comprados,
+                    fecha_proyeccion: horarioProyeccion.fecha_proyeccion,
+                    horario_proyeccion: horarioProyeccion.horario_proyeccion,
+                    total: boleto.total,
+                    estado_compra: boleto.estado_compra
+                };
+            }));
+    
+            await this.conexion.close();
+    
+            return boletosConDetalles;
+        } catch (error) {
+            await this.conexion.close();
+            throw new Error(`Error al obtener los boletos del usuario: ${error.message}`);
+        }
+    }
     
 }
