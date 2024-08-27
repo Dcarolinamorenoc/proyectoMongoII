@@ -11,7 +11,9 @@ module.exports = class Usuario extends connect {
             return Usuario.instanceUsuario;
         }
         super();
-        this.initializeCollections();
+        this.initializeCollections().catch(error => {
+            console.error('Error al inicializar las colecciones:', error);
+        });
         Usuario.instanceUsuario = this;
     }
 
@@ -27,7 +29,6 @@ module.exports = class Usuario extends connect {
             this.collectionUsuario = this.db.collection('usuario');
             this.collectionTarjetaVIP = this.db.collection('tarjeta_vip');
 
-            // Verificar si las colecciones existen
             const collections = await this.db.listCollections().toArray();
             const collectionNames = collections.map(c => c.name);
 
@@ -65,7 +66,32 @@ module.exports = class Usuario extends connect {
      */
 
 
-    
+    async crearRolesPersonalizados(db) {
+        try {
+            // Crear rol userVip
+            await db.command({
+                createRole: "userVip",
+                privileges: [
+                    { resource: { db: "cineCampus", collection: "" }, actions: ["find", "update"] }
+                ],
+                roles: []
+            });
+
+            // Crear rol userEstandar
+            await db.command({
+                createRole: "userEstandar",
+                privileges: [
+                    { resource: { db: "cineCampus", collection: "" }, actions: ["find"] }
+                ],
+                roles: []
+            });
+
+            console.log("Roles personalizados creados con éxito");
+        } catch (error) {
+            console.error("Error al crear roles personalizados:", error);
+            // Si los roles ya existen, simplemente continuamos
+        }
+    }
 
     async crearUsuario(datosUsuario) {
         console.log('Datos recibidos en crearUsuario:', datosUsuario);
@@ -105,6 +131,9 @@ module.exports = class Usuario extends connect {
             const resultado = await usuarios.insertOne(datosUsuario);
             console.log('Resultado de insertOne:', resultado);
     
+            // Crear roles personalizados si no existen
+            await this.crearRolesPersonalizados(db);
+
             if (datosUsuario.rol === 'Administrador') {
                 await db.command({
                     createUser: datosUsuario.nickname,
@@ -161,7 +190,11 @@ module.exports = class Usuario extends connect {
 
     async crearTarjetaVIP(datosTarjetaVip) {
         try {
-            await this.conexion.connect();
+            console.log('Datos recibidos en crearTarjetaVIP:', datosTarjetaVip);
+            
+            if (!this.collectionUsuario || !this.collectionTarjetaVIP) {
+                await this.initializeCollections();
+            }
 
             let usuario;
             if (datosTarjetaVip.id_usuario) {
@@ -182,7 +215,7 @@ module.exports = class Usuario extends connect {
                 throw new Error('El usuario no tiene el rol VIP. No se puede crear la tarjeta VIP.');
             }
 
-            const tarjetaExistente = await this.collectionTarjetaVip.findOne({ id_usuario: usuario.id });
+            const tarjetaExistente = await this.collectionTarjetaVIP.findOne({ id_usuario: usuario.id });
             if (tarjetaExistente) {
                 throw new Error('El usuario ya tiene una tarjeta VIP.');
             }
@@ -197,28 +230,27 @@ module.exports = class Usuario extends connect {
                 tarjeta_img: "https://i.pinimg.com/736x/a4/dc/ab/a4dcab9932c9e10f2f7efd77c022a979.jpg"
             };
 
-            await this.collectionTarjetaVip.insertOne(nuevaTarjeta);
-            await this.conexion.close();
+            await this.collectionTarjetaVIP.insertOne(nuevaTarjeta);
             return nuevaTarjeta;
         } catch (error) {
-            await this.conexion.close();
+            console.error('Error detallado en crearTarjetaVIP:', error);
             return { error: error.message };
         }
     }
-    
+
     async generarIdTarjeta() {
-        const ultimaTarjeta = await this.collectionTarjetaVip.findOne({}, { sort: { id: -1 } });
+        const ultimaTarjeta = await this.collectionTarjetaVIP.findOne({}, { sort: { id: -1 } });
         return ultimaTarjeta ? ultimaTarjeta.id + 1 : 1;
     }
-    
+
     async generarNumeroTarjeta() {
         let numero;
         do {
-        numero = 'VIP' + Math.floor(1000 + Math.random() * 9000).toString();
-        } while (await this.collectionTarjetaVip.findOne({ numero: numero }));
+            numero = 'VIP' + Math.floor(1000 + Math.random() * 9000).toString();
+        } while (await this.collectionTarjetaVIP.findOne({ numero: numero }));
         return numero;
     }
-    
+
     generarFechaExpiracion() {
         const fecha = new Date();
         fecha.setFullYear(fecha.getFullYear() + 1);

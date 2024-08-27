@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         rol: usuarioEncontrado.rol
                     }));
                 
-                    window.location.href = './views/home.html';
+                    window.location.href = '../views/home.html';
                 } else {
                     showErrorPopup('Usuario o contraseña incorrectos');
                 }
