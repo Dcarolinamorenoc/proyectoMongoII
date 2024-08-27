@@ -18,27 +18,27 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="nombre">Nombre completo:</label>
-                        <input type="text" id="nombre" name="nombre_completo" required>
+                        <input type="text" id="nombre" name="nombre_completo" placeholder="nombre completo" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" placeholder="email" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="identificacion">Identificación:</label>
-                        <input type="text" id="identificacion" name="identificacion" required>
+                        <input type="text" id="identificacion" name="identificacion" placeholder="identificacion" required>
                     </div>
                     <div class="form-group">
                         <label for="telefono">Teléfono:</label>
-                        <input type="tel" id="telefono" name="telefono" required>
+                        <input type="tel" id="telefono" name="telefono" placeholder="telefono" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="id">ID:</label>
-                        <input type="text" id="id" name="id" required>
+                        <input type="text" id="id" name="id" placeholder="id" required>
                     </div>
                     <div class="form-group">
                         <label for="rol">Rol:</label>
@@ -51,18 +51,18 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="nickname">Nickname:</label>
-                        <input type="text" id="nickname" name="nickname" required>
+                        <label for="nickname">Alias:</label>
+                        <input type="text" id="nickname" name="nickname" placeholder="alias" required>
                     </div>
                     <div class="form-group">
                         <label for="celular">Celular:</label>
-                        <input type="tel" id="celular" name="celular" required>
+                        <input type="tel" id="celular" name="celular" placeholder="celular" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="imagen">Imagen del Usuario:</label>
-                        <input type="url" id="imagen" name="imagen_user" placeholder="Ingrese el enlace de la imagen" required>
+                        <input type="url" id="imagen" name="imagen_user" placeholder="Ingrese el enlace de la imagen" placeholder="Imagen del usuario" required>
                     </div>
                 </div>
 
@@ -74,11 +74,11 @@
                         <br>
                         <div class="form-group">
                             <label for="nombre_tarjeta_0">Nombre de la tarjeta:</label>
-                            <input type="text" id="nombre_tarjeta_0" name="nombre_tarjeta_0" required>
+                            <input type="text" id="nombre_tarjeta_0" name="nombre_tarjeta_0" placeholder="nombre de tarjeta" required>
                         </div>
                         <div class="form-group">
                             <label for="numero_tarjeta_0">Número de la tarjeta:</label>
-                            <input type="text" id="numero_tarjeta_0" name="numero_tarjeta_0" required>
+                            <input type="text" id="numero_tarjeta_0" name="numero_tarjeta_0" placeholder="numero de tarjeta" required>
                         </div>
                     </div>
                     
@@ -88,11 +88,11 @@
                         <br>
                         <div class="form-group">
                             <label for="nombre_tarjeta_1">Nombre de la tarjeta:</label>
-                            <input type="text" id="nombre_tarjeta_1" name="nombre_tarjeta_1">
+                            <input type="text" id="nombre_tarjeta_1" placeholder="nombre de tarjeta" name="nombre_tarjeta_1">
                         </div>
                         <div class="form-group">
                             <label for="numero_tarjeta_1">Número de la tarjeta:</label>
-                            <input type="text" id="numero_tarjeta_1" name="numero_tarjeta_1">
+                            <input type="text" id="numero_tarjeta_1" name="numero_tarjeta_1" placeholder="numero de tarjeta">
                         </div>
                     </div>
                     
@@ -102,21 +102,27 @@
                         <br>
                         <div class="form-group">
                             <label for="nombre_tarjeta_2">Nombre de la tarjeta:</label>
-                            <input type="text" id="nombre_tarjeta_2" name="nombre_tarjeta_2">
+                            <input type="text" id="nombre_tarjeta_2" name="nombre_tarjeta_2" placeholder="nombre de tarjeta">
                         </div>
                         <div class="form-group">
                             <label for="numero_tarjeta_2">Número de la tarjeta:</label>
-                            <input type="text" id="numero_tarjeta_2" name="numero_tarjeta_2">
+                            <input type="text" id="numero_tarjeta_2" name="numero_tarjeta_2" placeholder="numero de tarjeta">
                         </div>
                     </div>
                 </div>
 
                 <button type="submit">Registrarse</button>
             </form>
-            <br>
-            <p>Continuar en el sistema <a href="../index.html">Login</a></p>
-            <br>
-            <p>Registrar Tarjeta Usuarios VIP <a href="./registarTarjeta.html">TarjetaVip</a></p>
+            <div class="boxes">
+                <div class="boxes-base">
+                    <a href="/index.html" class="boxes-left">
+                        <p>Iniciar Sesión</p>
+                    </a>
+                    <a href="../views/registarTarjeta.html" class="boxes-right">                        
+                        <p>Tarjeta VIP</p>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     <div id="popup" class="popup" style="display: none;">

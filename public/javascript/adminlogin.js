@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (user) {
                     if (user.rol === 'Administrador') {
                         console.log('Inicio de sesión exitoso como administrador');
-                        window.location.href = './registrar.html';
+                        window.location.href = '/views/registrar.html';
                     } else {
                         console.log('Usuario no es administrador');
                         showErrorPopup('No tienes permisos de administrador');
