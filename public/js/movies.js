@@ -1,3 +1,22 @@
+/**
+ * Gestiona la interacción con el Service Worker y las funciones relacionadas con la visualización de películas.
+ * 
+ * @description
+ * - Registra el Service Worker para optimizar el rendimiento del sitio y habilitar el soporte sin conexión.
+ * - Llama a funciones que listan películas en cartelera, próximos estrenos y no disponibles.
+ * - Proporciona una función para limpiar la caché almacenada por el Service Worker.
+ * 
+ * @function clearCache
+ * - Limpia la caché almacenada por el Service Worker.
+ * 
+ * @event DOMContentLoaded
+ * - Escucha la carga del documento para registrar el Service Worker y ejecutar las funciones de película.
+ * 
+ * @returns {void}
+ */
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -42,6 +61,29 @@ function clearCache() {
         });
     }
 }
+
+/**
+ * Realiza solicitudes a la API para obtener películas en diferentes estados y las muestra en el sitio web.
+ * 
+ * @function fetchMoviesEnCartelera
+ * - Obtiene las películas que están actualmente en cartelera.
+ * - Si la respuesta es válida y contiene un array, llama a `displayMoviesEnCartelera` para mostrar las películas y configura el carrusel con `setupCarousel`.
+ * - Maneja errores en caso de fallo en la solicitud o respuesta incorrecta.
+ * 
+ * @function fetchMoviesProximoEstreno
+ * - Obtiene las películas que están próximas a estrenarse.
+ * - Si la respuesta es válida y contiene un array, llama a `displayMoviesProximoEstreno` para mostrar las películas.
+ * - Maneja errores en caso de fallo en la solicitud o respuesta incorrecta.
+ * 
+ * @function fetchMoviesNoDisponible
+ * - Obtiene las películas que ya no están disponibles.
+ * - Si la respuesta es válida y contiene un array, llama a `displayMoviesNoDisponible` para mostrar las películas.
+ * - Maneja errores en caso de fallo en la solicitud o respuesta incorrecta.
+ * 
+ * @returns {Promise<void>}
+ */
+
+
 
 async function fetchMoviesEnCartelera() {
     try {
@@ -88,6 +130,28 @@ async function fetchMoviesNoDisponible() {
         console.error('Error al obtener las películas no disponibles:', error);
     }
 }
+
+
+
+/**
+ * Muestra las películas en cartelera en un contenedor de tarjetas y configura un carrusel infinito.
+ * 
+ * @function displayMoviesEnCartelera
+ * - Recibe un array de películas y las muestra como tarjetas en el contenedor con el ID 'now-playing-container'.
+ * - Cada tarjeta incluye una imagen, título y género de la película, y un evento `onclick` para mostrar detalles de la película.
+ * - Si la imagen de la película no se carga, utiliza una imagen por defecto.
+ * 
+ * @function setupCarousel
+ * - Configura un carrusel infinito con las tarjetas de películas en cartelera.
+ * - Clona varias veces las tarjetas para crear un efecto infinito de desplazamiento.
+ * - Crea indicadores de carrusel para mostrar la posición actual en el carrusel.
+ * - Ajusta el desplazamiento del carrusel y actualiza los indicadores y la visibilidad de las tarjetas activas.
+ * - Implementa un desplazamiento infinito que reinicia el scroll cuando llega al inicio o al final.
+ * - Maneja eventos de clic en los indicadores para desplazarse suavemente a la posición correspondiente.
+ * 
+ * @returns {void}
+ */
+
 
 function displayMoviesEnCartelera(movies) {
     const container = document.getElementById('now-playing-container');
@@ -216,6 +280,23 @@ function setupCarousel() {
 }
 
 
+/**
+ * Muestra las películas próximas a estrenarse en una lista de elementos y configura los eventos para mostrar detalles de cada película.
+ * 
+ * @function displayMoviesProximoEstreno
+ * - Recibe un array de películas y las muestra en el contenedor con el ID 'coming-soon-movies'.
+ * - Cada película se muestra con una imagen, título (con el año de estreno extraído) y género.
+ * - Si la imagen de la película no se carga, se utiliza una imagen por defecto.
+ * - Cada película incluye un evento `onclick` para mostrar detalles específicos de la película.
+ * 
+ * @function displayMoviesNoDisponible
+ * - Muestra las películas no disponibles en un contenedor de elementos con el ID 'not-avaliable-movies'.
+ * - Cada película se muestra con una imagen, título (con el año de estreno, o "Desconocido" si no está disponible) y género.
+ * - Cada tarjeta tiene un evento `onclick` para mostrar los detalles de la película no disponible.
+ * - Si la imagen de la película no se carga, se utiliza una imagen por defecto.
+ * 
+ * @returns {void}
+ */
 
 
 function displayMoviesProximoEstreno(movies) {
@@ -266,6 +347,32 @@ function displayMoviesNoDisponible(movies) {
         movieList.appendChild(movieElement);
     });
 }
+
+
+/**
+ * Muestra los detalles de una película específica y permite interactuar con su contenido, como ver el tráiler o seleccionar cine para la compra de boletos.
+ * 
+ * @async
+ * @function displayMovieDetails
+ * @param {number} movieId - El ID de la película cuyos detalles se desean mostrar.
+ * @param {string} movieState - El estado actual de la película, como "En cartelera", "Próximo estreno" o "No disponible".
+ * 
+ * - Obtiene los detalles de la película a través de una solicitud `fetch` a la API (`/api/peliculas/:movieId`).
+ * - Muestra la imagen del banner de la película, sinopsis, género y el elenco en un formato dinámico.
+ * - Permite ver el tráiler en un reproductor de YouTube incrustado.
+ * - Si el estado de la película es "En cartelera", habilita la opción de compra de boletos, que se activa seleccionando un cine.
+ * - Si no está disponible o es un estreno futuro, desactiva el botón de compra.
+ * - Controla el popup para confirmar si el usuario desea ver el tráiler.
+ * - Incluye un botón para regresar a la página de inicio.
+ * 
+ * @returns {void}
+ * 
+ * @example
+ * // Ejemplo de uso:
+ * displayMovieDetails(3, 'En cartelera');
+ * // Muestra los detalles de la película con ID 3 que está en cartelera.
+ */
+
 
 async function displayMovieDetails(movieId, movieState) {
     try {
@@ -730,6 +837,15 @@ async function displayMovieDetails(movieId, movieState) {
     }
 }
 
+/**
+ * Carga la API de YouTube para poder reproducir videos incrustados en la página.
+ * 
+ * @function loadYouTubeAPI
+ * - Inserta un script dinámicamente en el documento para cargar la API de YouTube.
+ * 
+ * @returns {void}
+ */
+
 function loadYouTubeAPI() {
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
@@ -737,18 +853,63 @@ function loadYouTubeAPI() {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
 
+
+/**
+ * Callback que indica cuando la API de YouTube está lista para ser usada.
+ * 
+ * @function onYouTubeIframeAPIReady
+ * - Se llama automáticamente cuando la API de YouTube se ha cargado.
+ * - Inicializa la consola con un mensaje para indicar que la API está lista.
+ * 
+ * @returns {void}
+ */
+
+
 let player;
 function onYouTubeIframeAPIReady() {
     console.log("YouTube API is ready");
 }
 
+
+/**
+ * Muestra un popup para confirmar si el usuario desea ver el tráiler.
+ * 
+ * @function showTrailerPopup
+ * @param {string} trailerUrl - La URL del tráiler de YouTube que se mostrará.
+ * - Hace visible el popup que contiene el mensaje de confirmación.
+ * 
+ * @returns {void}
+ */
+
 function showTrailerPopup(trailerUrl) {
     document.getElementById('trailer-popup').style.display = 'flex';
 }
 
+/**
+ * Cierra el popup de confirmación del tráiler.
+ * 
+ * @function closeTrailerPopup
+ * - Oculta el popup de confirmación.
+ * 
+ * @returns {void}
+ */
+
 function closeTrailerPopup() {
     document.getElementById('trailer-popup').style.display = 'none';
 }
+
+/**
+ * Reproduce el tráiler en un reproductor incrustado de YouTube y oculta el banner de la película.
+ * 
+ * @function playTrailer
+ * @param {string} trailerUrl - La URL del tráiler de YouTube.
+ * - Cierra el popup de confirmación y muestra el reproductor de YouTube.
+ * - Extrae el ID del video desde la URL del tráiler.
+ * - Si ya existe un reproductor de YouTube, carga el video en él. De lo contrario, crea uno nuevo.
+ * - Cambia el botón de ver tráiler a "Detener Trailer" para permitir detener la reproducción.
+ * 
+ * @returns {void}
+ */
 
 function playTrailer(trailerUrl) {
     closeTrailerPopup();
@@ -779,9 +940,32 @@ function playTrailer(trailerUrl) {
     trailerButton.onclick = stopTrailer;
 }
 
+
+/**
+ * Callback que se ejecuta cuando el reproductor de YouTube está listo para reproducir el video.
+ * 
+ * @function onPlayerReady
+ * @param {object} event - El evento que indica que el reproductor está listo.
+ * - Inicia la reproducción automática del tráiler cuando el reproductor esté listo.
+ * 
+ * @returns {void}
+ */
+
+
 function onPlayerReady(event) {
     event.target.playVideo();
 }
+
+
+/**
+ * Detiene la reproducción del tráiler y vuelve a mostrar el banner de la película.
+ * 
+ * @function stopTrailer
+ * - Detiene el video del reproductor de YouTube y oculta el reproductor.
+ * - Vuelve a mostrar el banner de la película y cambia el botón a "Ver tráiler".
+ * 
+ * @returns {void}
+ */
 
 function stopTrailer() {
     const movieBanner = document.getElementById('movie-banner');
@@ -804,6 +988,15 @@ function stopTrailer() {
     };
 }
 
+/**
+ * Recarga la página y vuelve al inicio.
+ * 
+ * @function goToHome
+ * - Recarga la página actual.
+ * 
+ * @returns {void}
+ */
+
 function goToHome() {
     location.reload();
 }
@@ -815,6 +1008,16 @@ function goToHome() {
 
 
 
+/**
+ * Desplaza el slider de películas hasta la diapositiva especificada.
+ *
+ * @function scrollToSlide
+ * - Utiliza el índice proporcionado para calcular el desplazamiento y moverse al slide correspondiente.
+ * 
+ * @param {number} index - Índice de la diapositiva a la que se debe desplazar el slider.
+ * 
+ * @returns {void}
+ */
 
 
 
@@ -828,6 +1031,19 @@ function scrollToSlide(index) {
     });
 }
 
+
+/**
+ * Actualiza el punto activo en el slider según la diapositiva actual.
+ *
+ * @function updateActiveDot
+ * - Activa el punto correspondiente a la diapositiva visible y desactiva los demás.
+ * 
+ * @param {number} index - Índice de la diapositiva actualmente visible.
+ * 
+ * @returns {void}
+ */
+
+
 function updateActiveDot(index) {
     const dots = document.querySelectorAll('.slider-dot');
     dots.forEach((dot, i) => {
@@ -835,6 +1051,15 @@ function updateActiveDot(index) {
     });
 }
 
+
+/**
+ * Agrega un evento al slider para detectar el desplazamiento y actualizar los puntos activos.
+ * 
+ * @event movieSlider.scroll
+ * - Detecta cuando el usuario desplaza el slider y actualiza los puntos activos.
+ * 
+ * @returns {void}
+ */
 
 
 // Evento para el slider de películas en cartelera
@@ -845,6 +1070,15 @@ if (document.getElementById('movieSlider')) {
     });
 }
 
+
+/**
+ * Evento ejecutado al cargar la página.
+ * 
+ * @event DOMContentLoaded
+ * - Carga la información del usuario desde localStorage y asigna eventos de búsqueda.
+ * 
+ * @returns {void}
+ */
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -879,6 +1113,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+
+/**
+ * Muestra los resultados de la búsqueda en la interfaz.
+ *
+ * @function displaySearchResults
+ * - Renderiza los resultados de la búsqueda en el contenedor principal.
+ * 
+ * @param {Array<Object>} movies - Lista de películas que coinciden con la búsqueda.
+ * @param {string} query - Término de búsqueda utilizado.
+ * 
+ * @returns {void}
+ */
+
 
 // Función para mostrar los resultados de la búsqueda
 function displaySearchResults(movies, query) {
@@ -975,6 +1224,19 @@ function displaySearchResults(movies, query) {
     // Actualizar la información del usuario después de renderizar
     updateUserInfo();
 }
+
+
+/**
+ * Realiza la búsqueda de películas y muestra los resultados.
+ *
+ * @async
+ * @function fetchAndDisplaySearchResults
+ * - Hace una solicitud a la API para obtener los resultados de búsqueda de películas.
+ * 
+ * @param {string} query - El término de búsqueda.
+ * 
+ * @returns {Promise<void>}
+ */
 
 // Función auxiliar para fetch y display de resultados
 async function fetchAndDisplaySearchResults(query) {
