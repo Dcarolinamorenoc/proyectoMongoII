@@ -17,6 +17,32 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchMoviesNoDisponible();
 });
 
+function clearCache() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.ready.then(registration => {
+            return new Promise((resolve, reject) => {
+                const messageChannel = new MessageChannel();
+                messageChannel.port1.onmessage = event => {
+                    if (event.data.error) {
+                        reject(event.data.error);
+                    } else {
+                        resolve(event.data);
+                    }
+                };
+                registration.active.postMessage(
+                    { action: 'clearCache' },
+                    [messageChannel.port2]
+                );
+            });
+        }).then(response => {
+            console.log(response.result);
+            // Aquí puedes añadir cualquier acción adicional después de limpiar la caché
+        }).catch(error => {
+            console.error('Error al limpiar la caché:', error);
+        });
+    }
+}
+
 async function fetchMoviesEnCartelera() {
     try {
         const response = await fetch('/api/peliculas/estado/En%20cartelera');
@@ -989,6 +1015,7 @@ function updateUserInfo() {
 
 
 async function displaySeatSelection(movieId) {
+    await clearCache(); 
     try {
         const response = await fetch(`/api/peliculas/${movieId}/info-completa`);
         const movieData = await response.json();
@@ -1621,6 +1648,13 @@ async function displaySeatSelection(movieId) {
                 setTimeout(() => {
                     window.location.href = '../views/home.html';
                 }, 3500);
+
+                await clearCache();  // Limpiar la caché después de una reserva exitosa
+                createCustomPopup('Reserva realizada con éxito', 'success', 3000);   
+                setTimeout(() => {
+                    window.location.href = '../views/home.html';
+                }, 3500);
+
             } catch (error) {
                 console.error('Error:', error);
                 createCustomPopup('Hubo un error al procesar tu solicitud. Por favor, intenta de nuevo.', 'error');
@@ -1824,13 +1858,24 @@ async function displaySeatSelection(movieId) {
     }
 }
 
-function goBack(movieId, movieState) {
+async function goBack(movieId, movieState) {
+    await clearCache();  // Limpiar la caché antes de volver
     console.log('Volviendo a los detalles de la película con ID:', movieId, 'y estado:', movieState);
     displayMovieDetails(movieId, movieState);
 }
 
 
-
+async function clearCache() {
+    if ('caches' in window) {
+        try {
+            const cacheNames = await caches.keys();
+            await Promise.all(cacheNames.map(cacheName => caches.delete(cacheName)));
+            console.log('Cache limpiada exitosamente');
+        } catch (error) {
+            console.error('Error al limpiar la cache:', error);
+        }
+    }
+}
 
 
 
@@ -2624,7 +2669,7 @@ async function showTicketDetails(purchaseData, movieData, movieId) {
 
 function formatearFecha(fechaString) {
     const [dia, mes, año] = fechaString.split('/');
-    const fecha = new Date(año, mes - 1, dia); // Mes es 0-indexado en JavaScript
+    const fecha = new Date(año, mes - 1, dia); 
     const diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
     const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
     

@@ -114,6 +114,7 @@ function showFullTicketDetails(boleto) {
         width: 100%;
         border-radius: 10px;
         height: 15vh;
+        object-fit: cover;
     }
     .card_title h1 {
         font-size: 24px;
@@ -194,7 +195,7 @@ function showFullTicketDetails(boleto) {
         </div>
         <section class="card">
             <div class="card_img">
-                <img src="${boleto.pelicula.imagen_banner}" alt="${boleto.pelicula.titulo}">
+                <img src="${boleto.pelicula.imagen_pelicula}" alt="${boleto.pelicula.titulo}">
             </div>
             <div class="card_title">
                 <h2 class="titulo-ticket">${boleto.pelicula.titulo}</h2>
