@@ -255,7 +255,7 @@ async function displayMovieDetails(movieId, movieState) {
             <div class="movie-details-container">
                 <div class="movie-header">
                     <img src="../storage/img/arrow.png" alt="Back" class="back-button" onclick="goToHome()">
-                    <h1>Cinema Selection</h1>
+                    <h1>Selección de cine</h1>
                     <img src="../storage/img/points.png" alt="More options" class="more-options">
                 </div>
                 <div class="movie-content">
@@ -267,7 +267,7 @@ async function displayMovieDetails(movieId, movieState) {
                         <h2>${movie.titulo}</h2>
                         <button id="trailer-button" class="watch-trailer" onclick="showTrailerPopup('${movie.trailer}')">
                             <img src="../storage/img/music.png" alt="Trailer Icon" class="trailer-icon">
-                            Watch Trailer
+                            Ver tráiler
                         </button>
                     </div>
                     <div class="movie-inf">
@@ -275,7 +275,7 @@ async function displayMovieDetails(movieId, movieState) {
                         <p class="description">${movie.sinopsis}</p>
                     </div>
                     <div class="cast">
-                        <h3>Cast</h3>
+                        <h3>Elenco</h3>
                         <div class="cast-list">
                             ${movie.reparto.map(actor => `
                                 <div class="actor">
@@ -290,16 +290,16 @@ async function displayMovieDetails(movieId, movieState) {
                     </div>
                     ${movieState !== 'No disponible' && movieState !== 'Próximo estreno' ? `
                         <div class="cinema">
-                            <h3>Cinema</h3>
+                            <h3>Cine</h3>
                             <div id="cinecampus" class="cinema-item">
                                 <div>
-                                    <p>CineCampus</p>
+                                    <p>Cine Campus</p>
                                     <p>Zona Franca Santander</p>
                                 </div>
                                 <img src="../storage/img//newLogo.webp" alt="Cinema logo">
                             </div>
                         </div>
-                    <button id="book-now" onclick="displaySeatSelection(${movieId})" ${movieState !== 'En cartelera' ? 'disabled' : ''}>Book Now</button>
+                    <button id="book-now" onclick="displaySeatSelection(${movieId})" ${movieState !== 'En cartelera' ? 'disabled' : ''}>Comora ahora</button>
                     ` : ''}
                 </div>
             </div>
@@ -748,7 +748,7 @@ function playTrailer(trailerUrl) {
         });
     }
 
-    trailerButton.textContent = 'Stop Trailer';
+    trailerButton.textContent = 'Detener remolque';
     trailerButton.onclick = stopTrailer;
 }
 
@@ -2225,12 +2225,12 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
         </div>
         <div class="movie-details-containerpay">
             <div class="order-details">
-                <p>ORDER NUMBER: ${orderNumber}</p>
+                <p>NÚMERO DE ORDEN: ${orderNumber}</p>
 
                 <p class="line">________________________________________</p>
 
                 <div class="flex-row">
-                    <p>${seatsArray.length} TICKET(S):</p>
+                    <p>${seatsArray.length} BOLETO(S):</p>
                     <p>${seatNames.join(', ')}</p>
                 </div>
 
@@ -2271,7 +2271,7 @@ async function showOrderSummary(movieId, movieData, selectedSeats) {
                     </div>
                 </div>
                     <div class="timer-display">
-                    <span id="message">Complete your payment in</span>
+                    <span id="message">Complete su pago en</span>
                     <span id="time"></span>
                     </div>
 
